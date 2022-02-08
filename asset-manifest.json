@@ -1,0 +1,22 @@
+{
+  "files": {
+    "app.js": "/guess-the-movie/static/js/app.5c90f057.chunk.js",
+    "app.js.map": "/guess-the-movie/static/js/app.5c90f057.chunk.js.map",
+    "runtime~app.js": "/guess-the-movie/static/js/runtime~app.aacfe733.js",
+    "runtime~app.js.map": "/guess-the-movie/static/js/runtime~app.aacfe733.js.map",
+    "static/js/2.8cb67565.chunk.js": "/guess-the-movie/static/js/2.8cb67565.chunk.js",
+    "static/js/2.8cb67565.chunk.js.map": "/guess-the-movie/static/js/2.8cb67565.chunk.js.map",
+    "favicon-16.png": "/guess-the-movie/favicon-16.png",
+    "favicon-32.png": "/guess-the-movie/favicon-32.png",
+    "favicon.ico": "/guess-the-movie/favicon.ico",
+    "index.html": "/guess-the-movie/index.html",
+    "manifest.json": "/guess-the-movie/manifest.json",
+    "serve.json": "/guess-the-movie/serve.json",
+    "static/js/2.8cb67565.chunk.js.LICENSE.txt": "/guess-the-movie/static/js/2.8cb67565.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.aacfe733.js",
+    "static/js/2.8cb67565.chunk.js",
+    "static/js/app.5c90f057.chunk.js"
+  ]
+}
