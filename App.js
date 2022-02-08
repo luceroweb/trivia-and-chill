@@ -1,20 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Home from './Components/Home';
 
 export default function App() {
+
+  const initialState = {
+    winningStreak: 0
+  }
+
+  const reducer = (state = initialState, action) => {
+    switch(action.type){
+      case 'INCREASE_WINNING_STREAK':
+        return {
+          winningStreak: state.winningStreak + 1
+        }
+      case 'RESET_WINNING_STREAK':
+        return {
+          winningStreak: 0
+        }
+    }
+    return state;
+  }
+
+  const store = createStore(reducer);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <Provider store={store}>
+      <Home />
       <StatusBar style="auto" />
-    </View>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
