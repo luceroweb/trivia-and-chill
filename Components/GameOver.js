@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 function GameOver({ setScreen, resetWinningStreak }) {
   const backToStartHandler = () => {
-    console.log("Button has been pressed");
     resetWinningStreak;
     setScreen("Home");
   };
