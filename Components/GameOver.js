@@ -2,10 +2,9 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 
-function GameOver({ setScreen, resetWinningStreak }) {
+function GameOver() {
   const backToStartHandler = () => {
-    resetWinningStreak;
-    setScreen("Home");
+
   };
 
   return (
@@ -22,25 +21,6 @@ function GameOver({ setScreen, resetWinningStreak }) {
       </View>
     </View>
   );
-}
-
-function mapStateToProps(state) {
-  return {
-    winningStreak: state.winningStreak,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    increaseWinningStreak: () =>
-      dispatch({
-        type: "INCREASE_WINNING_STREAK",
-      }),
-    resetWinningStreak: () =>
-      dispatch({
-        type: "RESET_WINNING_STREAK",
-      }),
-  };
 }
 
 const styles = StyleSheet.create({
