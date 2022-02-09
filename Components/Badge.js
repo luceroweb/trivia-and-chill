@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   badgeText: {
     position: 'relative',
     top: -33,
-    fontSize: '.8rem',
+    fontSize: 14,
   },
   badgeIcon: {
     paddingTop: 10,
