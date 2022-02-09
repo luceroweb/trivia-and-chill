@@ -13,19 +13,18 @@ export default function Trailer() {
     }
   }, []);
 
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
-
   return (
-    <View>
+    <View 
+    style={{ flex:1,alignItems:'center',justifyContent:'center'}}
+    >
+      <View style={{width:'80%',aspectRatio:16/9}}>
       <YoutubePlayer
-        height={300}
+        height={'100%'}        
         play={playing}
         videoId={videoI}
         onChangeState={onStateChange}
       />
-      <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
+       </View>
     </View>
   );
 }

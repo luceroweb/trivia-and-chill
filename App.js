@@ -27,10 +27,13 @@ export default function App() {
   const store = createStore(reducer);
 
   return (
-    
+<>
+<Trailer/>
     <Provider store={store}>
       <Home />
       <StatusBar style="auto" />
     </Provider>
+    </>
   );
+  
 }
