@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameOver);
+export default GameOver;
