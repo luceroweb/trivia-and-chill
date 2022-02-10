@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Home from './Components/Home';
 import RandomGenerator from './utils/RandomGenerator'
 import Badge from './Components/Badge';
+import FetchApi from './Utils/FetchApi';
 
 export default function App() {
 
@@ -31,7 +32,8 @@ export default function App() {
     <Provider store={store}>
       <RandomGenerator/>
       <Badge />
-      <Home />
+      {/* <Home /> */}
+      <FetchApi />
       <StatusBar style="auto" />
     </Provider>
   );
