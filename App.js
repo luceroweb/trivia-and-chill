@@ -1,36 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import Home from './Components/Home';
-import Badge from './Components/Badge';
+import { StatusBar } from "expo-status-bar";
+import { Provider } from "react-redux";
+import { StyleSheet, View } from "react-native";
+import Nav from "./Components/Nav";
+import { store } from "./Utils/store";
 
 export default function App() {
-
-  const initialState = {
-    winningStreak: 0
-  }
-
-  const reducer = (state = initialState, action) => {
-    switch(action.type){
-      case 'INCREASE_WINNING_STREAK':
-        return {
-          winningStreak: state.winningStreak + 1
-        }
-      case 'RESET_WINNING_STREAK':
-        return {
-          winningStreak: 0
-        }
-    }
-    return state;
-  }
-
-  const store = createStore(reducer);
-
   return (
     <Provider store={store}>
-      <Badge />
-      <Home />
+      <View style={styles.layout}>
+        <Nav />
+      </View>
       <StatusBar style="auto" />
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  layout: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
