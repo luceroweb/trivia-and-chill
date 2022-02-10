@@ -1,6 +1,10 @@
 import { ScrollView, View, Text, Button, StyleSheet, Platform, } from 'react-native';
 
 const CorrectAnswer = ({ videoId }) => {
+  const handleNextQuestion = () => {
+    // set scene state to question scene
+  }
+
   return (
     <ScrollView
       style={[styles.scrollViewOuter, styles.borderStyleDebug]} 
@@ -19,7 +23,7 @@ const CorrectAnswer = ({ videoId }) => {
         <Button
           // pressable instead
           title="Next Question!"
-          // onPress={}
+          onPress={handleNextQuestion}
         />
       </View>
     </ScrollView>
