@@ -32,7 +32,7 @@ export default function App() {
     <Provider store={store}>
       <RandomGenerator/>
       <Badge />
-      {/* <Home /> */}
+      <Home />
       <FetchApi />
       <StatusBar style="auto" />
     </Provider>
