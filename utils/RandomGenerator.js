@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, StyleSheet } from "react-native";
 
+const randomNumber = Math.floor(Math.random() * 700);
 const RandomGenerator = () => {
-    const randomNumber = Math.floor(Math.random() * 700);
+
   return (
     <Text>{randomNumber}</Text>
   )
