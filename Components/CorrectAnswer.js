@@ -1,5 +1,21 @@
 import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions, Platform } from 'react-native';
 
+const VideoSkeleton = () => (
+  <View style={skelStyle.container}>
+    <View style={skelStyle.video}>
+      <Text>Video Trailer Component goes here</Text>
+    </View>
+    <View style={skelStyle.infoContainer}>
+      <View style={skelStyle.avatar}>
+
+      </View>
+      <View style={skelStyle.description}>
+
+      </View>
+    </View>
+  </View>
+);
+
 const CorrectAnswer = ({ videoId }) => {
   const { width } = useWindowDimensions();
   const handleNextQuestion = () => {
@@ -7,32 +23,72 @@ const CorrectAnswer = ({ videoId }) => {
   }
 
   return (
-    // todo: replace paddingTop value with useSafeAreaInsets
-    <ScrollView
+      <ScrollView
+        // todo: replace paddingTop value with useSafeAreaInsets
+        style={[styles.scrollViewOuter, { paddingTop: 20 }]} 
       style={[styles.scrollViewOuter, { paddingTop: 20 }]} 
-      contentContainerStyle={[
-        styles.scrollViewContent,
-        { marginHorizontal: width > 1000 ? 100 : 0 }
-      ]}
-    >
-      <View style={[ styles.videoContainer, styles.boxShadow ]}>
-        <Text>Video Trailer Component goes here</Text>
-      </View>
-      
-      <View style={styles.textContainer}>
-        <Text style={styles.h2}>Correct!</Text>
-        <Text style={styles.h3}>Here's a trailer for your troubles</Text>
-      </View>
-     
-      <Pressable
-        style={[ styles.button, styles.boxShadow ]}
-        onPress={handleNextQuestion}
+        style={[styles.scrollViewOuter, { paddingTop: 20 }]} 
+        contentContainerStyle={[
+          styles.scrollViewContent,
+          { marginHorizontal: width > 1000 ? 100 : 0 }
+        ]}
       >
-        <Text>Next Question!</Text>
-      </Pressable>
-    </ScrollView>
+        <View style={[ styles.videoContainer, Platform.OS === 'web' ? styles.boxShadow: null ]}>
+          {/* replace VideoSkeleton with your Trailer component
+              or use it for a loading animation... */}
+          <VideoSkeleton />
+        </View>
+        
+        <View style={styles.textContainer}>
+          <Text style={styles.h2}>Correct!</Text>
+          <Text style={styles.h3}>Enjoy this video trailer</Text>
+        </View>
+      
+        <Pressable
+          style={[ styles.button, styles.boxShadow ]}
+          onPress={handleNextQuestion}
+        >
+          <Text>Next Question!</Text>
+        </Pressable>
+      </ScrollView>
   )
 }
+
+const skelStyle = StyleSheet.create({
+  container: {
+    height: '100%',
+    width: '100%',
+    paddingBottom: 15,
+    justifyContent: 'space-between',
+    alignItems: 'flex-start'
+  },
+  video: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '70%',
+    width: '100%',
+    backgroundColor: '#E0E0E0',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 15,
+    width: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  avatar: {
+    height: 50,
+    width: 50,
+    backgroundColor: '#E0E0E0',
+    borderRadius: 100,
+    marginRight: 20,
+  },
+  description: {
+    minWidth: '60%',
+    height: 25,
+    backgroundColor: '#E0E0E0',
+  },
+})
 
 const styles = StyleSheet.create({
   borderStyleDebug: {
