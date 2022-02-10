@@ -1,4 +1,6 @@
-const madLibsArray = [
+export default function madLibsArray( movies ) {
+  
+  return movies && [
     // {
     //     question: `${cast.name[0]} starred in ${movies.title}.`, //get credits endpoint for cast.name
     //     answer: true,
@@ -89,6 +91,7 @@ const madLibsArray = [
     {
         question: `La La Land's plot used to be described as "Two lovers are drawn together by their desire to do what is right.  They are faced with a growing need to dance into the night."`,
         answer: false,
-        movieId: id,
+        movieId: movies.id,
     }
-];
+  ]
+};
