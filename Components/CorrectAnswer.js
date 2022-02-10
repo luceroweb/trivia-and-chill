@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, Button, StyleSheet, Platform, } from 'react-native';
+import { ScrollView, View, Text, Pressable, StyleSheet, Platform, } from 'react-native';
 
 const CorrectAnswer = ({ videoId }) => {
   const handleNextQuestion = () => {
@@ -19,13 +19,14 @@ const CorrectAnswer = ({ videoId }) => {
         <Text style={styles.h3}>Here's a trailer for your troubles</Text>
       </View>
      
-      <View style={styles.buttonContainer}>
-        <Button
-          // pressable instead
-          title="Next Question!"
-          onPress={handleNextQuestion}
-        />
-      </View>
+
+      <Pressable
+        style={styles.button}
+        onPress={handleNextQuestion}
+      >
+        <Text>Next Question!</Text>
+      </Pressable>
+
     </ScrollView>
   )
 }
@@ -59,10 +60,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'whitesmoke',
   },
-  buttonContainer: {
+  button: {
     flexShrink: 1,
     alignSelf: 'center',
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    backgroundColor: 'lightblue',
   },
   textContainer: {
     flexGrow: 1, // pushes textContainer upwards
