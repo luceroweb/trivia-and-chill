@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { connect } from 'react-redux';
 
-function Home({ winningStreak, increaseWinningStreak, resetWinningStreak }) {
+function Home({ winningStreak, increaseWinningStreak, setScene, scene, resetWinningStreak }) {
 
   return(
     <View style={styles.container}>
@@ -12,13 +12,17 @@ function Home({ winningStreak, increaseWinningStreak, resetWinningStreak }) {
       <Pressable onPress={resetWinningStreak}>
         <Text>Reset</Text>
       </Pressable>
+      <Pressable onPress={()=>setScene('GameOver')}>
+        <Text>Go to GameOver</Text>
+      </Pressable>
     </View>
   )
 }
 
 function mapStateToProps(state){
   return {
-    winningStreak: state.winningStreak
+    winningStreak: state.winningStreak,
+    scene: state.scene
   }
 }
 
@@ -29,6 +33,10 @@ function mapDispatchToProps(dispatch) {
     }),
     resetWinningStreak: () => dispatch({
       type: 'RESET_WINNING_STREAK'
+    }),
+    setScene: (name) => dispatch({
+      type: 'SET_SCENE',
+      name
     })
   }
 }

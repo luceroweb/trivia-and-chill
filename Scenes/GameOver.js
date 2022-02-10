@@ -2,15 +2,17 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 
-function GameOver() {
+function GameOver({ setScene, resetWinningStreak, winningStreak }) {
   const backToStartHandler = () => {
-
+    resetWinningStreak();
+    setScene('Home');
   };
 
   return (
     <View style={styles.layout}>
       <Text style={styles.heading}>Oh no! You picked the wrong answer!</Text>
       <Text style={styles.gameOver}>Game Over</Text>
+      <Text>{winningStreak}</Text>
       <View>
         <Pressable
           onPress={backToStartHandler}
@@ -23,21 +25,43 @@ function GameOver() {
   );
 }
 
+function mapStateToProps(state) {
+  return {
+    winningStreak: state.winningStreak,
+    scene: state.scene
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    resetWinningStreak: () =>
+      dispatch({
+        type: "RESET_WINNING_STREAK",
+      }),
+      setScene: (name) =>
+      dispatch({
+        type: "SET_SCENE",
+        name
+      })
+  };
+}
+
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    padding: 40,
   },
   heading: {
     fontSize: 40,
-    marginBottom: 100,
+    marginBottom: 70,
     textAlign: "center",
   },
   gameOver: {
     fontSize: 100,
-    marginBottom: 100,
+    marginBottom: 70,
     textAlign: "center",
   },
   backToStartButton: {
@@ -57,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameOver;
+export default connect(mapStateToProps, mapDispatchToProps)(GameOver);
