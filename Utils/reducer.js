@@ -1,6 +1,7 @@
   const initialState = {
     winningStreak: 0,
-    scene: "Home"
+    scene: "Home",
+    movies: [],
   }
   
   export const reducer = (state = initialState, action) => {
@@ -19,6 +20,11 @@
         return {
           ...state,
           scene: action.name
+        };
+      case "SET_MOVIES":
+        return {
+          ...state,
+          movies: action.movies
         };
     }
     return state;
