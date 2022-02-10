@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions, } from 'react-native';
+import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions, Platform } from 'react-native';
 
 const CorrectAnswer = ({ videoId }) => {
   const { width } = useWindowDimensions();
@@ -15,7 +15,7 @@ const CorrectAnswer = ({ videoId }) => {
         { marginHorizontal: width > 1000 ? 100 : 0 }
       ]}
     >
-      <View style={[ styles.videoContainer, styles.boxShadow, styles.borderStyleDebug ]}>
+      <View style={[ styles.videoContainer, styles.boxShadow ]}>
         <Text>Video Trailer Component goes here</Text>
       </View>
       
@@ -24,14 +24,12 @@ const CorrectAnswer = ({ videoId }) => {
         <Text style={styles.h3}>Here's a trailer for your troubles</Text>
       </View>
      
-
       <Pressable
-        style={styles.button}
+        style={[ styles.button, styles.boxShadow ]}
         onPress={handleNextQuestion}
       >
         <Text>Next Question!</Text>
       </Pressable>
-
     </ScrollView>
   )
 }
@@ -52,12 +50,11 @@ const styles = StyleSheet.create({
   },
   boxShadow: {
     shadowOffset: {
-      width: 5.0,
+      width: 2.0,
       height: 5.0,
     },
-    shadowOpacity: 0.8,
-    shadowRadius: 0,
-    shadowColor: 'red',
+    shadowRadius: Platform.OS === 'web' ? 8.0 : 2.0,
+    shadowOpacity: 0.4,
   },
   videoContainer: {
     height: 250,
