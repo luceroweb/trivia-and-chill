@@ -1,11 +1,11 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { connect } from 'react-redux';
 
-function Header(){
+function Footer(){
     return(
         <View style={styles.container}>
             <Text>
-                HEADER
+                FOOTER
             </Text>
         </View>
     )
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default connect()(Header);
+export default connect()(Footer);

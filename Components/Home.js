@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { connect } from 'react-redux';
 
+
 function Home({ winningStreak, increaseWinningStreak, resetWinningStreak }) {
 
   return(
