@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions } from 'react-native';
+import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions, } from 'react-native';
 
 const CorrectAnswer = ({ videoId }) => {
   const { width } = useWindowDimensions();
@@ -7,8 +7,9 @@ const CorrectAnswer = ({ videoId }) => {
   }
 
   return (
+    // todo: replace paddingTop value with useSafeAreaInsets
     <ScrollView
-      style={[styles.scrollViewOuter, styles.borderStyleDebug]} 
+      style={[styles.scrollViewOuter, { paddingTop: 20 }]} 
       contentContainerStyle={[
         styles.scrollViewContent,
         { marginHorizontal: width > 1000 ? 100 : 0 }
