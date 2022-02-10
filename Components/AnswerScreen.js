@@ -94,7 +94,7 @@ export default connect(mapStateToProps)(AnswerScreen);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight,
+        marginTop: 20, // StatusBar.currentHeight,
         paddingHorizontal: 20,
     },
     options: {
