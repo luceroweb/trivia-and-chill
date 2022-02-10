@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Home from './Components/Home';
+import Badge from './Components/Badge';
 
 export default function App() {
 
@@ -27,6 +28,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <Badge />
       <Home />
       <StatusBar style="auto" />
     </Provider>
