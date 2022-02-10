@@ -1,11 +1,24 @@
 import React from 'react'
-import { View, Text, StyleSheet } from "react-native";
+import { View } from 'react-native';
+import madLibsArray from '../Utils/madLibsArray';
+import RandomGenerator from '../Utils/RandomGenerator';
 
-const GenerateQuestion = (props) => {
+const GenerateQuestion = ({ movies }) => {
+
+  let movie = movies
+    ? movies[RandomGenerator(movies.length)] 
+    : [];
+
+  let questionObject = movie 
+    ? madLibsArray(movie)
+    : {};
+
+  if(questionObject) {
+    console.log('Mad Libs', questionObject[RandomGenerator(questionObject.length)] ) 
+  };
 
   return (
     <View>
-        {props.madLibsArray[props.randomNumber].question}
     </View>
   )
 }
