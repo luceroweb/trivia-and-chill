@@ -13,6 +13,7 @@ import { setAnswer } from '../App';
 import GameOver from '../Components/GameOver'
 import WinningModal from './WinningModal';
 
+const setAnswer = (question, answer) => ({ type: 'SET_ANSWER', payload: { question: { ...question, selectedAnswer: answer }, answer } })
 const getBorderColor = (question) => {
     if (!question.selectedAnswer) {
         return '#00f';

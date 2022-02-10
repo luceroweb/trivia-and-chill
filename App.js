@@ -19,8 +19,6 @@ const initialState = {
     }]
 }
 
-export const setAnswer = (question, answer) => ({ type: 'SET_ANSWER', payload: { question: { ...question, selectedAnswer: answer }, answer } })
-
 export default function App() {
 
   const reducer = (state = initialState, action) => {
