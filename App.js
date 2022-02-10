@@ -32,7 +32,6 @@ export default function App() {
     <Provider store={store}>
       <Header />
       <Main />
-      <Home />
       <Footer />
       <StatusBar style="auto" />
     </Provider>

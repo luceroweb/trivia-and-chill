@@ -5,7 +5,7 @@ function Footer(){
     return(
         <View style={styles.container}>
             <Text>
-                FOOTER
+                SETTINGS |  INSTRUCTIONS
             </Text>
         </View>
     )

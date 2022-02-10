@@ -5,7 +5,7 @@ function Header(){
     return(
         <View style={styles.container}>
             <Text>
-                HEADER
+            PROJECT GITHUB  |  BITWISE WORFORCE TRAINING WEBSITE  |  BITWISE WORKFORCE TRAINING TWITTER
             </Text>
         </View>
     )
