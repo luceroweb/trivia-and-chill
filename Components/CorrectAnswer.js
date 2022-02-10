@@ -1,4 +1,5 @@
 import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions, Platform } from 'react-native';
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 const VideoSkeleton = () => (
   <View style={skelStyle.container}>
@@ -23,10 +24,14 @@ const CorrectAnswer = ({ videoId }) => {
   }
 
   return (
+    <View style={{flex: 1}}>
+      <ConfettiCannon
+        count={100}
+        origin={{x: -10, y: 0}}
+        fadeOut={true}
+      />
       <ScrollView
         // todo: replace paddingTop value with useSafeAreaInsets
-        style={[styles.scrollViewOuter, { paddingTop: 20 }]} 
-      style={[styles.scrollViewOuter, { paddingTop: 20 }]} 
         style={[styles.scrollViewOuter, { paddingTop: 20 }]} 
         contentContainerStyle={[
           styles.scrollViewContent,
@@ -51,6 +56,7 @@ const CorrectAnswer = ({ videoId }) => {
           <Text>Next Question!</Text>
         </Pressable>
       </ScrollView>
+    </View>
   )
 }
 
