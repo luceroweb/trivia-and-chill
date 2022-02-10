@@ -1,6 +1,7 @@
-import { ScrollView, View, Text, Pressable, StyleSheet, Platform, } from 'react-native';
+import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions } from 'react-native';
 
 const CorrectAnswer = ({ videoId }) => {
+  const { width } = useWindowDimensions();
   const handleNextQuestion = () => {
     // set scene state to question scene
   }
@@ -8,7 +9,10 @@ const CorrectAnswer = ({ videoId }) => {
   return (
     <ScrollView
       style={[styles.scrollViewOuter, styles.borderStyleDebug]} 
-      contentContainerStyle={styles.scrollViewContent}
+      contentContainerStyle={[
+        styles.scrollViewContent,
+        { marginHorizontal: width > 1000 ? 100 : 0 }
+      ]}
     >
       <View style={[ styles.videoContainer, styles.boxShadow, styles.borderStyleDebug ]}>
         <Text>Video Trailer Component goes here</Text>
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
   },
   scrollViewOuter: {
     alignSelf: 'center',
-    width: Platform.OS === 'web' ? '80%' : '100%' // we should add a horizontalPadding to the content instead
+    width: '100%'
   },
   scrollViewContent: {
     flex: 1,
