@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Home from './Components/Home';
 import Badge from './Components/Badge';
-import Timer from './Components/Timer';
+// import Timer from './Components/Timer';
 
 export default function App() {
 
@@ -34,7 +34,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Timer />
+      {/* <Timer /> */}
       <Badge />
       <Home />
       <StatusBar style="auto" />
