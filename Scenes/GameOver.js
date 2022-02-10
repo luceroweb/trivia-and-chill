@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 
-function GameOver({ setScene, resetWinningStreak, winningStreak }) {
+function GameOver({ setScene, resetWinningStreak }) {
   const backToStartHandler = () => {
     resetWinningStreak();
     setScene('Home');
@@ -12,7 +12,6 @@ function GameOver({ setScene, resetWinningStreak, winningStreak }) {
     <View style={styles.layout}>
       <Text style={styles.heading}>Oh no! You picked the wrong answer!</Text>
       <Text style={styles.gameOver}>Game Over</Text>
-      <Text>{winningStreak}</Text>
       <View>
         <Pressable
           onPress={backToStartHandler}
