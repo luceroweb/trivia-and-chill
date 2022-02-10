@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Home from './Components/Home';
 import Badge from './Components/Badge';
+import FetchApi from './Utils/FetchApi';
 
 export default function App() {
 
@@ -29,7 +30,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <Badge />
-      <Home />
+      {/* <Home /> */}
+      <FetchApi />
       <StatusBar style="auto" />
     </Provider>
   );
