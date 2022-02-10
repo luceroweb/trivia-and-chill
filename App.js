@@ -10,7 +10,7 @@ export default function App() {
     <Provider store={store}>
       <View style={styles.layout}>
         <Nav />
-        {/* <GenerateQuestion /> */}
+        <GenerateQuestion />
       </View>
       <StatusBar style="auto" />
     </Provider>
