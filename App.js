@@ -3,11 +3,13 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Home from './Components/Home';
 import Badge from './Components/Badge';
+import Timer from './Components/Timer';
 
 export default function App() {
 
   const initialState = {
-    winningStreak: 0
+    winningStreak: 0,
+    timerCount: 10
   }
 
   const reducer = (state = initialState, action) => {
@@ -20,6 +22,10 @@ export default function App() {
         return {
           winningStreak: 0
         }
+      case 'COUNTDOWN_TIMER':
+        return {
+          timerCount: setInterval(state.timerCount, -1)
+        }
     }
     return state;
   }
@@ -28,6 +34,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <Timer />
       <Badge />
       <Home />
       <StatusBar style="auto" />
