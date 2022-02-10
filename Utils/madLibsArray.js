@@ -25,7 +25,7 @@ const madLibsArray = [
         movieId: `${movies.id}`,
     },
     {
-        question: `${title} is a movie about ${overview}`,
+        question: `${movies.title} is a movie about ${movies.overview}`,
         answer: true,
         movieId: `${movies.id}`,
     },
@@ -58,22 +58,22 @@ const madLibsArray = [
     {
         question: `Ghostbusters was released on May 12, 187.`,
         answer: false,
-        movieId: `${movies.id}`,
+        movieId: 620,
     },
     {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
-        movieId: `${movies.id}`,
+        movieId: 4232,
     },
     {
         question: `"A brillant and gifted young man must find the most beautiful location on the planet to set up a new vacation home for his family." describes what the movie Dune is about.`,
         answer: false,
-        movieId: `${movies.id}`, 
+        movieId: 438631, 
     },
     {
         question: `Aladdin is a movie about a young man in search of a magic carpet.`,
         answer: false,
-        movieId: `${movies.id}`,
+        movieId: 812,
         
     },
     // {
