@@ -58,22 +58,22 @@ const madLibsArray = [
     {
         question: `Ghostbusters was released on May 12, 187.`,
         answer: false,
-        movieId: id,
+        movieId: `${movies.id}`,
     },
     {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
-        movieId: id,
+        movieId: `${movies.id}`,
     },
     {
         question: `"A brillant and gifted young man must find the most beautiful location on the planet to set up a new vacation home for his family." describes what the movie Dune is about.`,
         answer: false,
-        movieId: id, 
+        movieId: `${movies.id}`, 
     },
     {
         question: `Aladdin is a movie about a young man in search of a magic carpet.`,
         answer: false,
-        movieId: id,
+        movieId: `${movies.id}`,
         
     },
     // {
