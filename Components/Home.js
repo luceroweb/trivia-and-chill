@@ -1,20 +1,20 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { connect } from 'react-redux';
 
-function Home({ winningStreak, increaseWinningStreak, resetWinningStreak, timerCount, countdownTimer }) {
+function Home({ winningStreak, increaseWinningStreak, resetWinningStreak, timerCount }) {
 
   return(
     <View style={styles.container}>
-      <Text>{timerCount}</Text>
+      { timerCount > 0 && 
+        <Text>{timerCount}</Text>}
+      { timerCount < 1 &&
+        <Text>Timer = 0; set scene state to Game Over</Text>}
       <Text>{winningStreak}</Text>
       <Pressable onPress={increaseWinningStreak}>
         <Text>Add</Text>
       </Pressable>
       <Pressable onPress={resetWinningStreak}>
         <Text>Reset</Text>
-      </Pressable>
-      <Pressable onPress={countdownTimer}>
-        <Text>Start timer</Text>
       </Pressable>
     </View>
   )

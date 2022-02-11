@@ -24,7 +24,11 @@ export default function App() {
         }
       case 'COUNTDOWN_TIMER':
         return {
-          timerCount: setInterval(state.timerCount, -1)
+          timerCount: state.timerCount - 1
+        }
+      case 'RESET_TIMER':
+        return {
+          timerCount: 10
         }
     }
     return state;

@@ -4,12 +4,7 @@ import { connect } from 'react-redux';
 function Timer({ timerCount }) {
   return (
     <View style={styles.timer}>
-      {
-      timerCount > 0 &&
-        <Text>{timerCount}</Text>
-      }
-      {/* {timerCount = 0 &&
-      setScene('gameover')} */}
+      <Text>{timerCount}</Text>
     </View>
   )
 }
@@ -22,8 +17,11 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch) {
   return {
-    countdownTimer: () => dispatch({
+    countdownTimer: setInterval(() => dispatch({
       type: 'COUNTDOWN_TIMER'
+    }), 1000),
+    resetTimer: () => dispatch({
+      type: 'RESET_TIMER'
     })
   }
 }
