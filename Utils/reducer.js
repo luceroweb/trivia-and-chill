@@ -2,6 +2,7 @@
     winningStreak: 0,
     scene: "Home",
     movies: [],
+    selectedMovie: {},
   }
   
   export const reducer = (state = initialState, action) => {
@@ -26,6 +27,11 @@
           ...state,
           movies: action.movies
         };
+        case "SET_SELECTED_MOVIE":
+          return {
+            ...state,
+            selectedMovie: action.selectedMovie
+          };
     }
     return state;
   };

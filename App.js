@@ -3,12 +3,14 @@ import { Provider } from "react-redux";
 import { StyleSheet, View } from "react-native";
 import Nav from "./Components/Nav";
 import { store } from "./Utils/store";
+import Badge from "./Components/Badge";
 // import GenerateQuestion from "./Components/GenerateQuestion";
 
 export default function App() {
   return (
     <Provider store={store}>
       <View style={styles.layout}>
+        <Badge />
         <Nav />
         {/* <GenerateQuestion /> */}
       </View>
@@ -24,4 +26,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-

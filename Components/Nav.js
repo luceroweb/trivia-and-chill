@@ -2,12 +2,14 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
 import Home from "../Scenes/Home";
+import Question from "../Scenes/Question";
 
 function Nav({ scene }) {
   return (
     <View>
       {scene === "Home" && <Home />}
       {scene === "GameOver" && <GameOver />}
+      {scene === "Question" && <Question />}
     </View>
   );
 }
