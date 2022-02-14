@@ -1,16 +1,30 @@
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
-import Home from "../Scenes/Home";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import Question from "../Scenes/Question";
 
 function Nav({ scene }) {
   return (
     <View>
-      {scene === "Home" && <Home />}
+      <Header />
+      {scene === "Main" && <Main />}
       {scene === "GameOver" && <GameOver />}
+      {scene === "Question" && <Question />}
+      <Footer />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  layout: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 function mapStateToProps(state) {
   return {
