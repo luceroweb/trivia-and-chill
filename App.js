@@ -2,46 +2,30 @@ import { StatusBar } from 'expo-status-bar';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Home from './Components/Home';
-import Badge from './Components/Badge';
-import Timer from './Components/Timer';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import Main from './Components/Main';
+import { StyleSheet, View } from "react-native";
+import Nav from "./Components/Nav";
+import { store } from "./Utils/store";
+import Badge from "./Components/Badge";
 
 export default function App() {
-
-  const initialState = {
-    winningStreak: 0,
-    timerCount: 10
-  }
-
-  const reducer = (state = initialState, action) => {
-    switch(action.type){
-      case 'INCREASE_WINNING_STREAK':
-        return {
-          winningStreak: state.winningStreak + 1
-        }
-      case 'RESET_WINNING_STREAK':
-        return {
-          winningStreak: 0
-        }
-      case 'COUNTDOWN_TIMER':
-        return {
-          timerCount: state.timerCount - 1
-        }
-      case 'RESET_TIMER':
-        return {
-          timerCount: 10
-        }
-    }
-    return state;
-  }
-
-  const store = createStore(reducer);
-
   return (
     <Provider store={store}>
-      <Timer />
-      <Badge />
-      <Home />
+      <View style={styles.layout}>
+        <Badge />
+        <Nav />
+      </View>
       <StatusBar style="auto" />
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  layout: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
