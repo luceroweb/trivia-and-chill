@@ -5,15 +5,16 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import Question from "../Scenes/Question";
+import Home from "../Scenes/Home";
 
 function Nav({ scene }) {
   return (
     <View>
-      <Header />
-      {scene === "Main" && <Main />}
+      {/* <Header /> */}
+      {scene === "Home" && <Home />}
       {scene === "GameOver" && <GameOver />}
       {scene === "Question" && <Question />}
-      <Footer />
+      {/* <Footer /> */}
     </View>
   );
 }

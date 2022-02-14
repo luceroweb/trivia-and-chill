@@ -1,17 +1,28 @@
 import { StyleSheet, View, Text} from 'react-native';
 import { connect } from 'react-redux';
 
-function Timer({ timerCount }) {
+function Timer({ timerCount, setScene }) {
+  const timerEnd = () => {
+    setScene('GameOver')
+  }
+
   return (
-    <View style={styles.timer}>
+    <View style={styles.timer}>{
+      timerCount < 1
+      ?
+      timerEnd()
+      :
       <Text>{timerCount}</Text>
+    }
+
     </View>
   )
 }
 
 function mapStateToProps(state){
   return {
-    timerCount: state.timerCount
+    timerCount: state.timerCount,
+    scene: state.scene
   }
 }
 
@@ -20,8 +31,10 @@ function mapDispatchToProps(dispatch) {
     countdownTimer: setInterval(() => dispatch({
       type: 'COUNTDOWN_TIMER'
     }), 1000),
-    resetTimer: () => dispatch({
-      type: 'RESET_TIMER'
+    setScene: (name) =>
+    dispatch({
+      type: "SET_SCENE",
+      name
     })
   }
 }
