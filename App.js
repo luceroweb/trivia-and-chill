@@ -1,10 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { Provider } from "react-redux";
+import { StatusBar } from 'expo-status-bar';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Home from './Components/Home';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import Main from './Components/Main';
 import { StyleSheet, View } from "react-native";
 import Nav from "./Components/Nav";
 import { store } from "./Utils/store";
 import Badge from "./Components/Badge";
-// import GenerateQuestion from "./Components/GenerateQuestion";
 
 export default function App() {
   return (
@@ -12,7 +16,6 @@ export default function App() {
       <View style={styles.layout}>
         <Badge />
         <Nav />
-        {/* <GenerateQuestion /> */}
       </View>
       <StatusBar style="auto" />
     </Provider>

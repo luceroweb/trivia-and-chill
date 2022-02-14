@@ -13,6 +13,7 @@ function Home({
   setMovies,
   setScene
 }) {
+  
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
