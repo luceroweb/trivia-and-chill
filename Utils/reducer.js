@@ -27,11 +27,11 @@
           ...state,
           movies: action.movies
         };
-        case "SET_SELECTED_MOVIE":
-          return {
-            ...state,
-            selectedMovie: action.selectedMovie
-          };
+      case "SET_SELECTED_MOVIE":
+        return {
+          ...state,
+          selectedMovie: action.selectedMovie
+        };
     }
     return state;
   };

@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
   subtitle: {
     textAlign: "center",
     borderWidth: 2,
-    borderHeight: "50%",
     borderStyle: "dashed",
     borderTopColor: "#de4e45",
     color: "#fff",
