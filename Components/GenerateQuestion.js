@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
@@ -8,10 +8,11 @@ const GenerateQuestion = ({ movies, selectedMovie, setSelectedMovie }) => {
   let movie = movies ? movies[RandomGenerator(movies.length)] : [];
 
   let questionObject = movie ? madLibsArray(movie) : {};
+  let randomIndex = RandomGenerator(questionObject.length);
 
-  useEffect(() => {
+ 
     if (questionObject) {
-      let randomIndex = RandomGenerator(questionObject.length);
+      
       console.log(
         "Mad Libs",
         questionObject[randomIndex],
@@ -19,11 +20,13 @@ const GenerateQuestion = ({ movies, selectedMovie, setSelectedMovie }) => {
         questionObject[randomIndex]?.answer,
         questionObject[randomIndex]?.question
       );
-      movies ? setSelectedMovie(questionObject[randomIndex]) : null;
     }
+      useEffect(() => {
+      setSelectedMovie(questionObject[randomIndex]);
+  
   }, []);
 
-  return <View></View>;
+  return <View></View>
 };
 
 function mapStateToProps(state) {
