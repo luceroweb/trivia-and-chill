@@ -6,7 +6,7 @@ export default async function FetchApi() {
 
   await axios
     .get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US&page="
+      "https://api.themoviedb.org/3/movie/popular?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US"
       
     )
     .then( (res) => movies = res.data.results )
