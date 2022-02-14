@@ -7,7 +7,7 @@ import GenerateQuestion from "../Components/GenerateQuestion";
 function Home({
   winningStreak,
   increaseWinningStreak,
-  selectedMovie,
+
   resetWinningStreak,
   movies,
   setMovies,
@@ -28,8 +28,7 @@ function Home({
       </Pressable>
       <Pressable onPress={()=>setScene('Question')}>
         <Text>Start</Text>
-      </Pressable>
-      <GenerateQuestion />
+      </Pressable> 
     </View>
   );
 }
@@ -38,7 +37,7 @@ function mapStateToProps(state) {
   return {
     winningStreak: state.winningStreak,
     movies: state.movies,
-    selectedMovie: state.selectedMovie,
+    
     scene: state.scene
   };
 }

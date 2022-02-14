@@ -17,6 +17,26 @@ function Question({
     FetchApi().then((res) => setMovies(res));
   }, []);
 
+  const checkForTrue = () => {
+    if (selectedMovie?.answer === true) {
+      increaseWinningStreak();
+      setScene('CorrectAnswer');
+    } else {
+      resetWinningStreak();
+      setScene('GameOver');
+    }
+  }
+
+  const checkForFalse = () => {
+    if (selectedMovie?.answer === false) {
+      increaseWinningStreak();
+      setScene('CorrectAnswer');
+    } else {
+      resetWinningStreak();
+      setScene('GameOver');
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.container}>
@@ -30,12 +50,12 @@ function Question({
         <View style={styles.titleWrap}>
           <View style={styles.btn}>
             <Pressable>
-              <Text>True</Text>
+              <Text onPress={checkForTrue}>True</Text>
             </Pressable>
           </View>
           <View style={styles.btn}>
             <Pressable>
-              <Text>False</Text>
+              <Text onPress={checkForFalse}>False</Text>
             </Pressable>
           </View>
         </View>
