@@ -1,14 +1,13 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { connect } from 'react-redux';
 
-function Home({ winningStreak, increaseWinningStreak, resetWinningStreak, timerCount }) {
+function Home({ winningStreak, increaseWinningStreak, resetWinningStreak, timerCount, resetTimer }) {
 
   return(
     <View style={styles.container}>
-      { timerCount > 0 && 
-        <Text>{timerCount}</Text>}
+      <Text>{timerCount}</Text>
       { timerCount < 1 &&
-        <Text>Timer = 0; set scene state to Game Over</Text>}
+        resetTimer() } 
       <Text>{winningStreak}</Text>
       <Pressable onPress={increaseWinningStreak}>
         <Text>Add</Text>
@@ -37,6 +36,9 @@ function mapDispatchToProps(dispatch) {
     }),
     countdownTimer: () => dispatch({
       type: 'COUNTDOWN_TIMER'
+    }),
+    resetTimer: () => dispatch({
+      type: 'RESET_TIMER'
     })
   }
 }
