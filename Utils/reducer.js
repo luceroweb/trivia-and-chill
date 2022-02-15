@@ -1,6 +1,6 @@
   const initialState = {
     winningStreak: 0,
-    timerCount: 5,
+    timerCount: 10,
     scene: "Home",
     movies: [],
     selectedMovie: {},

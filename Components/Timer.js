@@ -1,20 +1,17 @@
+import { useEffect } from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import { connect } from 'react-redux';
 
 function Timer({ timerCount, setScene }) {
-  const timerEnd = () => {
-    setScene('GameOver')
-  }
+  useEffect(() => {
+    if (timerCount === 0) {
+      setScene('GameOver')
+    }
+  });
 
   return (
-    <View style={styles.timer}>{
-      timerCount < 1
-      ?
-      timerEnd()
-      :
-      <Text>{timerCount}</Text>
-    }
-
+    <View style={styles.timer}>
+      <Text>{timerCount}</Text>  
     </View>
   )
 }
