@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
 import Header from "./Header";
@@ -8,21 +8,32 @@ import Question from "../Scenes/Question";
 
 function Nav({ scene }) {
   return (
-    <View>
-      <Header />
-      {scene === "Main" && <Main />}
-      {scene === "GameOver" && <GameOver />}
-      {scene === "Question" && <Question />}
-      <Footer />
-    </View>
+    <SafeAreaView style={styles.layout}>
+      <Header style={styles.header} />
+      <ScrollView style={styles.scrollView}>
+        {scene === "Main" && <Main />}
+        {scene === "GameOver" && <GameOver />}
+        {scene === "Question" && <Question />}
+      </ScrollView>
+      <Footer style={styles.footer} />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: StatusBar.currentHeight,
+    overflow: "hidden",
+  },
+  header: {
+    maxHeight: "10%",
+  },
+  scrollView: {
+    height: "80%",
+  },
+  footer: {
+    maxHeight: "10%",
   },
 });
 
