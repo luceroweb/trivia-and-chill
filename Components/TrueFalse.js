@@ -12,8 +12,6 @@ const TrueFalse = ({
   const [selectedAnswer, setSelectedAnswer] = useState();
   const answer = selectedMovie?.answer;
 
-  console.log("answer", answer);
-
   const isCorrect = (selection) => {
     setSelectedAnswer(selection);
     if (selection === answer) {
@@ -30,13 +28,14 @@ const TrueFalse = ({
   };
 
   const getBorderColor = (button) => {
-    console.log("Selected Answer", selectedAnswer);
     if (typeof selectedAnswer === "undefined") {
       return "#00f";
-    } else if (button === answer && answer === selectedAnswer) {
-      return "#0f0";
-    } else {
+    }
+    if (button !== answer) {
       return "#f00";
+    }
+    if (button === answer) {
+      return "#0f0";
     }
   };
 
