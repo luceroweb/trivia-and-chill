@@ -4,22 +4,19 @@ import { StyleSheet, View } from "react-native";
 import Nav from "./Components/Nav";
 import { store } from "./Utils/store";
 import GenerateQuestion from "./Components/GenerateQuestion";
-import Trailer from './Components/Trailer';
 
 export default function App() {
   return (
-<>
-<Trailer/>
-    <Provider store={store}>
-      <View style={styles.layout}>
-        <Nav />
-        {/* <GenerateQuestion /> */}
-      </View>
-      <StatusBar style="auto" />
-    </Provider>
+    <>
+      <Provider store={store}>
+        <View style={styles.layout}>
+          <Nav />
+          <GenerateQuestion />
+        </View>
+        <StatusBar style="auto" />
+      </Provider>
     </>
   );
-  
 }
 
 const styles = StyleSheet.create({
@@ -29,4 +26,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-

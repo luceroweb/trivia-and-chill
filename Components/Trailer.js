@@ -2,10 +2,10 @@ import React, { useState, useCallback, useRef } from "react";
 import { Button, View, Alert } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 
-export default function Trailer() {
+export default function Trailer({movieId}) {
   const [playing, setPlaying] = useState(false);
-  const [videoI,setVideoI]=useState("iee2TATGMyI")
-
+  // const [videoI,setVideoI]=useState("iee2TATGMyI")
+  const [videoI,setVideoI]=useState("_zxhK3Z-R0c")
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
