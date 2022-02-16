@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import { StyleSheet, View, Text, Image, Pressable, useWindowDimensions } from 'react-native';
 import { connect } from 'react-redux';
+import FetchApi from '../Utils/FetchApi';
 
-function Main({ setScene }){
+function Main({ setScene, setMovies }){
   const windowWidth = useWindowDimensions().width;
   console.log("window", windowWidth);
+
+  useEffect(() => {
+    FetchApi().then((res) => setMovies(res));
+  }, []); 
 
   return(
     <View style={styles.container}>
@@ -50,7 +56,12 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_SCENE",
         name
-      })
+      }),
+    setMovies: (movies) =>
+      dispatch({
+        type: "SET_MOVIES",
+        movies
+      }),
   };
 }
 

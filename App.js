@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { Provider } from 'react-redux';
+import { StatusBar } from "expo-status-bar";
+import { Provider } from "react-redux";
 import { StyleSheet } from "react-native";
 import Nav from "./Components/Nav";
 import { store } from "./Utils/store";
@@ -14,9 +14,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  layout: {
-    flex: 1,
-  },
-});

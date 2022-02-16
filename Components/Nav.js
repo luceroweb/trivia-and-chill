@@ -1,10 +1,17 @@
-import { View, StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import Question from "../Scenes/Question";
+import CorrectAnswer from "../Scenes/CorrectAnswer";
 
 function Nav({ scene }) {
   return (
@@ -14,6 +21,7 @@ function Nav({ scene }) {
         {scene === "Main" && <Main />}
         {scene === "GameOver" && <GameOver />}
         {scene === "Question" && <Question />}
+        {scene === "CorrectAnswer" && <CorrectAnswer />}
       </ScrollView>
       <Footer style={styles.footer} />
     </SafeAreaView>
@@ -27,13 +35,13 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   header: {
-    maxHeight: "10%",
+    height: "10%",
   },
   scrollView: {
     height: "80%",
   },
   footer: {
-    maxHeight: "10%",
+    height: "10%",
   },
 });
 
