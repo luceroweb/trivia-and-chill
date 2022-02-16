@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import { connect } from 'react-redux';
 
-function Timer({ timerCount, setScene }) {
+function Timer({ timerCount, resetTimer, setScene }) {
   useEffect(() => {
     if (timerCount === 0) {
       setScene('GameOver')
+      resetTimer();
     }
   });
 
@@ -28,6 +29,10 @@ function mapDispatchToProps(dispatch) {
     countdownTimer: setInterval(() => dispatch({
       type: 'COUNTDOWN_TIMER'
     }), 1000),
+    resetTimer: () =>
+    dispatch({
+      type: 'RESET_TIMER',
+    }),
     setScene: (name) =>
     dispatch({
       type: "SET_SCENE",

@@ -5,7 +5,6 @@ function Home({ winningStreak, increaseWinningStreak, resetWinningStreak  }) {
 
   return(
     <View style={styles.container}>
-      <Text>{timerCount}</Text>
       <Text>{winningStreak}</Text>
       <Pressable onPress={increaseWinningStreak}>
         <Text>Add</Text>

@@ -12,8 +12,6 @@ function Home({
   movies,
   setMovies,
   setScene,
-  timerCount,
-  countdownTimer,
 }) {
   
   useEffect(() => {
@@ -22,7 +20,6 @@ function Home({
 
   return (
     <View style={styles.container}>
-      <Text>{timerCount}</Text>
       <Text>{winningStreak}</Text>
       <Pressable onPress={increaseWinningStreak}>
         <Text>Add</Text>
@@ -41,7 +38,6 @@ function Home({
 function mapStateToProps(state) {
   return {
     winningStreak: state.winningStreak,
-    timerCount: state.timerCount,
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene
@@ -63,9 +59,6 @@ function mapDispatchToProps(dispatch) {
         type: "SET_MOVIES",
         movies,
       }),
-    countdownTimer: () => dispatch({
-      type: 'COUNTDOWN_TIMER',
-    }),
       setScene: (name) =>
       dispatch({
         type: "SET_SCENE",

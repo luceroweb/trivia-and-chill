@@ -23,6 +23,11 @@
           ...state,
           timerCount: state.timerCount - 1,
         };
+      case "RESET_TIMER":
+        return {
+          ...state,
+          timerCount: 10,
+        };
       case "SET_SCENE":
         return {
           ...state,

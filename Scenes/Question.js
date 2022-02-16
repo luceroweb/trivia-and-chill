@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
+import Timer from "../Components/Timer";
 
 function Question({
   winningStreak,
@@ -12,6 +13,8 @@ function Question({
   movies,
   setMovies,
   setScene,
+  timerCount,
+  countdownTimer,
 }) {
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
@@ -21,6 +24,7 @@ function Question({
     <View style={styles.container}>
       <View style={styles.container}>
         <View style={styles.title}>
+        <Timer />
           <View style={styles.heading}>
             <Text>Question</Text>
           </View>
@@ -50,6 +54,7 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
+    timerCount: state.timerCount,
   };
 }
 
@@ -67,6 +72,9 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_MOVIES",
         movies,
+      }),
+    countdownTimer: () => dispatch({
+        type: 'COUNTDOWN_TIMER',
       }),
     setScene: (name) =>
       dispatch({
