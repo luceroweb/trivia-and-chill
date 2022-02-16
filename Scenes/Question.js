@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
+import TrueFalse from "../Components/TrueFalse";
 
 function Question({
-  winningStreak,
-  increaseWinningStreak,
   selectedMovie,
-  resetWinningStreak,
   movies,
   setMovies,
-  setScene,
 }) {
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
@@ -28,16 +25,7 @@ function Question({
           <Text>{movies && selectedMovie?.question}</Text>
         </View>
         <View style={styles.titleWrap}>
-          <View style={styles.btn}>
-            <Pressable>
-              <Text>True</Text>
-            </Pressable>
-          </View>
-          <View style={styles.btn}>
-            <Pressable>
-              <Text>False</Text>
-            </Pressable>
-          </View>
+          <TrueFalse />
         </View>
       </View>
     </View>
