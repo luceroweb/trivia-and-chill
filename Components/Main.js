@@ -1,18 +1,9 @@
 import { useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  Pressable,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 
 function Main({ setScene, setMovies }) {
-  const windowWidth = useWindowDimensions().width;
-
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);

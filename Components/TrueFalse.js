@@ -18,12 +18,12 @@ const TrueFalse = ({
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
-      }, 5000);
+      }, 1000);
     } else {
       setTimeout(() => {
         resetWinningStreak();
         setScene("GameOver");
-      }, 5000);
+      }, 1000);
     }
   };
 
