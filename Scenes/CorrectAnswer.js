@@ -1,5 +1,6 @@
 import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions, Platform } from 'react-native';
 import ConfettiCannon from 'react-native-confetti-cannon';
+import { connect } from "react-redux";
 
 const VideoSkeleton = () => (
   <View style={skelStyle.container}>
@@ -17,10 +18,10 @@ const VideoSkeleton = () => (
   </View>
 );
 
-const CorrectAnswer = ({ videoId }) => {
+const CorrectAnswer = ({ videoId, setScene }) => {
   const { width } = useWindowDimensions();
   const handleNextQuestion = () => {
-    // set scene state to question scene
+    setScene('Question');
   }
 
   return (
@@ -58,6 +59,22 @@ const CorrectAnswer = ({ videoId }) => {
       </ScrollView>
     </View>
   )
+}
+
+function mapStateToProps(state) {
+  return {
+    scene: state.scene
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setScene: (name) =>
+    dispatch({
+      type: "SET_SCENE",
+      name
+    })
+  };
 }
 
 const skelStyle = StyleSheet.create({
@@ -149,4 +166,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CorrectAnswer;
+export default connect(mapStateToProps, mapDispatchToProps)(CorrectAnswer);
