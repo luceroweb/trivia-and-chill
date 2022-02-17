@@ -1,6 +1,5 @@
   const initialState = {
     winningStreak: 0,
-    timerCount: 10,
     scene: "Home",
     movies: [],
     selectedMovie: {},
@@ -17,16 +16,6 @@
         return {
           ...state,
           winningStreak: 0,
-        };
-      case "COUNTDOWN_TIMER":
-        return {
-          ...state,
-          timerCount: state.timerCount - 1,
-        };
-      case "RESET_TIMER":
-        return {
-          ...state,
-          timerCount: 10,
         };
       case "SET_SCENE":
         return {

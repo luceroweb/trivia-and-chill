@@ -13,9 +13,9 @@ function Question({
   movies,
   setMovies,
   setScene,
-  timerCount,
-  countdownTimer,
 }) {
+  const [timerCount, setTimerCount] = useState(10);
+
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -24,7 +24,7 @@ function Question({
     <View style={styles.container}>
       <View style={styles.container}>
         <View style={styles.title}>
-        <Timer />
+        <Timer timerCount={timerCount} setTimerCount={setTimerCount}/>
           <View style={styles.heading}>
             <Text>Question</Text>
           </View>
@@ -54,7 +54,6 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
-    timerCount: state.timerCount,
   };
 }
 
@@ -72,9 +71,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_MOVIES",
         movies,
-      }),
-    countdownTimer: () => dispatch({
-        type: 'COUNTDOWN_TIMER',
       }),
     setScene: (name) =>
       dispatch({
