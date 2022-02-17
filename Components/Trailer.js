@@ -9,7 +9,7 @@ export default function Trailer({movieId}) {
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
-      Alert.alert("video has finished playing!");
+      Alert.alert("video has finished playi!");
     }
   }, []);
 
