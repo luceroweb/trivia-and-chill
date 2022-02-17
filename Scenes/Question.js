@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
