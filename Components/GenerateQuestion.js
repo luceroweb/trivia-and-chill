@@ -1,29 +1,36 @@
-import React from 'react'
-import { View } from 'react-native';
-import madLibsArray from '../Utils/madLibsArray';
-import RandomGenerator from '../Utils/RandomGenerator';
+import React, { useEffect } from "react";
+import { View } from "react-native";
+import madLibsArray from "../Utils/madLibsArray";
+import RandomGenerator from "../Utils/RandomGenerator";
+import { connect } from "react-redux";
 
-const GenerateQuestion = ({ movies
-  ,movieId ,setMovieId
-}) => {
-  
-  let movie = movies
-    ? movies[RandomGenerator(movies.length)] 
-    : [];
+const GenerateQuestion = ({ movies, setSelectedMovie }) => {
+  let movie = movies ? movies[RandomGenerator(movies.length)] : [];
 
-  let questionObject = movie 
-    ? madLibsArray(movie)
-    : {};
+  let questionObject = movie ? madLibsArray(movie) : {};
+  let randomIndex = RandomGenerator(questionObject.length);
+ 
+  useEffect(() => {
+    setSelectedMovie(questionObject[randomIndex]);
+  }, []);
 
-  if(questionObject) {
-    console.log('Mad Libs', questionObject[RandomGenerator(questionObject.length)]?.question) 
+  return <View></View>
+};
+
+function mapStateToProps(state) {
+  return {
+    selectedMovie: state.selectedMovie,
   };
-  console.log(questionObject[RandomGenerator(questionObject.length)]?.movieId) 
-  return (
-    <View>
-    </View>
-  )
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    setSelectedMovie: (selectedMovie) =>
+      dispatch({
+        type: "SET_SELECTED_MOVIE",
+        selectedMovie,
+      }),
+  };
+}
 
-export default GenerateQuestion;
+export default connect(mapStateToProps, mapDispatchToProps)(GenerateQuestion);
