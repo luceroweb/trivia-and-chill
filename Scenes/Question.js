@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
+import Timer from "../Components/Timer";
 import TrueFalse from "../Components/TrueFalse";
 
 function Question({
@@ -10,6 +11,8 @@ function Question({
   movies,
   setMovies,
 }) {
+  const [timerCount, setTimerCount] = useState(10);
+
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -18,6 +21,7 @@ function Question({
     <View style={styles.container}>
       <View style={styles.container}>
         <View style={styles.title}>
+        <Timer timerCount={timerCount} setTimerCount={setTimerCount}/>
           <View style={styles.heading}>
             <Text>Question</Text>
           </View>

@@ -7,11 +7,8 @@ export default function Trailer({ movieId }) {
   const [playing, setPlaying] = useState(false);
   const [youTubeId, setYouTubeId] = useState(null);
 
-  console.log("movie id", movieId);
-
   useEffect(() => {
     getYouTubeId(movieId).then((res) => {
-      console.log(res);
       setYouTubeId(res);
     });
   }, []);
@@ -19,7 +16,7 @@ export default function Trailer({ movieId }) {
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
-      Alert.alert("video has finished playing!");
+      Alert.alert("video has finished playi!");
     }
   }, []);
 

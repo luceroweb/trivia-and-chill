@@ -1,10 +1,4 @@
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  SafeAreaView,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
 import Header from "./Header";
