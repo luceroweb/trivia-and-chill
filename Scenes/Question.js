@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
 import Timer from "../Components/Timer";
+import TrueFalse from "../Components/TrueFalse";
 
 function Question({
-  winningStreak,
-  increaseWinningStreak,
   selectedMovie,
-  resetWinningStreak,
   movies,
   setMovies,
-  setScene,
 }) {
   const [timerCount, setTimerCount] = useState(10);
 
@@ -32,16 +29,7 @@ function Question({
           <Text>{movies && selectedMovie?.question}</Text>
         </View>
         <View style={styles.titleWrap}>
-          <View style={styles.btn}>
-            <Pressable>
-              <Text>True</Text>
-            </Pressable>
-          </View>
-          <View style={styles.btn}>
-            <Pressable>
-              <Text>False</Text>
-            </Pressable>
-          </View>
+          <TrueFalse />
         </View>
       </View>
     </View>

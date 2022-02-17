@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 function GameOver({ setScene, resetWinningStreak }) {
   const backToStartHandler = () => {
     resetWinningStreak();
-    setScene('Home');
+    setScene('Main');
   };
 
   return (
