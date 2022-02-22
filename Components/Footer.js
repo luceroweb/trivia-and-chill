@@ -15,7 +15,7 @@ function Footer(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EEF525',
+        backgroundColor: 'red',
         height: 100,
         width: '100%',
         alignItems: 'center',

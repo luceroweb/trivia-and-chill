@@ -5,7 +5,7 @@ function Header(){
     return(
         <View style={styles.container}>
             <Text>
-            PROJECT GITHUB  |  BITWISE WORFORCE TRAINING WEBSITE  |  BITWISE WORKFORCE TRAINING TWITTER
+            ABOUT TEAM  |  PROJECT GITHUB  |  BITWISE WORFORCE TRAINING WEBSITE  |  BITWISE WORKFORCE TRAINING TWITTER
             </Text>
         </View>
     )
@@ -15,7 +15,7 @@ function Header(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EEF525',
+        backgroundColor: 'red',
         height: 100,
         width: '100%',
         alignItems: 'center',
