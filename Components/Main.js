@@ -40,7 +40,6 @@ function Main({ setScene, setMovies }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
     alignItems: "center",
   },
   start: {
