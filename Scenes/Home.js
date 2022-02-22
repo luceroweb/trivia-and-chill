@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { connect } from 'react-redux';
-import Badge from '../Components/Badge';
 import FetchApi from '../Utils/FetchApi';
 import GenerateQuestion from '../Components/GenerateQuestion';
 
@@ -16,7 +15,6 @@ function Home({ winningStreak, increaseWinningStreak, resetWinningStreak, movies
 
   return(
     <View style={styles.container}>
-      <Badge />
 
       <Text>{winningStreak}</Text>
       <Pressable onPress={increaseWinningStreak}>

@@ -12,9 +12,12 @@ const GenerateQuestion = ({ movies }) => {
   let questionObject = movie 
     ? madLibsArray(movie)
     : {};
-
+    
+  
   if(questionObject) {
-    console.log('Mad Libs', questionObject[RandomGenerator(questionObject.length)] ) 
+    let film = RandomGenerator(questionObject.length);
+    // console.log(film);
+    console.log('Mad Libs', questionObject[film], questionObject[film]?.movieId) 
   };
 
   return (
