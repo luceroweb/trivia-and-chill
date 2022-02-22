@@ -6,16 +6,23 @@ import {
   StyleSheet,
   useWindowDimensions,
   Platform,
+  ImageBackground,
 } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import { connect } from "react-redux";
 import Trailer from "../Components/Trailer";
+import { useFonts, Limelight_400Regular } from '@expo-google-fonts/limelight';
+import ticket from '../Images/ticket.png';
 
 const CorrectAnswer = ({ selectedMovie, setScene }) => {
   const { width } = useWindowDimensions();
   const handleNextQuestion = () => {
     setScene("Question");
   };
+
+const [font] = useFonts({
+  Limelight_400Regular,
+});
 
   return (
     <View style={{ flex: 1 }}>
@@ -43,10 +50,12 @@ const CorrectAnswer = ({ selectedMovie, setScene }) => {
         </View>
 
         <Pressable
-          style={[styles.button, styles.boxShadow]}
+          style={[styles.button]}
           onPress={handleNextQuestion}
         >
-          <Text>Next Question!</Text>
+          <ImageBackground style={styles.ticketButton} source={ticket}>
+            <Text style={styles.ticketText}>Next Question!</Text>
+          </ImageBackground>
         </Pressable>
       </ScrollView>
     </View>
@@ -70,42 +79,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const skelStyle = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%",
-    paddingBottom: 15,
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  video: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "70%",
-    width: "100%",
-    backgroundColor: "#E0E0E0",
-  },
-  infoContainer: {
-    flexDirection: "row",
-    marginHorizontal: 15,
-    width: "100%",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  avatar: {
-    height: 50,
-    width: 50,
-    backgroundColor: "#E0E0E0",
-    borderRadius: 100,
-    marginRight: 20,
-  },
-  description: {
-    minWidth: "60%",
-    height: 25,
-    backgroundColor: "#E0E0E0",
-  },
-});
-
 const styles = StyleSheet.create({
   borderStyleDebug: {
     borderWidth: 2,
@@ -114,6 +87,7 @@ const styles = StyleSheet.create({
   scrollViewOuter: {
     alignSelf: "center",
     width: "100%",
+    height: "100%",
   },
   scrollViewContent: {
     flex: 1,
@@ -139,7 +113,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,
-    backgroundColor: "lightblue",
+    backgroundColor: "transparent",
   },
   textContainer: {
     flexGrow: 1, // pushes textContainer upwards
@@ -150,11 +124,25 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: "bold",
     marginVertical: 10,
+    fontFamily: 'Limelight_400Regular',
   },
   h3: {
     fontSize: 24,
     fontWeight: "bold",
     marginVertical: 10,
+    fontFamily: 'Limelight_400Regular',
+  },
+  ticketButton: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 224,
+    height: 116,
+    justifyContent: 'center',
+  },
+  ticketText: {
+    fontFamily: 'Limelight_400Regular',
+    position: 'absolute',
+    alignSelf: 'center',
   },
 });
 
