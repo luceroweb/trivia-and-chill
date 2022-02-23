@@ -32,7 +32,7 @@ const DeveloperCredits = () => {
                     <Text style = {styles.textStyle}>Developer</Text>
                     <Text style = {styles.textStyle}>Team Lead</Text>
                     <Text style = {styles.textStyle}>Developer</Text>
-                    <Text style = {styles.textStyle}>Product Owner/Client</Text>
+                    <Text style = {styles.textStyle}>Owner/Client</Text>
                     <Text style = {styles.textStyle}>Developer</Text>
                     <Text style = {styles.textStyle}>Team Lead</Text>
                     <Text style = {styles.textStyle}>Team Lead</Text>
