@@ -11,8 +11,10 @@
     "predeploy": "expo build:web"
   },
   "dependencies": {
+    "@expo-google-fonts/limelight": "^0.2.2",
     "axios": "^0.25.0",
     "expo": "~44.0.0",
+    "expo-font": "~10.0.4",
     "expo-status-bar": "~1.2.0",
     "gh-pages": "^3.2.3",
     "react": "17.0.1",
