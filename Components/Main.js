@@ -1,32 +1,38 @@
-import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
+import { StyleSheet, View, Image, useWindowDimensions } from 'react-native';
 import { connect } from 'react-redux';
 
 function Main(){
+  const windowWidth = useWindowDimensions().width;
+  console.log("window", windowWidth);
+
     return(
-        
-        <>
+        <View>
             <View>
                 <Image
-                    style={{ width: 700, height: 100 }}
-                    source={require('../Images/bw-header-logo.png')} />
+                    style={{ width: "80%", aspectRatio: 7/1 }}
+                    source={require('../Images/bw-header-logo.png')}
+                    alt="BitWise Industries" />
             </View>
             <View>
                     <Image
-                        style={{ width: 500, height: 100 }}
-                        source={require('../Images/teammvp-header-logo.png')} />
+                        style={{ width: "45%", aspectRatio: 5/1 }}
+                        source={require('../Images/teammvp-header-logo.png')}
+                        alt="Team MVP" />
             </View>
             <View>
                     <Image
-                        style={{ width: 500, height: 100 }}
-                        source={require('../Images/presents-header-logo.png')} />
+                        style={{ width: "45%", aspectRatio: 5/1 }}
+                        source={require('../Images/presents-header-logo.png')}
+                        alt="Presents" />
             </View>
             <View>
                     <Image
-                        style={{ width: 500, height: 500 }}
-                        source={require('../Images/gtm-header-logo.png')} />
+                        style={{ width: "75%", aspectRatio: 1 }}
+                        source={require('../Images/gtm-header-logo.png')}
+                        alt="Guess The Movie" />
             </View>
             
-            </>
+        </View>
     )
 }
 
