@@ -5,7 +5,8 @@ import {
 	Text,
 	Pressable,
   ImageBackground,
-  useWindowDimensions
+  useWindowDimensions,
+  SafeAreaView
 } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
@@ -17,30 +18,54 @@ import Drive from "../Images/drive-in-movie.jpg";
 function Question({ selectedMovie, movies, setMovies }) {
   const [timerCount, setTimerCount] = useState(10);
   const { width, height } = useWindowDimensions();
-	const widthBreakpoint = 500;
+	const widthBreakpoint = 700;
 
 	useEffect(() => {
 		FetchApi().then((res) => setMovies(res));
 	}, []);
 
 	return (
-		// <ImageBackground source={Drive}  style={styles.image}>
-		<View style={styles.container}>
-			{/* <View style={styles.container}> */}
-			<View style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}>
-				{/* <Timer timerCount={timerCount} setTimerCount={setTimerCount} /> */}
-				<View style={styles.heading}>
-					<Text style={styles.heading}>Question</Text>
+		<ImageBackground
+			resizeMode={"cover"}
+			source={Drive}
+			style={[width > widthBreakpoint ? styles.image : styles.imageMobile]}
+		>
+			<Text>
+				<View
+					style={[
+						width > widthBreakpoint ? styles.container : styles.containerMobile,
+					]}
+				>
+					<View
+						style={[
+							width > widthBreakpoint ? styles.title : styles.titleMobile,
+						]}
+					>
+						{/* <Timer timerCount={timerCount} setTimerCount={setTimerCount} /> */}
+						<View style={styles.heading}>
+							<Text style={styles.heading}>Question</Text>
+						</View>
+						<Text style={styles.q}>
+							<GenerateQuestion movies={movies} />
+						</Text>
+						<Text style={styles.q}>
+							{movies && selectedMovie?.question}
+						</Text>
+					</View>
+					<View
+						style={[
+							width > widthBreakpoint
+								? styles.titleWrap
+								: styles.titleWrapMobile,
+						]}
+					>
+						<Text>
+							<TrueFalse />
+						</Text>
+					</View>
 				</View>
-				<GenerateQuestion movies={movies} />
-				<Text style={styles.heading}>{movies && selectedMovie?.question}</Text>
-			</View>
-			<View style={styles.titleWrap}>
-				<TrueFalse />
-			</View>
-		</View>
-		// {/* </View> */}
-		// </ImageBackground>
+			</Text>
+		</ImageBackground>
 	);
 }
 
@@ -79,17 +104,34 @@ function mapDispatchToProps(dispatch) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#401323",
+		// backgroundColor: "#401323",
 		alignItems: "center",
 		justifyContent: "center",
 		height: "60%",
 		width: "100%",
 		flexDirection: "column",
-		paddingTop: 50,
+		// paddingTop: 15,
+	},
+	containerMobile: {
+		flex: 1,
+		// backgroundColor: "#401323",
+		alignItems: "center",
+		justifyContent: "center",
+		height: "60%",
+		width: "100%",
+		flexDirection: "column",
+		// paddingTop: 50,
 	},
 	titleWrap: {
 		flexDirection: "row",
+		// paddingTop: 10,
+		paddingBottom: 20,
+	},
+	titleWrapMobile: {
+		flexDirection: "row",
 		paddingTop: 100,
+		paddingBottom: 3,
+		marginHorizontal: 30,
 	},
 	title: {
 		shadowColor: "#1a1a1a",
@@ -99,8 +141,8 @@ const styles = StyleSheet.create({
 		backgroundColor: "#292840",
 		fontWeight: "bold",
 		fontSize: 20,
-		height: 335,
-		width: 500,
+		height: 300,
+		width: 615,
 	},
 	titleMobile: {
 		shadowColor: "#1a1a1a",
@@ -110,30 +152,35 @@ const styles = StyleSheet.create({
 		backgroundColor: "#292840",
 		fontWeight: "bold",
 		fontSize: 20,
-		height: 225,
-		width: 375,
+		height: 390,
+		width: 300,
+		marginHorizontal: 30,
 	},
 	heading: {
 		marginBottom: 8,
 		color: "#F2D379",
 		paddingTop: 20,
+		paddingRight:20,
+		alignSelf:"center"
 	},
-	// subtitle: {
-	// 	textAlign: "center",
-	// 	borderWidth: 2,
-	// 	borderStyle: "dashed",
-	// 	color: "#F2D379",
-	// 	shadowRadius: 10,
-	// 	fontWeight: "bold",
-	// 	padding: 5,
-	// 	fontSize: 10,
-	// 	paddingHorizontal: 70,
-	// 	// height: 150,
-	// },
+	q: {
+		marginBottom: 8,
+		color: "#F2D379",
+		paddingTop: 20,
+		marginHorizontal: 20,
+	},
+
 	image: {
 		justifyContent: "center",
+		paddingBottom: 30,
+		// margin: 10,
 		paddingTop: 20,
-		margin: 10,
+	},
+	imageMobile: {
+		justifyContent: "center",
+		paddingBottom: 100,
+		paddingTop: 25,
+		// margin: 10,
 	},
 });
 
