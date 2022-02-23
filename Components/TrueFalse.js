@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 const TrueFalse = ({
   selectedMovie,
@@ -41,30 +42,25 @@ const TrueFalse = ({
 
   return (
     <View style={styles.container}>
-      <Pressable
-        key={1}
-        style={[
-          styles.option,
-          { borderWidth: 2, borderColor: getBorderColor(true) },
-        ]}
-        onPress={() => isCorrect(true)}
-      >
-        <Text>True</Text>
-      </Pressable>
-      <Pressable
-        key={0}
-        style={[
-          styles.option,
-          { borderWidth: 2, borderColor: getBorderColor(false) },
-        ]}
-        onPress={() => isCorrect(false)}
-      >
-        <Text>False</Text>
-      </Pressable>
+<Pressable onPress={() => isCorrect(true)} style={styles.start}>
+
+<FontAwesome5 name="ticket-alt" size={124} color="#A0947C"/>
+<View styles={styles.border}>
+ <Text style={styles.text}>True</Text>
+ <View style={styles.border}></View>
+ </View>
+    </Pressable>
+    <Pressable onPress={() => isCorrect(false)} style={styles.start}>
+
+<FontAwesome5 name="ticket-alt" size={124} color="#A0947C"/>
+<View styles={styles.border}>
+ <Text style={styles.text}>False</Text>
+ <View style={styles.border}></View>
+ </View>
+    </Pressable>
     </View>
   );
 };
-
 const mapStateToProps = (state) => ({
   questions: state.questions,
   selectedMovie: state.selectedMovie,
@@ -95,11 +91,28 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20, // StatusBar.currentHeight,
     paddingHorizontal: 20,
+    flexDirection:"row"
   },
-  option: {
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    margin: 8,
-    backgroundColor: "#afafaf",
+  start: {
+    borderRadius: 5,
+    backgroundColor: "white",
+    padding: 10,
+    marginBottom: 10,
   },
+  text: {
+    position: 'relative',
+    top: -78,
+    marginLeft: 42,
+    fontSize: 24,
+  },
+  border: {
+    borderWidth: 4,
+    borderColor: "#401323",
+    width: 85,
+    marginLeft: 27,
+    height: 54,
+    top: -123,
+  }
 });
+
+

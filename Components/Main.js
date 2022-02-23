@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
+import { FontAwesome5 } from '@expo/vector-icons';
 
 function Main({ setScene, setMovies }) {
   useEffect(() => {
@@ -30,8 +31,11 @@ function Main({ setScene, setMovies }) {
         source={require("../Images/gtm-header-logo.png")}
         alt="Guess The Movie"
       />
+      
       <Pressable onPress={() => setScene("Question")} style={styles.start}>
-        <Text>Start</Text>
+        <FontAwesome5 name="ticket-alt" size={124} color="#A0947C" />
+        <Text style={styles.text}>start</Text>
+        <View style={styles.border}></View>
       </Pressable>
     </View>
   );
@@ -48,6 +52,20 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
   },
+  text: {
+    position: 'relative',
+    top: -78,
+    marginLeft: 42,
+    fontSize: 24,
+  },
+  border: {
+    borderWidth: 4,
+    borderColor: "#401323",
+    width: 85,
+    marginLeft: 27,
+    height: 54,
+    top: -123,
+  }
 });
 
 function mapDispatchToProps(dispatch) {
