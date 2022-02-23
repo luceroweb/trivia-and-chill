@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import Trailer from "../Components/Trailer";
 import { useFonts, Limelight_400Regular } from '@expo-google-fonts/limelight';
 import ticket from '../Images/ticket.png';
+import drivein from '../Images/drive-in-movie.jpg';
 
 const CorrectAnswer = ({ selectedMovie, setScene }) => {
   const { width } = useWindowDimensions();
@@ -26,6 +27,7 @@ const [font] = useFonts({
 
   return (
     <View style={{ flex: 1 }}>
+      <ImageBackground style={styles.drivein} source={drivein} resizeMode='cover'>
       <ConfettiCannon count={100} origin={{ x: -10, y: 0 }} fadeOut={true} />
       <ScrollView
         // todo: replace paddingTop value with useSafeAreaInsets
@@ -35,29 +37,29 @@ const [font] = useFonts({
           { marginHorizontal: width > 1000 ? 100 : 0 },
         ]}
       >
-        <View
-          style={[
-            styles.videoContainer,
-            Platform.OS === "web" ? styles.boxShadow : null,
-          ]}
-        >
-          <Trailer movieId={selectedMovie?.movieId} />
-        </View>
+          <View
+            style={[
+              styles.videoContainer,
+            ]}
+          >
+            <Trailer movieId={selectedMovie?.movieId} />
+          </View>
 
-        <View style={styles.textContainer}>
-          <Text style={styles.h2}>Correct!</Text>
-          <Text style={styles.h3}>Enjoy this video trailer</Text>
-        </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.h2}>Correct!</Text>
+            <Text style={styles.h3}>Enjoy this video trailer</Text>
+          </View>
 
-        <Pressable
-          style={[styles.button]}
-          onPress={handleNextQuestion}
-        >
-          <ImageBackground style={styles.ticketButton} source={ticket}>
-            <Text style={styles.ticketText}>Next Question!</Text>
-          </ImageBackground>
-        </Pressable>
+          <Pressable
+            style={[styles.button]}
+            onPress={handleNextQuestion}
+          >
+            <ImageBackground style={styles.ticketButton} source={ticket}>
+              <Text style={styles.ticketText}>Next Question!</Text>
+            </ImageBackground>
+          </Pressable>
       </ScrollView>
+      </ImageBackground>
     </View>
   );
 };
@@ -94,18 +96,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 20,
   },
-  boxShadow: {
-    shadowOffset: {
-      width: 2.0,
-      height: 5.0,
-    },
-    shadowRadius: Platform.OS === "web" ? 8.0 : 2.0,
-    shadowOpacity: 0.4,
-  },
   videoContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "whitesmoke",
+    backgroundColor: "transparent",
   },
   button: {
     flexShrink: 1,
@@ -144,6 +138,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
   },
+  drivein: {
+    justifyContent: 'center',
+    height: '100%',
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CorrectAnswer);
