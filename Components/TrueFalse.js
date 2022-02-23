@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, ImageBackground } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -42,22 +42,30 @@ const TrueFalse = ({
 
   return (
     <View style={styles.container}>
-<Pressable onPress={() => isCorrect(true)} style={styles.start}>
+<View style={{margin:4, flex:1,flexDirection:'row'}}>
+        <View style={{marginRight:15}}>
+      <ImageBackground source={require('../Images/ticket.png')} style={{width:160, height:80}}>
+   <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+   <Pressable onPress={() => isCorrect(true)} >
+     <Text>True</Text>
+     </Pressable>
+   </View>
+   
+</ImageBackground>
+</View>
+<View>
+<ImageBackground source={require('../Images/ticket.png')} style={{width:160, height:80}}>
+   <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+   <Pressable onPress={() => isCorrect(false)} > 
+     <Text>False</Text>
+     </Pressable>
+   </View>
+</ImageBackground>
+</View>
+</View>
 
-<FontAwesome5 name="ticket-alt" size={124} color="#A0947C"/>
-<View styles={styles.border}>
- <Text style={styles.text}>True</Text>
- <View style={styles.border}></View>
- </View>
-    </Pressable>
-    <Pressable onPress={() => isCorrect(false)} style={styles.start}>
 
-<FontAwesome5 name="ticket-alt" size={124} color="#A0947C"/>
-<View styles={styles.border}>
- <Text style={styles.text}>False</Text>
- <View style={styles.border}></View>
- </View>
-    </Pressable>
+
     </View>
   );
 };
@@ -93,26 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection:"row"
   },
-  start: {
-    borderRadius: 5,
-    backgroundColor: "white",
-    padding: 10,
-    marginBottom: 10,
-  },
-  text: {
-    position: 'relative',
-    top: -78,
-    marginLeft: 42,
-    fontSize: 24,
-  },
-  border: {
-    borderWidth: 4,
-    borderColor: "#401323",
-    width: 85,
-    marginLeft: 27,
-    height: 54,
-    top: -123,
-  }
+ 
 });
 
 

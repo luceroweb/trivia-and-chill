@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { StyleSheet, View, Text, Image, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image, Pressable,ImageBackground  } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -32,11 +32,15 @@ function Main({ setScene, setMovies }) {
         alt="Guess The Movie"
       />
       
-      <Pressable onPress={() => setScene("Question")} style={styles.start}>
-        <FontAwesome5 name="ticket-alt" size={124} color="#A0947C" />
-        <Text style={styles.text}>start</Text>
-        <View style={styles.border}></View>
-      </Pressable>
+     
+
+      <ImageBackground source={require('../Images/ticket.png')} style={{width:160, height:80}}>
+   <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+   <Pressable onPress={() => setScene("Question")} > 
+     <Text>Start</Text>
+     </Pressable>
+   </View>
+</ImageBackground>
     </View>
   );
 }
