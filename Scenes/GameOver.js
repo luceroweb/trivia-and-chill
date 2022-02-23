@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, ImageBackground } from "react-native";
 import { connect } from "react-redux";
+import BGImage from "../Images/drive-in-movie.jpg"
 
 function GameOver({ setScene, resetWinningStreak }) {
   const backToStartHandler = () => {
@@ -10,16 +11,19 @@ function GameOver({ setScene, resetWinningStreak }) {
 
   return (
     <View style={styles.layout}>
-      <Text style={styles.heading}>Oh no! You picked the wrong answer!</Text>
-      <Text style={styles.gameOver}>Game Over</Text>
-      <View>
-        <Pressable
-          onPress={backToStartHandler}
-          style={styles.backToStartButton}
-        >
-          <Text style={styles.backToStartButtonText}>Back to Start</Text>
-        </Pressable>
-      </View>
+      <ImageBackground source={BGImage} resizeMode="cover" style={styles.image}>
+        <View style={styles.gameOverWrap}>
+          <Text style={styles.gameOver}>Game Over</Text>
+          {/* <View>
+            <Pressable
+              onPress={backToStartHandler}
+              style={styles.backToStartButton}
+            >
+              <Text style={styles.backToStartButtonText}>Back to Start</Text>
+            </Pressable>
+          </View> */}
+        </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -47,21 +51,35 @@ function mapDispatchToProps(dispatch) {
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    backgroundColor: 'red',
+    height: '97.5vh',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
     padding: 40,
+    alignItems: 'center',
   },
   heading: {
     fontSize: 40,
     marginBottom: 70,
     textAlign: "center",
   },
+  gameOverWrap: {
+    backgroundColor: '#12121C',
+    padding: 20,
+    width: '52%',
+    marginTop: '21vh',
+  },
   gameOver: {
-    fontSize: 100,
+    fontSize: 70,
     marginBottom: 70,
     textAlign: "center",
+    color: '#F2E6C4',
   },
   backToStartButton: {
     padding: 10,
