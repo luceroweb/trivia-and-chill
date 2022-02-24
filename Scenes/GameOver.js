@@ -21,28 +21,28 @@ function GameOver({ setScene, resetWinningStreak }) {
   let myBackgroundImage;
   let gameOverWrapStyle;
   let gameOverStyle;
-  // let buttonStyle;
+  let buttonStyle;
 
   if (width > 860) {
     myBackgroundImage = BGImage;
     gameOverWrapStyle = styles.gameOverWrap;
     gameOverStyle = styles.gameOver;
-    // buttonStyle = styles.button;
+    buttonStyle = styles.button;
   } else if (width > 580) {
     myBackgroundImage = BGImageMobile;
     gameOverWrapStyle = styles.gameOverWrapMobile;
     gameOverStyle = styles.gameOver;
-    // buttonStyle = styles.buttonMobile;
+    buttonStyle = styles.buttonMobile;
   } else if (width > 430) {
     myBackgroundImage = BGImageMobile;
     gameOverWrapStyle = styles.gameOverWrapMini;
     gameOverStyle = styles.gameOverMobile;
-    // buttonStyle = styles.buttonMini;
+    buttonStyle = styles.buttonMini;
   } else {
     myBackgroundImage = BGImageMobile;
     gameOverWrapStyle = styles.gameOverWrapSuperMini;
     gameOverStyle = styles.gameOverMini;
-    // buttonStyle = styles.buttonSuperMini;
+    buttonStyle = styles.buttonSuperMini;
   }
   return (
     <View style={styles.layout}>
@@ -50,8 +50,9 @@ function GameOver({ setScene, resetWinningStreak }) {
         <View style={gameOverWrapStyle}>
           <Text style={gameOverStyle}>Game Over</Text>
         </View>
-        {/* <Pressable style={buttonStyle} onPress={backToStartHandler}>
+        <Pressable style={buttonStyle} onPress={backToStartHandler}>
           <ImageBackground
+          resizeMode="contain"
             source={require("../Images/ticket.png")}
             style={styles.ticket}
           >
@@ -59,7 +60,7 @@ function GameOver({ setScene, resetWinningStreak }) {
               <Text style={styles.backToStartButtonText}>Back to Start</Text>
             </View>
           </ImageBackground>
-        </Pressable> */}
+        </Pressable>
       </ImageBackground>
     </View>
   );
@@ -93,12 +94,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     backgroundColor: "red",
-    height: "97.5vh",
+    height: "127.5%",
   },
   image: {
     width: "100%",
     height: "100%",
-    padding: 40,
+    padding: 30,
     alignItems: "center",
   },
   heading: {
@@ -107,32 +108,40 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   gameOverWrap: {
-    backgroundColor: "#12121C",
+    backgroundColor: "#292840",
     padding: 20,
-    width: "52%",
-    marginTop: "14vh",
-    marginBottom: 30,
+    width: "60%",
+    aspectRatio: 16/9,
+    marginTop: "2%",
+    // marginBottom: 30,
+    justifyContent: "center",
   },
   gameOverWrapMobile: {
-    backgroundColor: "#12121C",
+    backgroundColor: "#292840",
     padding: 20,
-    width: "80%",
-    marginTop: "14vh",
-    marginBottom: 30,
+    width: "84%",
+    aspectRatio: 16/9,
+    marginTop: "8%",
+    // marginBottom: 30,
+    justifyContent: "center",
   },
   gameOverWrapMini: {
-    backgroundColor: "#12121C",
+    backgroundColor: "#292840",
     padding: 20,
-    width: "80%",
-    marginTop: "19vh",
-    marginBottom: 30,
+    width: "84%",
+    aspectRatio: 16/9,
+    marginTop: "20%",
+    // marginBottom: 30,
+    justifyContent: "center",
   },
   gameOverWrapSuperMini: {
-    backgroundColor: "#12121C",
+    backgroundColor: "#292840",
     padding: 10,
-    width: "80%",
-    marginTop: "24vh",
+    width: "94%",
+    aspectRatio: 16/9,
+    marginTop: "48%",
     marginBottom: 30,
+    justifyContent: "center",
   },
   gameOver: {
     fontSize: 70,
@@ -162,7 +171,7 @@ const styles = StyleSheet.create({
   },
   backToStartButtonText: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
     color: "#401323",
   },
   ticket: {
@@ -171,19 +180,19 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "22%",
-    height: "32%",
+    aspectRatio: 7/4,
   },
   buttonMobile: {
     width: "40%",
-    height: "26%",
+    aspectRatio: 7/4,
   },
   buttonMini: {
     width: "50%",
-    height: "28%",
+    aspectRatio: 7/4,
   },
   buttonSuperMini: {
     width: "60%",
-    height: "32%",
+    aspectRatio: 7/4,
   },
 });
 
