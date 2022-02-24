@@ -14,49 +14,59 @@ const About = () => {
     <>
       <Header style={styles.headerComponent} />
       <View style={styles.mainContainer}>
-        <ImageBackground source={require("../images/film-strip.jpg")} style={styles.image}>
-        <View style={styles.container}>
-          <Text style={styles.headings}>About the "Guess The Movie" Game:</Text>
+        <View>
+          <ImageBackground
+            source={require("../Images/film-strip.jpg")}
+            resizeMode="contain"
+            style={styles.image}
+          >
+            <View style={styles.container}>
+              <Text style={styles.headings}>
+                About the "Guess The Movie" Game:
+              </Text>
 
-          <Text style={styles.content}>
-            This game was created in order for our developer team to learn more
-            about React-Native, Redux, Axios, and dynamic question generation
-            using a live data base.
-            <Text
-              onPress={() =>
-                Linking.openURL(
-                  "https://bitwiseindustries.com/services/workforce-training/classes/"
-                )
-              }
+              <Text style={styles.content}>
+                This game was created in order for our developer team to learn
+                more about React-Native, Redux, Axios, and dynamic question
+                generation using a live data base.
+                <Text
+                  onPress={() =>
+                    Linking.openURL(
+                      "https://bitwiseindustries.com/services/workforce-training/classes/"
+                    )
+                  }
+                >
+                  Credits
+                </Text>
+              </Text>
+
+              <Text style={styles.headings}>About Workforce Training:</Text>
+
+              <Text style={styles.content}>
+                Our curriculum doesn’t come from textbooks, it comes directly
+                from practicing industry experts. Our system of teaching is
+                hands-on and up-to-date with current practices. Learn more{" "}
+                <Text
+                  onPress={() =>
+                    Linking.openURL(
+                      "https://bitwiseindustries.com/services/workforce-training/classes/"
+                    )
+                  }
+                >
+                  HERE
+                </Text>
+              </Text>
+            </View>
+            <ImageBackground
+              source={require("../Images/ticket.png")}
+              style={styles.ticketImage}
             >
-              Credits
-            </Text>
-          </Text>
-
-          <Text style={styles.headings}>About Workforce Training:</Text>
-
-          <Text style={styles.content}>
-            Our curriculum doesn’t come from textbooks, it comes directly from
-            practicing industry experts. Our system of teaching is hands-on and
-            up-to-date with current practices. Learn more{" "}
-            <Text
-              onPress={() =>
-                Linking.openURL(
-                  "https://bitwiseindustries.com/services/workforce-training/classes/"
-                )
-              }
-            >
-              HERE
-            </Text>
-          </Text>
+              <Text>Home</Text>
+            </ImageBackground>
+          </ImageBackground>
         </View>
-        <Image
-          source={require("../images/ticket.png")}
-          style={styles.ticketImage}
-        />
-        </ImageBackground>
-        <Footer style={styles.footer} />
       </View>
+      <Footer style={styles.footer} />
     </>
   );
 };
@@ -95,24 +105,27 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   image: {
-    alignSelf: "center",
+    width: "100%",
     height: "100%",
   },
   mainContainer: {
-    display: "flex",
+    paddingLeft: "10%",
+    paddingRight: "10%",
     justifyContent: "center",
     backgroundColor: "#401323",
-    height: "100%",
   },
   ticketImage: {
-    marginTop: 100,
-    height: "25%",
-    width: "28%",
+    flex: 1,
+    marginBottom: 10,
+    width: 200,
+    aspectRatio: 18 / 9,
     alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   headerComponent: {
     width: "100%",
-    height: "30%",
+    height: "100%",
   },
 });
 

@@ -24,7 +24,7 @@ function Nav({ scene }) {
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1,
+    flexGrow: 1,
     marginTop: StatusBar.currentHeight,
     overflow: "hidden",
   },
