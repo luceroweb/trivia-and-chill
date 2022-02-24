@@ -11,7 +11,10 @@ function Nav({ scene }) {
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         {scene === "Main" && <Main />}
         {scene === "GameOver" && <GameOver />}
         {scene === "Question" && <Question />}
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
     height: "10%",
   },
   scrollView: {
-    height: "80%",
+    height: "100%",
   },
   footer: {
     height: "10%",
