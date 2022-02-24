@@ -11,7 +11,10 @@ function Nav({ scene }) {
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
-      <ScrollView style={styles.scrollView} contentContainerStyle={{flex: 1}}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         {scene === "Main" && <Main />}
         {scene === "GameOver" && <GameOver />}
         {scene === "Question" && <Question />}
