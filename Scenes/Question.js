@@ -59,7 +59,7 @@ function Question({ selectedMovie, movies, setMovies }) {
 								: styles.titleWrapMobile,
 						]}
 					>
-						<Text>
+						<Text >
 							<TrueFalse />
 						</Text>
 					</View>
@@ -104,34 +104,33 @@ function mapDispatchToProps(dispatch) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// backgroundColor: "#401323",
 		alignItems: "center",
 		justifyContent: "center",
 		height: "60%",
 		width: "100%",
 		flexDirection: "column",
-		// paddingTop: 15,
+	
 	},
 	containerMobile: {
 		flex: 1,
-		// backgroundColor: "#401323",
 		alignItems: "center",
 		justifyContent: "center",
 		height: "60%",
 		width: "100%",
 		flexDirection: "column",
-		// paddingTop: 50,
+		
 	},
 	titleWrap: {
 		flexDirection: "row",
-		// paddingTop: 10,
-		paddingBottom: 20,
+		padding: 20,
+		
+		
 	},
 	titleWrapMobile: {
 		flexDirection: "row",
 		paddingTop: 100,
 		paddingBottom: 3,
-		marginHorizontal: 30,
+		// marginHorizontal: 10,
 	},
 	title: {
 		shadowColor: "#1a1a1a",
@@ -157,7 +156,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 30,
 	},
 	heading: {
-		marginBottom: 8,
+		// marginBottom: 8,
 		color: "#F2D379",
 		paddingTop: 20,
 		paddingRight:20,
@@ -172,9 +171,9 @@ const styles = StyleSheet.create({
 
 	image: {
 		justifyContent: "center",
-		paddingBottom: 30,
+		paddingBottom: 75,
 		// margin: 10,
-		paddingTop: 20,
+		paddingTop: 10,
 	},
 	imageMobile: {
 		justifyContent: "center",
@@ -182,6 +181,7 @@ const styles = StyleSheet.create({
 		paddingTop: 25,
 		// margin: 10,
 	},
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
