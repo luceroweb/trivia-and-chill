@@ -13,7 +13,6 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
     getPerformerName(movie.id)
   .then(response => {
     movie={...movie, name: response.data.cast[0].name}
-    console.log(movie)
   let questionObject = movie ? madLibsArray(movie) : {};
   let randomIndex = RandomGenerator(questionObject.length);
   setSelectedMovie(questionObject[randomIndex]);
