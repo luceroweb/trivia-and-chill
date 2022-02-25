@@ -14,14 +14,14 @@ function GameOver({ setScene, resetWinningStreak }) {
       <ImageBackground source={BGImage} resizeMode="cover" style={styles.image}>
         <View style={styles.gameOverWrap}>
           <Text style={styles.gameOver}>Game Over</Text>
-          {/* <View>
+          <View>
             <Pressable
               onPress={backToStartHandler}
               style={styles.backToStartButton}
             >
               <Text style={styles.backToStartButtonText}>Back to Start</Text>
             </Pressable>
-          </View> */}
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -51,18 +51,19 @@ function mapDispatchToProps(dispatch) {
 
 const styles = StyleSheet.create({
   layout: {
-    // flex: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     backgroundColor: 'red',
-    height: '97.5vh',
+    height: '100%',
   },
   image: {
     width: '100%',
     height: '100%',
     padding: 40,
     alignItems: 'center',
+    height: '100%',
   },
   heading: {
     fontSize: 40,
