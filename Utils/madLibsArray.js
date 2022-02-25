@@ -1,4 +1,5 @@
 export default function madLibsArray(movies) {
+  console.log(movies)
   return (
     movies && [
       {
@@ -22,10 +23,31 @@ export default function madLibsArray(movies) {
         movieId: `${movies.id}`,
       },
       {
-        question: `Ghostbusters was released on May 12, 1987.`,
-        answer: false,
-        movieId: 620,
+        question: `${movies.name} starred in ${movies.title}.`, //get credits endpoint for cast.name
+        answer: true,
+        movieId: `${movies.id}`,
       },
+      {
+        question: `${movies.title}'s cast included ${movies.name} .`, //get credits endpoint for cast.name
+        answer: true,
+        movieId: `${movies.id}`,
+      },
+      // {
+      //   question: `${movies.title} is considered a ${movies.genres.name} movie.`,
+      //   answer: true,
+      //   movieId: `${movies.id}`,
+      // },
+    
+      // {
+      //   question: `${movies.title} is categorized under the ${movies.genres.name} genre.`, //get details
+      //   answer: true,
+      //   movieId: `${movies.id}`,
+      // },
+      // {
+      //   question: `${movies.title}'s plot used to described as ${movies.changes.items.original_value} genre.`, //get changes endpoint
+      //   answer: true,
+      //   movieId: `${movies.id}`,
+      // },
       {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
@@ -45,6 +67,11 @@ export default function madLibsArray(movies) {
         question: `La La Land's plot used to be described as "Two lovers are drawn together by their desire to do what is right.  They are faced with a growing need to dance into the night."`,
         answer: false,
         movieId: 313369,
+      },
+      {
+        question: `Ghostbusters was released on May 12, 1987.`,
+        answer: false,
+        movieId: 620,
       },
     ]
   );

@@ -32,6 +32,11 @@
           ...state,
           selectedMovie: action.selectedMovie
         };
+      case "SET_PERFORMER_NAME":
+        return {
+          ...state,
+          performerName: action.performerName
+        };
     }
     return state;
   };

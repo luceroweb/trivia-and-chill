@@ -1,12 +1,30 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 
-function Main({ setScene, setMovies }) {
+function Main({ setScene, setMovies,  }) {
+
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
+
+  //   // axios.all([
+  //   //   FetchApi(),
+  //   //   getPerformerName(550),
+  //   // ]).then(
+  //   //    axios.spread((...allData) => {
+  //   //     const allDataMovieTitle = allData[0];
+  //   //     const allDataPerformerName = allData[1].cast[0].name;
+  //   //     setMovies(allDataMovieTitle);
+  //   //     setPerformerName(allDataPerformerName);
+  //   //   })
+  //   // )
+  // }, []);
+
+  
+  
 
   return (
     <View style={styles.container}>
@@ -61,6 +79,11 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_MOVIES",
         movies,
+      }),
+      setPerformerName: (performerName) =>
+      dispatch({
+        type: "SET_PERFORMER_NAME",
+        performerName,
       }),
   };
 }
