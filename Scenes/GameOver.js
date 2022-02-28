@@ -12,6 +12,8 @@ import BGImage from "../Images/drive-in-movie.jpg";
 import BGImageMobile from "../Images/drive-in-movie (mobile).jpg";
 import { Audio } from 'expo-av';
 import lose from '../Sounds/lose.wav';
+// import AppLoading from 'expo-app-loading';
+import { useFonts, Limelight_400Regular} from '@expo-google-fonts/limelight';
 
 function GameOver({ setScene, resetWinningStreak }) {
   const [sound, setSound] = useState();
@@ -30,6 +32,14 @@ function GameOver({ setScene, resetWinningStreak }) {
     resetWinningStreak();
     setScene("Main");
   };
+
+  let [fontsLoaded] = useFonts({
+    Limelight_400Regular
+  });
+
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // }
 
   let myBackgroundImage;
   let gameOverWrapStyle;
@@ -111,7 +121,7 @@ function mapDispatchToProps(dispatch) {
 
 const styles = StyleSheet.create({
   layout: {
-    // flex: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
@@ -169,6 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 70,
     marginBottom: 70,
     textAlign: "center",
+    fontFamily: 'Limelight_400Regular',
     color: "#F2D379",
   },
   gameOverMobile: {
