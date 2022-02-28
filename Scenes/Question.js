@@ -20,53 +20,6 @@ function Question({ selectedMovie, movies, setMovies }) {
   const { width, height } = useWindowDimensions();
 	const widthBreakpoint = 700;
 
-<<<<<<< HEAD
-  const checkForTrue = () => {
-    if (selectedMovie?.answer === true) {
-      increaseWinningStreak();
-      setScene('CorrectAnswer');
-    } else {
-      resetWinningStreak();
-      setScene('GameOver');
-    }
-  }
-
-  const checkForFalse = () => {
-    if (selectedMovie?.answer === false) {
-      increaseWinningStreak();
-      setScene('CorrectAnswer');
-    } else {
-      resetWinningStreak();
-      setScene('GameOver');
-    }
-  }
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.title}>
-          <View style={styles.heading}>
-            <Text>Question</Text>
-          </View>
-          <GenerateQuestion movies={movies} />
-          <Text>{movies && selectedMovie?.question}</Text>
-        </View>
-        <View style={styles.titleWrap}>
-          <View style={styles.btn}>
-            <Pressable>
-              <Text onPress={checkForTrue}>True</Text>
-            </Pressable>
-          </View>
-          <View style={styles.btn}>
-            <Pressable>
-              <Text onPress={checkForFalse}>False</Text>
-            </Pressable>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-=======
 	useEffect(() => {
 		FetchApi().then((res) => setMovies(res));
 	}, []);
@@ -114,7 +67,6 @@ function Question({ selectedMovie, movies, setMovies }) {
 			</Text>
 		</ImageBackground>
 	);
->>>>>>> a1c12b7328d8b3b6abf8e9c4040e836eb79b0c04
 }
 
 function mapStateToProps(state) {
