@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
 		height: "60%",
 		width: "100%",
 		flexDirection: "column",
-	
 	},
 	containerMobile: {
 		flex: 1,
@@ -122,13 +121,10 @@ const styles = StyleSheet.create({
 		height: "60%",
 		width: "100%",
 		flexDirection: "column",
-		
 	},
 	titleWrap: {
 		flexDirection: "row",
 		padding: 20,
-		
-		
 	},
 	titleWrapMobile: {
 		flexDirection: "row",
@@ -162,16 +158,17 @@ const styles = StyleSheet.create({
 	heading: {
 		// marginBottom: 8,
 		color: "#F2D379",
-		paddingTop: 20,
-		paddingRight:20,
-		alignSelf:"center"
+		paddingTop: 10,
+		paddingRight: 20,
+		alignSelf: "center",
 	},
 	q: {
-		marginBottom: 8,
+		// marginBottom: 8,
 		color: "#F2D379",
-		paddingTop: 20,
+		// paddingTop: 10,
 		marginHorizontal: 20,
 	},
+
 
 	image: {
 		justifyContent: "center",
@@ -185,7 +182,6 @@ const styles = StyleSheet.create({
 		paddingTop: 25,
 		// margin: 10,
 	},
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
