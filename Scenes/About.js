@@ -43,15 +43,7 @@ const About = () => {
               source={require("../Images/ticket.png")}
               style={styles.ticketImage}
             >
-              <Text
-                  onPress={() =>
-                    Linking.openURL(
-                      "https://bitwiseindustries.com/services/workforce-training/classes/"
-                    )
-                  }
-                >
-                   Home
-                </Text>
+              <Text>Home</Text>
             </ImageBackground>
       </ScrollView>
       <Footer style={styles.footer} />
