@@ -6,6 +6,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import Question from "../Scenes/Question";
 import CorrectAnswer from "../Scenes/CorrectAnswer";
+import DeveloperCredits from "../Scenes/DeveloperCredits";
 
 function Nav({ scene }) {
   return (
@@ -19,6 +20,7 @@ function Nav({ scene }) {
         {scene === "GameOver" && <GameOver />}
         {scene === "Question" && <Question />}
         {scene === "CorrectAnswer" && <CorrectAnswer />}
+        {scene === "Credits" && <DeveloperCredits />}
       </ScrollView>
       <Footer style={styles.footer} />
     </SafeAreaView>
