@@ -25,6 +25,7 @@ function Question({ selectedMovie, movies, setMovies }) {
     FetchApi().then((res) => setMovies(res));
   }, []);
 
+
   return (
     <ImageBackground
       resizeMode={"cover"}

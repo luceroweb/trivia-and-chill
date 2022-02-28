@@ -1,4 +1,7 @@
 export default function madLibsArray(movies) {
+  function generateRandomDate() {
+    return new Date(+(new Date()) - Math.floor(Math.random() * 100000000000));
+  }
   return (
     movies && [
       {
@@ -6,6 +9,7 @@ export default function madLibsArray(movies) {
         answer: true,
         movieId: `${movies.id}`,
       },
+
       {
         question: `${movies.release_date} was the release date of ${movies.title}.`,
         answer: true,
@@ -45,6 +49,48 @@ export default function madLibsArray(movies) {
         question: `La La Land's plot used to be described as "Two lovers are drawn together by their desire to do what is right.  They are faced with a growing need to dance into the night."`,
         answer: false,
         movieId: 313369,
+      },
+
+      {
+        question: `When was ${movies.title} was released on?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+
+        question: ` ${movies.title} was released when?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: ` ${movies.title} was released when?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `what was the release date of the ${movies.title}?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `When did the ${movies.title} come out?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `${movies.title} was released on what date?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `When did ${movies.title} come out?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `What was the release date of ${movies.title}?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
       },
     ]
   );

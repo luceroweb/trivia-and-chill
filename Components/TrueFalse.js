@@ -3,12 +3,14 @@ import { Pressable, StyleSheet, Text, View, ImageBackground } from "react-native
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import madLibsArray from '../Utils/madLibsArray';
 
 const TrueFalse = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
   resetWinningStreak,
+  
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
   const answer = selectedMovie?.answer;
@@ -39,6 +41,7 @@ const TrueFalse = ({
       return "#0f0";
     }
   };
+  console.log(selectedMovie)
 
   return (
     <View style={styles.container}>
