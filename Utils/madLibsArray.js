@@ -1,13 +1,27 @@
 export default function madLibsArray(movies) {
+  let movieDate = new Date(
+    Date.UTC(
+      movies.release_date.substr(0, 4),
+      movies.release_date.substr(5, 2),
+      movies.release_date.substr(8, 2)
+    )
+  );
+
+  movieDate = movieDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     movies && [
       {
-        question: `${movies.title} was released on ${movies.release_date}.`, //movie details
+        question: `${movies.title} was released on ${movieDate}.`, //movie details
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.release_date} was the release date of ${movies.title}.`,
+        question: `${movieDate} was the release date of ${movies.title}.`,
         answer: true,
         movieId: `${movies.id}`,
       },
