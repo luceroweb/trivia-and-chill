@@ -1,12 +1,25 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import { connect } from 'react-redux';
+import { Audio } from 'expo-av';
+import tick from '../Sounds/tick.wav';
 
 function Timer({ setScene, timerCount, setTimerCount }) {
+  const [sound, setSound] = useState();
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      tick
+    );
+    setSound(sound);
+    await sound.playAsync();
+  }
+
   useEffect(() => {
     const timerInterval = setInterval(() => {
       if (timerCount > 0) {
-      setTimerCount(timerCount - 1);
+        setTimerCount(timerCount - 1);
+        playSound();
       }
       else {
         clearTimer();
@@ -18,7 +31,10 @@ function Timer({ setScene, timerCount, setTimerCount }) {
       setScene('GameOver')
     }
 
-    return () => clearInterval(timerInterval);
+    return () => {
+        clearInterval(timerInterval);
+        sound ? sound.unloadAsync() : undefined;
+      }
   }, [timerCount]);
 
   return (
