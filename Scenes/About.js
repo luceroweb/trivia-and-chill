@@ -1,52 +1,58 @@
-import { View, Text, Linking, StyleSheet, ScrollView, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  Linking,
+  StyleSheet,
+  ScrollView,
+  ImageBackground,
+  Pressable
+} from "react-native";
 import React from "react";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
 
 const About = () => {
   return (
     <View style={styles.mainContainer}>
-      <Header style={styles.headerComponent} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.subContainer}>
-              <View style={styles.contentContainer}>
-              <Text style={styles.headings}>
-                About the "Guess The Movie" Game:
-              </Text>
-              <Text style={styles.content}>
-                This game was created in order for our developer team to learn
-                more about React-Native, Redux, Axios, and dynamic question
-                generation using a live data base.
-              </Text>
-              </View>
+          <View style={styles.contentContainer}>
+            <Text style={styles.headings}>
+              About the "Guess The Movie" Game:
+            </Text>
+            <Text style={styles.content}>
+              This game was created in order for our developer team to learn
+              more about React-Native, Redux, Axios, and dynamic question
+              generation using a live data base.
+            </Text>
+          </View>
 
-              <View style={styles.contentContainer}>
-              <Text style={styles.headings}>About Workforce Training:</Text>
+          <View style={styles.contentContainer}>
+            <Text style={styles.headings}>About Workforce Training:</Text>
 
-              <Text style={styles.content}>
-                Our curriculum doesn’t come from textbooks, it comes directly
-                from practicing industry experts. Our system of teaching is
-                hands-on and up-to-date with current practices. Learn more
-                <Text
-                  onPress={() =>
-                    Linking.openURL(
-                      "https://bitwiseindustries.com/services/workforce-training/classes/"
-                    )
-                  }
-                >
-                   HERE
-                </Text>
+            <Text style={styles.content}>
+              Our curriculum doesn’t come from textbooks, it comes directly from
+              practicing industry experts. Our system of teaching is hands-on
+              and up-to-date with current practices. Learn more
+              <Text
+                onPress={() =>
+                  Linking.openURL(
+                    "https://bitwiseindustries.com/services/workforce-training/classes/"
+                  )
+                }
+              >
+                HERE
               </Text>
-              </View>
+            </Text>
+          </View>
         </View>
         <ImageBackground
-              source={require("../Images/ticket.png")}
-              style={styles.ticketImage}
-            >
-              <Text>Home</Text>
-            </ImageBackground>
+          source={require("../Images/ticket.png")}
+          style={styles.ticketImage}
+        >
+          <Pressable onPress={() => setScene("Main")}>
+            <Text>Home</Text>
+          </Pressable>
+        </ImageBackground>
       </ScrollView>
-      <Footer style={styles.footer} />
     </View>
   );
 };

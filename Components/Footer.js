@@ -4,9 +4,12 @@ import { connect } from "react-redux";
 function Footer({setScene}) {
   return (
     <View style={styles.container}>
-      <Text>SETTINGS | INSTRUCTIONS</Text>
       <Pressable onPress={() => setScene("Credits")}>
         <Text>Credits</Text>
+      </Pressable>
+      <Text> | </Text>
+      <Pressable onPress={() => setScene("About")}>
+        <Text>About</Text>
       </Pressable>
     </View>
   );
@@ -18,6 +21,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row"
   },
 });
 

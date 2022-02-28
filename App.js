@@ -11,9 +11,7 @@ export default function App() {
       <Provider store={store}>
         {/* <Badge /> */}
         <Nav />
-        <StatusBar style="auto" /> */}
-        <About/>
-
+        <StatusBar style="auto" />
       </Provider>
     </>
   );
