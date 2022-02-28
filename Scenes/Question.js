@@ -5,6 +5,7 @@ import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
 import Timer from "../Components/Timer";
 import TrueFalse from "../Components/TrueFalse";
+import MultipleChoice from "../Components/MultipleChoice";
 
 function Question({
   selectedMovie,
@@ -29,7 +30,15 @@ function Question({
           <Text>{movies && selectedMovie?.question}</Text>
         </View>
         <View style={styles.titleWrap}>
-          <TrueFalse />
+          {/* {
+            Array.isArray(selectedMovie?.answer)
+            ? */}
+
+            <MultipleChoice />
+
+          {/*   :
+             <TrueFalse />
+          */ }
         </View>
       </View>
     </View>
