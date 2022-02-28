@@ -14,6 +14,7 @@ import GenerateQuestion from "../Components/GenerateQuestion";
 import Timer from "../Components/Timer";
 import TrueFalse from "../Components/TrueFalse";
 import Drive from "../Images/drive-in-movie.jpg";
+import Badge from "../Components/Badge";
 
 function Question({ selectedMovie, movies, setMovies }) {
   const [timerCount, setTimerCount] = useState(10);
@@ -48,8 +49,11 @@ function Question({ selectedMovie, movies, setMovies }) {
 						<Text style={styles.q}>
 							<GenerateQuestion movies={movies} />
 						</Text>
-						<Text style={styles.q}>
-							{movies && selectedMovie?.question}
+						<Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+					</View>
+					<View style={{ justifyContent: "center" }}>
+						<Text>
+							<Badge />
 						</Text>
 					</View>
 					<View
@@ -59,7 +63,7 @@ function Question({ selectedMovie, movies, setMovies }) {
 								: styles.titleWrapMobile,
 						]}
 					>
-						<Text >
+						<Text>
 							<TrueFalse />
 						</Text>
 					</View>

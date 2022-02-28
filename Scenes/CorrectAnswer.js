@@ -15,6 +15,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import drivein from "../Images/drive-in-movie.jpg";
+import Badge from "../Components/Badge";
 
 const CorrectAnswer = ({ selectedMovie, setScene }) => {
   const { width } = useWindowDimensions();
@@ -30,43 +31,46 @@ const CorrectAnswer = ({ selectedMovie, setScene }) => {
     return <AppLoading />;
   } else {
     return (
-      <View style={{ flex: 1 }}>
-        <ImageBackground
-          style={styles.drivein}
-          source={drivein}
-          resizeMode="cover"
-        >
-          <ConfettiCannon
-            count={100}
-            origin={{ x: -10, y: 0 }}
-            fadeOut={true}
-          />
-          <ScrollView
-            // todo: replace paddingTop value with useSafeAreaInsets
-            style={[styles.scrollViewOuter, { paddingTop: 20 }]}
-            contentContainerStyle={[
-              styles.scrollViewContent,
-              { marginHorizontal: width > 1000 ? 100 : 0 },
-            ]}
-          >
-            <View style={[styles.videoContainer]}>
-              <Trailer movieId={selectedMovie?.movieId} />
-            </View>
+			<View style={{ flex: 1 }}>
+				<ImageBackground
+					style={styles.drivein}
+					source={drivein}
+					resizeMode="cover"
+				>
+					<ConfettiCannon
+						count={100}
+						origin={{ x: -10, y: 0 }}
+						fadeOut={true}
+					/>
+					<ScrollView
+						// todo: replace paddingTop value with useSafeAreaInsets
+						style={[styles.scrollViewOuter, { paddingTop: 20 }]}
+						contentContainerStyle={[
+							styles.scrollViewContent,
+							{ marginHorizontal: width > 1000 ? 100 : 0 },
+						]}
+					>
+						<View style={[styles.videoContainer]}>
+							<Trailer movieId={selectedMovie?.movieId} />
+						</View>
 
-            <View style={styles.textContainer}>
-              <Text style={styles.h2}>Correct!</Text>
-              <Text style={styles.h3}>Enjoy this video trailer</Text>
-            </View>
+						<View style={styles.textContainer}>
+							<Text style={styles.h2}>
+								Correct! <Badge />
+							</Text>
+						
+							<Text style={styles.h3}>Enjoy this video trailer</Text>
+						</View>
 
-            <Pressable style={[styles.button]} onPress={handleNextQuestion}>
-              <ImageBackground style={styles.ticketButton} source={ticket}>
-                <Text style={styles.ticketText}>Next Question!</Text>
-              </ImageBackground>
-            </Pressable>
-          </ScrollView>
-        </ImageBackground>
-      </View>
-    );
+						<Pressable style={[styles.button]} onPress={handleNextQuestion}>
+							<ImageBackground style={styles.ticketButton} source={ticket}>
+								<Text style={styles.ticketText}>Next Question!</Text>
+							</ImageBackground>
+						</Pressable>
+					</ScrollView>
+				</ImageBackground>
+			</View>
+		);
   }
 };
 
