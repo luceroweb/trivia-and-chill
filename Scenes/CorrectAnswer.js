@@ -6,10 +6,16 @@ import {
   StyleSheet,
   useWindowDimensions,
   Platform,
+  ImageBackground,
 } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import { connect } from "react-redux";
 import Trailer from "../Components/Trailer";
+import AppLoading from "expo-app-loading";
+import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
+import ticket from "../Images/ticket.png";
+import drivein from "../Images/drive-in-movie.jpg";
+import Badge from "../Components/Badge";
 
 const CorrectAnswer = ({ selectedMovie, setScene }) => {
   const { width } = useWindowDimensions();
@@ -17,40 +23,55 @@ const CorrectAnswer = ({ selectedMovie, setScene }) => {
     setScene("Question");
   };
 
-  return (
-    <View style={{ flex: 1 }}>
-      <ConfettiCannon count={100} origin={{ x: -10, y: 0 }} fadeOut={true} />
-      <ScrollView
-        // todo: replace paddingTop value with useSafeAreaInsets
-        style={[styles.scrollViewOuter, { paddingTop: 20 }]}
-        contentContainerStyle={[
-          styles.scrollViewContent,
-          { marginHorizontal: width > 1000 ? 100 : 0 },
-        ]}
-      >
-        <View
-          style={[
-            styles.videoContainer,
-            Platform.OS === "web" ? styles.boxShadow : null,
-          ]}
-        >
-          <Trailer movieId={selectedMovie?.movieId} />
-        </View>
+  let [fontsLoaded] = useFonts({
+    Limelight_400Regular,
+  });
 
-        <View style={styles.textContainer}>
-          <Text style={styles.h2}>Correct!</Text>
-          <Text style={styles.h3}>Enjoy this video trailer</Text>
-        </View>
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+			<View style={{ flex: 1 }}>
+				<ImageBackground
+					style={styles.drivein}
+					source={drivein}
+					resizeMode="cover"
+				>
+					<ConfettiCannon
+						count={100}
+						origin={{ x: -10, y: 0 }}
+						fadeOut={true}
+					/>
+					<ScrollView
+						// todo: replace paddingTop value with useSafeAreaInsets
+						style={[styles.scrollViewOuter, { paddingTop: 20 }]}
+						contentContainerStyle={[
+							styles.scrollViewContent,
+							{ marginHorizontal: width > 1000 ? 100 : 0 },
+						]}
+					>
+						<View style={[styles.videoContainer]}>
+							<Trailer movieId={selectedMovie?.movieId} />
+						</View>
 
-        <Pressable
-          style={[styles.button, styles.boxShadow]}
-          onPress={handleNextQuestion}
-        >
-          <Text>Next Question!</Text>
-        </Pressable>
-      </ScrollView>
-    </View>
-  );
+						<View style={styles.textContainer}>
+							<Text style={styles.h2}>
+								Correct! <Badge />
+							</Text>
+						
+							<Text style={styles.h3}>Enjoy this video trailer</Text>
+						</View>
+
+						<Pressable style={[styles.button]} onPress={handleNextQuestion}>
+							<ImageBackground style={styles.ticketButton} source={ticket}>
+								<Text style={styles.ticketText}>Next Question!</Text>
+							</ImageBackground>
+						</Pressable>
+					</ScrollView>
+				</ImageBackground>
+			</View>
+		);
+  }
 };
 
 function mapStateToProps(state) {
@@ -70,42 +91,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const skelStyle = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%",
-    paddingBottom: 15,
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  video: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "70%",
-    width: "100%",
-    backgroundColor: "#E0E0E0",
-  },
-  infoContainer: {
-    flexDirection: "row",
-    marginHorizontal: 15,
-    width: "100%",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  avatar: {
-    height: 50,
-    width: 50,
-    backgroundColor: "#E0E0E0",
-    borderRadius: 100,
-    marginRight: 20,
-  },
-  description: {
-    minWidth: "60%",
-    height: 25,
-    backgroundColor: "#E0E0E0",
-  },
-});
-
 const styles = StyleSheet.create({
   borderStyleDebug: {
     borderWidth: 2,
@@ -114,24 +99,17 @@ const styles = StyleSheet.create({
   scrollViewOuter: {
     alignSelf: "center",
     width: "100%",
+    height: "100%",
   },
   scrollViewContent: {
     flex: 1,
     justifyContent: "space-between",
     marginVertical: 20,
   },
-  boxShadow: {
-    shadowOffset: {
-      width: 2.0,
-      height: 5.0,
-    },
-    shadowRadius: Platform.OS === "web" ? 8.0 : 2.0,
-    shadowOpacity: 0.4,
-  },
   videoContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "whitesmoke",
+    backgroundColor: "transparent",
   },
   button: {
     flexShrink: 1,
@@ -139,7 +117,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,
-    backgroundColor: "lightblue",
+    backgroundColor: "transparent",
   },
   textContainer: {
     flexGrow: 1, // pushes textContainer upwards
@@ -148,13 +126,31 @@ const styles = StyleSheet.create({
   },
   h2: {
     fontSize: 36,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginVertical: 10,
+    fontFamily: "Limelight_400Regular",
   },
   h3: {
     fontSize: 24,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginVertical: 10,
+    fontFamily: "Limelight_400Regular",
+  },
+  ticketButton: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+    width: 224,
+    height: 116,
+    justifyContent: "center",
+  },
+  ticketText: {
+    fontFamily: "Limelight_400Regular",
+    position: "absolute",
+    alignSelf: "center",
+  },
+  drivein: {
+    justifyContent: "center",
+    height: "100%",
   },
 });
 
