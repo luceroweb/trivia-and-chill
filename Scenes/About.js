@@ -36,17 +36,18 @@ const About = ({setScene}) => {
             <Text style={styles.headings}>About Workforce Training:</Text>
 
             <Text style={styles.content}>
-              Our curriculum doesn’t come from textbooks, it comes directly from
+              Our curriculum doesn't come from textbooks, it comes directly from
               practicing industry experts. Our system of teaching is hands-on
-              and up-to-date with current practices. Learn more
+              and up-to-date with current practices.
               <Text
+              style={{display: "block", textDecoration: "underline", color: "white"}}
                 onPress={() =>
                   Linking.openURL(
                     "https://bitwiseindustries.com/services/workforce-training/classes/"
                   )
                 }
               >
-                HERE
+                Learn more about Workforce Training
               </Text>
             </Text>
           </View>
@@ -78,14 +79,14 @@ function mapDispatchToProps(dispatch){
 const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: "#A0947C",
-    // borderWidth: 10,
+    // borderWidth: 3,
     // borderColor: "#A0947C",
-    marginBottom: 30,
-    marginTop: 30,
-    maxWidth: "73%",
+    // marginBottom: 30,
+    marginTop: 10,
+    maxWidth: "90%",
     alignSelf: "center",
-    width: "80%",
-    padding: 30,
+    // width: "80%",
+    padding: 5,
     borderRadius: 8,
   },
   headings: {
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#292840",
   },
   content: {
+    borderRadius: 8,
     padding: 20,
     fontSize: 20,
     backgroundColor: "#292840",
@@ -111,6 +113,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   ticketImage: {
+    marginTop: 10,
     flex: 1,
     marginBottom: 10,
     width: 200,
