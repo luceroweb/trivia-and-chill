@@ -53,7 +53,7 @@ function Question({ selectedMovie, movies, setMovies }) {
 						>
 							{/* <Timer timerCount={timerCount} setTimerCount={setTimerCount} /> */}
 							<View style={styles.heading}>
-								<Text style={{ fontFamily: 'Limelight_400Regular', fontSize: 30 }}>Question</Text>
+								<Text style={{ color: "#F2D379", fontFamily: 'Limelight_400Regular', fontSize: 30 }}>Question</Text>
 							</View>
 							<Text style={styles.q}>
 								<GenerateQuestion movies={movies} />
