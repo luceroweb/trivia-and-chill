@@ -3,7 +3,7 @@ export default function madLibsArray(movies) {
   let year = movies.release_date.substr(0, 4);
   let month = movies.release_date.substr(5, 2);
   let day = movies.release_date.substr(8, 2);
-  
+
   if (day < 10) {
     day = day[1];
   }
