@@ -3,7 +3,7 @@ export default function madLibsArray(movies) {
   return (
     movies && [
       {
-        question: `${movies.title} was released on ${movies.release_date}.`, //movie details
+        question: `${movies.title} was released on ${movies.release_date}.`, //get popular endpoint
         answer: true,
         movieId: `${movies.id}`,
       },
@@ -23,28 +23,28 @@ export default function madLibsArray(movies) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.name} starred in ${movies.title}.`, //get credits endpoint for cast.name
+        question: `${movies.name} starred in ${movies.title}.`, //get credits endpoint for performer name
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.title}'s cast included ${movies.name} .`, //get credits endpoint for cast.name
+        question: `${movies.title}'s cast included ${movies.name} .`, //get credits endpoint for performer name
         answer: true,
         movieId: `${movies.id}`,
       },
       // {
-      //   question: `${movies.title} is considered a ${movies.genres.name} movie.`,
+      //   question: `${movies.title} is considered a ${movies.genres.name} movie.`, //get details endpoint for genre
       //   answer: true,
       //   movieId: `${movies.id}`,
       // },
     
       // {
-      //   question: `${movies.title} is categorized under the ${movies.genres.name} genre.`, //get details
+      //   question: `${movies.title} is categorized under the ${movies.genres.name} genre.`, //get details for genre
       //   answer: true,
       //   movieId: `${movies.id}`,
       // },
       // {
-      //   question: `${movies.title}'s plot used to described as ${movies.changes.items.original_value} genre.`, //get changes endpoint
+      //   question: `${movies.title}'s plot used to described as ${movies.changes.items.original_value} genre.`, //get changes endpoint for original plot
       //   answer: true,
       //   movieId: `${movies.id}`,
       // },
@@ -73,6 +73,7 @@ export default function madLibsArray(movies) {
         answer: false,
         movieId: 620,
       },
+      
     ]
   );
 }
