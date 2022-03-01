@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       <Provider store={store}>
-        <Badge />
+        {/* <Badge /> */}
         <Nav />
         <StatusBar style="auto" />
       </Provider>

@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { connect } from "react-redux";
+import { Audio } from 'expo-av';
+import lose from '../Sounds/lose.wav';
 
 function GameOver({ setScene, resetWinningStreak }) {
+  const [sound, setSound] = useState();
+ 
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      lose
+    );
+    setSound(sound);
+
+    await sound.playAsync();
+  }
+
   const backToStartHandler = () => {
     resetWinningStreak();
     setScene('Main');
   };
+
+  useEffect(() => {
+    playSound();
+    return sound
+      ? () => {
+        sound.unloadAsync();
+      }
+      : undefined;
+  }, []);
 
   return (
     <View style={styles.layout}>
