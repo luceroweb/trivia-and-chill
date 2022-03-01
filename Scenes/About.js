@@ -9,8 +9,14 @@ import {
 } from "react-native";
 import React from "react";
 import {connect} from "react-redux";
+import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
+import AppLoading from "expo-app-loading";
 
 const About = ({setScene}) => {
+  let [fontsLoaded] = useFonts({ Limelight_400Regular });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
   return (
     <View style={styles.mainContainer}>
       <ScrollView style={styles.scrollView}>
@@ -55,7 +61,8 @@ const About = ({setScene}) => {
         </ImageBackground>
       </ScrollView>
     </View>
-  );
+   );
+  }
 };
 
 function mapDispatchToProps(dispatch){
@@ -82,6 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   headings: {
+    fontFamily: "Limelight_400Regular",
     borderRadius: 8,
     padding: 20,
     textAlign: "center",
