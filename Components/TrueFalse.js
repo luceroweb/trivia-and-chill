@@ -1,16 +1,21 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View, ImageBackground } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+} from "react-native";
 import React from "react";
 import { connect } from "react-redux";
-import { FontAwesome5 } from '@expo/vector-icons'; 
-import madLibsArray from '../Utils/madLibsArray';
+import { FontAwesome5 } from "@expo/vector-icons";
+import madLibsArray from "../Utils/madLibsArray";
 
 const TrueFalse = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
   resetWinningStreak,
-  
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
   const answer = selectedMovie?.answer;
@@ -41,34 +46,55 @@ const TrueFalse = ({
       return "#0f0";
     }
   };
-  console.log(selectedMovie)
 
   return (
     <View style={styles.container}>
-<View style={{margin:4, flex:1,flexDirection:'row'}}>
-        <View style={{marginRight:15}}>
-      <ImageBackground source={require('../Images/ticket.png')} style={{width:160, height:80}}>
-   <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-   <Pressable onPress={() => isCorrect(true)} >
-     <Text>True</Text>
-     </Pressable>
-   </View>
-   
-</ImageBackground>
-</View>
-<View>
-<ImageBackground source={require('../Images/ticket.png')} style={{width:160, height:80}}>
-   <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-   <Pressable onPress={() => isCorrect(false)} > 
-     <Text>False</Text>
-     </Pressable>
-   </View>
-</ImageBackground>
-</View>
-</View>
-
-
-
+      <View style={{ margin: 4, flex: 1, flexDirection: "row" }}>
+        <View style={{ marginRight: 15 }}>
+          <ImageBackground
+            source={require("../Images/ticket.png")}
+            style={{ width: 160, height: 80 }}
+          >
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Pressable onPress={() => isCorrect(true)}>
+                <Text>True</Text>
+              </Pressable>
+            </View>
+          </ImageBackground>
+        </View>
+        <View>
+          <ImageBackground
+            source={require("../Images/ticket.png")}
+            style={{ width: 160, height: 80 }}
+          >
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Pressable onPress={() => isCorrect(false)}>
+                <Text>False</Text>
+              </Pressable>
+            </View>
+          </ImageBackground>
+        </View>
+      </View>
     </View>
   );
 };
@@ -102,9 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20, // StatusBar.currentHeight,
     paddingHorizontal: 20,
-    flexDirection:"row"
+    flexDirection: "row",
   },
- 
 });
-
-

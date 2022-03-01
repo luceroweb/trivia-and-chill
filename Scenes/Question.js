@@ -25,8 +25,6 @@ function Question({ selectedMovie, movies, setMovies }) {
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
-  // selectedMovie?.answer = ['2022-2-18', '2021-6-1', '1985-4-7'];
-
 
   return (
     <ImageBackground

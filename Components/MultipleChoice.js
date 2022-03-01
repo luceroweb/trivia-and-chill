@@ -15,12 +15,8 @@ const MultipleChoice = ({
   increaseWinningStreak,
   resetWinningStreak,
 }) => {
-  const [multipleAnswer, setMultipleAnswer] = useState([
-    "2022-2-18",
-    "2021-6-1",
-    "1985-4-7",
-  ]);
-  const [correctAnswer, setCorrectAnswer] = useState(multipleAnswer[0]);
+  const multipleAnswer = selectedMovie?.answer || null;
+  const correctAnswer = multipleAnswer[0] || null;
   const [selectedAnswer, setSelectedAnswer] = useState();
 
   const randomizeAnswer = (array) => {
@@ -64,6 +60,7 @@ const MultipleChoice = ({
         <ImageBackground
           source={require("../Images/ticket.png")}
           style={{ width: 160, height: 80, padding: 10 }}
+          key={index}
         >
           <View
             style={{
