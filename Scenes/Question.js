@@ -8,6 +8,8 @@ import {
   useWindowDimensions,
   SafeAreaView
 } from "react-native";
+import AppLoading from "expo-app-loading";
+import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
@@ -24,49 +26,58 @@ function Question({ selectedMovie, movies, setMovies }) {
 		FetchApi().then((res) => setMovies(res));
 	}, []);
 
-	return (
-		<ImageBackground
-			resizeMode={"cover"}
-			source={Drive}
-			style={[width > widthBreakpoint ? styles.image : styles.imageMobile]}
-		>
-			<Text>
-				<View
-					style={[
-						width > widthBreakpoint ? styles.container : styles.containerMobile,
-					]}
-				>
+	let [fontsLoaded] = useFonts({
+		Limelight_400Regular,
+	});
+
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	} else {
+
+		return (
+			<ImageBackground
+				resizeMode={"cover"}
+				source={Drive}
+				style={[width > widthBreakpoint ? styles.image : styles.imageMobile]}
+			>
+				<Text>
 					<View
 						style={[
-							width > widthBreakpoint ? styles.title : styles.titleMobile,
+							width > widthBreakpoint ? styles.container : styles.containerMobile,
 						]}
 					>
-						{/* <Timer timerCount={timerCount} setTimerCount={setTimerCount} /> */}
-						<View style={styles.heading}>
-							<Text style={styles.heading}>Question</Text>
+						<View
+							style={[
+								width > widthBreakpoint ? styles.title : styles.titleMobile,
+							]}
+						>
+							{/* <Timer timerCount={timerCount} setTimerCount={setTimerCount} /> */}
+							<View style={styles.heading}>
+								<Text style={{ fontFamily: 'Limelight_400Regular', fontSize: 30 }}>Question</Text>
+							</View>
+							<Text style={styles.q}>
+								<GenerateQuestion movies={movies} />
+							</Text>
+							<Text style={styles.q}>
+								{movies && selectedMovie?.question}
+							</Text>
 						</View>
-						<Text style={styles.q}>
-							<GenerateQuestion movies={movies} />
-						</Text>
-						<Text style={styles.q}>
-							{movies && selectedMovie?.question}
-						</Text>
+						<View
+							style={[
+								width > widthBreakpoint
+									? styles.titleWrap
+									: styles.titleWrapMobile,
+							]}
+						>
+							<Text >
+								<TrueFalse />
+							</Text>
+						</View>
 					</View>
-					<View
-						style={[
-							width > widthBreakpoint
-								? styles.titleWrap
-								: styles.titleWrapMobile,
-						]}
-					>
-						<Text >
-							<TrueFalse />
-						</Text>
-					</View>
-				</View>
-			</Text>
-		</ImageBackground>
-	);
+				</Text>
+			</ImageBackground>
+		);
+	}
 }
 
 function mapStateToProps(state) {
