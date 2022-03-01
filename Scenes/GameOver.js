@@ -10,7 +10,7 @@ import {
 import { connect } from "react-redux";
 import BGImage from "../Images/drive-in-movie.jpg";
 import BGImageMobile from "../Images/drive-in-movie (mobile).jpg";
-// import AppLoading from 'expo-app-loading';
+import AppLoading from 'expo-app-loading';
 import { useFonts, Limelight_400Regular} from '@expo-google-fonts/limelight';
 
 function GameOver({ setScene, resetWinningStreak }) {
@@ -24,9 +24,9 @@ function GameOver({ setScene, resetWinningStreak }) {
     Limelight_400Regular
   });
 
-  // if (!fontsLoaded) {
-  //   return <AppLoading />;
-  // }
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   let myBackgroundImage;
   let gameOverWrapStyle;
