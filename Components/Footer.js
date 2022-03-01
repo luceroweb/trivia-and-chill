@@ -1,10 +1,13 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
 
-function Footer() {
+function Footer({ setScene }) {
   return (
     <View style={styles.container}>
       <Text>SETTINGS | INSTRUCTIONS</Text>
+      <Pressable onPress={() => setScene("Credits")}>
+        <Text>Credits</Text>
+      </Pressable>
     </View>
   );
 }
@@ -18,4 +21,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect()(Footer);
+function mapDispatchToProps(dispatch) {
+  return {
+    setScene: (name) =>
+      dispatch({
+        type: "SET_SCENE",
+        name,
+      }),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Footer);

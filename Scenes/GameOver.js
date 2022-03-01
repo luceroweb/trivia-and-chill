@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,9 +12,23 @@ import BGImage from "../Images/drive-in-movie.jpg";
 import BGImageMobile from "../Images/drive-in-movie (mobile).jpg";
 import AppLoading from 'expo-app-loading';
 import { useFonts, Limelight_400Regular} from '@expo-google-fonts/limelight';
+import { Audio } from 'expo-av';
+import lose from '../Sounds/lose.wav';
 
 function GameOver({ setScene, resetWinningStreak }) {
   const { width } = useWindowDimensions();
+
+  const [sound, setSound] = useState();
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      lose
+    );
+    setSound(sound);
+
+    await sound.playAsync();
+  }
+
   const backToStartHandler = () => {
     resetWinningStreak();
     setScene("Main");
@@ -54,6 +68,15 @@ function GameOver({ setScene, resetWinningStreak }) {
     gameOverStyle = styles.gameOverMini;
     buttonStyle = styles.buttonSuperMini;
   }
+  useEffect(() => {
+    playSound();
+    return sound
+      ? () => {
+        sound.unloadAsync();
+      }
+      : undefined;
+  }, []);
+
   return (
     <View style={styles.layout}>
       <ImageBackground source={myBackgroundImage} style={styles.image}>

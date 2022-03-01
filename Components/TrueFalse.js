@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+} from "react-native";
 import React from "react";
 import { connect } from "react-redux";
+import { FontAwesome5 } from "@expo/vector-icons";
+import madLibsArray from "../Utils/madLibsArray";
 
 const TrueFalse = ({
   selectedMovie,
@@ -41,30 +49,55 @@ const TrueFalse = ({
 
   return (
     <View style={styles.container}>
-      <Pressable
-        key={1}
-        style={[
-          styles.option,
-          { borderWidth: 2, borderColor: getBorderColor(true) },
-        ]}
-        onPress={() => isCorrect(true)}
-      >
-        <Text>True</Text>
-      </Pressable>
-      <Pressable
-        key={0}
-        style={[
-          styles.option,
-          { borderWidth: 2, borderColor: getBorderColor(false) },
-        ]}
-        onPress={() => isCorrect(false)}
-      >
-        <Text>False</Text>
-      </Pressable>
+      <View style={{ margin: 4, flex: 1, flexDirection: "row" }}>
+        <View style={{ marginRight: 15 }}>
+          <ImageBackground
+            source={require("../Images/ticket.png")}
+            style={{ width: 160, height: 80 }}
+          >
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Pressable onPress={() => isCorrect(true)}>
+                <Text>True</Text>
+              </Pressable>
+            </View>
+          </ImageBackground>
+        </View>
+        <View>
+          <ImageBackground
+            source={require("../Images/ticket.png")}
+            style={{ width: 160, height: 80 }}
+          >
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Pressable onPress={() => isCorrect(false)}>
+                <Text>False</Text>
+              </Pressable>
+            </View>
+          </ImageBackground>
+        </View>
+      </View>
     </View>
   );
 };
-
 const mapStateToProps = (state) => ({
   questions: state.questions,
   selectedMovie: state.selectedMovie,
@@ -95,11 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20, // StatusBar.currentHeight,
     paddingHorizontal: 20,
-  },
-  option: {
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    margin: 8,
-    backgroundColor: "#afafaf",
+    flexDirection: "row",
   },
 });
