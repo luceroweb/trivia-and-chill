@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -17,7 +17,6 @@ const MultipleChoice = ({
 }) => {
   const multipleAnswer = selectedMovie?.answer || null;
   const correctAnswer = multipleAnswer[0] || null;
-  const [selectedAnswer, setSelectedAnswer] = useState();
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
@@ -40,7 +39,6 @@ const MultipleChoice = ({
   }, []);
 
   const isCorrect = (selection) => {
-    setSelectedAnswer(selection);
     if (selection === correctAnswer) {
       setTimeout(() => {
         increaseWinningStreak();
