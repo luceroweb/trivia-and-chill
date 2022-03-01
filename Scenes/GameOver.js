@@ -10,13 +10,11 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import BGImage from "../Images/drive-in-movie.jpg";
-import BGImageMobile from "../Images/drive-in-movie (mobile).jpg";
+// import BGImageMobile from "../Images/drive-in-movie (mobile).jpg";
 import AppLoading from 'expo-app-loading';
-import { useFonts, Limelight_400Regular} from '@expo-google-fonts/limelight';
+import { useFonts, Limelight_400Regular } from '@expo-google-fonts/limelight';
 import { Audio } from 'expo-av';
 import lose from '../Sounds/lose.wav';
-import AppLoading from "expo-app-loading";
-import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 
 function GameOver({ setScene, resetWinningStreak }) {
   const { width } = useWindowDimensions();
@@ -28,6 +26,7 @@ function GameOver({ setScene, resetWinningStreak }) {
       lose
     );
     setSound(sound);
+    }
 
   async function playSound() {
       const { sound } = await Audio.Sound.createAsync(lose);
@@ -115,6 +114,7 @@ function GameOver({ setScene, resetWinningStreak }) {
       </ImageBackground>
     );
   }
+
 }
 
   function mapStateToProps(state) {
@@ -137,7 +137,6 @@ function GameOver({ setScene, resetWinningStreak }) {
         }),
     };
   }
-
 
 const styles = StyleSheet.create({
   layout: {
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
     width: '50%',
     //   width: "60%",
     aspectRatio: 16 / 9,
-    marginTop: '-25%',
+    // marginTop: '-25%',
     //   marginTop: "-18%",
     justifyContent: 'center',
     //   alignItems: "center",
