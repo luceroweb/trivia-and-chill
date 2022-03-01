@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, Pressable } from "react-native";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
+import { connect } from "react-redux";
 
-const DeveloperCredits = () => {
+const DeveloperCredits = ({setscene}) => {
     let [fontsLoaded] = useFonts({ Limelight_400Regular });
     if (!fontsLoaded) {
         return <AppLoading />;    
@@ -46,13 +47,27 @@ const DeveloperCredits = () => {
                     <Text style={styles.textStyle}>Tesfa Worku (he/him)</Text>
                 </View>
             </View>
-            <View>
-                <Text style={styles.headerStyle}>Home</Text>
-            </View>
+            <ImageBackground
+                source = {require("../Images/ticket.png")}
+                style = {styles.ticket}
+            >
+                <Pressable onPress={() => setscene("Main")}>
+                    <Text>Home</Text>
+                </Pressable>
+            </ImageBackground>            
         </View>
     );
     }
 };
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setscene: (name) => dispatch({
+            type: "SET_SCENE",
+            name: name
+        })
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -87,6 +102,15 @@ const styles = StyleSheet.create({
         color: "#F2D379",
         fontSize: 15,
     },
+    ticket: {
+        margin: 10,
+        padding: 10,
+        width: 100,
+        aspectRatio: 18/9,
+        alignSelf: "center",
+        alignItems: "center",
+        justifyContent: "center"
+    }
 });
 
-export default DeveloperCredits;
+export default connect(null, mapDispatchToProps) (DeveloperCredits);
