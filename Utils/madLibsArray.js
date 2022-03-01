@@ -1,17 +1,29 @@
 export default function madLibsArray(movies) {
-  let movieDate = new Date(
-    Date.UTC(
-      movies.release_date.substr(0, 4),
-      movies.release_date.substr(5, 2),
-      movies.release_date.substr(8, 2)
-    )
-  );
 
-  movieDate = movieDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  let year = movies.release_date.substr(0, 4);
+  let month = movies.release_date.substr(5, 2);
+  let day = movies.release_date.substr(8, 2);
+  
+  if (day < 10) {
+    day = day[1];
+  }
+
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let movieDate = `${months[month - 1]} ${day}, ${year}`;
 
   return (
     movies && [
