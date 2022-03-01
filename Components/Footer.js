@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { connect } from "react-redux";
 
-function Footer({setScene}) {
+function Footer({ setScene }) {
   return (
     <View style={styles.container}>
       <Text>SETTINGS | INSTRUCTIONS</Text>
@@ -27,10 +27,8 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_SCENE",
         name,
-      }),    
+      }),
   };
 }
 
 export default connect(null, mapDispatchToProps)(Footer);
-
-
