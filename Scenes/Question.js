@@ -25,6 +25,7 @@ function Question({ selectedMovie, movies, setMovies }) {
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
+  // selectedMovie?.answer = ['2022-2-18', '2021-6-1', '1985-4-7'];
 
   return (
     <ImageBackground
@@ -64,23 +65,17 @@ function Question({ selectedMovie, movies, setMovies }) {
                 : styles.titleWrapMobile,
             ]}
           >
-            <Text>
-              <TrueFalse />
-            </Text>
+            <View>
+              <MultipleChoice />
+              {/* {
+                Array.isArray(selectedMovie?.answer)
+                ? 
+                  <MultipleChoice />
+                :
+                  <TrueFalse />
+              } */}
+            </View>
           </View>
-          <GenerateQuestion movies={movies} />
-          <Text>{movies && selectedMovie?.question}</Text>
-        </View>
-        <View style={styles.titleWrap}>
-          {/* {
-            Array.isArray(selectedMovie?.answer)
-            ? */}
-
-            <MultipleChoice />
-
-          {/*   :
-             <TrueFalse />
-          */ }
         </View>
       </Text>
     </ImageBackground>

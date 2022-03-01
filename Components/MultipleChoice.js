@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, ImageBackground } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
 
@@ -48,19 +48,21 @@ const MultipleChoice = ({
     };
 
     return (
-        <View style={styles.container}>
+        <View>
             {
                 multipleAnswer.map((item, index) => (
-                    <Pressable
-                        key={index}
-                        style={styles.option}
-                        onPress={() => isCorrect(item)}
-                    >
-                        <Text key={index}>{index + 1}) {item}</Text>
-                        {/* selectedMovie.date.release_date */}
-                    </Pressable> 
+                    <ImageBackground source={require('../Images/ticket.png')} style={{width:160, height:80, padding: 10}}>
+                        <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+                            <Pressable
+                                key={index}
+                                onPress={() => isCorrect(item)}>
+                                <Text key={index}>{item}</Text>
+                            </Pressable>
+                        </View> 
+                    </ImageBackground>
+                    )
                 )
-            )}
+            }
         </View>
     );
 };
@@ -95,11 +97,5 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 20,
         paddingHorizontal: 20,
-    },
-    option: {
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        margin: 8,
-        backgroundColor: "#afafaf",
     },
 });
