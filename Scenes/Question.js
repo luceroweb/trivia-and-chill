@@ -66,14 +66,11 @@ function Question({ selectedMovie, movies, setMovies }) {
             ]}
           >
             <View>
-              <MultipleChoice />
-              {/* {
-                Array.isArray(selectedMovie?.answer)
-                ? 
-                  <MultipleChoice />
-                :
-                  <TrueFalse />
-              } */}
+              {Array.isArray(selectedMovie?.answer) ? (
+                <MultipleChoice />
+              ) : (
+                <TrueFalse />
+              )}
             </View>
           </View>
         </View>
