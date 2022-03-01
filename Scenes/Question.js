@@ -13,6 +13,7 @@ import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
 import Timer from "../Components/Timer";
 import TrueFalse from "../Components/TrueFalse";
+import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
@@ -24,6 +25,7 @@ function Question({ selectedMovie, movies, setMovies }) {
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
+  // selectedMovie?.answer = ['2022-2-18', '2021-6-1', '1985-4-7'];
 
   return (
     <ImageBackground
@@ -63,9 +65,16 @@ function Question({ selectedMovie, movies, setMovies }) {
                 : styles.titleWrapMobile,
             ]}
           >
-            <Text>
-              <TrueFalse />
-            </Text>
+            <View>
+              <MultipleChoice />
+              {/* {
+                Array.isArray(selectedMovie?.answer)
+                ? 
+                  <MultipleChoice />
+                :
+                  <TrueFalse />
+              } */}
+            </View>
           </View>
         </View>
       </Text>
