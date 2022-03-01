@@ -8,8 +8,9 @@ import {
   Pressable
 } from "react-native";
 import React from "react";
+import {connect} from "react-redux";
 
-const About = () => {
+const About = ({setScene}) => {
   return (
     <View style={styles.mainContainer}>
       <ScrollView style={styles.scrollView}>
@@ -57,6 +58,16 @@ const About = () => {
   );
 };
 
+function mapDispatchToProps(dispatch){
+  return{
+    setScene: (name) => dispatch({
+      type: "SET_SCENE",
+      name: name
+    })
+  }
+}
+
+
 const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: "#A0947C",
@@ -102,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default About;
+export default connect(null, mapDispatchToProps)(About);
