@@ -14,10 +14,7 @@
     "@expo-google-fonts/limelight": "^0.2.2",
     "axios": "^0.25.0",
     "expo": "~44.0.0",
-<<<<<<< HEAD
-=======
     "expo-app-loading": "~1.3.0",
->>>>>>> a1c12b7328d8b3b6abf8e9c4040e836eb79b0c04
     "expo-font": "~10.0.4",
     "expo-status-bar": "~1.2.0",
     "gh-pages": "^3.2.3",
