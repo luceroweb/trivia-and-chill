@@ -27,6 +27,7 @@ function Question({ selectedMovie, movies, setMovies }) {
   }, []);
   // selectedMovie?.answer = ['2022-2-18', '2021-6-1', '1985-4-7'];
 
+
   return (
     <ImageBackground
       resizeMode={"cover"}
