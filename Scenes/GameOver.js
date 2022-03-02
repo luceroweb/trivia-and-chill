@@ -17,7 +17,7 @@ import { Audio } from 'expo-av';
 import lose from '../Sounds/lose.wav';
 
 function GameOver({ setScene, resetWinningStreak }) {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const [sound, setSound] = useState();
 
@@ -49,7 +49,12 @@ function GameOver({ setScene, resetWinningStreak }) {
   let gameOverStyle;
   let buttonStyle;
 
-  if (width > 860) {
+  if (width/height > 2) {
+    myBackgroundImage = BGImage;
+    gameOverWrapStyle = styles.gameOverWrapWide;
+    gameOverStyle = styles.gameOver;
+    buttonStyle = styles.button;
+  } else if (width > 860) {
     myBackgroundImage = BGImage;
     gameOverWrapStyle = styles.gameOverWrap;
     gameOverStyle = styles.gameOver;
@@ -176,8 +181,19 @@ const styles = StyleSheet.create({
     aspectRatio: 16 / 9,
     marginTop: '-25%',
     //   marginTop: "-18%",
-    // justifyContent: 'center',
-    //   alignItems: "center",
+    justifyContent: 'center',
+      alignItems: "center",
+},
+gameOverWrapWide: {
+  backgroundColor: '#292840',
+  padding: 20,
+  width: '50%',
+  //   width: "60%",
+  aspectRatio: 16 / 9,
+  marginTop: '-15%',
+  //   marginTop: "-18%",
+  justifyContent: 'center',
+    alignItems: "center",
 },
   gameOverWrapMobile: {
     backgroundColor: '#292840',
@@ -188,7 +204,7 @@ const styles = StyleSheet.create({
     // marginTop: '2%',
       marginTop: "-25%",
     justifyContent: 'center',
-    //   alignItems: "center",
+      alignItems: "center",
 },
   gameOverWrapMini: {
     backgroundColor: '#292840',
@@ -197,8 +213,8 @@ const styles = StyleSheet.create({
     aspectRatio: 16 / 9,
     // marginTop: '20%',
     marginTop: "-50%",
-    // justifyContent: 'center',
-    // alignItems: "center",
+    justifyContent: 'center',
+    alignItems: "center",
 },
 gameOverWrapSuperMini: {
   backgroundColor: '#292840',
@@ -211,11 +227,11 @@ gameOverWrapSuperMini: {
   // marginBottom: 30,
   justifyContent: 'center',
   // marginHorizontal: 20
-  // alignItems: "center",
+  alignItems: "center",
 },
 gameOver: {
   fontSize: 60,
-  // marginBottom: 70,
+  marginBottom: 50,
   textAlign: 'center',
   fontFamily: 'Limelight_400Regular',
   color: '#F2D379',
@@ -232,7 +248,7 @@ gameOverMini: {
   fontSize: 24,
   // fontSize: 34,
   marginBottom: Platform.OS === 'android' ? 20 : 70,
-  // marginBottom: 70,
+  marginBottom: 20,
   textAlign: 'center',
   fontFamily: 'Limelight_400Regular',
   color: '#F2D379',
