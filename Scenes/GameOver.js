@@ -59,7 +59,7 @@ function GameOver({ setScene, resetWinningStreak }) {
     gameOverWrapStyle = styles.gameOverWrapMobile;
     gameOverStyle = styles.gameOver;
     buttonStyle = styles.buttonMobile;
-  } else if (width > 430) {
+  } else if (width > 450) {
     myBackgroundImage = BGImage;
     gameOverWrapStyle = styles.gameOverWrapMini;
     gameOverStyle = styles.gameOverMobile;
@@ -86,7 +86,6 @@ function GameOver({ setScene, resetWinningStreak }) {
       <ImageBackground
         source={myBackgroundImage}
         style={styles.image}
-        resizeMode="cover"
       >
         <View
                 style={[
@@ -148,6 +147,7 @@ const styles = StyleSheet.create({
   },
   image: {
     alignItems: "center",
+    // flex: 1;
     justifyContent: "center",
     position: "absolute",
     top: 0,
@@ -174,47 +174,47 @@ const styles = StyleSheet.create({
     width: '50%',
     //   width: "60%",
     aspectRatio: 16 / 9,
-    // marginTop: '-25%',
+    marginTop: '-25%',
     //   marginTop: "-18%",
-    justifyContent: 'center',
+    // justifyContent: 'center',
     //   alignItems: "center",
 },
   gameOverWrapMobile: {
     backgroundColor: '#292840',
     padding: 20,
-    width: '84%',
+    width: '70%',
     //   width: "70%",
     aspectRatio: 16 / 9,
-    marginTop: '8%',
-    //   marginTop: "-16%",
+    // marginTop: '2%',
+      marginTop: "-25%",
     justifyContent: 'center',
     //   alignItems: "center",
 },
   gameOverWrapMini: {
     backgroundColor: '#292840',
     padding: 20,
-    width: '84%',
+    width: '90%',
     aspectRatio: 16 / 9,
-    marginTop: '20%',
-    // marginTop: "-20%",
-    justifyContent: 'center',
+    // marginTop: '20%',
+    marginTop: "-50%",
+    // justifyContent: 'center',
     // alignItems: "center",
 },
 gameOverWrapSuperMini: {
   backgroundColor: '#292840',
   padding: 10,
-  width: '85%',
+  width: '100%',
   // width: "94%",
-  // aspectRatio: 16 / 9,
-  // marginTop: "0%",
-  marginBottom: '40%',
+  aspectRatio: 16 / 9,
+  marginTop: "-60%",
+  // marginBottom: '40%',
   // marginBottom: 30,
   justifyContent: 'center',
   // marginHorizontal: 20
   // alignItems: "center",
 },
 gameOver: {
-  fontSize: 70,
+  fontSize: 60,
   // marginBottom: 70,
   textAlign: 'center',
   fontFamily: 'Limelight_400Regular',
@@ -256,9 +256,9 @@ ticket: {
   // marginTop: 30,
 },
 button: {
-  width: '22%',
-  height: 75,
-  // aspectRatio: 7 / 4,
+  width: '40%',
+  // height: 75,
+  aspectRatio: 7 / 4,
   // aspectRatio: 7.2 / 5,
   // height: 'auto'
 },
@@ -270,15 +270,15 @@ buttonMobile: {
 },
 
 buttonMini: {
-  width: '50%',
+  width: '30%',
   aspectRatio: 7 / 4,
   // width: "30%",
   // aspectRatio: 7.2 / 5,
 },
 buttonSuperMini: {
-  width: '50%',
-  height: 80,
-  // aspectRatio: 7 / 4,
+  width: '40%',
+  // height: 80,
+  aspectRatio: 7 / 4,
   // width: "30%",
   // aspectRatio: 7.2 / 5,
 },
