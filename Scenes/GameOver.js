@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,11 +10,10 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import BGImage from "../Images/drive-in-movie.jpg";
-// import BGImageMobile from "../Images/drive-in-movie (mobile).jpg";
-import AppLoading from 'expo-app-loading';
-import { useFonts, Limelight_400Regular } from '@expo-google-fonts/limelight';
-import { Audio } from 'expo-av';
-import lose from '../Sounds/lose.wav';
+import AppLoading from "expo-app-loading";
+import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
+import { Audio } from "expo-av";
+import lose from "../Sounds/lose.wav";
 
 function GameOver({ setScene, resetWinningStreak }) {
   const { width, height } = useWindowDimensions();
@@ -22,22 +21,20 @@ function GameOver({ setScene, resetWinningStreak }) {
   const [sound, setSound] = useState();
 
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(
-      lose
-    );
+    const { sound } = await Audio.Sound.createAsync(lose);
     setSound(sound);
-    }
+  }
 
   async function playSound() {
-      const { sound } = await Audio.Sound.createAsync(lose);
-      setSound(sound);
+    const { sound } = await Audio.Sound.createAsync(lose);
+    setSound(sound);
 
-      await sound.playAsync();
+    await sound.playAsync();
   }
 
   const backToStartHandler = () => {
-      resetWinningStreak();
-      setScene('Main');
+    resetWinningStreak();
+    setScene("Main");
   };
 
   let [fontsLoaded] = useFonts({
@@ -49,13 +46,12 @@ function GameOver({ setScene, resetWinningStreak }) {
   let gameOverStyle;
   let buttonStyle;
 
-  if (width/height >= 1.8) {
+  if (width / height >= 1.8) {
     myBackgroundImage = BGImage;
     gameOverWrapStyle = styles.gameOverWrapWide;
     gameOverStyle = styles.gameOver;
     buttonStyle = styles.button;
-  }
-  else if (width > 860) {
+  } else if (width > 860) {
     myBackgroundImage = BGImage;
     gameOverWrapStyle = styles.gameOverWrap;
     gameOverStyle = styles.gameOver;
@@ -89,15 +85,13 @@ function GameOver({ setScene, resetWinningStreak }) {
     return <AppLoading />;
   } else {
     return (
-      <ImageBackground
-        source={myBackgroundImage}
-        style={styles.image}
-      >
+      <ImageBackground source={myBackgroundImage} style={styles.image}>
         <View
-                style={[
-                    gameOverWrapStyle,
-                    { alignItems: 'center', paddingVertical: 20 },
-                ]}>
+          style={[
+            gameOverWrapStyle,
+            { alignItems: "center", paddingVertical: 20 },
+          ]}
+        >
           <Text style={gameOverStyle}>Game Over</Text>
           <Pressable style={buttonStyle} onPress={backToStartHandler}>
             <ImageBackground
@@ -105,13 +99,13 @@ function GameOver({ setScene, resetWinningStreak }) {
               style={[
                 styles.ticket,
                 {
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                  alignItems: "center",
+                  justifyContent: "center",
                 },
-            ]}
+              ]}
             >
               {/* <View style={styles.backToStartButton}> */}
-                <Text style={styles.backToStartButtonText}>Back to Start</Text>
+              <Text style={styles.backToStartButtonText}>Back to Start</Text>
               {/* </View> */}
             </ImageBackground>
           </Pressable>
@@ -119,29 +113,28 @@ function GameOver({ setScene, resetWinningStreak }) {
       </ImageBackground>
     );
   }
-
 }
 
-  function mapStateToProps(state) {
-    return {
-      winningStreak: state.winningStreak,
-      scene: state.scene,
-    };
-  }
+function mapStateToProps(state) {
+  return {
+    winningStreak: state.winningStreak,
+    scene: state.scene,
+  };
+}
 
-  function mapDispatchToProps(dispatch) {
-    return {
-      resetWinningStreak: () =>
-        dispatch({
-          type: "RESET_WINNING_STREAK",
-        }),
-      setScene: (name) =>
-        dispatch({
-          type: "SET_SCENE",
-          name,
-        }),
-    };
-  }
+function mapDispatchToProps(dispatch) {
+  return {
+    resetWinningStreak: () =>
+      dispatch({
+        type: "RESET_WINNING_STREAK",
+      }),
+    setScene: (name) =>
+      dispatch({
+        type: "SET_SCENE",
+        name,
+      }),
+  };
+}
 
 const styles = StyleSheet.create({
   layout: {
@@ -174,334 +167,104 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   gameOverWrapWide: {
-    backgroundColor: '#292840',
+    backgroundColor: "#292840",
     padding: 20,
-    width: '50%',
+    width: "50%",
     aspectRatio: 16 / 9,
-      position: 'absolute',
-      top: 0,
-},
+    position: "absolute",
+    top: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   gameOverWrap: {
-    backgroundColor: '#292840',
+    backgroundColor: "#292840",
     padding: 20,
-    width: '50%',
+    width: "50%",
     aspectRatio: 16 / 9,
-    marginTop: '-25%',
-},
+    marginTop: "-25%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   gameOverWrapMobile: {
-    backgroundColor: '#292840',
+    backgroundColor: "#292840",
     padding: 20,
-    width: '70%',
+    width: "70%",
     aspectRatio: 16 / 9,
-      marginTop: "-25%",
-    justifyContent: 'center',
-},
+    marginTop: "-25%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   gameOverWrapMini: {
-    backgroundColor: '#292840',
+    backgroundColor: "#292840",
     padding: 20,
-    width: '90%',
+    width: "90%",
     aspectRatio: 16 / 9,
     marginTop: "-50%",
-},
-gameOverWrapSuperMini: {
-  backgroundColor: '#292840',
-  padding: 10,
-  width: '90%',
-  aspectRatio: 16 / 9,
-  marginTop: "-45%",
-  justifyContent: 'center',
-},
-gameOver: {
-  fontSize: 60,
-  textAlign: 'center',
-  fontFamily: 'Limelight_400Regular',
-  color: '#F2D379',
-},
-gameOverMobile: {
-  fontSize: 40,
-  marginBottom: 70,
-  textAlign: 'center',
-  fontFamily: 'Limelight_400Regular',
-  color: '#F2D379',
-},
+    alignItems: "center",
+  },
+  gameOverWrapSuperMini: {
+    backgroundColor: "#292840",
+    padding: 10,
+    width: "90%",
+    aspectRatio: 16 / 9,
+    marginTop: "-45%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gameOver: {
+    fontSize: 60,
+    textAlign: "center",
+    fontFamily: "Limelight_400Regular",
+    color: "#F2D379",
+  },
+  gameOverMobile: {
+    fontSize: 40,
+    marginBottom: 70,
+    textAlign: "center",
+    fontFamily: "Limelight_400Regular",
+    color: "#F2D379",
+  },
 
-gameOverMini: {
-  fontSize: 24,
-  marginBottom: Platform.OS === 'android' ? 20 : 70,
-  textAlign: 'center',
-  fontFamily: 'Limelight_400Regular',
-  color: '#F2D379',
-},
-backToStartButton: {
-  flex: 1,
-  padding: 10,
-  borderRadius: 10,
-  textAlign: 'center',
-  justifyContent: 'center',
-  alignItems: 'center',
-},
-backToStartButtonText: {
-  textAlign: 'center',
-  fontSize: 16,
-  color: '#401323',
-},
-ticket: {
-  flex: 1,
-},
-button: {
-  width: '40%',
-  aspectRatio: 7 / 4,
-},
-buttonMobile: {
-  width: '40%',
-  aspectRatio: 7 / 4,
-},
+  gameOverMini: {
+    fontSize: 28,
+    marginBottom: Platform.OS === "android" ? 20 : 70,
+    textAlign: "center",
+    fontFamily: "Limelight_400Regular",
+    color: "#F2D379",
+  },
+  backToStartButton: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 10,
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backToStartButtonText: {
+    textAlign: "center",
+    fontSize: 14,
+    color: "#401323",
+  },
+  ticket: {
+    flex: 1,
+  },
+  button: {
+    width: "30%",
+    aspectRatio: 7 / 4,
+  },
+  buttonMobile: {
+    width: "40%",
+    aspectRatio: 7 / 4,
+  },
 
-buttonMini: {
-  width: '30%',
-  aspectRatio: 7 / 4,
-},
-buttonSuperMini: {
-  width: '40%',
-  aspectRatio: 7 / 4,
-},
+  buttonMini: {
+    width: "30%",
+    aspectRatio: 7 / 4,
+  },
+  buttonSuperMini: {
+    width: "35%",
+    aspectRatio: 7 / 4,
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOver);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
