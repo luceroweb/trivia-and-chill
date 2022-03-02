@@ -206,9 +206,9 @@ const styles = StyleSheet.create({
 gameOverWrapSuperMini: {
   backgroundColor: '#292840',
   padding: 10,
-  width: '100%',
+  width: '90%',
   aspectRatio: 16 / 9,
-  marginTop: "-60%",
+  marginTop: "-45%",
   justifyContent: 'center',
 },
 gameOver: {
