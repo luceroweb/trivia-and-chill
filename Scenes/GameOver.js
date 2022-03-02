@@ -46,7 +46,7 @@ function GameOver({ setScene, resetWinningStreak }) {
   let gameOverStyle;
   let buttonStyle;
 
-  if (width / height > 2) {
+  if (width / height >= 1.8) {
     myBackgroundImage = BGImage;
     gameOverWrapStyle = styles.gameOverWrapWide;
     gameOverStyle = styles.gameOver;
@@ -164,23 +164,24 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     textAlign: "center",
   },
+  gameOverWrapWide: {
+    backgroundColor: "#292840",
+    padding: 20,
+    width: "50%",
+    aspectRatio: 16 / 9,
+    position: "absolute",
+    top: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   gameOverWrap: {
     backgroundColor: "#292840",
     padding: 20,
     width: "50%",
     aspectRatio: 16 / 9,
     marginTop: "-25%",
-    justifyContent: "center",
     alignItems: "center",
-  },
-  gameOverWrapWide: {
-    backgroundColor: "#292840",
-    padding: 20,
-    width: "50%",
-    aspectRatio: 16 / 9,
-    marginTop: "-15%",
     justifyContent: "center",
-    alignItems: "center",
   },
   gameOverWrapMobile: {
     backgroundColor: "#292840",
@@ -211,7 +212,6 @@ const styles = StyleSheet.create({
   },
   gameOver: {
     fontSize: 60,
-    marginBottom: 50,
     textAlign: "center",
     fontFamily: "Limelight_400Regular",
     color: "#F2D379",
@@ -225,9 +225,8 @@ const styles = StyleSheet.create({
   },
 
   gameOverMini: {
-    fontSize: 24,
+    fontSize: 28,
     marginBottom: Platform.OS === "android" ? 20 : 70,
-    marginBottom: 20,
     textAlign: "center",
     fontFamily: "Limelight_400Regular",
     color: "#F2D379",
@@ -242,14 +241,14 @@ const styles = StyleSheet.create({
   },
   backToStartButtonText: {
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 14,
     color: "#401323",
   },
   ticket: {
     flex: 1,
   },
   button: {
-    width: "40%",
+    width: "30%",
     aspectRatio: 7 / 4,
   },
   buttonMobile: {
@@ -262,7 +261,7 @@ const styles = StyleSheet.create({
     aspectRatio: 7 / 4,
   },
   buttonSuperMini: {
-    width: "40%",
+    width: "35%",
     aspectRatio: 7 / 4,
   },
 });
