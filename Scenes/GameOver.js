@@ -17,7 +17,7 @@ import { Audio } from 'expo-av';
 import lose from '../Sounds/lose.wav';
 
 function GameOver({ setScene, resetWinningStreak }) {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const [sound, setSound] = useState();
 
@@ -49,7 +49,13 @@ function GameOver({ setScene, resetWinningStreak }) {
   let gameOverStyle;
   let buttonStyle;
 
-  if (width > 860) {
+  if (width/height >= 1.8) {
+    myBackgroundImage = BGImage;
+    gameOverWrapStyle = styles.gameOverWrapWide;
+    gameOverStyle = styles.gameOver;
+    buttonStyle = styles.button;
+  }
+  else if (width > 860) {
     myBackgroundImage = BGImage;
     gameOverWrapStyle = styles.gameOverWrap;
     gameOverStyle = styles.gameOver;
@@ -147,7 +153,6 @@ const styles = StyleSheet.create({
   },
   image: {
     alignItems: "center",
-    // flex: 1;
     justifyContent: "center",
     position: "absolute",
     top: 0,
@@ -168,54 +173,46 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     textAlign: "center",
   },
+  gameOverWrapWide: {
+    backgroundColor: '#292840',
+    padding: 20,
+    width: '50%',
+    aspectRatio: 16 / 9,
+      position: 'absolute',
+      top: 0,
+},
   gameOverWrap: {
     backgroundColor: '#292840',
     padding: 20,
     width: '50%',
-    //   width: "60%",
     aspectRatio: 16 / 9,
     marginTop: '-25%',
-    //   marginTop: "-18%",
-    // justifyContent: 'center',
-    //   alignItems: "center",
 },
   gameOverWrapMobile: {
     backgroundColor: '#292840',
     padding: 20,
     width: '70%',
-    //   width: "70%",
     aspectRatio: 16 / 9,
-    // marginTop: '2%',
       marginTop: "-25%",
     justifyContent: 'center',
-    //   alignItems: "center",
 },
   gameOverWrapMini: {
     backgroundColor: '#292840',
     padding: 20,
     width: '90%',
     aspectRatio: 16 / 9,
-    // marginTop: '20%',
     marginTop: "-50%",
-    // justifyContent: 'center',
-    // alignItems: "center",
 },
 gameOverWrapSuperMini: {
   backgroundColor: '#292840',
   padding: 10,
   width: '100%',
-  // width: "94%",
   aspectRatio: 16 / 9,
   marginTop: "-60%",
-  // marginBottom: '40%',
-  // marginBottom: 30,
   justifyContent: 'center',
-  // marginHorizontal: 20
-  // alignItems: "center",
 },
 gameOver: {
   fontSize: 60,
-  // marginBottom: 70,
   textAlign: 'center',
   fontFamily: 'Limelight_400Regular',
   color: '#F2D379',
@@ -230,9 +227,7 @@ gameOverMobile: {
 
 gameOverMini: {
   fontSize: 24,
-  // fontSize: 34,
   marginBottom: Platform.OS === 'android' ? 20 : 70,
-  // marginBottom: 70,
   textAlign: 'center',
   fontFamily: 'Limelight_400Regular',
   color: '#F2D379',
@@ -248,39 +243,27 @@ backToStartButton: {
 backToStartButtonText: {
   textAlign: 'center',
   fontSize: 16,
-  // fontSize: 12,
   color: '#401323',
 },
 ticket: {
   flex: 1,
-  // marginTop: 30,
 },
 button: {
   width: '40%',
-  // height: 75,
   aspectRatio: 7 / 4,
-  // aspectRatio: 7.2 / 5,
-  // height: 'auto'
 },
 buttonMobile: {
   width: '40%',
   aspectRatio: 7 / 4,
-  // width: "30%",
-  // aspectRatio: 7.2 / 5,
 },
 
 buttonMini: {
   width: '30%',
   aspectRatio: 7 / 4,
-  // width: "30%",
-  // aspectRatio: 7.2 / 5,
 },
 buttonSuperMini: {
   width: '40%',
-  // height: 80,
   aspectRatio: 7 / 4,
-  // width: "30%",
-  // aspectRatio: 7.2 / 5,
 },
 });
 
