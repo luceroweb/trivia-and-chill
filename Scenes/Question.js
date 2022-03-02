@@ -54,7 +54,7 @@ function Question({ selectedMovie, movies, setMovies }) {
                 width > widthBreakpoint ? styles.title : styles.titleMobile,
               ]}
             >
-              {/* <Timer timerCount={timerCount} setTimerCount={setTimerCount} /> */}
+              <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
               <View style={styles.heading}>
                 <Text
                   style={{
@@ -71,6 +71,7 @@ function Question({ selectedMovie, movies, setMovies }) {
               </Text>
               <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
             </View>
+            <Badge />
             <View
               style={[
                 width > widthBreakpoint
@@ -78,9 +79,11 @@ function Question({ selectedMovie, movies, setMovies }) {
                   : styles.titleWrapMobile,
               ]}
             >
-              <Text>
+              {Array.isArray(selectedMovie?.answer) ? (
+                <MultipleChoice />
+              ) : (
                 <TrueFalse />
-              </Text>
+              )}
             </View>
           </View>
         </Text>
