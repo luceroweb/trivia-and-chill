@@ -8,6 +8,8 @@ import {
 	useWindowDimensions,
 	SafeAreaView,
 } from "react-native";
+import AppLoading from "expo-app-loading";
+import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
@@ -26,42 +28,58 @@ function Question({ selectedMovie, movies, setMovies }) {
 		FetchApi().then((res) => setMovies(res));
 	}, []);
 
-	return (
-		<ImageBackground
-			resizeMode={"cover"}
-			source={Drive}
-			style={[
-				styles.container,
-				width > widthBreakpoint ? styles.image : styles.imageMobile,
-			]}
-		>
-			<View
-				style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
-			>
-				<Timer timerCount={timerCount} setTimerCount={setTimerCount} />
-				<Text style={styles.heading}>Question</Text>
-				<GenerateQuestion movies={movies} />
-
-				<Text style={styles.q}>{movies && selectedMovie?.question}</Text>
-			</View>
-			<View style={styles.badge}>
-				<Badge />
-			</View>
-			<View
+	
+	let [fontsLoaded] = useFonts({
+		Limelight_400Regular,
+	});
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	} else {
+		return (
+			<ImageBackground
+				resizeMode={"cover"}
+				source={Drive}
 				style={[
-					width > widthBreakpoint ? styles.titleWrap : styles.titleWrapMobile,
+					styles.container,
+					width > widthBreakpoint ? styles.image : styles.imageMobile,
 				]}
 			>
-				{Array.isArray(selectedMovie?.answer) ? (
-					<MultipleChoice />
-				) : (
-					<TrueFalse />
-				)}
-			</View>
-		</ImageBackground>
-	);
-}
+				<View
+					style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
+				>
+					<Timer timerCount={timerCount} setTimerCount={setTimerCount} />
+					
+					<Text
+						style={[styles.heading,{
+							color: "#F2D379",
+							fontFamily: "Limelight_400Regular",
+							fontSize: 30,
+						}]}
+					>
+						Question
+					</Text>
+					<GenerateQuestion movies={movies} />
 
+					<Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+				</View>
+				<View style={styles.badge}>
+					<Badge />
+				</View>
+				<View
+					style={[
+						width > widthBreakpoint ? styles.titleWrap : styles.titleWrapMobile,
+					]}
+				>
+					{Array.isArray(selectedMovie?.answer) ? (
+						<MultipleChoice />
+					) : (
+						<TrueFalse />
+					)}
+				</View>
+			</ImageBackground>
+		);
+	}
+}
 function mapStateToProps(state) {
 	return {
 		winningStreak: state.winningStreak,
