@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 
+
 const MultipleChoice = ({
   selectedMovie,
   setScene,
@@ -16,7 +17,11 @@ const MultipleChoice = ({
   resetWinningStreak,
 }) => {
   const multipleAnswer = selectedMovie?.answer || null;
-  const correctAnswer = multipleAnswer[0] || null;
+  const [correctAnswer, setCorrectAnswer]=useState(multipleAnswer[0]);
+  const [selectedAnswer, setSelectedAnswer] = useState();
+  const [runRandom, setRunRandom] = useState(true);
+
+  console.log(correctAnswer);
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
@@ -29,26 +34,36 @@ const MultipleChoice = ({
         array[randomIndex],
         array[currentIndex],
       ];
-    }
+    }}
 
-    return array;
-  };
-
-  useEffect(() => {
+  if (runRandom) {
     randomizeAnswer(multipleAnswer);
-  }, []);
+  }
 
   const isCorrect = (selection) => {
+    setRunRandom(false)
+    setSelectedAnswer(selection);
     if (selection === correctAnswer) {
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
-      }, 1000);
+      }, 2000);
     } else {
       setTimeout(() => {
         resetWinningStreak();
         setScene("GameOver");
-      }, 1000);
+      }, 2000);
+    }
+  };
+
+  const getBorderColor = (selection) => {
+    if (typeof selectedAnswer === "undefined") {
+      return "#000";
+    } else if (selection === correctAnswer) {
+      return "#0f0";
+    }
+    else {
+      return "#f00";
     }
   };
 
@@ -71,7 +86,12 @@ const MultipleChoice = ({
               alignItems: "center",
             }}
           >
-            <Pressable key={index} onPress={() => isCorrect(item)}>
+            <Pressable
+              key={index}
+
+              style={[{ color: getBorderColor(item) }]}
+              onPress={() => isCorrect(item)}
+            >
               <Text key={index}>{item}</Text>
             </Pressable>
           </View>
