@@ -243,26 +243,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     color: "#401323",
+    marginBottom: 5,
   },
   ticket: {
     flex: 1,
   },
   button: {
     width: "30%",
-    aspectRatio: 7 / 4,
+    aspectRatio: 7.8 / 4,
   },
   buttonMobile: {
     width: "40%",
-    aspectRatio: 7 / 4,
+    aspectRatio: 7.8 / 4,
   },
 
   buttonMini: {
     width: "30%",
-    aspectRatio: 7 / 4,
+    aspectRatio: 7.8 / 4,
   },
   buttonSuperMini: {
     width: "35%",
-    aspectRatio: 7 / 4,
+    aspectRatio: 7.8 / 4,
   },
 });
 
