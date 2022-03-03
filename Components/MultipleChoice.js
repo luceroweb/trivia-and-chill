@@ -9,7 +9,6 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 
-
 const MultipleChoice = ({
   selectedMovie,
   setScene,
@@ -20,8 +19,6 @@ const MultipleChoice = ({
   const [correctAnswer, setCorrectAnswer]=useState(multipleAnswer[0]);
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [runRandom, setRunRandom] = useState(true);
-
-  console.log(correctAnswer);
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
