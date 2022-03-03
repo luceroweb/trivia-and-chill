@@ -99,13 +99,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
-		height: "60%",
+		height: "100%",
 		width: "100%",
 		flexDirection: "column",
 	},
 	image: {
 		paddingBottom: 75,
-		paddingTop: 10,
+		// paddingTop: 10,
+		
 	},
 	imageMobile: {
 		paddingBottom: 100,
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#292840",
 		fontWeight: "bold",
 		fontSize: 20,
-		height: 300,
+		height: 350,
 		width: 615,
 	},
 	titleMobile: {
@@ -148,6 +149,7 @@ const styles = StyleSheet.create({
 		paddingTop: 10,
 		paddingRight: 20,
 		alignSelf: "center",
+		marginTop:10,
 	},
 	q: {
 		color: "#F2D379",
