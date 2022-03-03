@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
     height: "10%",
   },
   scrollView: {
+    // height: "80%",
+    flex: 1,
     height: "100%",
   },
   footer: {
