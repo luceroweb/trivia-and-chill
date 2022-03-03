@@ -40,7 +40,7 @@ function Timer({ setScene, timerCount, setTimerCount }) {
 
   return (
     <View style={styles.timer}>
-      <Clock/>
+      <Text>{timerCount}</Text>
     </View>
   )
 }
