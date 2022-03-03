@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -9,7 +9,6 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 
-
 const MultipleChoice = ({
   selectedMovie,
   setScene,
@@ -18,7 +17,7 @@ const MultipleChoice = ({
 }) => {
   const multipleAnswer = selectedMovie?.answer || null;
   const correctAnswer = multipleAnswer[0] || null;
-  const selectedAnswer = useRef();
+  const [selectedAnswer, setSelectedAnswer] = useState();
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
@@ -38,10 +37,10 @@ const MultipleChoice = ({
 
   useEffect(() => {
     randomizeAnswer(multipleAnswer);
-  }, []);
+  }, [selectedMovie?.question]);
 
   const isCorrect = (selection) => {
-    selectedAnswer.current = selection;
+    setSelectedAnswer(selection);
     if (selection === correctAnswer) {
       setTimeout(() => {
         increaseWinningStreak();
@@ -54,50 +53,49 @@ const MultipleChoice = ({
       }, 1000);
     }
   };
+
   const getBorderColor = (selection) => {
-		if (typeof selectedAnswer === "undefined") {
-			return "#000";
-		}
-		if (selection === correctAnswer) {
-			return "#0f0";
-		}
-		else {
-			return "#f00";
-		}
-	};
+    if (typeof selectedAnswer === "undefined") {
+      return "#000";
+    }
+    if (selection === correctAnswer) {
+      return "#0f0";
+    } else {
+      return "#f00";
+    }
+  };
 
   return (
-		<View>
-			{multipleAnswer.map((item, index) => (
-				<ImageBackground
-					source={require("../Images/ticket.png")}
-					style={{ width: 160, height: 80, padding: 10 }}
-					key={index}
-				>
-					<View
-						style={{
-							position: "absolute",
-							top: 0,
-							left: 0,
-							right: 0,
-							bottom: 0,
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Pressable
-							key={index}
-					
-							style={[{ color: getBorderColor(item) }]}
-							onPress={() => isCorrect(item)}
-						>
-							<Text key={index}>{item}</Text>
-						</Pressable>
-					</View>
-				</ImageBackground>
-			))}
-		</View>
-	);
+    <View>
+      {multipleAnswer.map((item, index) => (
+        <ImageBackground
+          source={require("../Images/ticket.png")}
+          style={{ width: 160, height: 80, padding: 10 }}
+          key={index}
+        >
+          <View
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Pressable
+              key={index}
+              style={[{ color: getBorderColor(item) }]}
+              onPress={() => isCorrect(item)}
+            >
+              <Text key={index}>{item}</Text>
+            </Pressable>
+          </View>
+        </ImageBackground>
+      ))}
+    </View>
+  );
 };
 
 const mapStateToProps = (state) => ({
