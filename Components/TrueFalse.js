@@ -4,7 +4,8 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	ImageBackground,
+  ImageBackground,
+  Platform,
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
@@ -49,11 +50,25 @@ const TrueFalse = ({
 
 	return (
 		<View style={styles.container}>
-			<View style={{ margin: 4, flex: 1, flexDirection: "row" }}>
-				<View style={{ marginRight: 15 }}>
+			<View
+				style={{
+					margin: Platform.OS === "android" ? 1 : 4,
+					flex: 1,
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
+				<View
+					style={{
+						marginTop: Platform.OS === "ios" ? 20 : 0,
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+				>
 					<ImageBackground
 						source={require("../Images/ticket.png")}
-						style={{ width: 160, height: 80 }}
+						style={{ width: 160, height: 80, padding: 10 }}
 					>
 						<View
 							style={{
@@ -76,10 +91,10 @@ const TrueFalse = ({
 						</View>
 					</ImageBackground>
 				</View>
-				<View>
+				<View style={{ marginTop: Platform.OS === "ios" ? 80 : 20 }}>
 					<ImageBackground
 						source={require("../Images/ticket.png")}
-						style={{ width: 160, height: 80 }}
+						style={{ width: 160, height: 80, padding: 10 }}
 					>
 						<View
 							style={{
