@@ -87,10 +87,10 @@ const MultipleChoice = ({
 					>
 						<Pressable
 							key={index}
-							style={[{ color: getBorderColor(item) }]}
+							
 							onPress={() => isCorrect(item)}
 						>
-							<Text key={index} style={[{ color: getBorderColor(item) }]}>
+							<Text key={index} style={{ color: getBorderColor(item) }}>
 								{item}
 							</Text>
 						</Pressable>

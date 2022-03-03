@@ -81,7 +81,7 @@ const TrueFalse = ({
 								alignItems: "center",
 							}}
 						>
-							<Pressable key={1} onPress={() => isCorrect(true)}>
+							<Pressable  onPress={() => isCorrect(true)}>
 								<Text style={{ color: getBorderColor(true) }}>True</Text>
 							</Pressable>
 						</View>
@@ -103,7 +103,7 @@ const TrueFalse = ({
 								alignItems: "center",
 							}}
 						>
-							<Pressable key={1} onPress={() => isCorrect(false)}>
+							<Pressable onPress={() => isCorrect(false)}>
 								<Text style={{ color: getBorderColor(false) }}>False</Text>
 							</Pressable>
 						</View>
