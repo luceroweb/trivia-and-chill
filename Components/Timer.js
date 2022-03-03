@@ -3,7 +3,6 @@ import { StyleSheet, View, Text} from 'react-native';
 import { connect } from 'react-redux';
 import { Audio } from 'expo-av';
 import tick from '../Sounds/tick.wav';
-import Clock from "../Components/Clock";
 
 function Timer({ setScene, timerCount, setTimerCount }) {
   const [sound, setSound] = useState();
