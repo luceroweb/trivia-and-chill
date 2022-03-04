@@ -5,11 +5,10 @@ import {
   Text,
   View,
   ImageBackground,
+  Platform,
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
-import { FontAwesome5 } from "@expo/vector-icons";
-import madLibsArray from "../Utils/madLibsArray";
 
 const TrueFalse = ({
   selectedMovie,
@@ -49,11 +48,25 @@ const TrueFalse = ({
 
   return (
     <View style={styles.container}>
-      <View style={{ margin: 4, flex: 1, flexDirection: "row" }}>
-        <View style={{ marginRight: 15 }}>
+      <View
+        style={{
+          margin: Platform.OS === "android" ? 1 : 4,
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            marginTop: Platform.OS === "ios" ? 20 : 0,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <ImageBackground
             source={require("../Images/ticket.png")}
-            style={{ width: 160, height: 80 }}
+            style={{ width: 160, height: 80, padding: 10 }}
           >
             <View
               style={{
@@ -66,20 +79,16 @@ const TrueFalse = ({
                 alignItems: "center",
               }}
             >
-              <Pressable
-                key={1}
-                style={[{ color: getBorderColor(true) }]}
-                onPress={() => isCorrect(true)}
-              >
-                <Text>True</Text>
+              <Pressable onPress={() => isCorrect(true)}>
+                <Text style={{ color: getBorderColor(true) }}>True</Text>
               </Pressable>
             </View>
           </ImageBackground>
         </View>
-        <View>
+        <View style={{ marginTop: Platform.OS === "ios" ? 80 : 20 }}>
           <ImageBackground
             source={require("../Images/ticket.png")}
-            style={{ width: 160, height: 80 }}
+            style={{ width: 160, height: 80, padding: 10 }}
           >
             <View
               style={{
@@ -92,12 +101,8 @@ const TrueFalse = ({
                 alignItems: "center",
               }}
             >
-              <Pressable
-                key={0}
-                style={[{ color: getBorderColor(false) }]}
-                onPress={() => isCorrect(false)}
-              >
-                <Text>False</Text>
+              <Pressable onPress={() => isCorrect(false)}>
+                <Text style={{ color: getBorderColor(false) }}>False</Text>
               </Pressable>
             </View>
           </ImageBackground>
@@ -134,7 +139,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(TrueFalse);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20, // StatusBar.currentHeight,
+    marginTop: 20,
     paddingHorizontal: 20,
     flexDirection: "row",
   },

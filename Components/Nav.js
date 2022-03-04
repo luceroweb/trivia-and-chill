@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import Question from "../Scenes/Question";
 import CorrectAnswer from "../Scenes/CorrectAnswer";
 import DeveloperCredits from "../Scenes/DeveloperCredits";
+import About from "../Scenes/About";
 
 function Nav({ scene }) {
   return (
@@ -21,15 +22,18 @@ function Nav({ scene }) {
         {scene === "Question" && <Question />}
         {scene === "CorrectAnswer" && <CorrectAnswer />}
         {scene === "Credits" && <DeveloperCredits />}
+        {scene === "About" && <About />}
       </ScrollView>
-      <Footer style={styles.footer} />
+      {scene !== "Question" && scene !== "CorrectAnswer" && (
+        <Footer style={styles.footer} />
+      )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1,
+    flexGrow: 1,
     marginTop: StatusBar.currentHeight,
     overflow: "hidden",
   },

@@ -14,14 +14,15 @@ console.log(movies)
 }
 
 export async function getYouTubeId(movieId) {
-  let youTubeId = "";
+  let youTubeId = null;
 
   await axios
     .get(
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .then((response) => (youTubeId = response.data.results[0].key||null))
-    .catch((err) => console.log(err.response.data));
-    console.log(youTubeId)
+    .then((response) => (youTubeId = response.data?.results[0]?.key||null))
+    .catch((err) => console.log("Fetch API Error",err));
+
   return youTubeId;
+  
 }

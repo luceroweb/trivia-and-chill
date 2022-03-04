@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -15,10 +15,11 @@ const MultipleChoice = ({
   increaseWinningStreak,
   resetWinningStreak,
 }) => {
-  const multipleAnswer = selectedMovie?.answer || null;
-  const correctAnswer = multipleAnswer[0] || null;
+  const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
+  const [correctAnswer, setCorrectAnswer] = useState("");
   const [selectedAnswer, setSelectedAnswer] = useState();
-console.log(correctAnswer)
+  const [runRandom, setRunRandom] = useState(true);
+
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
     while (currentIndex != 0) {
@@ -29,33 +30,36 @@ console.log(correctAnswer)
         array[currentIndex],
       ];
     }
-    return array;
   };
 
   useEffect(() => {
-    randomizeAnswer(multipleAnswer);
-  }, [selectedMovie?.question]);
+    setCorrectAnswer(multipleAnswer[0]);
+
+    if (runRandom) {
+      randomizeAnswer(multipleAnswer);
+    }
+  }, [multipleAnswer]);
 
   const isCorrect = (selection) => {
+    setRunRandom(false);
     setSelectedAnswer(selection);
     if (selection === correctAnswer) {
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
-      }, 1000);
+      }, 2000);
     } else {
       setTimeout(() => {
         resetWinningStreak();
         setScene("GameOver");
-      }, 1000);
+      }, 2000);
     }
   };
   console.log(correctAnswer)
   const getBorderColor = (selection) => {
     if (typeof selectedAnswer === "undefined") {
       return "#000";
-    }
-    if (selection === correctAnswer) {
+    } else if (selection === correctAnswer) {
       return "#0f0";
     } else {
       return "#f00";
@@ -81,12 +85,10 @@ console.log(correctAnswer)
               alignItems: "center",
             }}
           >
-            <Pressable
-              key={index}
-              style={[{ color: getBorderColor(item) }]}
-              onPress={() => isCorrect(item)}
-            >
-              <Text key={index}>{item}</Text>
+            <Pressable key={index} onPress={() => isCorrect(item)}>
+              <Text key={index} style={{ color: getBorderColor(item) }}>
+                {item}
+              </Text>
             </Pressable>
           </View>
         </ImageBackground>
