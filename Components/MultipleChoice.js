@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -16,8 +16,9 @@ const MultipleChoice = ({
   resetWinningStreak,
 }) => {
   const multipleAnswer = selectedMovie?.answer || null;
-  const correctAnswer = multipleAnswer[0] || null;
+  const [correctAnswer, setCorrectAnswer] = useState(multipleAnswer[0]);
   const [selectedAnswer, setSelectedAnswer] = useState();
+  const [runRandom, setRunRandom] = useState(true);
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
@@ -31,34 +32,32 @@ const MultipleChoice = ({
         array[currentIndex],
       ];
     }
-
-    return array;
   };
 
-  useEffect(() => {
+  if (runRandom) {
     randomizeAnswer(multipleAnswer);
-  }, [selectedMovie?.question]);
+  }
 
   const isCorrect = (selection) => {
+    setRunRandom(false);
     setSelectedAnswer(selection);
     if (selection === correctAnswer) {
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
-      }, 1000);
+      }, 2000);
     } else {
       setTimeout(() => {
         resetWinningStreak();
         setScene("GameOver");
-      }, 1000);
+      }, 2000);
     }
   };
 
   const getBorderColor = (selection) => {
     if (typeof selectedAnswer === "undefined") {
       return "#000";
-    }
-    if (selection === correctAnswer) {
+    } else if (selection === correctAnswer) {
       return "#0f0";
     } else {
       return "#f00";
