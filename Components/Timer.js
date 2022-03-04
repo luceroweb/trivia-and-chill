@@ -65,10 +65,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
 const styles = StyleSheet.create({
     timer: {
-        // position: 'absolute',
-        flexDirection: 'column',
-        alignSelf: 'center',
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end'
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      flex: 1,
     }
 });
