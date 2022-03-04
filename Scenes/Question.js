@@ -31,7 +31,6 @@ function Question({ selectedMovie, movies, setMovies }) {
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
   });
-
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -39,59 +38,50 @@ function Question({ selectedMovie, movies, setMovies }) {
       <ImageBackground
         resizeMode={"cover"}
         source={Drive}
-        style={[width > widthBreakpoint ? styles.image : styles.imageMobile]}
+        style={[
+          styles.container,
+          width > widthBreakpoint ? styles.image : styles.imageMobile,
+        ]}
       >
-        <Text>
-          <View
+        <View
+          style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
+        >
+          <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
+
+          <Text
             style={[
-              width > widthBreakpoint
-                ? styles.container
-                : styles.containerMobile,
+              styles.heading,
+              {
+                color: "#F2D379",
+                fontFamily: "Limelight_400Regular",
+                fontSize: 30,
+              },
             ]}
           >
-            <View
-              style={[
-                width > widthBreakpoint ? styles.title : styles.titleMobile,
-              ]}
-            >
-              <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
-              <View style={styles.heading}>
-                <Text
-                  style={{
-                    color: "#F2D379",
-                    fontFamily: "Limelight_400Regular",
-                    fontSize: 30,
-                  }}
-                >
-                  Question
-                </Text>
-              </View>
-              <Text style={styles.q}>
-                <GenerateQuestion movies={movies} />
-              </Text>
-              <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
-            </View>
-            <Badge />
-            <View
-              style={[
-                width > widthBreakpoint
-                  ? styles.titleWrap
-                  : styles.titleWrapMobile,
-              ]}
-            >
-              {Array.isArray(selectedMovie?.answer) ? (
-                <MultipleChoice />
-              ) : (
-                <TrueFalse />
-              )}
-            </View>
-          </View>
-        </Text>
+            Question
+          </Text>
+          <GenerateQuestion movies={movies} />
+
+          <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+        </View>
+        <View style={styles.badge}>
+          <Badge />
+        </View>
+        <View
+          style={[
+            width > widthBreakpoint ? styles.titleWrap : styles.titleWrapMobile,
+          ]}
+        >
+          {Array.isArray(selectedMovie?.answer) ? (
+            <MultipleChoice />
+          ) : (
+            <TrueFalse />
+          )}
+        </View>
       </ImageBackground>
     );
   }
 }
-
 function mapStateToProps(state) {
   return {
     winningStreak: state.winningStreak,
@@ -129,17 +119,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    height: "60%",
+    height: "100%",
     width: "100%",
     flexDirection: "column",
   },
-  containerMobile: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    height: "60%",
-    width: "100%",
-    flexDirection: "column",
+  image: {
+    paddingBottom: 75,
+    // paddingTop: 10,
+  },
+  imageMobile: {
+    paddingBottom: 100,
+    paddingTop: 25,
   },
   titleWrap: {
     flexDirection: "row",
@@ -147,9 +137,8 @@ const styles = StyleSheet.create({
   },
   titleWrapMobile: {
     flexDirection: "row",
-    paddingTop: 100,
+    paddingTop: 20,
     paddingBottom: 3,
-    // marginHorizontal: 10,
   },
   title: {
     shadowColor: "#1a1a1a",
@@ -159,7 +148,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#292840",
     fontWeight: "bold",
     fontSize: 20,
-    height: 300,
+    height: 350,
     width: 615,
   },
   titleMobile: {
@@ -175,30 +164,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   heading: {
-    // marginBottom: 8,
     color: "#F2D379",
     paddingTop: 10,
     paddingRight: 20,
     alignSelf: "center",
+    marginTop: 10,
   },
   q: {
-    // marginBottom: 8,
     color: "#F2D379",
-    // paddingTop: 10,
     marginHorizontal: 20,
   },
-
-  image: {
+  badge: {
+    flex: 1,
+    alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 75,
-    // margin: 10,
-    paddingTop: 10,
-  },
-  imageMobile: {
-    justifyContent: "center",
-    paddingBottom: 100,
-    paddingTop: 25,
-    // margin: 10,
   },
 });
 
