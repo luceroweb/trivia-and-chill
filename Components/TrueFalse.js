@@ -37,7 +37,7 @@ const TrueFalse = ({
 
   const getBorderColor = (button) => {
     if (typeof selectedAnswer === "undefined") {
-      return "#00f";
+      return "#000";
     }
     if (button !== answer) {
       return "#f00";
@@ -67,7 +67,7 @@ const TrueFalse = ({
               }}
             >
               <Pressable onPress={() => isCorrect(true)}>
-                <Text>True</Text>
+                <Text style={{ color: getBorderColor(true) }}>True</Text>
               </Pressable>
             </View>
           </ImageBackground>
@@ -89,7 +89,7 @@ const TrueFalse = ({
               }}
             >
               <Pressable onPress={() => isCorrect(false)}>
-                <Text>False</Text>
+                <Text style={{ color: getBorderColor(false) }}>False</Text>
               </Pressable>
             </View>
           </ImageBackground>
