@@ -32,6 +32,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         selectedMovie: action.selectedMovie,
       };
+    case "RESET_SELECTED_MOVIE":
+      return {
+        ...state,
+        selectedMovie: {},
+      };
   }
   return state;
 };
