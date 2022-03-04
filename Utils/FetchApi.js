@@ -9,7 +9,7 @@ export default async function FetchApi() {
     )
     .then((res) => (movies = res.data.results))
     .catch((err) => console.log(err.response.data));
-
+console.log(movies)
   return movies;
 }
 
@@ -22,6 +22,6 @@ export async function getYouTubeId(movieId) {
     )
     .then((response) => (youTubeId = response.data.results[0].key||null))
     .catch((err) => console.log(err.response.data));
-
+    console.log(youTubeId)
   return youTubeId;
 }

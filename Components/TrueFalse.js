@@ -37,7 +37,7 @@ const TrueFalse = ({
 
   const getBorderColor = (button) => {
     if (typeof selectedAnswer === "undefined") {
-      return "#00f";
+      return "#000";
     }
     if (button !== answer) {
       return "#f00";
@@ -66,7 +66,11 @@ const TrueFalse = ({
                 alignItems: "center",
               }}
             >
-              <Pressable onPress={() => isCorrect(true)}>
+              <Pressable
+                key={1}
+                style={[{ color: getBorderColor(true) }]}
+                onPress={() => isCorrect(true)}
+              >
                 <Text>True</Text>
               </Pressable>
             </View>
@@ -88,7 +92,11 @@ const TrueFalse = ({
                 alignItems: "center",
               }}
             >
-              <Pressable onPress={() => isCorrect(false)}>
+              <Pressable
+                key={0}
+                style={[{ color: getBorderColor(false) }]}
+                onPress={() => isCorrect(false)}
+              >
                 <Text>False</Text>
               </Pressable>
             </View>

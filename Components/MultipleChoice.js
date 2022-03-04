@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -18,26 +18,23 @@ const MultipleChoice = ({
   const multipleAnswer = selectedMovie?.answer || null;
   const correctAnswer = multipleAnswer[0] || null;
   const [selectedAnswer, setSelectedAnswer] = useState();
-
+console.log(correctAnswer)
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
-
     while (currentIndex != 0) {
       const randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
-
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex],
         array[currentIndex],
       ];
     }
-
     return array;
   };
 
   useEffect(() => {
     randomizeAnswer(multipleAnswer);
-  }, []);
+  }, [selectedMovie?.question]);
 
   const isCorrect = (selection) => {
     setSelectedAnswer(selection);
@@ -51,6 +48,17 @@ const MultipleChoice = ({
         resetWinningStreak();
         setScene("GameOver");
       }, 1000);
+    }
+  };
+  console.log(correctAnswer)
+  const getBorderColor = (selection) => {
+    if (typeof selectedAnswer === "undefined") {
+      return "#000";
+    }
+    if (selection === correctAnswer) {
+      return "#0f0";
+    } else {
+      return "#f00";
     }
   };
 
@@ -73,7 +81,11 @@ const MultipleChoice = ({
               alignItems: "center",
             }}
           >
-            <Pressable key={index} onPress={() => isCorrect(item)}>
+            <Pressable
+              key={index}
+              style={[{ color: getBorderColor(item) }]}
+              onPress={() => isCorrect(item)}
+            >
               <Text key={index}>{item}</Text>
             </Pressable>
           </View>
