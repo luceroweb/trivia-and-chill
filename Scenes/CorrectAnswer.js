@@ -17,10 +17,11 @@ import ticket from "../Images/ticket.png";
 import drivein from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
-const CorrectAnswer = ({ selectedMovie, setScene }) => {
+const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
   const { width } = useWindowDimensions();
   const handleNextQuestion = () => {
     setScene("Question");
+    resetSelectedMovie();
   };
 
   let [fontsLoaded] = useFonts({
@@ -88,6 +89,10 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
+    resetSelectedMovie: () => 
+      dispatch({
+        type: "RESET_SELECTED_MOVIE",
+      })
   };
 }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -15,8 +15,8 @@ const MultipleChoice = ({
   increaseWinningStreak,
   resetWinningStreak,
 }) => {
-  const multipleAnswer = selectedMovie?.answer || null;
-  const [correctAnswer, setCorrectAnswer]=useState(multipleAnswer[0]);
+  const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
+  const [correctAnswer, setCorrectAnswer] = useState('');
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [runRandom, setRunRandom] = useState(true);
 
@@ -33,12 +33,16 @@ const MultipleChoice = ({
       ];
     }}
 
-  if (runRandom) {
-    randomizeAnswer(multipleAnswer);
-  }
+  useEffect(() => {
+    setCorrectAnswer(multipleAnswer[0]);
+
+    if (runRandom) {
+      randomizeAnswer(multipleAnswer);
+    }
+  },[multipleAnswer]);
 
   const isCorrect = (selection) => {
-    setRunRandom(false)
+    setRunRandom(false);
     setSelectedAnswer(selection);
     if (selection === correctAnswer) {
       setTimeout(() => {
@@ -85,11 +89,12 @@ const MultipleChoice = ({
           >
             <Pressable
               key={index}
-
-              style={[{ color: getBorderColor(item) }]}
               onPress={() => isCorrect(item)}
             >
-              <Text key={index}>{item}</Text>
+              <Text key={index}
+              style={{ color: getBorderColor(item) }}>
+                {item}
+              </Text>
             </Pressable>
           </View>
         </ImageBackground>
