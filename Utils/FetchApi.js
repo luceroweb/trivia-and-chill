@@ -9,7 +9,7 @@ export default async function FetchApi() {
     )
     .then((res) => (movies = res.data.results))
     .catch((err) => console.log(err.response.data));
-console.log(movies)
+
   return movies;
 }
 
@@ -21,8 +21,22 @@ export async function getYouTubeId(movieId) {
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
     .then((response) => (youTubeId = response.data?.results[0]?.key||null))
-    .catch((err) => console.log("Fetch API Error",err));
+    .catch((err) => console.log("Fetch API Error",err))
 
   return youTubeId;
+  
+}
+
+export async function getGenreName(movieId) {
+  let genreName= null;
+
+  await axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
+    )
+    .then((response) => console.log(response.data?.genres[0].name||null))
+    .catch((err) => console.log("Fetch API Error",err))
+
+  return genreName;
   
 }
