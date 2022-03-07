@@ -34,7 +34,7 @@ export async function getGenreName(movieId) {
     .get(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .then((response) => console.log(response.data?.genres[0].name||null))
+    .then((response) => (genreName=response.data?.genres[0].name||null))
     .catch((err) => console.log("Fetch API Error",err))
 
   return genreName;

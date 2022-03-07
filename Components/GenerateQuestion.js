@@ -4,7 +4,7 @@ import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
 import { connect } from "react-redux";
 
-const GenerateQuestion = ({ movies, setSelectedMovie }) => {
+const GenerateQuestion = ({ movies, setSelectedMovie,movieId}) => {
   let movie = movies ? movies[RandomGenerator(movies.length)] : [];
 
   let questionObject = movie ? madLibsArray(movie) : {};
@@ -13,7 +13,8 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   useEffect(() => {
     setSelectedMovie(questionObject[randomIndex]);
   }, []);
-
+console.log(movies)
+console.log(movieId)
   return <View></View>
 };
 

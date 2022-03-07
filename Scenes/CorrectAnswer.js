@@ -17,6 +17,7 @@ import ticket from "../Images/ticket.png";
 import drivein from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 import {ErrorBoundary} from 'react-error-boundary'
+import GenerateQuestion from "../Components/GenerateQuestion";
 
 const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
   const { width } = useWindowDimensions();
@@ -54,6 +55,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
 					>
 						<View style={[styles.videoContainer]}>
 							<Trailer movieId={selectedMovie?.movieId} />
+              <GenerateQuestion movieId={selectedMovie?.movieId} />
 						</View>
 
 						<View style={styles.textContainer}>
