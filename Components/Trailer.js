@@ -3,13 +3,10 @@ import { View, Alert } from "react-native";
 import { getGenreName, getYouTubeId } from "../Utils/FetchApi";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { connect } from "react-redux";
-import madLibsArray from "../Utils/madLibsArray";
 
 function Trailer({ movieId ,setGenreName,genreName}) {
   const [playing, setPlaying] = useState(false);
   const [youTubeId, setYouTubeId] = useState(null);
-  // const[genreName,setGenreName]=useState('')
-  console.log(genreName)
   useEffect(() => {
     getYouTubeId(movieId).then((res) => {
       setYouTubeId(res);

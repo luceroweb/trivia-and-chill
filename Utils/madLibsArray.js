@@ -119,12 +119,12 @@ export default function madLibsArray(movies) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${title} is considered a ${genres.name}`,
+        question: `${movies.title} is considered a ${movies.genres?.name}`,
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `${title} is categorized under the ${genres.name} genre.`,
+        question: `${movies.title} is categorized under the ${movies.genres?.name} genre.`,
         answer: true,
         movieId: `${movies.id}`,
       },
@@ -134,7 +134,7 @@ export default function madLibsArray(movies) {
         movieId: 24,
       },
       {
-        question: `Captain America is categorized under the "musicals" genre.`,
+        question: `Captain America is categorized under the musicals genre.`,
         answer: false,
         movieId: 1771,
       }

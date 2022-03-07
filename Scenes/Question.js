@@ -11,7 +11,7 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { connect } from "react-redux";
-import FetchApi from "../Utils/FetchApi";
+import FetchApi, { getGenreName } from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
 import Timer from "../Components/Timer";
 import TrueFalse from "../Components/TrueFalse";
@@ -19,7 +19,7 @@ import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
-function Question({ selectedMovie, movies, setMovies }) {
+function Question({ selectedMovie, movies, setMovies, movieId, genreName, setGenreName }) {
   const [timerCount, setTimerCount] = useState(10);
   const { width, height } = useWindowDimensions();
   const widthBreakpoint = 700;
@@ -27,6 +27,12 @@ function Question({ selectedMovie, movies, setMovies }) {
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
+
+  useEffect(() => {
+    getGenreName(movieId).then((res) => setGenreName(res));
+  }, []); 
+  
+  console.log(genreName)
 
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
@@ -88,6 +94,7 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
+    genreName: state.genreName,
   };
 }
 
@@ -110,6 +117,11 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_SCENE",
         name,
+      }),
+    setGenreName: (genreName) =>
+      dispatch({
+        type: "SET_GENRE_NAME",
+        genreName,
       }),
   };
 }
