@@ -118,6 +118,26 @@ export default function madLibsArray(movies) {
         answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
         movieId: `${movies.id}`,
       },
+      {
+        question: `${title} is considered a ${genres.name}`,
+        answer: true,
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `${title} is categorized under the ${genres.name} genre.`,
+        answer: true,
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `Kill Bill is a romantic comedy.`,
+        answer: false,
+        movieId: 24,
+      },
+      {
+        question: `Captain America is categorized under the "musicals" genre.`,
+        answer: false,
+        movieId: 1771,
+      }
     ]
   );
 }
