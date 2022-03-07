@@ -36,7 +36,7 @@ export async function getGenre(movieId) {
 
 
 export async function getYouTubeId(movieId) {
-  let youTubeId = "";
+  let youTubeId = null;
 
   await axios
     .get(
@@ -46,5 +46,6 @@ export async function getYouTubeId(movieId) {
     .catch((err) => console.log(err.response.data));
 
   return youTubeId;
+  
 }
 
