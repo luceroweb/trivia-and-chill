@@ -1,17 +1,15 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text} from 'react-native';
-import { connect } from 'react-redux';
-import { Audio } from 'expo-av';
-import tick from '../Sounds/tick.wav';
-import Clock from '../Components/Clock';
+import { useState, useEffect } from "react";
+import { StyleSheet, View, Text, Platform } from "react-native";
+import { connect } from "react-redux";
+import { Audio } from "expo-av";
+import tick from "../Sounds/tick.wav";
+import Clock from "../Components/Clock";
 
 function Timer({ setScene, timerCount, setTimerCount }) {
   const [sound, setSound] = useState();
 
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(
-      tick
-    );
+    const { sound } = await Audio.Sound.createAsync(tick);
     setSound(sound);
     await sound.playAsync();
   }
@@ -21,53 +19,54 @@ function Timer({ setScene, timerCount, setTimerCount }) {
       if (timerCount > 0) {
         setTimerCount(timerCount - 1);
         playSound();
-      }
-      else {
+      } else {
         clearTimer();
       }
     }, 1000);
 
     const clearTimer = () => {
       clearInterval(timerInterval);
-      setScene('GameOver')
-    }
+      setScene("GameOver");
+    };
 
     return () => {
-        clearInterval(timerInterval);
-        sound ? sound.unloadAsync() : undefined;
-      }
+      clearInterval(timerInterval);
+      sound ? sound.unloadAsync() : undefined;
+    };
   }, [timerCount]);
 
   return (
     <View style={styles.timer}>
-      <Text><Clock/></Text>
+      <Text>
+        <Clock />
+      </Text>
     </View>
-  )
+  );
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
-    scene: state.scene
-  }
+    scene: state.scene,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     setScene: (name) =>
-    dispatch({
-      type: "SET_SCENE",
-      name
-    })
-  }
+      dispatch({
+        type: "SET_SCENE",
+        name,
+      }),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
 const styles = StyleSheet.create({
-    timer: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        flex: 1,
-    }
+  timer: {
+    position: "absolute",
+    left: 0,
+    top: Platform.OS === 'android' || Platform.OS === 'ios' ? -44: 0,
+    flex: 1,
+  },
 });
