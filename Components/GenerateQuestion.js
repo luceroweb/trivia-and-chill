@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { View } from "react-native";
 import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
+import getGenreName from "../Utils/FetchApi";
 import { connect } from "react-redux";
 
 const GenerateQuestion = ({ movies, setSelectedMovie,movieId}) => {
@@ -11,8 +12,16 @@ const GenerateQuestion = ({ movies, setSelectedMovie,movieId}) => {
   let randomIndex = RandomGenerator(questionObject.length);
  
   useEffect(() => {
+    getGenreName(movieId)
+    .then((response) => {
+      movie={...movie, name: response.data?.genre_ids[0]}
+      console.log('MOVIE', movie);
+      console.log('NAME', response.data?.genre_ids[0]);
+    });
+
     setSelectedMovie(questionObject[randomIndex]);
   }, []);
+  
 console.log(movies)
 console.log(movieId)
   return <View></View>
