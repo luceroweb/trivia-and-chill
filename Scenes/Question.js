@@ -46,11 +46,10 @@ function Question({ selectedMovie, movies, setMovies }) {
         <View
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
-          <View style={styles.timerbox}>
+          <View style={styles.timerBox}>
             <Timer
               timerCount={timerCount}
               setTimerCount={setTimerCount}
-              style={styles.timer}
             />
             <Text
               style={[
@@ -131,7 +130,6 @@ const styles = StyleSheet.create({
   },
   image: {
     paddingBottom: 75,
-    // paddingTop: 10,
   },
   imageMobile: {
     paddingBottom: 100,
@@ -198,14 +196,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  timerbox: {
+  timerBox: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  timer: {
-    // alignSelf: "flex-start",
-  },
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
