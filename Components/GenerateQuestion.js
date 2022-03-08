@@ -3,20 +3,27 @@ import { View } from "react-native";
 import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
 import { connect } from "react-redux";
-import { getPerformerName } from "../Utils/FetchApi";
+import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
+import axios from "axios";
 
 const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   let movie = movies ? movies[RandomGenerator(movies.length)] : {};
 
 
   useEffect(() => {
-    getPerformerName(movie.id)
+    axios.all([getPerformerName(movie.performerId),getMovieChanges(movie.id)]).then(axios.spread((performerName,movieChanges) => {
+      movie={...movie, name: response.data.cast[0].name, changes: movieChanges.data.changes}
+  let questionObject = movie ? madLibsArray(movie) : {};
+  let randomIndex = RandomGenerator(questionObject.length);
+  setSelectedMovie(questionObject[randomIndex]);
+    }))
+  /*  getPerformerName(movie.id)
   .then(response => {
     movie={...movie, name: response.data.cast[0].name}
   let questionObject = movie ? madLibsArray(movie) : {};
   let randomIndex = RandomGenerator(questionObject.length);
   setSelectedMovie(questionObject[randomIndex]);
-  })
+  }) */
   }, []);
 
   return <View></View>

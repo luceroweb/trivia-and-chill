@@ -34,6 +34,15 @@ export async function getGenre(movieId) {
   return details;
 }
 
+export async function getMovieChanges(movieId) {
+  let details = await axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieId}/changes?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
+    )
+    .catch((err) => console.log(err))
+    console.log("details", details)
+    return details;
+    }
 
 export async function getYouTubeId(movieId) {
   let youTubeId = "";
