@@ -46,20 +46,26 @@ function Question({ selectedMovie, movies, setMovies }) {
         <View
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
-          <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
-
-          <Text
-            style={[
-              styles.heading,
-              {
-                color: "#F2D379",
-                fontFamily: "Limelight_400Regular",
-                fontSize: 30,
-              },
-            ]}
-          >
-            Question
-          </Text>
+          <View style={styles.timerbox}>
+            <Timer
+              timerCount={timerCount}
+              setTimerCount={setTimerCount}
+              style={styles.timer}
+            />
+            <Text
+              style={[
+                width > 800 ? styles.heading : styles.headingMobile,
+                {
+                  color: "#F2D379",
+                  fontFamily: "Limelight_400Regular",
+                  fontSize: 30,
+                },
+              ]}
+            >
+              Question
+            </Text>
+            <View></View>
+          </View>
           <GenerateQuestion movies={movies} />
 
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
@@ -164,20 +170,41 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   heading: {
+    flexGrow: 1,
     color: "#F2D379",
     paddingTop: 10,
-    paddingRight: 20,
+    paddingBottom: 4,
     alignSelf: "center",
     marginTop: 10,
+    textAlign: "center",
+  },
+  headingMobile: {
+    flexGrow: 1,
+    color: "#F2D379",
+    paddingTop: 10,
+    paddingBottom: 4,
+    paddingRight: 50,
+    alignSelf: "center",
+    marginTop: 10,
+    textAlign: "center",
   },
   q: {
     color: "#F2D379",
     marginHorizontal: 20,
+    alignSelf: "center",
   },
   badge: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  timerbox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  timer: {
+    // alignSelf: "flex-start",
   },
 });
 
