@@ -18,7 +18,7 @@ export default function madLibsArray(movies) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.title} is a movie about ${movies.overview}`,
+        question: `${movies.title} is a movie about "${movies.overview}"`,
         answer: true,
         movieId: `${movies.id}`,
       },
@@ -70,12 +70,12 @@ export default function madLibsArray(movies) {
         movieId: 620,
       },
       {
-        question: `${movies.title}'s plot used to described as ${changes.items.original_value}.`,
+        question: `${movies.title}'s plot is described as "${movies.overview}"`,
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `${changes.items.original_value} was the original plot of ${movies.title}.`,
+        question: `"${movies.overview}" was the original plot of ${movies.title}.`,
         answer: true,
         movieId: `${movies.id}`,
       },
@@ -94,11 +94,6 @@ export default function madLibsArray(movies) {
         answer: false,
         movieId: 8467,
       },
-      {
-        question: `${title}'s plot used to described as ${changes.items.original_value}.`,
-        answer: true,
-        movieId: id,
-      }, 
     ]
   );
 }
