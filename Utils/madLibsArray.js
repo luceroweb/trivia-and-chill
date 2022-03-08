@@ -1,14 +1,43 @@
 export default function madLibsArray(movies) {
-  console.log(movies)
+
+  let year = movies.release_date.substr(0, 4);
+  let month = movies.release_date.substr(5, 2);
+  let day = movies.release_date.substr(8, 2);
+
+  if (day < 10) {
+    day = day[1];
+  }
+
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let movieDate = `${months[month - 1]} ${day}, ${year}`;
+
+  function generateRandomDate() {
+    return new Date(+(new Date()) - Math.floor(Math.random() * 100000000000));
+  }
   return (
     movies && [
       {
-        question: `${movies.title} was released on ${movies.release_date}.`, //get popular endpoint
+        question: `${movies.title} was released on ${movieDate}.`, //movie details
         answer: true,
         movieId: `${movies.id}`,
       },
+
       {
-        question: `${movies.release_date} was the release date of ${movies.title}.`,
+        question: `${movieDate} was the release date of ${movies.title}.`,
         answer: true,
         movieId: `${movies.id}`,
       },
@@ -64,6 +93,38 @@ export default function madLibsArray(movies) {
         answer: false,
         movieId: 313369,
       },
+
+      {
+        question: `When was ${movies.title} was released on?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `${movies.title} was released when?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `What was the release date of the ${movies.title}?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `${movies.title} was released on what date?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `When did ${movies.title} come out?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `What was the release date of ${movies.title}?`, //movie details
+        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        movieId: `${movies.id}`,
+      },
+
       {
         question: `Ghostbusters was released on May 12, 1987.`,
         answer: false,

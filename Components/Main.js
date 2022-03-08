@@ -1,9 +1,17 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { StyleSheet, View, Text, Image, Pressable,ImageBackground  } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Pressable,
+  ImageBackground,
+  scrollView,
+} from "react-native";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from "@expo/vector-icons";
 
 function Main({ setScene, setMovies}) {
 
@@ -33,16 +41,27 @@ function Main({ setScene, setMovies}) {
         source={require("../Images/gtm-header-logo.png")}
         alt="Guess The Movie"
       />
-      
-     
 
-      <ImageBackground source={require('../Images/ticket.png')} style={{width:160, height:80}}>
-   <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-   <Pressable onPress={() => setScene("Question")} > 
-     <Text>Start</Text>
-     </Pressable>
-   </View>
-</ImageBackground>
+      <ImageBackground
+        source={require("../Images/ticket.png")}
+        style={{ width: 160, height: 80 }}
+      >
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Pressable onPress={() => setScene("Question")}>
+            <Text>Start</Text>
+          </Pressable>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -59,7 +78,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
-    position: 'relative',
+    position: "relative",
     top: -78,
     marginLeft: 42,
     fontSize: 24,
@@ -71,7 +90,7 @@ const styles = StyleSheet.create({
     marginLeft: 27,
     height: 54,
     top: -123,
-  }
+  },
 });
 
 function mapDispatchToProps(dispatch) {
