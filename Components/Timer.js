@@ -65,9 +65,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
 const styles = StyleSheet.create({
     timer: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        flex: 1,
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      flex: 1,
     }
 });
