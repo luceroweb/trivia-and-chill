@@ -11,20 +11,13 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
 
 
   useEffect(() => {
-    axios.all([getPerformerName(movie.id),getMovieChanges(movie.id)]).then(axios.spread((performerName,movieChanges) => {
-      console.log(performerName, movieChanges);
-      movie={...movie, name: performerName.data.cast[0].name}
-  let questionObject = movie ? madLibsArray(movie) : {};
-  let randomIndex = RandomGenerator(questionObject.length);
-  setSelectedMovie(questionObject[randomIndex]);
-    }))
-  /*  getPerformerName(movie.id)
+    getPerformerName(movie.id)
   .then(response => {
     movie={...movie, name: response.data.cast[0].name}
   let questionObject = movie ? madLibsArray(movie) : {};
   let randomIndex = RandomGenerator(questionObject.length);
   setSelectedMovie(questionObject[randomIndex]);
-  }) */
+  }) 
   }, []);
 
   return <View></View>
