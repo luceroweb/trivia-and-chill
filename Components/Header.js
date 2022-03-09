@@ -1,13 +1,10 @@
-import { StyleSheet, Alert, Modal, View, Text, Pressable, Platform, } from "react-native";
-import {useState} from "react";
+import { StyleSheet, View, Text, Platform, } from "react-native";
 import { connect } from "react-redux";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
-import { AntDesign } from '@expo/vector-icons';
+import SettingsModal from "../Utils/SettingsModal"
 
 function Header() {
-
-  const [modalVisible, setModalVisible] = useState(false)
 
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
@@ -26,36 +23,7 @@ function Header() {
         >
           The Movie Game
         </Text>
-
-        <View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <AntDesign name="arrowleft" size={24} color="black" />
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <AntDesign name="setting" size={24} color="#F2D379" />
-      </Pressable>
-    </View>
+        <SettingsModal/>
       </View>
     );
   }
