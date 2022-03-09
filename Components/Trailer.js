@@ -10,20 +10,20 @@ export default function Trailer({ movieId }) {
   useEffect(() => {
     getYouTubeId(movieId).then((res) => {
       setYouTubeId(res);
-    });
+    }).catch((err) => console.log(err));
   }, []);
 
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
-      Alert.alert("video has finished playi!");
+      Alert.alert("video has finished playing!");
     }
   }, []);
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View style={{ width: "100%", aspectRatio: 16 / 9 }}>
-        {youTubeId && (
+        {youTubeId && window.ReactNativeWebView && (
           <YoutubePlayer
             height={"100%"}
             play={playing}
