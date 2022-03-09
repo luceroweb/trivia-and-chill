@@ -50,7 +50,7 @@ const TrueFalse = ({
 			return "solid";
 		}
 		if (button !== answer) {
-			return "line-through red  ";
+			return "line-through red";
 		}
 	};
 
@@ -120,7 +120,7 @@ const TrueFalse = ({
 									<Text
 										style={[
 											{ marginRight: 20, marginLeft: 20 ,},
-											{ textDecoration: getTextDecoration(false) },
+											{ textDecoration: getTextDecoration(false)}
 										]}
 									>
 										False
