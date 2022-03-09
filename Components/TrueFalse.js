@@ -52,6 +52,9 @@ const TrueFalse = ({
 		if (button !== answer) {
 			return "line-through red";
 		}
+		if (button === answer) {
+			return "solid";
+		 }
 	};
 
 	return (
@@ -90,7 +93,14 @@ const TrueFalse = ({
 							<Pressable onPress={() => isCorrect(true)}>
 								<View style={{ flexDirection: "row" }}>
 									{getIcon(true)}
-									<Text style={{ marginRight: 20, marginLeft: 20 }}>True </Text>
+									<Text
+										style={
+											[{ marginRight: 20, marginLeft: 20 },
+											{ textDecoration: getTextDecoration(true) }]
+										}
+									>
+										True
+									</Text>
 									{getIcon(true)}
 								</View>
 							</Pressable>
@@ -119,8 +129,8 @@ const TrueFalse = ({
 
 									<Text
 										style={[
-											{ marginRight: 20, marginLeft: 20 ,},
-											{ textDecoration: getTextDecoration(false)}
+											{ marginRight: 20, marginLeft: 20 },
+											{ textDecoration: getTextDecoration(false) },
 										]}
 									>
 										False
