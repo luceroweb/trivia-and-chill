@@ -66,7 +66,6 @@ function Question({ selectedMovie, movies, setMovies }) {
             <View></View>
           </View>
           <GenerateQuestion movies={movies} />
-
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
         </View>
         <View style={styles.badge}>
