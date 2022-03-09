@@ -34,25 +34,24 @@ const TrueFalse = ({
 		}
 	};
 
-	const getBorderColor = (button) => {
+	const getIcon = (button) => {
 		if (typeof selectedAnswer === "undefined") {
 			return <AntDesign name="star" size={12} color="#401323" />;
 		}
 		if (button !== answer) {
-			return < AntDesign name = "close" size = { 16} color = "#CA3D45" /> ;
+			return <AntDesign name="close" size={16} color="#CA3D45" />;
 		}
 		if (button === answer) {
 			return <AntDesign name="check" size={16} color="green" />;
 		}
 	};
-	const getBorder = (button) => {
+	const getTextDecoration = (button) => {
 		if (typeof selectedAnswer === "undefined") {
-			return  "solid" ;
+			return "solid";
 		}
 		if (button !== answer) {
-			return  "line-through" ;
+			return "line-through red  ";
 		}
-		
 	};
 
 	return (
@@ -90,9 +89,9 @@ const TrueFalse = ({
 						>
 							<Pressable onPress={() => isCorrect(true)}>
 								<View style={{ flexDirection: "row" }}>
-									{getBorderColor(true)}
+									{getIcon(true)}
 									<Text style={{ marginRight: 20, marginLeft: 20 }}>True </Text>
-									{getBorderColor(true)}
+									{getIcon(true)}
 								</View>
 							</Pressable>
 						</View>
@@ -116,15 +115,17 @@ const TrueFalse = ({
 						>
 							<Pressable onPress={() => isCorrect(false)}>
 								<View style={{ flexDirection: "row" }}>
-									{getBorderColor(false)}
-								
+									{getIcon(false)}
+
 									<Text
-										style={[{ marginRight: 20, marginLeft: 20 },{ textDecoration: getBorder(false) }]}
-										
+										style={[
+											{ marginRight: 20, marginLeft: 20 ,},
+											{ textDecoration: getTextDecoration(false) },
+										]}
 									>
 										False
 									</Text>
-									{getBorderColor(false)}
+									{getIcon(false)}
 								</View>
 							</Pressable>
 						</View>

@@ -59,7 +59,7 @@ const MultipleChoice = ({
     }
   };
 
-  const getBorderColor = (selection) => {
+  const getIcon = (selection) => {
     if (typeof selectedAnswer === "undefined") {
       return <AntDesign name="star" size={12} color="#401323" />;
     } else if (selection === correctAnswer) {
@@ -69,7 +69,7 @@ const MultipleChoice = ({
       
     }
   };
-   const getBorder = (selection) => {
+   const getTextDecoration = (selection) => {
 			if (typeof selectedAnswer === "undefined") {
 				return "solid";
 			} else if (selection === correctAnswer) {
@@ -98,18 +98,21 @@ const MultipleChoice = ({
 								justifyContent: "center",
 								alignItems: "center",
 							},
-							{ color: getBorderColor(item) },
+							{ color: getIcon(item) },
 						]}
 					>
-						<Pressable
-							key={index}
-							onPress={() => isCorrect(item)}
-							
-						>
-							<Text key={index} >
-								{getBorderColor(item)}
-								<Text style={[{ marginRight: 5, marginLeft: 5 },{ textDecoration: getBorder(item) }]}>{item}</Text>
-								{getBorderColor(item)}
+						<Pressable key={index} onPress={() => isCorrect(item)}>
+							<Text key={index}>
+								{getIcon(item)}
+								<Text
+									style={[
+										{ marginRight: 5, marginLeft: 5 },
+										{ textDecoration: getTextDecoration(item) },
+									]}
+								>
+									{item}
+								</Text>
+								{getIcon(item)}
 							</Text>
 						</Pressable>
 					</View>
