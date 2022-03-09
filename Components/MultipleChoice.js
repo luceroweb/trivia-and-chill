@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
+import { AntDesign } from "@expo/vector-icons";
 
 const MultipleChoice = ({
   selectedMovie,
@@ -55,46 +56,68 @@ const MultipleChoice = ({
       }, 2000);
     }
   };
-  console.log(correctAnswer)
-  const getBorderColor = (selection) => {
+
+  const getIcon = (selection) => {
     if (typeof selectedAnswer === "undefined") {
-      return "#000";
+      return <AntDesign name="star" size={12} color="#401323" />;
     } else if (selection === correctAnswer) {
-      return "#0f0";
+      return <AntDesign name="check" size={16} color="green" />;
     } else {
-      return "#f00";
+      return <AntDesign name="close" size={16} color="#CA3D45" />;
+      
     }
   };
-
+   const getTextDecoration = (selection) => {
+			if (typeof selectedAnswer === "undefined") {
+				return "solid";
+			} else if (selection === correctAnswer) {
+				return "solid";
+			} else {
+				return "line-through";
+			}
+		};
+	
   return (
-    <View>
-      {multipleAnswer.map((item, index) => (
-        <ImageBackground
-          source={require("../Images/ticket.png")}
-          style={{ width: 160, height: 80, padding: 10 }}
-          key={index}
-        >
-          <View
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Pressable key={index} onPress={() => isCorrect(item)}>
-              <Text key={index} style={{ color: getBorderColor(item) }}>
-                {item}
-              </Text>
-            </Pressable>
-          </View>
-        </ImageBackground>
-      ))}
-    </View>
-  );
+		<View>
+			{multipleAnswer.map((item, index) => (
+				<ImageBackground
+					source={require("../Images/ticket2.png")}
+					style={{ width: 160, height: 80, padding: 10 }}
+					key={index}
+				>
+					<View
+						style={[
+							{
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								justifyContent: "center",
+								alignItems: "center",
+							},
+							{ color: getIcon(item) },
+						]}
+					>
+						<Pressable key={index} onPress={() => isCorrect(item)}>
+							<Text key={index}>
+								{getIcon(item)}
+								<Text
+									style={[
+										{ marginRight: 5, marginLeft: 5 },
+										{ textDecoration: getTextDecoration(item) },
+									]}
+								>
+									{item}
+								</Text>
+								{getIcon(item)}
+							</Text>
+						</Pressable>
+					</View>
+				</ImageBackground>
+			))}
+		</View>
+	);
 };
 
 const mapStateToProps = (state) => ({
