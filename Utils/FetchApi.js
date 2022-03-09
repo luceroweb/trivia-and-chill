@@ -9,7 +9,7 @@ export default async function FetchApi() {
     )
     .then((res) => (movies = res.data.results))
     .catch((err) => console.log(err.response.data));
-console.log(movies)
+
   return movies;
 }
 

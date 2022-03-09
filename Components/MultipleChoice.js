@@ -73,7 +73,7 @@ const MultipleChoice = ({
 			} else if (selection === correctAnswer) {
 				return "solid";
 			} else {
-				return "line-through";
+				return "line-through red";
 			}
 		};
 	
