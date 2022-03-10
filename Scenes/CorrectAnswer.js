@@ -16,7 +16,7 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import drivein from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
-import {ErrorBoundary} from 'react-error-boundary'
+
 
 const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
   const { width } = useWindowDimensions();
