@@ -27,16 +27,19 @@ export async function getYouTubeId(movieId) {
   
 }
 
-export async function getGenreName(movieId) {
-  let genreName= null;
+export async function getGenreName(genreId) {
+  let matchGenre = null;
 
   await axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .then((response) => (genreName=response.data?.genres[0].name||null))
+    .then((response) =>
+      {
+        matchGenre = response.data.genres.filter((genre) => genre.id === genreId);
+        matchGenre = matchGenre[0].name;
+      })
     .catch((err) => console.log("Fetch API Error",err))
-
-  return genreName;
   
+    return matchGenre;
 }

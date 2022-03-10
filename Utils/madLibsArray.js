@@ -1,4 +1,4 @@
-export default function madLibsArray(movies) {
+export default function madLibsArray(movies, genreName) {
 
   let year = movies.release_date.substr(0, 4);
   let month = movies.release_date.substr(5, 2);
@@ -29,7 +29,7 @@ export default function madLibsArray(movies) {
     return new Date(+(new Date()) - Math.floor(Math.random() * 100000000000));
   }
   return (
-    movies && [
+    movies && genreName && [
       {
         question: `${movies.title} was released on ${movieDate}.`, //movie details
         answer: true,
@@ -112,19 +112,14 @@ export default function madLibsArray(movies) {
         question: `When did ${movies.title} come out?`, //movie details
         answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
         movieId: `${movies.id}`,
-      },
+      },fetchGenre
       {
-        question: `What was the release date of ${movies.title}?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
-        movieId: `${movies.id}`,
-      },
-      {
-        question: `${movies.title} is considered a ${movies.genres?.name}`,
+        question: `${movies.title} is considered a ${genreName}`,
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.title} is categorized under the ${movies.genres?.name} genre.`,
+        question: `${movies.title} is categorized under the ${genreName} genre.`,
         answer: true,
         movieId: `${movies.id}`,
       },
