@@ -10,6 +10,7 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
+// import { getColorF, getColorT, getIcon } from "./getIcon";
 const TrueFalse = ({
 	selectedMovie,
 	setScene,
@@ -18,7 +19,6 @@ const TrueFalse = ({
 }) => {
 	const [selectedAnswer, setSelectedAnswer] = useState();
 	const answer = selectedMovie?.answer;
-
 	const isCorrect = (selection) => {
 		setSelectedAnswer(selection);
 		if (selection === answer) {
