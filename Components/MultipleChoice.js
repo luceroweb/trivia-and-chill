@@ -20,8 +20,8 @@ const MultipleChoice = ({
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [runRandom, setRunRandom] = useState(true);
-  
-      const randomizeAnswer = (array) => {
+
+  const randomizeAnswer = (array) => {
     let currentIndex = array.length;
     while (currentIndex != 0) {
       const randomIndex = Math.floor(Math.random() * currentIndex);
@@ -66,15 +66,14 @@ const MultipleChoice = ({
       return <FontAwesome name="close" size={16} color="#CA3D45" />;
     }
   };
-  
+
   const getColor = (selection) => {
     if (typeof selectedAnswer === "undefined") {
-      return styles.colorU
-        
+      return styles.colorU;
     } else if (selection === correctAnswer) {
-      return styles.colorT
+      return styles.colorT;
     } else {
-      return styles.colorF
+      return styles.colorF;
     }
   };
   const getTextDecoration = (selection) => {
@@ -92,35 +91,18 @@ const MultipleChoice = ({
       {multipleAnswer.map((item, index) => (
         <ImageBackground
           source={require("../Images/ticket2.png")}
-          style={{ width: 160, height: 80, padding: 10 }}
+          style={styles.ticket}
           key={index}
         >
-          <View
-            style={[
-              {
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                justifyContent: "center",
-                alignItems: "center",
-              }
-            ]}
+          <TouchableOpacity
+            key={index}
+            onPress={() => isCorrect(item)}
+            style={styles.ticketOption}
           >
-            <TouchableOpacity key={index} onPress={() => isCorrect(item)}>
-              <Text key={index}>
-                {getIcon(item)}
-                <Text
-									style={getColor(item)}
-								>
-									{item}
-								</Text>
-
-                {getIcon(item)}
-              </Text>
-            </TouchableOpacity>
-          </View>
+            {getIcon(item)}
+            <Text style={getColor(item)}>{item}</Text>
+            {getIcon(item)}
+          </TouchableOpacity>
         </ImageBackground>
       ))}
     </View>
@@ -158,22 +140,37 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 20,
   },
+  ticket: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 160,
+    height: 80,
+    marginBottom: 5,
+  },
+  ticketOption: {
+    flexDirection: "row",
+    width: "90%",
+    height: 80,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
   colorT: {
-    marginRight: 5, 
-    marginLeft: 5 ,
+    marginRight: 5,
+    marginLeft: 5,
     textDecorationLine: "none",
-    color:"green"
+    color: "green",
   },
   colorF: {
-    marginRight: 5, 
-    marginLeft: 5 ,
+    marginRight: 5,
+    marginLeft: 5,
     textDecorationLine: "line-through",
-    color:"red"
+    color: "red",
   },
   colorU: {
-    marginRight: 5, 
-    marginLeft: 5 ,
+    marginRight: 5,
+    marginLeft: 5,
     textDecorationLine: "none",
-    color:"black"
-  }
+    color: "black",
+  },
 });
