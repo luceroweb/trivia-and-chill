@@ -5,15 +5,21 @@ import RandomGenerator from "../Utils/RandomGenerator";
 import { getGenreName, genreName, getGenreFromId } from "../Utils/FetchApi";
 // import setGenreName from ""
 import { connect } from "react-redux";
+import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
+import axios from "axios";
 
 const GenerateQuestion = ({ movies, setSelectedMovie, selectedMovie }) => {
   let movie = movies ? movies[RandomGenerator(movies.length)] : [];
 
+
+  useEffect(() => {
+    getPerformerName(movie.id)
+  .then(response => {
+    movie={...movie, name: response.data.cast[0].name}
   let questionObject = movie ? madLibsArray(movie) : {};
   let randomIndex = RandomGenerator(questionObject.length);
- 
-  useEffect(() => {
-    setSelectedMovie(questionObject[randomIndex]);
+  setSelectedMovie(questionObject[randomIndex]);
+  }) 
   }, []);
 
   // useEffect(() => {
