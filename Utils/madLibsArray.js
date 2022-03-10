@@ -154,6 +154,26 @@ export default function madLibsArray(movies) {
         answer: false,
         movieId: 8467,
       },
+      {
+        question: `Denzel Washington was in the movie Dude, Where's My Car?`,
+        answer: false,
+        movieId: 8859,
+      },
+      {
+        question: `Kristen Stewart was in Fight Club`,
+        answer: false,
+        movieId: 550,
+      },
+      {
+        question: `Olivia Munn starred in Ron's Gone Wrong`,
+        answer: false,
+        movieId: 482321,
+      },
+      {
+        question: `Ashton Kutcher starred in Grown Ups`,
+        answer: false,
+        movieId: 38365,
+      },
     ]
   );
 }
