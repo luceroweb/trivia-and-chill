@@ -5,28 +5,23 @@ import RandomGenerator from "../Utils/RandomGenerator";
 import { getGenreName } from "../Utils/FetchApi";
 import { connect } from "react-redux";
 import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
+import axios from "axios";
 
 const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   useEffect(() => {
-    let mov = movies ? movies[RandomGenerator(movies.length)] : [];
-    getGenreName(mov.genre_ids[0])
-      .then((res) => {
-        let questionObj = mov ? madLibsArray(mov, res) : {};
+    let movie = movies ? movies[RandomGenerator(movies.length)] : [];
+    axios.all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
+      .then(axios.spread ((castRes, genreRes) => {
+        movie={...movie, name: castRes.data.cast[0].name}
+        let questionObject = movie ? madLibsArray(movie, castRes) : {};
+        let randomIndex = RandomGenerator(questionObject.length);
+        setSelectedMovie(questionObject[randomIndex]);
+
+        let questionObj = movie ? madLibsArray(movie, genreRes) : {};
         let randomInd = RandomGenerator(questionObj.length);
         setSelectedMovie(questionObj[randomInd]);
-      })
+      }))
     }, []);
-
-  // useEffect(() => {
-  //   let movie = movies ? movies[RandomGenerator(movies.length)] : [];
-  //   getPerformerName(movie.id)
-  //     .then(response => {
-  //       movie={...movie, name: response.data.cast[0].name}
-  //       let questionObject = movie ? madLibsArray(movie, response) : {};
-  //       let randomIndex = RandomGenerator(questionObject.length);
-  //       setSelectedMovie(questionObject[randomIndex]); 
-  //     })
-  //   }, []);
 
 return <View></View>
 };
