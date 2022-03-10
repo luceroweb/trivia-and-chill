@@ -76,6 +76,7 @@ const MultipleChoice = ({
       return styles.colorF;
     }
   };
+
   const getTextDecoration = (selection) => {
     if (typeof selectedAnswer === "undefined") {
       return "none";
