@@ -12,7 +12,7 @@ export const getIcon = (button) => {
     }
 };
 
-export const getColorT = (button) => {
+export const getColor= (button) => {
     if (typeof selectedAnswer === "undefined") {
         return <Text style={{ marginRight: 20, marginLeft: 20 ,textDecorationLine: "none",color:"black"}}>True </Text>;
     }
