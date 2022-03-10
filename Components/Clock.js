@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Platform } from "react-native";
 import Constants from "expo-constants";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // paddingTop: Constants.statusBarHeight,
+    paddingTop: Platform.OS === "ios" ? Constants.statusBarHeight : 4,
     padding: 4,
   },
 });
