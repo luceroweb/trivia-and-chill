@@ -22,15 +22,6 @@ export async function getPerformerName(movieId) {
   return credits;
 }
 
-export async function getGenre(movieId) {
-  let details = await axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${movieId}/?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
-    )
-    .catch((err) => console.log(err))
-  return details;
-}
-
 export async function getMovieChanges(movieId) {
   let details = await axios
     .get(

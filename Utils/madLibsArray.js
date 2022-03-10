@@ -61,18 +61,6 @@ export default function madLibsArray(movies, genreName) {
         answer: true,
         movieId: `${movies.id}`,
       },
-      // {
-      //   question: `${movies.title} is considered a ${movies.genres.name} movie.`, //get details endpoint for genre
-      //   answer: true,
-      //   movieId: `${movies.id}`,
-      // },
-
-      // {
-      //   question: `${movies.title} is categorized under the ${movies.genres.name} genre.`, //get details for genre
-      //   answer: true,
-      //   movieId: `${movies.id}`,
-      // },
-
       {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
