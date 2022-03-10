@@ -26,7 +26,7 @@ export default function madLibsArray(movies, genreName) {
   let movieDate = `${months[month - 1]} ${day}, ${year}`;
 
   function generateRandomDate() {
-    return new Date(+(new Date()) - Math.floor(Math.random() * 100000000000));
+    return new Date(+new Date() - Math.floor(Math.random() * 100000000000));
   }
   return (
     movies && genreName && [
@@ -47,15 +47,32 @@ export default function madLibsArray(movies, genreName) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.title} is a movie about ${movies.overview}`,
+        question: `${movies.title} is a movie about "${movies.overview}"`,
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `Ghostbusters was released on May 12, 1987.`,
-        answer: false,
-        movieId: 620,
+        question: `${movies.name} starred in ${movies.title}.`, //get credits endpoint for performer name
+        answer: true,
+        movieId: `${movies.id}`,
       },
+      {
+        question: `${movies.title}'s cast included ${movies.name} .`, //get credits endpoint for performer name
+        answer: true,
+        movieId: `${movies.id}`,
+      },
+      // {
+      //   question: `${movies.title} is considered a ${movies.genres.name} movie.`, //get details endpoint for genre
+      //   answer: true,
+      //   movieId: `${movies.id}`,
+      // },
+
+      // {
+      //   question: `${movies.title} is categorized under the ${movies.genres.name} genre.`, //get details for genre
+      //   answer: true,
+      //   movieId: `${movies.id}`,
+      // },
+
       {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
@@ -79,40 +96,69 @@ export default function madLibsArray(movies, genreName) {
 
       {
         question: `When was ${movies.title} was released on?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        answer: [
+          `${movies.release_date}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+        ],
         movieId: `${movies.id}`,
       },
       {
-
-        question: ` ${movies.title} was released when?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        question: `${movies.title} was released when?`, //movie details
+        answer: [
+          `${movies.release_date}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+        ],
         movieId: `${movies.id}`,
       },
       {
-        question: ` ${movies.title} was released when?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
-        movieId: `${movies.id}`,
-      },
-      {
-        question: `what was the release date of the ${movies.title}?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
-        movieId: `${movies.id}`,
-      },
-      {
-        question: `When did the ${movies.title} come out?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        question: `What was the release date of the ${movies.title}?`, //movie details
+        answer: [
+          `${movies.release_date}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+        ],
         movieId: `${movies.id}`,
       },
       {
         question: `${movies.title} was released on what date?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        answer: [
+          `${movies.release_date}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+        ],
         movieId: `${movies.id}`,
       },
       {
         question: `When did ${movies.title} come out?`, //movie details
-        answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
+        answer: [
+          `${movies.release_date}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+        ],
         movieId: `${movies.id}`,
-      },fetchGenre
+      },
+      {
+        question: `What was the release date of ${movies.title}?`, //movie details
+        answer: [
+          `${movies.release_date}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+          `${new generateRandomDate().toLocaleDateString("en-US")}`,
+        ],
+        movieId: `${movies.id}`,
+      },
+
+      {
+        question: `Ghostbusters was released on May 12, 1987.`,
+        answer: false,
+        movieId: 620,
+      },
+      {
+        question: `${movies.title}'s plot is described as "${movies.overview}"`,
+        answer: true,
+        movieId: `${movies.id}`,
+      },
       {
         question: `${movies.title} is considered a ${genreName}`,
         answer: true,
@@ -120,6 +166,11 @@ export default function madLibsArray(movies, genreName) {
       },
       {
         question: `${movies.title} is categorized under the ${genreName} genre.`,
+        answer: true,
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `"${movies.overview}" was the original plot of ${movies.title}.`,
         answer: true,
         movieId: `${movies.id}`,
       },
@@ -132,7 +183,22 @@ export default function madLibsArray(movies, genreName) {
         question: `Captain America is categorized under the musicals genre.`,
         answer: false,
         movieId: 1771,
-      }
+      },
+      {
+        question: `Encanto's plot used to be described as "The Luceros are an extraordinary family who live hidden in the mountains of Mexico in a charmed place called the Encanto. The magic of the Encanto has blessed every child in the family with a unique gift -- every child except Miranda"`,
+        answer: false,
+        movieId: 568124,
+      },
+      {
+        question: `Deformed since birth, a bitter man known only as the Phantom lives in the sewers underneath the Marid Opera House. He falls in love with the obscure chorus singer Christine, and privately tutors her while terrorizing the rest of the opera house and demanding Christine be given lead roles. Things get worse when Christine meets back up with her childhood acquaintance Raoul and the two fall in love`,
+        answer: false,
+        movieId: 9833,
+      },
+      {
+        question: `George and Kevin are two men whose stupidity is really indescribable. When Martha, a beautiful woman, loses an important suitcase with money before she leaves for Miami, the two friends (who have found the suitcase) decide to return it to her. After some "adventures" they finally get to Aspen where, using the lost money they live it up and fight for Mary's heart.`,
+        answer: false,
+        movieId: 8467,
+      },
     ]
   );
 }

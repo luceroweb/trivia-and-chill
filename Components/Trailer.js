@@ -24,13 +24,13 @@ function Trailer({ movieId }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View style={{ width: "100%", aspectRatio: 16 / 9 }}>
-        {youTubeId && (
+        {youTubeId && ( 
           <YoutubePlayer
             height={"100%"}
             play={playing}
             videoId={youTubeId}
             onChangeState={onStateChange}
-          />
+          /> 
         )}
         
       </View>
