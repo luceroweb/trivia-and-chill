@@ -46,7 +46,7 @@ function Question({ selectedMovie, movies, setMovies }) {
         <View
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
-          {/* <Timer timerCount={timerCount} setTimerCount={setTimerCount} /> */}
+          <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
 
           <Text
             style={[
