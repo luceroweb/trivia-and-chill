@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: Platform.OS === "ios" ? Constants.statusBarHeight : 4,
     padding: 4,
+    paddingTop: Platform.OS === "ios" ? Constants.statusBarHeight : 4,
+    
   },
 });

@@ -63,7 +63,6 @@ function Question({ selectedMovie, movies, setMovies }) {
             >
               Question
             </Text>
-            <View></View>
           </View>
           <GenerateQuestion movies={movies} />
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
@@ -165,6 +164,8 @@ const styles = StyleSheet.create({
     height: 390,
     width: 300,
     marginHorizontal: 30,
+    flexDirection: 'column',
+    justifyContent: "flex-start",
   },
   heading: {
     flexGrow: 1,
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
   timerBox: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
   }
 });
 
