@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-	Pressable,
+	TouchableOpacity,
 	StyleSheet,
 	Text,
 	View,
@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 const TrueFalse = ({
 	selectedMovie,
 	setScene,
@@ -36,26 +36,51 @@ const TrueFalse = ({
 
 	const getIcon = (button) => {
 		if (typeof selectedAnswer === "undefined") {
-			return <AntDesign name="star" size={12} color="#401323" />;
+			return <FontAwesome name="star" size={12} color="#401323" />;
 		}
 		if (button !== answer) {
-			return <AntDesign name="close" size={16} color="#CA3D45" />;
+			return <FontAwesome name="close" size={16} color="#CA3D45" />;
 		}
 		if (button === answer) {
-			return <AntDesign name="check" size={16} color="green" />;
+			return <FontAwesome name="check" size={16} color="green" />;
+		}
+	};
+	const getColorT = (button) => {
+		if (typeof selectedAnswer === "undefined") {
+			return <Text style={{ marginRight: 20, marginLeft: 20 ,textDecorationLine: "none",color:"black"}}>True </Text>;
+		}
+		if (button !== answer) {
+			return <Text style={{ marginRight: 20, marginLeft: 20 ,textDecorationLine: "line-through",color:"red"}}>True </Text>;
+		}
+		if (button === answer) {
+			return <Text style={{ marginRight: 20, marginLeft: 20 ,textDecorationLine: "none",color:"green"}}>True </Text>;
+		}
+	};
+	const getColorF = (button) => {
+		if (typeof selectedAnswer === "undefined") {
+			return <Text style={{ marginRight: 20, marginLeft: 20 ,textDecorationLine: "none",color:"black"}}>False </Text>;
+		}
+		if (button !== answer) {
+			return <Text style={{ marginRight: 20, marginLeft: 20 ,textDecorationLine: "line-through",color:"red"}}>False </Text>;
+		}
+		if (button === answer) {
+			return <Text style={{ marginRight: 20, marginLeft: 20 ,textDecorationLine: "none",color:"green"}}>False </Text>;
 		}
 	};
 	const getTextDecoration = (button) => {
 		if (typeof selectedAnswer === "undefined") {
-			return "solid";
+			return "none";
 		}
 		if (button !== answer) {
-			return "line-through red";
+			return "line-through";
+	
+
 		}
 		if (button === answer) {
 			return "solid";
 		 }
 	};
+	
 
 	return (
 		<View style={styles.container}>
@@ -90,20 +115,13 @@ const TrueFalse = ({
 								alignItems: "center",
 							}}
 						>
-							<Pressable onPress={() => isCorrect(true)}>
+							<TouchableOpacity onPress={() => isCorrect(true)}>
 								<View style={{ flexDirection: "row" }}>
 									{getIcon(true)}
-									<Text
-										style={
-											[{ marginRight: 20, marginLeft: 20 },
-											{ textDecoration: getTextDecoration(true) }]
-										}
-									>
-										True
-									</Text>
+									{getColorT(true)}
 									{getIcon(true)}
 								</View>
-							</Pressable>
+							</TouchableOpacity>
 						</View>
 					</ImageBackground>
 				</View>
@@ -123,21 +141,13 @@ const TrueFalse = ({
 								alignItems: "center",
 							}}
 						>
-							<Pressable onPress={() => isCorrect(false)}>
+							<TouchableOpacity onPress={() => isCorrect(false)}>
 								<View style={{ flexDirection: "row" }}>
 									{getIcon(false)}
-
-									<Text
-										style={[
-											{ marginRight: 20, marginLeft: 20 },
-											{ textDecoration: getTextDecoration(false) },
-										]}
-									>
-										False
-									</Text>
+									{getColorF(false)}
 									{getIcon(false)}
 								</View>
-							</Pressable>
+							</TouchableOpacity>
 						</View>
 					</ImageBackground>
 				</View>
