@@ -55,7 +55,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
 					>
 						<View style={[styles.videoContainer]}>
 							<Trailer movieId={selectedMovie?.movieId} />
-              <GenerateQuestion movieId={selectedMovie?.movieId} />
+              {/* <GenerateQuestion movieId={selectedMovie?.movieId} /> */}
 						</View>
 
 						<View style={styles.textContainer}>

@@ -55,7 +55,7 @@ const MultipleChoice = ({
       }, 2000);
     }
   };
-  console.log(correctAnswer)
+  
   const getBorderColor = (selection) => {
     if (typeof selectedAnswer === "undefined") {
       return "#000";
