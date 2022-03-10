@@ -112,7 +112,7 @@ export default function madLibsArray(movies, genreName) {
         question: `When did ${movies.title} come out?`, //movie details
         answer: [`${movies.release_date}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`, `${(new generateRandomDate()).toLocaleDateString('en-US')}`,],
         movieId: `${movies.id}`,
-      },fetchGenre
+      },
       {
         question: `${movies.title} is considered a ${genreName}`,
         answer: true,
