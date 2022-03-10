@@ -3,7 +3,8 @@ import { View } from "react-native";
 import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
 import { connect } from "react-redux";
-import { getPerformerName } from "../Utils/FetchApi";
+import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
+import axios from "axios";
 
 const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   let movie = movies ? movies[RandomGenerator(movies.length)] : {};
@@ -16,7 +17,7 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   let questionObject = movie ? madLibsArray(movie) : {};
   let randomIndex = RandomGenerator(questionObject.length);
   setSelectedMovie(questionObject[randomIndex]);
-  })
+  }) 
   }, []);
 
   return <View></View>

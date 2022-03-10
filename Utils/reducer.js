@@ -19,6 +19,7 @@ export const reducer = (state = initialState, action) => {
       };
     case "SET_SCENE":
       return {
+
         ...state,
         scene: action.name,
       };
@@ -43,5 +44,5 @@ export const reducer = (state = initialState, action) => {
         performerName: action.performerName
       };
   }
-    return state;
-  };
+  return state;
+};
