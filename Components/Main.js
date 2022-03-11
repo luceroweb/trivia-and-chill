@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect } from "react";
 import {
   StyleSheet,
@@ -12,7 +13,8 @@ import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-function Main({ setScene, setMovies }) {
+function Main({ setScene, setMovies}) {
+
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -102,6 +104,11 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_MOVIES",
         movies,
+      }),
+      setPerformerName: (performerName) =>
+      dispatch({
+        type: "SET_PERFORMER_NAME",
+        performerName,
       }),
   };
 }

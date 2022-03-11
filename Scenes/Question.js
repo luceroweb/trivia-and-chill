@@ -11,7 +11,7 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { connect } from "react-redux";
-import FetchApi, { getGenreName } from "../Utils/FetchApi";
+import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
 import Timer from "../Components/Timer";
 import TrueFalse from "../Components/TrueFalse";
@@ -19,7 +19,7 @@ import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
-function Question({ selectedMovie, movies, setMovies, movieId, genreName, setGenreName }) {
+function Question({ selectedMovie, movies, setMovies, movieId }) {
   const [timerCount, setTimerCount] = useState(10);
   const { width, height } = useWindowDimensions();
   const widthBreakpoint = 700;
@@ -27,12 +27,6 @@ function Question({ selectedMovie, movies, setMovies, movieId, genreName, setGen
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
-
-  useEffect(() => {
-    getGenreName(movieId).then((res) => setGenreName(res));
-  }, []); 
-  
-  console.log(genreName)
 
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
@@ -52,22 +46,26 @@ function Question({ selectedMovie, movies, setMovies, movieId, genreName, setGen
         <View
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
-          <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
-
-          <Text
-            style={[
-              styles.heading,
-              {
-                color: "#F2D379",
-                fontFamily: "Limelight_400Regular",
-                fontSize: 30,
-              },
-            ]}
-          >
-            Question
-          </Text>
+          <View style={styles.timerBox}>
+            <Timer
+              timerCount={timerCount}
+              setTimerCount={setTimerCount}
+            />
+            <Text
+              style={[
+                width > 800 ? styles.heading : styles.headingMobile,
+                {
+                  color: "#F2D379",
+                  fontFamily: "Limelight_400Regular",
+                  fontSize: 30,
+                },
+              ]}
+            >
+              Question
+            </Text>
+            <View></View>
+          </View>
           <GenerateQuestion movies={movies} />
-
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
         </View>
         <View style={styles.badge}>
@@ -94,7 +92,6 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
-    genreName: state.genreName,
   };
 }
 
@@ -118,11 +115,6 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
-    setGenreName: (genreName) =>
-      dispatch({
-        type: "SET_GENRE_NAME",
-        genreName,
-      }),
   };
 }
 
@@ -137,7 +129,6 @@ const styles = StyleSheet.create({
   },
   image: {
     paddingBottom: 75,
-    // paddingTop: 10,
   },
   imageMobile: {
     paddingBottom: 100,
@@ -176,21 +167,39 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   heading: {
+    flexGrow: 1,
     color: "#F2D379",
     paddingTop: 10,
-    paddingRight: 20,
+    paddingBottom: 4,
     alignSelf: "center",
     marginTop: 10,
+    textAlign: "center",
+  },
+  headingMobile: {
+    flexGrow: 1,
+    color: "#F2D379",
+    paddingTop: 10,
+    paddingBottom: 4,
+    paddingRight: 50,
+    alignSelf: "center",
+    marginTop: 10,
+    textAlign: "center",
   },
   q: {
     color: "#F2D379",
     marginHorizontal: 20,
+    alignSelf: "center",
   },
   badge: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
+  timerBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);

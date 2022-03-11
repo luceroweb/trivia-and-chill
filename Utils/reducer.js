@@ -3,7 +3,6 @@ const initialState = {
   scene: "Main",
   movies: [],
   selectedMovie: {},
-  genreName:'',
 };
 
 export const reducer = (state = initialState, action) => {
@@ -20,6 +19,7 @@ export const reducer = (state = initialState, action) => {
       };
     case "SET_SCENE":
       return {
+
         ...state,
         scene: action.name,
       };
@@ -38,10 +38,10 @@ export const reducer = (state = initialState, action) => {
         ...state,
         selectedMovie: {},
       };
-      case "SET_GENRE_NAME":
+    case "SET_PERFORMER_NAME":
       return {
         ...state,
-        genreName: action.genreName,
+        performerName: action.performerName
       };
   }
   return state;

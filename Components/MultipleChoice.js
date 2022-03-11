@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-  Pressable,
+  TouchableOpacity,
   StyleSheet,
   Text,
   View,
@@ -8,7 +8,8 @@ import {
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
-
+import { FontAwesome } from "@expo/vector-icons";
+import { getIcon } from "./getIcon";
 const MultipleChoice = ({
   selectedMovie,
   setScene,
@@ -55,14 +56,34 @@ const MultipleChoice = ({
       }, 2000);
     }
   };
-  console.log(correctAnswer)
-  const getBorderColor = (selection) => {
+
+  const getIcon = (selection) => {
     if (typeof selectedAnswer === "undefined") {
-      return "#000";
+      return <FontAwesome name="star" size={12} color="#401323" />;
     } else if (selection === correctAnswer) {
-      return "#0f0";
+      return <FontAwesome name="check" size={16} color="green" />;
     } else {
-      return "#f00";
+      return <FontAwesome name="close" size={16} color="#CA3D45" />;
+    }
+  };
+
+  const getColor = (selection) => {
+    if (typeof selectedAnswer === "undefined") {
+      return styles.colorU;
+    } else if (selection === correctAnswer) {
+      return styles.colorT;
+    } else {
+      return styles.colorF;
+    }
+  };
+
+  const getTextDecoration = (selection) => {
+    if (typeof selectedAnswer === "undefined") {
+      return "none";
+    } else if (selection === correctAnswer) {
+      return "none";
+    } else {
+      return "line-through";
     }
   };
 
@@ -70,27 +91,19 @@ const MultipleChoice = ({
     <View>
       {multipleAnswer.map((item, index) => (
         <ImageBackground
-          source={require("../Images/ticket.png")}
-          style={{ width: 160, height: 80, padding: 10 }}
+          source={require("../Images/ticket2.png")}
+          style={styles.ticket}
           key={index}
         >
-          <View
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+          <TouchableOpacity
+            key={index}
+            onPress={() => isCorrect(item)}
+            style={styles.ticketOption}
           >
-            <Pressable key={index} onPress={() => isCorrect(item)}>
-              <Text key={index} style={{ color: getBorderColor(item) }}>
-                {item}
-              </Text>
-            </Pressable>
-          </View>
+            {getIcon(item)}
+            <Text style={getColor(item)}>{item}</Text>
+            {getIcon(item)}
+          </TouchableOpacity>
         </ImageBackground>
       ))}
     </View>
@@ -127,5 +140,38 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
     paddingHorizontal: 20,
+  },
+  ticket: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 160,
+    height: 80,
+    marginBottom: 5,
+  },
+  ticketOption: {
+    flexDirection: "row",
+    width: "90%",
+    height: 80,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  colorT: {
+    marginRight: 5,
+    marginLeft: 5,
+    textDecorationLine: "none",
+    color: "green",
+  },
+  colorF: {
+    marginRight: 5,
+    marginLeft: 5,
+    textDecorationLine: "line-through",
+    color: "red",
+  },
+  colorU: {
+    marginRight: 5,
+    marginLeft: 5,
+    textDecorationLine: "none",
+    color: "black",
   },
 });
