@@ -4,21 +4,26 @@ import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
 import { getGenreName } from "../Utils/FetchApi";
 import { connect } from "react-redux";
+import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
+import axios from "axios";
 
-const GenerateQuestion = ({ movies, setSelectedMovie, setGenreName }) => {
-
+const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   useEffect(() => {
     let movie = movies ? movies[RandomGenerator(movies.length)] : [];
-    getGenreName(movie.genre_ids[0])
-      .then((res) => {
-        setGenreName(res);
-        let questionObject = movie ? madLibsArray(movie, res) : {};
+    axios.all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
+      .then(axios.spread ((castRes, genreRes) => {
+        movie={...movie, name: castRes.data.cast[0].name}
+        let questionObject = movie ? madLibsArray(movie, castRes) : {};
         let randomIndex = RandomGenerator(questionObject.length);
         setSelectedMovie(questionObject[randomIndex]);
-      });
-  }, []);
 
-  return <View></View>
+        let questionObj = movie ? madLibsArray(movie, genreRes) : {};
+        let randomInd = RandomGenerator(questionObj.length);
+        setSelectedMovie(questionObj[randomInd]);
+      }))
+    }, []);
+
+return <View></View>
 };
 
 function mapStateToProps(state) {
