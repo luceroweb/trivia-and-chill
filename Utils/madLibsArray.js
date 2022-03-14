@@ -1,4 +1,4 @@
-export default function madLibsArray(movies, genreName) {
+export default function madLibsArray(movies) {
 
   let year = movies.release_date.substr(0, 4);
   let month = movies.release_date.substr(5, 2);
@@ -29,7 +29,7 @@ export default function madLibsArray(movies, genreName) {
     return new Date(+new Date() - Math.floor(Math.random() * 100000000000));
   }
   return (
-    movies && genreName && [
+    movies && [
       {
         question: `${movies.title} was released on ${movieDate}.`, //movie details
         answer: true,
@@ -148,12 +148,12 @@ export default function madLibsArray(movies, genreName) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.title} is considered a ${genreName}`,
+        question: `${movies.title} is considered a ${movies.genre}`,
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.title} is categorized under the ${genreName} genre.`,
+        question: `${movies.title} is categorized under the ${movies.genre} genre.`,
         answer: true,
         movieId: `${movies.id}`,
       },
