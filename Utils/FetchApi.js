@@ -61,38 +61,3 @@ export async function getGenreName(genreId) {
   
     return matchGenre;
 }
-
-export async function getGenreFromId(movieId) {
-  let genreId= null;
-  let found;
-
-  await axios
-    .get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
-    )
-    .then((response) => response.data)
-    .then((genre) => {
-      genreId = genre.genres;
-      console.log("Console log for genreId variable: ", genreId);
-      console.log("Type of: ", typeof genreId);
-      console.log("ID that has been feed into getGenreFromId: ", movieId);
-    })
-    .then(() => {
-      for (const id in genreId) {
-        if (id === movieId) {
-          found = id.name;
-        }
-      }
-      // found = genreId.find(genre => genre.genres.id === movieId);
-      console.log("Found Genre: ", found);
-    }      
-    )
-    // .then(
-    //   for (let i = 0; i < response.data.genres.length; i++) {
-
-    //   }
-    // )
-    // .then(response => console.log(response.json))
-    .catch((err) => console.log("Fetch API Error",err))
-  
-}
