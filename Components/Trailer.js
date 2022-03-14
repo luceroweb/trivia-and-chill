@@ -8,9 +8,11 @@ function Trailer({ movieId }) {
   const [playing, setPlaying] = useState(false);
   const [youTubeId, setYouTubeId] = useState(null);
   useEffect(() => {
-    getYouTubeId(movieId).then((res) => {
-      setYouTubeId(res);
-    }).catch((err) => console.log(err));
+    getYouTubeId(movieId)
+      .then((res) => {
+        setYouTubeId(res);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const onStateChange = useCallback((state) => {
@@ -19,20 +21,18 @@ function Trailer({ movieId }) {
       Alert.alert("video has finished playing!");
     }
   }, []);
-  
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View style={{ width: "100%", aspectRatio: 16 / 9 }}>
-        {youTubeId && window.ReactNativeWebView && (
+        {youTubeId && (
           <YoutubePlayer
             height={"100%"}
             play={playing}
             videoId={youTubeId}
             onChangeState={onStateChange}
-          /> 
+          />
         )}
-        
       </View>
     </View>
   );
