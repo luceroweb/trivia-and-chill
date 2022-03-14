@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { connect } from "react-redux";
 import { Audio } from "expo-av";
 import tick from "../Sounds/tick.wav";
@@ -7,7 +6,7 @@ import Clock from "../Components/Clock";
 
 function Timer({ setScene, timerCount, setTimerCount }) {
   const [sound, setSound] = useState();
-  const { width } = useWindowDimensions();
+  
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(tick);
@@ -37,11 +36,8 @@ function Timer({ setScene, timerCount, setTimerCount }) {
   }, [timerCount]);
 
   return (
-    <View style={width > 800 && styles.timer}>
-      <Text>
-        <Clock />
-      </Text>
-    </View>
+    <Clock />
+      
   );
 }
 
@@ -63,11 +59,3 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
-const styles = StyleSheet.create({
-  timer: {
-    position: "absolute",
-    left: 0,
-    top: 4,
-    flex: 1,
-  },
-});

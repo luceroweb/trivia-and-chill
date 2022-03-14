@@ -3,10 +3,8 @@ import {
   StyleSheet,
   View,
   Text,
-  Pressable,
   ImageBackground,
   useWindowDimensions,
-  SafeAreaView,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
@@ -51,14 +49,11 @@ function Question({ selectedMovie, movies, setMovies }) {
               timerCount={timerCount}
               setTimerCount={setTimerCount}
             />
+            
             <Text
               style={[
-                width > 800 ? styles.heading : styles.headingMobile,
-                {
-                  color: "#F2D379",
-                  fontFamily: "Limelight_400Regular",
-                  fontSize: 30,
-                },
+                styles.heading,
+                width > 800 ? {} : {paddingRight: 50},
               ]}
             >
               Question
@@ -164,8 +159,6 @@ const styles = StyleSheet.create({
     height: 390,
     width: 300,
     marginHorizontal: 30,
-    flexDirection: 'column',
-    justifyContent: "flex-start",
   },
   heading: {
     flexGrow: 1,
@@ -175,16 +168,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 10,
     textAlign: "center",
-  },
-  headingMobile: {
-    flexGrow: 1,
     color: "#F2D379",
-    paddingTop: 10,
-    paddingBottom: 4,
-    paddingRight: 50,
-    alignSelf: "center",
-    marginTop: 10,
-    textAlign: "center",
+    fontFamily: "Limelight_400Regular",
+    fontSize: 30,
+    backgroundColor: "white",
   },
   q: {
     color: "#F2D379",
@@ -198,7 +185,8 @@ const styles = StyleSheet.create({
   },
   timerBox: {
     flexDirection: "row",
-    justifyContent: "center",
+    backgroundColor: "red",
+    justifyContent: "flex-start"
     // alignItems: "center",
   }
 });
