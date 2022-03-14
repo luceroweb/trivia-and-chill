@@ -16,23 +16,20 @@ function Footer({ setScene }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    borderTopWidth: 5,
-    borderColor: "#F2D379",
-    backgroundColor: "#EEF525",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    backgroundColor: "#401323",
-    height: 50,
-    padding: 25,
-    marginTop: 15,
-  },
-  textColor:{
-    color:"#F2D379",
-    fontSize: 20,
-  }
+	container: {
+		width: "100%",
+		alignItems: "center",
+		justifyContent: "center",
+		borderTopWidth: 3,
+		borderColor: "#F2D379",
+		backgroundColor: "#401323",
+		flexDirection: "row",
+	},
+	textColor: {
+		color: "#F2D379",
+		fontSize: 20,
+		textAlign: "center",
+	},
 });
 
 function mapDispatchToProps(dispatch) {

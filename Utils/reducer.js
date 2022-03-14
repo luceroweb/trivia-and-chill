@@ -19,6 +19,7 @@ export const reducer = (state = initialState, action) => {
       };
     case "SET_SCENE":
       return {
+
         ...state,
         scene: action.name,
       };
@@ -36,6 +37,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         selectedMovie: {},
+      };
+    case "SET_PERFORMER_NAME":
+      return {
+        ...state,
+        performerName: action.performerName
       };
   }
   return state;
