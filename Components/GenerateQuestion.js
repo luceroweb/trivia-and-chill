@@ -2,39 +2,28 @@ import React, { useEffect } from "react";
 import { View } from "react-native";
 import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
-import { getGenreName, genreName, getGenreFromId } from "../Utils/FetchApi";
-// import setGenreName from ""
+import { getGenreName } from "../Utils/FetchApi";
 import { connect } from "react-redux";
 import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
 import axios from "axios";
 
-const GenerateQuestion = ({ movies, setSelectedMovie, selectedMovie }) => {
-  let movie = movies ? movies[RandomGenerator(movies.length)] : [];
-
-
+const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   useEffect(() => {
-    getPerformerName(movie.id)
-  .then(response => {
-    movie={...movie, name: response.data.cast[0].name}
-  let questionObject = movie ? madLibsArray(movie) : {};
-  let randomIndex = RandomGenerator(questionObject.length);
-  setSelectedMovie(questionObject[randomIndex]);
-  }) 
-  }, []);
+    let movie = movies ? movies[RandomGenerator(movies.length)] : [];
+    axios.all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
+      .then(axios.spread ((castRes, genreRes) => {
+        movie={...movie, name: castRes.data.cast[0].name}
+        let questionObject = movie ? madLibsArray(movie, castRes) : {};
+        let randomIndex = RandomGenerator(questionObject.length);
+        setSelectedMovie(questionObject[randomIndex]);
 
-  // useEffect(() => {
-  //   getGenreName(movieId).then((res) => setGenreName(res));
-  // }, []);
+        let questionObj = movie ? madLibsArray(movie, genreRes) : {};
+        let randomInd = RandomGenerator(questionObj.length);
+        setSelectedMovie(questionObj[randomInd]);
+      }))
+    }, []);
 
-  useEffect(() => {
-    getGenreFromId(movie.genre_ids[0]);
-  }, []);
-
-  // console.log(genreName); // Trying to get the genre name
-  // console.log("Genre Id", movie.genre_ids[0]);
-  // console.log("Movie", movie)
-  // console.log("Selected", selectedMovie)
-  return <View></View>
+return <View></View>
 };
 
 function mapStateToProps(state) {

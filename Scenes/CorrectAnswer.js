@@ -15,8 +15,6 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import drivein from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
-import {ErrorBoundary} from 'react-error-boundary'
-import GenerateQuestion from "../Components/GenerateQuestion";
 
 const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
   const { width } = useWindowDimensions();
@@ -33,29 +31,28 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
     return <AppLoading />;
   } else {
     return (
-			<View style={{ flex: 1 }}>
-				<ImageBackground
-					style={styles.drivein}
-					source={drivein}
-					resizeMode="cover"
-				>
-					<ConfettiCannon
-						count={100}
-						origin={{ x: -10, y: 0 }}
-						fadeOut={true}
-					/>
-					<ScrollView
-						// todo: replace paddingTop value with useSafeAreaInsets
-						style={[styles.scrollViewOuter, { paddingTop: 20 }]}
-						contentContainerStyle={[
-							styles.scrollViewContent,
-							{ marginHorizontal: width > 1000 ? 100 : 0 },
-						]}
-					>
-						<View style={[styles.videoContainer]}>
-							<Trailer movieId={selectedMovie?.movieId} />
-              <GenerateQuestion movieId={selectedMovie?.movieId} />
-						</View>
+      <View style={{ flex: 1 }}>
+        <ImageBackground
+          style={styles.drivein}
+          source={drivein}
+          resizeMode="cover"
+        >
+          <ConfettiCannon
+            count={100}
+            origin={{ x: -10, y: 0 }}
+            fadeOut={true}
+          />
+          <ScrollView
+            // todo: replace paddingTop value with useSafeAreaInsets
+            style={[styles.scrollViewOuter, { paddingTop: 20 }]}
+            contentContainerStyle={[
+              styles.scrollViewContent,
+              { marginHorizontal: width > 1000 ? 100 : 0 },
+            ]}
+          >
+            <View style={[styles.videoContainer]}>
+              <Trailer movieId={selectedMovie?.movieId} />
+            </View>
 
             <View style={styles.textContainer}>
               <Text style={styles.h2}>

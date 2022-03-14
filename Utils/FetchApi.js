@@ -22,15 +22,6 @@ export async function getPerformerName(movieId) {
   return credits;
 }
 
-export async function getGenre(movieId) {
-  let details = await axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${movieId}/?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
-    )
-    .catch((err) => console.log(err))
-  return details;
-}
-
 export async function getMovieChanges(movieId) {
   let details = await axios
     .get(
@@ -54,51 +45,19 @@ export async function getYouTubeId(movieId) {
   
 }
 
-export async function getGenreName(movieId) {
-  let genreName= null;
-
-  await axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
-    )
-    .then((response) => (genreName=response.data?.genres[0].name||null))
-    .catch((err) => console.log("Fetch API Error",err))
-
-  return genreName;
-  
-}
-
-export async function getGenreFromId(movieId) {
-  let genreId= null;
-  let found;
+export async function getGenreName(genreId) {
+  let matchGenre = null;
 
   await axios
     .get(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .then((response) => response.data)
-    .then((genre) => {
-      genreId = genre.genres;
-      console.log("Console log for genreId variable: ", genreId);
-      console.log("Type of: ", typeof genreId);
-      console.log("ID that has been feed into getGenreFromId: ", movieId);
-    })
-    .then(() => {
-      for (const id in genreId) {
-        if (id === movieId) {
-          found = id.name;
-        }
-      }
-      // found = genreId.find(genre => genre.genres.id === movieId);
-      console.log("Found Genre: ", found);
-    }      
-    )
-    // .then(
-    //   for (let i = 0; i < response.data.genres.length; i++) {
-
-    //   }
-    // )
-    // .then(response => console.log(response.json))
+    .then((response) =>
+      {
+        matchGenre = response.data.genres.filter((genre) => genre.id === genreId);
+        matchGenre = matchGenre[0].name;
+      })
     .catch((err) => console.log("Fetch API Error",err))
   
+    return matchGenre;
 }

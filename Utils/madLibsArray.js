@@ -29,12 +29,12 @@ export default function madLibsArray(movies, genreName) {
     return new Date(+new Date() - Math.floor(Math.random() * 100000000000));
   }
   return (
-    movies && [
-      // {
-      //   question: `${movies.title} was released on ${movieDate}.`, //movie details
-      //   answer: true,
-      //   movieId: `${movies.id}`,
-      // },
+    movies && genreName && [
+      {
+        question: `${movies.title} was released on ${movieDate}.`, //movie details
+        answer: true,
+        movieId: `${movies.id}`,
+      },
 
       {
         question: `${movieDate} was the release date of ${movies.title}.`,
@@ -61,18 +61,6 @@ export default function madLibsArray(movies, genreName) {
         answer: true,
         movieId: `${movies.id}`,
       },
-      // {
-      //   question: `${movies.title} is considered a ${movies.genres.name} movie.`, //get details endpoint for genre
-      //   answer: true,
-      //   movieId: `${movies.id}`,
-      // },
-
-      // {
-      //   question: `${movies.title} is categorized under the ${movies.genres.name} genre.`, //get details for genre
-      //   answer: true,
-      //   movieId: `${movies.id}`,
-      // },
-
       {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
@@ -160,9 +148,29 @@ export default function madLibsArray(movies, genreName) {
         movieId: `${movies.id}`,
       },
       {
+        question: `${movies.title} is considered a ${genreName}`,
+        answer: true,
+        movieId: `${movies.id}`,
+      },
+      {
+        question: `${movies.title} is categorized under the ${genreName} genre.`,
+        answer: true,
+        movieId: `${movies.id}`,
+      },
+      {
         question: `"${movies.overview}" was the original plot of ${movies.title}.`,
         answer: true,
         movieId: `${movies.id}`,
+      },
+      {
+        question: `Kill Bill is a romantic comedy.`,
+        answer: false,
+        movieId: 24,
+      },
+      {
+        question: `Captain America is categorized under the musicals genre.`,
+        answer: false,
+        movieId: 1771,
       },
       {
         question: `Encanto's plot used to be described as "The Luceros are an extraordinary family who live hidden in the mountains of Mexico in a charmed place called the Encanto. The magic of the Encanto has blessed every child in the family with a unique gift -- every child except Miranda"`,
