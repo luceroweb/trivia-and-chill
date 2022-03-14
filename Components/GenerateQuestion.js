@@ -12,8 +12,7 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
     let movie = movies ? movies[RandomGenerator(movies.length)] : [];
     axios.all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
       .then(axios.spread ((castRes, genreRes) => {
-        movie={...movie, name: castRes.data.cast[0].name}
-        movie={...movie, genre: genreRes}
+        movie={...movie, name: castRes.data.cast[0].name, genre: genreRes}
         let questionObject = movie ? madLibsArray(movie) : {};
         let randomIndex = RandomGenerator(questionObject.length);
         setSelectedMovie(questionObject[randomIndex]);
