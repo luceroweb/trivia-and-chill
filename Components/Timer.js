@@ -44,7 +44,7 @@ function Timer({ setScene, timerCount, setTimerCount }) {
       </View>
     );
   } else {
-    // Render for ios and android
+  // Render for ios and android
     return <Clock />;
   }
 }
