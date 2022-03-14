@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { Audio } from "expo-av";
 import tick from "../Sounds/tick.wav";
 import Clock from "../Components/Clock";
+import { StyleSheet, View, Platform } from "react-native";
 
 function Timer({ setScene, timerCount, setTimerCount }) {
   const [sound, setSound] = useState();
-  
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(tick);
@@ -35,11 +35,28 @@ function Timer({ setScene, timerCount, setTimerCount }) {
     };
   }, [timerCount]);
 
-  return (
-    <Clock />
-      
-  );
+  // Conditional render depending on OS
+  if (Platform.OS === "web") {
+    // Render for web
+    return (
+      <View style={styles.timer}>
+        <Clock />
+      </View>
+    );
+  } else {
+    // Render for ios and android
+    return <Clock />;
+  }
 }
+
+const styles = StyleSheet.create({
+  timer: {
+    position: "absolute",
+    left: 0,
+    top: 4,
+    flex: 1,
+  },
+});
 
 function mapStateToProps(state) {
   return {
@@ -58,4 +75,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
-

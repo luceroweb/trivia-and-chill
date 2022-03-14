@@ -5,6 +5,7 @@ import {
   Text,
   ImageBackground,
   useWindowDimensions,
+  Platform,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
@@ -19,7 +20,7 @@ import Badge from "../Components/Badge";
 
 function Question({ selectedMovie, movies, setMovies }) {
   const [timerCount, setTimerCount] = useState(10);
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
   useEffect(() => {
@@ -45,16 +46,10 @@ function Question({ selectedMovie, movies, setMovies }) {
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
           <View style={styles.timerBox}>
-            <Timer
-              timerCount={timerCount}
-              setTimerCount={setTimerCount}
-            />
-            
+            <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
+
             <Text
-              style={[
-                styles.heading,
-                width > 800 ? {} : {paddingRight: 50},
-              ]}
+              style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
             >
               Question
             </Text>
@@ -171,7 +166,6 @@ const styles = StyleSheet.create({
     color: "#F2D379",
     fontFamily: "Limelight_400Regular",
     fontSize: 30,
-    backgroundColor: "white",
   },
   q: {
     color: "#F2D379",
@@ -185,10 +179,9 @@ const styles = StyleSheet.create({
   },
   timerBox: {
     flexDirection: "row",
-    backgroundColor: "red",
-    justifyContent: "flex-start"
+    // justifyContent: Platform.OS === "web" ? "space-evenly" : "flex-start",
     // alignItems: "center",
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
