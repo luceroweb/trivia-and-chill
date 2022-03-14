@@ -179,8 +179,6 @@ const styles = StyleSheet.create({
   },
   timerBox: {
     flexDirection: "row",
-    // justifyContent: Platform.OS === "web" ? "space-evenly" : "flex-start",
-    // alignItems: "center",
   },
 });
 
