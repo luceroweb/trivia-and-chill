@@ -137,8 +137,7 @@ const styles = StyleSheet.create({
   },
   titleWrap: {
     flexDirection: "row",
-    padding: 20,
-    backgroundColor: "red"
+    padding: 20,    
   },
   titleWrapMobile: {
     flexDirection: "row",
