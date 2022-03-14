@@ -3,10 +3,9 @@ import {
   StyleSheet,
   View,
   Text,
-  Pressable,
   ImageBackground,
   useWindowDimensions,
-  SafeAreaView,
+  Platform,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
@@ -21,7 +20,7 @@ import Badge from "../Components/Badge";
 
 function Question({ selectedMovie, movies, setMovies }) {
   const [timerCount, setTimerCount] = useState(10);
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
 
   useEffect(() => {
@@ -46,22 +45,16 @@ function Question({ selectedMovie, movies, setMovies }) {
         <View
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
-          <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
+          <View style={styles.timerBox}>
+            <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
 
-          <Text
-            style={[
-              styles.heading,
-              {
-                color: "#F2D379",
-                fontFamily: "Limelight_400Regular",
-                fontSize: 30,
-              },
-            ]}
-          >
-            Question
-          </Text>
+            <Text
+              style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
+            >
+              Question
+            </Text>
+          </View>
           <GenerateQuestion movies={movies} />
-
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
         </View>
         <View style={styles.badge}>
@@ -125,7 +118,6 @@ const styles = StyleSheet.create({
   },
   image: {
     paddingBottom: 75,
-    // paddingTop: 10,
   },
   imageMobile: {
     paddingBottom: 100,
@@ -164,20 +156,31 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   heading: {
+    flexGrow: 1,
     color: "#F2D379",
     paddingTop: 10,
-    paddingRight: 20,
+    paddingBottom: 4,
     alignSelf: "center",
     marginTop: 10,
+    textAlign: "center",
+    color: "#F2D379",
+    fontFamily: "Limelight_400Regular",
+    fontSize: 30,
   },
   q: {
     color: "#F2D379",
     marginHorizontal: 20,
+    alignSelf: "center",
   },
   badge: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  timerBox: {
+    flexDirection: "row",
+    // justifyContent: Platform.OS === "web" ? "space-evenly" : "flex-start",
+    // alignItems: "center",
   },
 });
 
