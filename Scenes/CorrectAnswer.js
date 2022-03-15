@@ -6,8 +6,12 @@ import {
   StyleSheet,
   useWindowDimensions,
   ImageBackground,
+  Alert,
+  Modal,
 } from "react-native";
-import ConfettiCannon from "react-native-confetti-cannon";
+
+import { useState } from "react";
+// import ConfettiCannon from "react-native-confetti-cannon";
 import { connect } from "react-redux";
 import Trailer from "../Components/Trailer";
 import AppLoading from "expo-app-loading";
@@ -17,7 +21,8 @@ import drivein from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
 const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
-  const { width } = useWindowDimensions();
+  const [modalVisible, setModalVisible] = useState(true);
+  const { width: currentWidth, height: currentHeight } = useWindowDimensions();
   const handleNextQuestion = () => {
     setScene("Question");
     resetSelectedMovie();
@@ -26,6 +31,22 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
   });
+
+  const maxWidth = 2000;
+  const minWidth = 560;
+  const optimalHeight = 1080;
+  // calculates how much margin should be added on top of the video trailer based on the current width size
+  const currentMarginSize = (maxWidth - currentWidth) / 4;
+  // video margin size will not increase above maxWidth - minWidth
+  const maxMarginSize = (maxWidth - minWidth) / 4;
+
+  // currently calculated margin size will not decrease below 0 as the current width size gets bigger than the maxWidth
+  const minMarginBound = Math.max(currentMarginSize, 0);
+  // video margin will not increase above the calculated maxMarginSize
+  const maxMarginBound = Math.min(minMarginBound, maxMarginSize);
+
+  let videoMarginTop = maxMarginBound;
+  videoMarginTop += (currentHeight - optimalHeight) / 2;
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -37,29 +58,40 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
           source={drivein}
           resizeMode="cover"
         >
-          <ConfettiCannon
+          {/* <ConfettiCannon
             count={100}
             origin={{ x: -10, y: 0 }}
             fadeOut={true}
-          />
-          <ScrollView
-            // todo: replace paddingTop value with useSafeAreaInsets
-            style={[styles.scrollViewOuter, { paddingTop: 20 }]}
-            contentContainerStyle={[
-              styles.scrollViewContent,
-              { marginHorizontal: width > 1000 ? 100 : 0 },
-            ]}
+          /> */}
+          <View
+            style={[styles.scrollViewContent, { marginTop: videoMarginTop }]}
           >
-            <View style={[styles.videoContainer]}>
-              <Trailer movieId={selectedMovie?.movieId} />
-            </View>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={{ alignItems: "center" }}>
+                <View style={[styles.videoContainer]}>
+                  <Trailer movieId={selectedMovie?.movieId} />
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>Continue</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
 
             <View style={styles.textContainer}>
               <Text style={styles.h2}>
                 Correct! <Badge />
               </Text>
-
-              <Text style={styles.h3}>Enjoy this video trailer</Text>
             </View>
 
             <Pressable style={[styles.button]} onPress={handleNextQuestion}>
@@ -67,7 +99,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
                 <Text style={styles.ticketText}>Next Question!</Text>
               </ImageBackground>
             </Pressable>
-          </ScrollView>
+          </View>
         </ImageBackground>
       </View>
     );
@@ -100,11 +132,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "black",
   },
-  scrollViewOuter: {
-    alignSelf: "center",
-    width: "100%",
-    height: "100%",
-  },
   scrollViewContent: {
     flex: 1,
     justifyContent: "space-between",
@@ -112,8 +139,10 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
     backgroundColor: "transparent",
+    minWidth: 320, // 320px is iPhone 5/SE size
+    width: "50%",
   },
   button: {
     flexShrink: 1,
@@ -124,12 +153,20 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   textContainer: {
-    flexGrow: 1, // pushes textContainer upwards
-    marginVertical: 50,
+    // flexGrow: 1, // pushes textContainer upwards
+    // marginVertical: 50,
+    alignSelf: "center",
     alignItems: "center",
+    backgroundColor: "azure",
+    opacity: 0.8,
+    borderRadius: 10,
+    width: "80%",
+    maxWidth: 400,
   },
   h2: {
     fontSize: 36,
+    justifyContent: "center",
+    alignItems: "center",
     // fontWeight: "bold",
     marginVertical: 10,
     fontFamily: "Limelight_400Regular",
@@ -156,6 +193,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
   },
+
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CorrectAnswer);
