@@ -103,7 +103,7 @@ function mapDispatchToProps(dispatch) {
       }),
     resetWinningStreak: () =>
       dispatch({
-        type: "RESET_WINNING_STREAK",import { StyleSheet, View, Platform } from "react-native";
+        type: "RESET_WINNING_STREAK",
       }),
     setMovies: (movies) =>
       dispatch({
