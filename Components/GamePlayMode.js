@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
 
 function GamePlayMode({ gamePlayMode }) {
@@ -6,6 +6,7 @@ function GamePlayMode({ gamePlayMode }) {
     <View style={styles.container}>
       <Text style={styles.gamePlayText}>{gamePlayMode}</Text>
     </View>
+  
   );
 }
 
@@ -24,9 +25,10 @@ const styles = StyleSheet.create({
     height: 18,
     width: 150,
     position: "absolute",
-    top: 30,
     zIndex: 6,
     borderColor: "#F2D379",
+    borderWidth: 1,
+    top: Platform.OS === "ios" ? 76 : 30,
   },
   gamePlayText: {
     color: "#F2D379",
