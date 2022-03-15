@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Platform } from "react-native";
+import { Text, View, StyleSheet, Button, Platform } from "react-native";
+import Constants from "expo-constants";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 export default function App() {
@@ -17,7 +18,7 @@ export default function App() {
         strokeWidth={6}
         trailColor={"#CA3D45"}
       >
-        {({ remainingTime }) => (
+        {({ remainingTime, color }) => (
           <Text style={{ color: "#F2D379", fontSize: 20 }}>
             {remainingTime}
           </Text>
@@ -29,9 +30,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: Platform.OS === "web" ? 0 : 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 4,
+    paddingTop: Platform.OS === "ios" ? Constants.statusBarHeight : 4,
+    
   },
 });

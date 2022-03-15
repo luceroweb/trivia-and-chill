@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { StyleSheet, View, Text, useWindowDimensions } from "react-native";
 import { connect } from "react-redux";
 import { Audio } from "expo-av";
 import tick from "../Sounds/tick.wav";
 import Clock from "../Components/Clock";
-import { StyleSheet, View, Platform } from "react-native";
 
 function Timer({ setScene, timerCount, setTimerCount }) {
   const [sound, setSound] = useState();
+  const { width } = useWindowDimensions();
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(tick);
@@ -35,18 +36,13 @@ function Timer({ setScene, timerCount, setTimerCount }) {
     };
   }, [timerCount]);
 
-  // Conditional render depending on OS
-  if (Platform.OS === "web") {
-    // Render for web
-    return (
-      <View style={styles.timer}>
+  return (
+    <View style={width > 800 && styles.timer}>
+      <Text>
         <Clock />
-      </View>
-    );
-  } else {
-    // Render for ios and android
-    return <Clock />;
-  }
+      </Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -71,7 +67,9 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
+      
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
+
