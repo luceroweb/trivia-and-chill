@@ -46,7 +46,7 @@ function Question({ selectedMovie, movies, setMovies, movieId,setGamePlayMode,ea
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
           <View style={styles.timerBox}>
-            {easySinglePlayer && <Timer
+            {!easySinglePlayer && <Timer
               timerCount={timerCount}
               setTimerCount={setTimerCount}
             />}
@@ -63,7 +63,9 @@ function Question({ selectedMovie, movies, setMovies, movieId,setGamePlayMode,ea
             >
               Question
             </Text>
-            <Pressable onPress={()=>setGamePlayMode()}><Text style={{color:"white"}}>{!easySinglePlayer?"Easy":"Hard"}</Text></Pressable>
+            <Pressable onPress={()=>setGamePlayMode()}><Text style={{color:"white"}}>
+              {easySinglePlayer?"Easy":"Hard"}              
+              </Text></Pressable>
             
           </View>
           <GenerateQuestion movies={movies} />

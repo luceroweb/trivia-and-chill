@@ -3,7 +3,7 @@ const initialState = {
   scene: "Main",
   movies: [],
   selectedMovie: {},
-  easySinglePlayer:false,
+  easySinglePlayer:true,
 };
 
 export const reducer = (state = initialState, action) => {
