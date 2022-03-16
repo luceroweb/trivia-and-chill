@@ -56,10 +56,11 @@ function Question({ selectedMovie, movies, setMovies, movieId }) {
           </View>
           <GenerateQuestion movies={movies} />
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+          <View style={styles.badge}>
+            <Badge />
+          </View>
         </View>
-        <View style={styles.badge}>
-          <Badge />
-        </View>
+
         <View
           style={[
             width > widthBreakpoint ? styles.titleWrap : styles.titleWrapMobile,
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
     width: "100%",
-    flexDirection: "column",
+    flexDirection: "column",    
   },
   image: {
     paddingBottom: 75,
@@ -125,12 +126,12 @@ const styles = StyleSheet.create({
   },
   titleWrap: {
     flexDirection: "row",
-    padding: 20,
+    padding: 20,    
   },
   titleWrapMobile: {
     flexDirection: "row",
     paddingTop: 20,
-    paddingBottom: 3,
+    paddingBottom: 3,    
   },
   title: {
     shadowColor: "#1a1a1a",
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     height: 350,
-    width: 615,
+    width: 615,   
   },
   titleMobile: {
     shadowColor: "#1a1a1a",
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 390,
     width: 300,
-    marginHorizontal: 30,
+    marginHorizontal: 30,    
   },
   heading: {
     flexGrow: 1,
@@ -173,9 +174,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   badge: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
   },
   timerBox: {
     flexDirection: "row",
