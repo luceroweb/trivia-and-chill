@@ -19,7 +19,7 @@ import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
-function Question({ selectedMovie, movies, setMovies, movieId,setGamePlayMode,easySinglePlayer }) {
+function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
   const [timerCount, setTimerCount] = useState(10);
   const { width, height } = useWindowDimensions();
   const widthBreakpoint = 700;
@@ -46,7 +46,7 @@ function Question({ selectedMovie, movies, setMovies, movieId,setGamePlayMode,ea
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
           <View style={styles.timerBox}>
-            {!easySinglePlayer && <Timer
+            {gamePlayMode!=="easySinglePlayer" &&<Timer
               timerCount={timerCount}
               setTimerCount={setTimerCount}
             />}
@@ -63,9 +63,6 @@ function Question({ selectedMovie, movies, setMovies, movieId,setGamePlayMode,ea
             >
               Question
             </Text>
-            <Pressable onPress={()=>setGamePlayMode()}><Text style={{color:"white"}}>
-              {easySinglePlayer?"Easy":"Hard"}              
-              </Text></Pressable>
             
           </View>
           <GenerateQuestion movies={movies} />
@@ -96,7 +93,7 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
-    easySinglePlayer:state.easySinglePlayer,
+    gamePlayMode:state.gamePlayMode||"easySinglePlayer",
   };
 }
 
