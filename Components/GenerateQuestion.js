@@ -12,14 +12,10 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
     let movie = movies ? movies[RandomGenerator(movies.length)] : [];
     axios.all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
       .then(axios.spread ((castRes, genreRes) => {
-        movie={...movie, name: castRes.data.cast[0].name}
-        let questionObject = movie ? madLibsArray(movie, castRes) : {};
+        movie={...movie, name: castRes.data.cast[0].name, genre: genreRes}
+        let questionObject = movie ? madLibsArray(movie) : {};
         let randomIndex = RandomGenerator(questionObject.length);
         setSelectedMovie(questionObject[randomIndex]);
-
-        let questionObj = movie ? madLibsArray(movie, genreRes) : {};
-        let randomInd = RandomGenerator(questionObj.length);
-        setSelectedMovie(questionObj[randomInd]);
       }))
     }, []);
 
@@ -29,6 +25,7 @@ return <View></View>
 function mapStateToProps(state) {
   return {
     selectedMovie: state.selectedMovie,
+    genreName: state.genreName,
   };
 }
 
@@ -39,6 +36,11 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SELECTED_MOVIE",
         selectedMovie,
       }),
+      setGenreName: (genreName) =>
+        dispatch({
+          type: "SET_GENRE_NAME",
+          genreName,
+        }),
   };
 }
 
