@@ -61,8 +61,6 @@ const styles = StyleSheet.create({
     fontFamily: "Limelight_400Regular",
     color: "#F2D379",
   },
-  gear:{
-  },
 
 });
 
