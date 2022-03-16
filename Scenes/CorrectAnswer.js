@@ -14,6 +14,8 @@ import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import drivein from "../Images/drive-in-movie.jpg";
+import driveinMobile from '../Images/drive-in-movie-mobile.jpg';
+import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
 import Badge from "../Components/Badge";
 
 const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
@@ -27,21 +29,27 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
     Limelight_400Regular,
   });
 
-  const maxWidth = 2000;
-  const minWidth = 560;
-  const optimalHeight = 1080;
-  // calculates how much margin should be added on top of the video trailer based on the current width size
-  const currentMarginSize = (maxWidth - currentWidth) / 4; 
-  // video margin size will not increase above maxWidth - minWidth
-  const maxMarginSize = (maxWidth - minWidth) / 4; 
-
-  // currently calculated margin size will not decrease below 0 as the current width size gets bigger than the maxWidth
-  const minMarginBound = Math.max(currentMarginSize, 0);
-  // video margin will not increase above the calculated maxMarginSize
-  const maxMarginBound = Math.min(minMarginBound, maxMarginSize);
-
-  let videoMarginTop = maxMarginBound;
-  videoMarginTop += (currentHeight - optimalHeight) / 2;
+  let backgroundImage;
+  let wrapStyle;
+  let videoWidth;
+  
+  if (currentWidth > 860) {
+    backgroundImage = drivein;
+    wrapStyle = styles.wrap;
+    videoWidth = "50%";
+  } else if (currentWidth > 580) {
+    backgroundImage = driveinMobile;
+    wrapStyle = styles.wrapMobile;
+    videoWidth = "75%";
+  } else if (currentWidth > 430) {
+    backgroundImage = driveinMobileMini;
+    wrapStyle = styles.wrapMini;
+    videoWidth = "75%";
+  } else {
+    backgroundImage = driveinMobileMini;
+    wrapStyle = styles.wrapSuperMini;
+    videoWidth = "75%";
+  }
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -50,7 +58,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
       <View style={{ flex: 1 }}>
         <ImageBackground
           style={styles.drivein}
-          source={drivein}
+          source={backgroundImage}
           resizeMode="cover"
         >
           {/* <ConfettiCannon
@@ -59,12 +67,14 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
             fadeOut={true}
           /> */}
           <View
-            style={[styles.scrollViewContent, { marginTop: videoMarginTop }]}
+            style={[styles.scrollViewContent, wrapStyle]}
           >
             <View style={{ alignItems: 'center', }}>
               <View
                 style={[
                   styles.videoContainer,
+                  { width: videoWidth },
+                  videoContainer
                 ]}
               >
                 <Trailer movieId={selectedMovie?.movieId} />
@@ -113,6 +123,18 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
+  wrap: {
+    // marginTop: 10,
+  },
+  wrapMobile: {
+    marginTop: "10%",
+  },
+  wrapMini: {
+    marginTop: "25%",
+  },
+  wrapSuperMini: {
+    marginTop: 115,
+  },
   borderStyleDebug: {
     borderWidth: 2,
     borderColor: "black",
@@ -120,13 +142,13 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     flex: 1,
     justifyContent: "space-between",
-    marginVertical: 20,
+    marginBottom: 20,
   },
   videoContainer: {
     justifyContent: "center",
     // alignItems: "center",
     backgroundColor: "transparent",
-    minWidth: 320, // 320px is iPhone 5/SE size
+    minWidth: 375, // 320px is iPhone 5/SE size
     width: '50%',
   },
   button: {
@@ -136,6 +158,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
     backgroundColor: "transparent",
+    marginTop: 50,
   },
   textContainer: {
     // flexGrow: 1, // pushes textContainer upwards
@@ -147,6 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     maxWidth: 400,
+    marginTop: 50,
   },
   h2: {
     fontSize: 36,
