@@ -31,8 +31,8 @@ function Trailer({ movieId }) {
           <WebView
             mediaPlaybackRequiresUserAction={true}
             style={{
-              height: 200,
-              width: 350,
+              aspectRatio: 16 / 9,
+              width: "100%",
               alignSelf: "center",
               alignContent: "center",
             }}
