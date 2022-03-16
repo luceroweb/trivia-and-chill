@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
-import { getIcon } from "./getIcon";
+
 const MultipleChoice = ({
   selectedMovie,
   setScene,

@@ -40,7 +40,7 @@ const About = ({setScene}) => {
               practicing industry experts. Our system of teaching is hands-on
               and up-to-date with current practices.
               <Text
-              style={{display: "block", textDecoration: "underline", color: "white"}}
+              style={{ textDecorationLine: "underline", color: "white"}}
                 onPress={() =>
                   Linking.openURL(
                     "https://bitwiseindustries.com/services/workforce-training/classes/"
