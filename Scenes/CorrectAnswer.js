@@ -30,24 +30,24 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
   });
 
   let backgroundImage;
-  let wrapStyle;
+  let contentViewStyle;
   let videoWidth;
   
   if (currentWidth > 860) {
     backgroundImage = drivein;
-    wrapStyle = styles.wrap;
+    contentViewStyle = styles.wrap;
     videoWidth = "50%";
   } else if (currentWidth > 580) {
     backgroundImage = driveinMobile;
-    wrapStyle = styles.wrapMobile;
+    contentViewStyle = styles.wrapMobile;
     videoWidth = "75%";
   } else if (currentWidth > 430) {
     backgroundImage = driveinMobileMini;
-    wrapStyle = styles.wrapMini;
+    contentViewStyle = styles.wrapMini;
     videoWidth = "75%";
   } else {
     backgroundImage = driveinMobileMini;
-    wrapStyle = styles.wrapSuperMini;
+    contentViewStyle = styles.wrapSuperMini;
     videoWidth = "75%";
   }
 
@@ -67,7 +67,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
             fadeOut={true}
           /> */}
           <View
-            style={[styles.scrollViewContent, wrapStyle]}
+            style={[styles.scrollViewContent, contentViewStyle]}
           >
             <View style={{ alignItems: 'center', }}>
               <View
