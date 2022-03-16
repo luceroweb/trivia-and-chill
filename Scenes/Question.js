@@ -117,11 +117,6 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
-    setGamePlayMode:()=>
-    dispatch({
-      type:"SET_GAME_PLAY_MODE",
-    })
-  };
 }
 
 const styles = StyleSheet.create({
