@@ -74,9 +74,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
             <View style={styles.textContainer}>
               <Text style={styles.h2}>
                 Correct! <Badge />
-              </Text>
-
-              <Text style={styles.h3}>Enjoy this video trailer</Text>
+              </Text>              
             </View>
 
             <Pressable style={[styles.button]} onPress={handleNextQuestion}>
@@ -115,7 +113,7 @@ function mapDispatchToProps(dispatch) {
 const styles = StyleSheet.create({
   borderStyleDebug: {
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#000",
   },
   scrollViewContent: {
     flex: 1,
@@ -123,8 +121,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   videoContainer: {
-    justifyContent: "center",
-    // alignItems: "center",
+    justifyContent: "center",    
     backgroundColor: "transparent",
     minWidth: 320, // 320px is iPhone 5/SE size
     width: '50%',
@@ -138,27 +135,19 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   textContainer: {
-    // flexGrow: 1, // pushes textContainer upwards
-    // marginVertical: 50,
+    flexGrow: 1,// pushes textContainer upwards    
     alignSelf: 'center',
     alignItems: "center",
-    backgroundColor: 'azure',
-    opacity: 0.8,
     borderRadius: 10,
     width: '80%',
-    maxWidth: 400,
+    maxWidth: 600,
   },
   h2: {
     fontSize: 36,
     // fontWeight: "bold",
     marginVertical: 10,
     fontFamily: "Limelight_400Regular",
-  },
-  h3: {
-    fontSize: 24,
-    // fontWeight: "bold",
-    marginVertical: 10,
-    fontFamily: "Limelight_400Regular",
+    color: "#F2D379",    
   },
   ticketButton: {
     maxWidth: "100%",
