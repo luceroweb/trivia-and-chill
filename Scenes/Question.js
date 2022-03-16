@@ -18,11 +18,10 @@ import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
-function Question({ selectedMovie, movies, setMovies, movieId }) {
+function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
   const [timerCount, setTimerCount] = useState(10);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
-
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -46,8 +45,11 @@ function Question({ selectedMovie, movies, setMovies, movieId }) {
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
           <View style={styles.timerBox}>
-            <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
-
+            {gamePlayMode!=="easySinglePlayer" &&<Timer
+              timerCount={timerCount}
+              setTimerCount={setTimerCount}
+            />}
+            
             <Text
               style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
             >
@@ -82,6 +84,7 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
+    gamePlayMode:state.gamePlayMode||"easySinglePlayer",
   };
 }
 
@@ -105,7 +108,7 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
-  };
+}
 }
 
 const styles = StyleSheet.create({
