@@ -74,7 +74,6 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
                 style={[
                   styles.videoContainer,
                   { width: videoWidth },
-                  videoContainer
                 ]}
               >
                 <Trailer movieId={selectedMovie?.movieId} />
