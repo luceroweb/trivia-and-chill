@@ -19,7 +19,7 @@ import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 
-function Question({ selectedMovie, movies, setMovies }) {
+function Question({ selectedMovie, movies, setMovies, movieId }) {
   const [timerCount, setTimerCount] = useState(10);
   const { width, height } = useWindowDimensions();
   const widthBreakpoint = 700;
@@ -46,27 +46,32 @@ function Question({ selectedMovie, movies, setMovies }) {
         <View
           style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
         >
-          <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
-
-          <Text
-            style={[
-              styles.heading,
-              {
-                color: "#F2D379",
-                fontFamily: "Limelight_400Regular",
-                fontSize: 30,
-              },
-            ]}
-          >
-            Question
-          </Text>
+          <View style={styles.timerBox}>
+            <Timer
+              timerCount={timerCount}
+              setTimerCount={setTimerCount}
+            />
+            <Text
+              style={[
+                width > 800 ? styles.heading : styles.headingMobile,
+                {
+                  color: "#F2D379",
+                  fontFamily: "Limelight_400Regular",
+                  fontSize: 30,
+                },
+              ]}
+            >
+              Question
+            </Text>
+            <View></View>
+          </View>
           <GenerateQuestion movies={movies} />
-
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+          <View style={styles.badge}>
+            <Badge />
+          </View>
         </View>
-        <View style={styles.badge}>
-          <Badge />
-        </View>
+
         <View
           style={[
             width > widthBreakpoint ? styles.titleWrap : styles.titleWrapMobile,
@@ -121,11 +126,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
     width: "100%",
-    flexDirection: "column",
+    flexDirection: "column",    
   },
   image: {
     paddingBottom: 75,
-    // paddingTop: 10,
   },
   imageMobile: {
     paddingBottom: 100,
@@ -133,12 +137,12 @@ const styles = StyleSheet.create({
   },
   titleWrap: {
     flexDirection: "row",
-    padding: 20,
+    padding: 20,    
   },
   titleWrapMobile: {
     flexDirection: "row",
     paddingTop: 20,
-    paddingBottom: 3,
+    paddingBottom: 3,    
   },
   title: {
     shadowColor: "#1a1a1a",
@@ -149,7 +153,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     height: 350,
-    width: 615,
+    width: 615,   
   },
   titleMobile: {
     shadowColor: "#1a1a1a",
@@ -161,24 +165,42 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 390,
     width: 300,
-    marginHorizontal: 30,
+    marginHorizontal: 30,    
   },
   heading: {
+    flexGrow: 1,
     color: "#F2D379",
     paddingTop: 10,
-    paddingRight: 20,
+    paddingBottom: 4,
     alignSelf: "center",
     marginTop: 10,
+    textAlign: "center",    
+  },
+  headingMobile: {
+    flexGrow: 1,
+    color: "#F2D379",
+    paddingTop: 10,
+    paddingBottom: 4,
+    paddingRight: 50,
+    alignSelf: "center",
+    marginTop: 10,
+    textAlign: "center",    
   },
   q: {
     color: "#F2D379",
     marginHorizontal: 20,
+    alignSelf: "center",
   },
   badge: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
   },
+  timerBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);

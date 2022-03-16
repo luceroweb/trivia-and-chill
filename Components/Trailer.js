@@ -1,37 +1,65 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, Alert } from "react-native";
+import { View, Alert, Platform } from "react-native";
 import { getYouTubeId } from "../Utils/FetchApi";
 import YoutubePlayer from "react-native-youtube-iframe";
+import { WebView } from "react-native-web-webview";
 
-export default function Trailer({ movieId }) {
+function Trailer({ movieId }) {
   const [playing, setPlaying] = useState(false);
   const [youTubeId, setYouTubeId] = useState(null);
-
   useEffect(() => {
-    getYouTubeId(movieId).then((res) => {
-      setYouTubeId(res);
-    });
+    getYouTubeId(movieId)
+      .then((res) => {
+        setYouTubeId(res);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const onStateChange = useCallback((state) => {
+    window.postMessage = postMessage.bind(window);
+
     if (state === "ended") {
       setPlaying(false);
-      Alert.alert("video has finished playi!");
+      Alert.alert("video has finished playing!");
     }
   }, []);
-
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <View style={{ width: "100%", aspectRatio: 16 / 9 }}>
+  
+  if (Platform.OS === "web") {
+    return (
+      <View>
         {youTubeId && (
-          <YoutubePlayer
-            height={"100%"}
-            play={playing}
-            videoId={youTubeId}
-            onChangeState={onStateChange}
+          <WebView
+            mediaPlaybackRequiresUserAction={true}
+            style={{
+              aspectRatio: 16 / 9,
+              width: "100%",
+              alignSelf: "center",
+              alignContent: "center",
+            }}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            source={{ uri: `https:www.youtube.com/embed/${youTubeId}?rel=0` }}
           />
         )}
+        
       </View>
-    </View>
-  );
+    );
+  } else {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <View style={{ width: "100%", aspectRatio: 16 / 9 }}>
+          {youTubeId && (
+            <YoutubePlayer
+              height={"100%"}
+              play={playing}
+              videoId={youTubeId}
+              onChangeState={onStateChange}
+            />
+          )}
+        </View>
+      </View>
+    );
+  }
 }
+
+export default Trailer;

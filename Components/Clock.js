@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: Constants.statusBarHeight,
-    padding: 8,
+    // paddingTop: Constants.statusBarHeight,
+    padding: 4,
   },
 });
