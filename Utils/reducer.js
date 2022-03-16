@@ -3,6 +3,7 @@ const initialState = {
   scene: "Main",
   movies: [],
   selectedMovie: {},
+  lives: 3,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -43,6 +44,16 @@ export const reducer = (state = initialState, action) => {
         ...state,
         performerName: action.performerName
       };
+    case "DECREASE_LIVES":
+      return {
+        ...state,
+        lives: state.lives - 1,
+      }
+    case "RESET_LIVES":
+      return {
+        ...state,
+        lives: 3,
+      }
   }
   return state;
 };
