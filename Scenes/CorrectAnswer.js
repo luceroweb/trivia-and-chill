@@ -5,7 +5,6 @@ import {
   Pressable,
   StyleSheet,
   useWindowDimensions,
-  Platform,
   ImageBackground,
 } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
@@ -32,46 +31,46 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
     return <AppLoading />;
   } else {
     return (
-			<View style={{ flex: 1 }}>
-				<ImageBackground
-					style={styles.drivein}
-					source={drivein}
-					resizeMode="cover"
-				>
-					<ConfettiCannon
-						count={100}
-						origin={{ x: -10, y: 0 }}
-						fadeOut={true}
-					/>
-					<ScrollView
-						// todo: replace paddingTop value with useSafeAreaInsets
-						style={[styles.scrollViewOuter, { paddingTop: 20 }]}
-						contentContainerStyle={[
-							styles.scrollViewContent,
-							{ marginHorizontal: width > 1000 ? 100 : 0 },
-						]}
-					>
-						<View style={[styles.videoContainer]}>
-							<Trailer movieId={selectedMovie?.movieId} />
-						</View>
+      <View style={{ flex: 1 }}>
+        <ImageBackground
+          style={styles.drivein}
+          source={drivein}
+          resizeMode="cover"
+        >
+          <ConfettiCannon
+            count={100}
+            origin={{ x: -10, y: 0 }}
+            fadeOut={true}
+          />
+          <ScrollView
+            // todo: replace paddingTop value with useSafeAreaInsets
+            style={[styles.scrollViewOuter, { paddingTop: 20 }]}
+            contentContainerStyle={[
+              styles.scrollViewContent,
+              { marginHorizontal: width > 1000 ? 100 : 0 },
+            ]}
+          >
+            <View style={[styles.videoContainer]}>
+              <Trailer movieId={selectedMovie?.movieId} />
+            </View>
 
-						<View style={styles.textContainer}>
-							<Text style={styles.h2}>
-								Correct! <Badge />
-							</Text>
-						
-							<Text style={styles.h3}>Enjoy this video trailer</Text>
-						</View>
+            <View style={styles.textContainer}>
+              <Text style={styles.h2}>
+                Correct! <Badge />
+              </Text>
 
-						<Pressable style={[styles.button]} onPress={handleNextQuestion}>
-							<ImageBackground style={styles.ticketButton} source={ticket}>
-								<Text style={styles.ticketText}>Next Question!</Text>
-							</ImageBackground>
-						</Pressable>
-					</ScrollView>
-				</ImageBackground>
-			</View>
-		);
+              <Text style={styles.h3}>Enjoy this video trailer</Text>
+            </View>
+
+            <Pressable style={[styles.button]} onPress={handleNextQuestion}>
+              <ImageBackground style={styles.ticketButton} source={ticket}>
+                <Text style={styles.ticketText}>Next Question!</Text>
+              </ImageBackground>
+            </Pressable>
+          </ScrollView>
+        </ImageBackground>
+      </View>
+    );
   }
 };
 
@@ -89,10 +88,10 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
-    resetSelectedMovie: () => 
+    resetSelectedMovie: () =>
       dispatch({
         type: "RESET_SELECTED_MOVIE",
-      })
+      }),
   };
 }
 

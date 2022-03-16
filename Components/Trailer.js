@@ -4,10 +4,9 @@ import { getYouTubeId } from "../Utils/FetchApi";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { WebView } from "react-native-web-webview";
 
-export default function Trailer({ movieId }) {
+function Trailer({ movieId }) {
   const [playing, setPlaying] = useState(false);
   const [youTubeId, setYouTubeId] = useState(null);
-
   useEffect(() => {
     getYouTubeId(movieId)
       .then((res) => {
@@ -24,7 +23,7 @@ export default function Trailer({ movieId }) {
       Alert.alert("video has finished playing!");
     }
   }, []);
-
+  
   if (Platform.OS === "web") {
     return (
       <View>
@@ -42,6 +41,7 @@ export default function Trailer({ movieId }) {
             source={{ uri: `https:www.youtube.com/embed/${youTubeId}?rel=0` }}
           />
         )}
+        
       </View>
     );
   } else {
@@ -61,3 +61,5 @@ export default function Trailer({ movieId }) {
     );
   }
 }
+
+export default Trailer;
