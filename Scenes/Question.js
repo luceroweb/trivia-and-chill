@@ -23,7 +23,6 @@ function Question({ selectedMovie, movies, setMovies, movieId,setGamePlayMode,ea
   const [timerCount, setTimerCount] = useState(10);
   const { width, height } = useWindowDimensions();
   const widthBreakpoint = 700;
-console.log(easySinglePlayer)
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
