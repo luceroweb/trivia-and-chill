@@ -118,6 +118,7 @@ function mapDispatchToProps(dispatch) {
         name,
       }),
 }
+}
 
 const styles = StyleSheet.create({
   container: {
