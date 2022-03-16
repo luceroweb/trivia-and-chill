@@ -18,6 +18,7 @@ import TrueFalse from "../Components/TrueFalse";
 import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
+import Lives from "../Components/Lives";
 
 function Question({ selectedMovie, movies, setMovies, movieId }) {
   const [timerCount, setTimerCount] = useState(10);
@@ -67,6 +68,11 @@ function Question({ selectedMovie, movies, setMovies, movieId }) {
           </View>
           <GenerateQuestion movies={movies} />
           <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+          {/* if gameMode = easy */}
+          <View style={styles.lives}>
+            <Lives />
+          </View>
+          {/* then enable lives */}
           <View style={styles.badge}>
             <Badge />
           </View>
@@ -195,6 +201,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
+  },
+  lives: {
+    position: "absolute",
+    bottom: -15,
+    left: 0,
   },
   timerBox: {
     flexDirection: "row",
