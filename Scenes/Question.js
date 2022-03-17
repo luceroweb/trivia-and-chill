@@ -17,6 +17,7 @@ import TrueFalse from "../Components/TrueFalse";
 import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
+import Lives from "../Components/Lives";
 
 function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
   const [timerCount, setTimerCount] = useState(10);
@@ -41,23 +42,32 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
           width > widthBreakpoint ? styles.image : styles.imageMobile,
         ]}
       >
-        <View
-          style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
-        >
-          <View style={styles.timerBox}>
+        <View>
+          <View style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}>
+            <View style={styles.questionHeader}>
             {gamePlayMode!=="easySinglePlayer" &&<Timer
               timerCount={timerCount}
               setTimerCount={setTimerCount}
             />}
-            
-            <Text
-              style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
-            >
-              Question
-            </Text>
+              <Text
+                style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
+              >
+                Question
+              </Text>
+            </View>
+            <GenerateQuestion movies={movies} />
+            <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
           </View>
-          <GenerateQuestion movies={movies} />
-          <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+        </View>
+
+        <View style={[width > widthBreakpoint ? styles.questionFooter : styles.questionFooterMobile]} >
+          {
+          gamePlayMode!=="easySinglePlayer" &&
+            <View style={styles.lives}>
+              <Lives />
+            </View>
+          }
+          {/* then enable lives */}
           <View style={styles.badge}>
             <Badge />
           </View>
@@ -181,9 +191,30 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-  timerBox: {
-    flexDirection: "row",
+  lives: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
   },
+  questionHeader: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  questionFooter: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    width: "48%",
+  },
+  questionFooterMobile: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    width: "75%",
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);

@@ -26,16 +26,10 @@ function Trailer({ movieId }) {
   
   if (Platform.OS === "web") {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         {youTubeId && (
           <WebView
             mediaPlaybackRequiresUserAction={true}
-            style={{
-              aspectRatio: 16 / 9,
-              width: "100%",
-              alignSelf: "center",
-              alignContent: "center",
-            }}
             javaScriptEnabled={true}
             domStorageEnabled={true}
             source={{ uri: `https:www.youtube.com/embed/${youTubeId}?rel=0` }}
