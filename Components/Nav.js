@@ -9,6 +9,7 @@ import CorrectAnswer from "../Scenes/CorrectAnswer";
 import DeveloperCredits from "../Scenes/DeveloperCredits";
 import About from "../Scenes/About";
 import SettingsModal from "../Components/SettingsModal"
+import GamePlayMode from "./GamePlayMode";
 
 function Nav({ scene }) {
   return (
@@ -16,6 +17,7 @@ function Nav({ scene }) {
       <Header style={styles.header} />
       <SettingsModal/>
       
+      <GamePlayMode style={styles.gamePlayMode}/>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={{ flexGrow: 1 }}
@@ -42,6 +44,10 @@ const styles = StyleSheet.create({
   },
   header: {
     height: "10%",
+  },
+  gamePlayMode: {
+    alignSelf: "center",
+    justifyContent: "center",
   },
   scrollView: {
     // height: "80%",
