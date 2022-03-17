@@ -23,7 +23,9 @@ function Header() {
         >
           The Movie Game
         </Text>
-        {/* <SettingsModal style={{position: "absolute", top: 0, right: 0,}}/> */}
+        <View style={{position: "absolute", top: 7, right: 6,}}>
+        <SettingsModal/>
+        </View>
       </View>
     );
   }
