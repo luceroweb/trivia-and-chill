@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 import { Modal, StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-const SettingsModal = () => {
+const SettingsModal = ({scene}) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View>
+    <View style={{width: "100%", position: 'absolute', textAlign: 'right', top: 4, right: 5,}}>
+      {scene==="Question"||scene==="CorrectAnswer"
+      ?<AntDesign style={styles.gear} name="setting" size={24} color="grey"/>
+      :
+      <>
       <Modal
         animationType="slide"
         transparent={true}
@@ -24,12 +29,20 @@ const SettingsModal = () => {
           <Text style={styles.modalText}>Settings</Text>
         </View>
       </Modal>
-      <Pressable onPress={() => setModalVisible(true)}>
-        <AntDesign style={styles.gear} name="setting" size={24} color="#F2D379"/>
+      <Pressable style={styles.gear} onPress={() => setModalVisible(true)}>
+        <AntDesign name="setting" size={24} color="#F2D379"/>
       </Pressable>
+      </>
+      }
     </View>
   );
 };
+
+function mapStateToProps(state) {
+  return {
+    scene: state.scene,
+  };
+}
 
 const styles = StyleSheet.create({
   modalView: {
@@ -60,8 +73,8 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
   gear:{
-    alignSelf: "flex-end",
+    
   },
 });
 
-export default SettingsModal;
+export default connect(mapStateToProps, null)(SettingsModal);
