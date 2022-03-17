@@ -8,15 +8,12 @@ import Question from "../Scenes/Question";
 import CorrectAnswer from "../Scenes/CorrectAnswer";
 import DeveloperCredits from "../Scenes/DeveloperCredits";
 import About from "../Scenes/About";
-import SettingsModal from "../Components/SettingsModal"
 import GamePlayMode from "./GamePlayMode";
 
 function Nav({ scene }) {
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
-      <SettingsModal/>
-      
       <GamePlayMode style={styles.gamePlayMode}/>
       <ScrollView
         style={styles.scrollView}
