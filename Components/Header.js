@@ -23,7 +23,7 @@ function Header() {
         >
           The Movie Game
         </Text>
-        <SettingsModal/>
+        {/* <SettingsModal style={{position: "absolute", top: 0, right: 0,}}/> */}
       </View>
     );
   }
@@ -31,7 +31,7 @@ function Header() {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "#EEF525",
+    // backgroundColor: "white",
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
