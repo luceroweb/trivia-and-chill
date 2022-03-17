@@ -24,7 +24,7 @@ const SettingsModal = ({scene}) => {
             style={styles.exit}
             onPress={() => setModalVisible(!modalVisible)}
           >
-            <AntDesign style={styles.exit} name="close" size={24} color="black" />
+            <AntDesign style={styles.exit} name="closecircle" size={24} color="black" />
           </Pressable>
           <Text style={styles.modalText}>Settings</Text>
         </View>
