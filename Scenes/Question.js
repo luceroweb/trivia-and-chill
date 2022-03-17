@@ -64,16 +64,17 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
             </View>
             <GenerateQuestion movies={movies} />
             <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
-            <View style={styles.questionFooter}>
-              {/* if gameMode = easy */}
-              <View style={styles.lives}>
-                <Lives />
-              </View>
-              {/* then enable lives */}
-              <View style={styles.badge}>
-                <Badge />
-              </View>
-            </View>
+          </View>
+        </View>
+
+        <View style={[width > widthBreakpoint ? styles.questionFooter : styles.questionFooterMobile]} >
+          {/* if gameMode = easy */}
+          <View style={styles.lives}>
+            <Lives />
+          </View>
+          {/* then enable lives */}
+          <View style={styles.badge}>
+            <Badge />
           </View>
         </View>
 
@@ -210,7 +211,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    width: "100%",
+    width: "48%",
+  },
+  questionFooterMobile: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    width: "75%",
   }
 });
 
