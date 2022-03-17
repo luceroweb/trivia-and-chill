@@ -158,7 +158,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   textContainer: {
-    flexGrow: 1,// pushes textContainer upwards    
     alignSelf: 'center',
     alignItems: "center",
     borderRadius: 10,
