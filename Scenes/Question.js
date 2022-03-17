@@ -3,10 +3,9 @@ import {
   StyleSheet,
   View,
   Text,
-  Pressable,
   ImageBackground,
   useWindowDimensions,
-  SafeAreaView,
+  Platform,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
@@ -20,11 +19,10 @@ import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
 import Lives from "../Components/Lives";
 
-function Question({ selectedMovie, movies, setMovies, movieId }) {
+function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
   const [timerCount, setTimerCount] = useState(10);
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
-
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -47,19 +45,12 @@ function Question({ selectedMovie, movies, setMovies, movieId }) {
         <View>
           <View style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}>
             <View style={styles.questionHeader}>
-              <Timer
-                timerCount={timerCount}
-                setTimerCount={setTimerCount}
-              />
+            {gamePlayMode!=="easySinglePlayer" &&<Timer
+              timerCount={timerCount}
+              setTimerCount={setTimerCount}
+            />}
               <Text
-                style={[
-                  width > 800 ? styles.heading : styles.headingMobile,
-                  {
-                    color: "#F2D379",
-                    fontFamily: "Limelight_400Regular",
-                    fontSize: 30,
-                  },
-                ]}
+                style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
               >
                 Question
               </Text>
@@ -70,10 +61,12 @@ function Question({ selectedMovie, movies, setMovies, movieId }) {
         </View>
 
         <View style={[width > widthBreakpoint ? styles.questionFooter : styles.questionFooterMobile]} >
-          {/* if gameMode = easy */}
-          <View style={styles.lives}>
-            <Lives />
-          </View>
+          {
+          gamePlayMode!=="easySinglePlayer" &&
+            <View style={styles.lives}>
+              <Lives />
+            </View>
+          }
           {/* then enable lives */}
           <View style={styles.badge}>
             <Badge />
@@ -101,6 +94,7 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
+    gamePlayMode:state.gamePlayMode||"easySinglePlayer",
   };
 }
 
@@ -124,7 +118,7 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
-  };
+}
 }
 
 const styles = StyleSheet.create({
@@ -182,17 +176,10 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     alignSelf: "center",
     marginTop: 10,
-    textAlign: "center",    
-  },
-  headingMobile: {
-    flexGrow: 1,
+    textAlign: "center",
     color: "#F2D379",
-    paddingTop: 10,
-    paddingBottom: 4,
-    paddingRight: 50,
-    alignSelf: "center",
-    marginTop: 10,
-    textAlign: "center",    
+    fontFamily: "Limelight_400Regular",
+    fontSize: 30,
   },
   q: {
     color: "#F2D379",
