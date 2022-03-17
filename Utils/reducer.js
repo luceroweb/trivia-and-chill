@@ -13,6 +13,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         winningStreak: state.winningStreak + 1,
       };
+      case "DECREASE_WINNING_STREAK":
+      return {
+        ...state,
+        winningStreak: state.winningStreak - 1,
+      };
     case "RESET_WINNING_STREAK":
       return {
         ...state,

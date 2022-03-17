@@ -14,11 +14,13 @@ const MultipleChoice = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
+  decreaseWinningStreak,
   resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
-  resetLives
+  resetLives,
+  winningStreak
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -54,14 +56,19 @@ const MultipleChoice = ({
         setScene("CorrectAnswer");
       }, 2000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&lives>1&&selection !== correctAnswer){
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
+      setTimeout(() => {
+        decreaseWinningStreak();
+        setScene("Main");
+      }, 1000);
+    }
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
         setTimeout(() => {
-          resetWinningStreak();
           decreaseLives();
           setScene("Main");
         }, 1000);
       }
-      else if(gamePlayMode="easySinglePlayer"&&lives==1&&selection !== correctAnswer){
+      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
         setTimeout(() => {
           resetWinningStreak();
           resetLives();
@@ -105,6 +112,7 @@ const MultipleChoice = ({
       return "line-through";
     }
   };
+
   return (
     <View>
       {multipleAnswer.map((item, index) => (
@@ -133,6 +141,7 @@ const mapStateToProps = (state) => ({
   selectedMovie: state.selectedMovie,
   lives:state.lives,
   gamePlayMode:state.gamePlayMode||"easySinglePlayer",
+  winningStreak:state.winningStreak
 });
 
 function mapDispatchToProps(dispatch) {
@@ -145,6 +154,10 @@ function mapDispatchToProps(dispatch) {
     increaseWinningStreak: () =>
       dispatch({
         type: "INCREASE_WINNING_STREAK",
+      }),
+    decreaseWinningStreak: () =>
+      dispatch({
+        type: "DECREASE_WINNING_STREAK",
       }),
     resetWinningStreak: () =>
       dispatch({
