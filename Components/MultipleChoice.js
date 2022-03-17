@@ -15,6 +15,10 @@ const MultipleChoice = ({
   setScene,
   increaseWinningStreak,
   resetWinningStreak,
+  lives,
+  gamePlayMode,
+  decreaseLives,
+  resetLives
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -49,7 +53,22 @@ const MultipleChoice = ({
         increaseWinningStreak();
         setScene("CorrectAnswer");
       }, 2000);
-    } else {
+    }
+    else if(gamePlayMode="easySinglePlayer"&&lives>1&&selection !== correctAnswer){
+        setTimeout(() => {
+          resetWinningStreak();
+          decreaseLives();
+          setScene("Main");
+        }, 1000);
+      }
+      else if(gamePlayMode="easySinglePlayer"&&lives==1&&selection !== correctAnswer){
+        setTimeout(() => {
+          resetWinningStreak();
+          resetLives();
+          setScene("GameOver");
+        }, 1000);
+      }
+    else {
       setTimeout(() => {
         resetWinningStreak();
         setScene("GameOver");
@@ -86,7 +105,6 @@ const MultipleChoice = ({
       return "line-through";
     }
   };
-
   return (
     <View>
       {multipleAnswer.map((item, index) => (
@@ -113,6 +131,8 @@ const MultipleChoice = ({
 const mapStateToProps = (state) => ({
   questions: state.questions,
   selectedMovie: state.selectedMovie,
+  lives:state.lives,
+  gamePlayMode:state.gamePlayMode||"easySinglePlayer",
 });
 
 function mapDispatchToProps(dispatch) {
@@ -130,6 +150,14 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "RESET_WINNING_STREAK",
       }),
+    decreaseLives: () =>
+      dispatch({
+        type: "DECREASE_LIVES",
+      }),
+    resetLives: () =>
+      dispatch({
+        type: "RESET_LIVES",
+      }),  
   };
 }
 
