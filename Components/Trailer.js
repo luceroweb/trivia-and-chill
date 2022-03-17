@@ -35,7 +35,6 @@ function Trailer({ movieId }) {
             source={{ uri: `https:www.youtube.com/embed/${youTubeId}?rel=0` }}
           />
         )}
-        
       </View>
     );
   } else {
