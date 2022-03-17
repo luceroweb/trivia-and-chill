@@ -69,7 +69,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
           <View
             style={[styles.scrollViewContent, contentViewStyle]}
           >
-            <View style={{ alignItems: 'center', }}>
+            <View style={{ alignItems: 'center', flex: 1 }}>
               <View
                 style={[
                   styles.videoContainer,
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     minWidth: 375, // 320px is iPhone 5/SE size
     width: '50%',
+    height: '100%'
   },
   button: {
     flexShrink: 1,
