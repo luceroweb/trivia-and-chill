@@ -24,12 +24,12 @@ const SettingsModal = ({scene}) => {
             style={styles.exit}
             onPress={() => setModalVisible(!modalVisible)}
           >
-            <AntDesign style={styles.exit} name="closecircle" size={24} color="black" />
+            <AntDesign style={styles.exit} name="close" size={24} color="black" />
           </Pressable>
           <Text style={styles.modalText}>Settings</Text>
         </View>
       </Modal>
-      <Pressable style={styles.gear} onPress={() => setModalVisible(true)}>
+      <Pressable onPress={() => setModalVisible(true)}>
         <AntDesign name="setting" size={24} color="#F2D379"/>
       </Pressable>
       </>
@@ -46,10 +46,10 @@ function mapStateToProps(state) {
 
 const styles = StyleSheet.create({
   modalView: {
-    margin: 20,
+    margin: 50,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 12,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
