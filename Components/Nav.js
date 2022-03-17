@@ -8,11 +8,13 @@ import Question from "../Scenes/Question";
 import CorrectAnswer from "../Scenes/CorrectAnswer";
 import DeveloperCredits from "../Scenes/DeveloperCredits";
 import About from "../Scenes/About";
+import GamePlayMode from "./GamePlayMode";
 
 function Nav({ scene }) {
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
+      <GamePlayMode style={styles.gamePlayMode}/>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={{ flexGrow: 1 }}
@@ -39,6 +41,10 @@ const styles = StyleSheet.create({
   },
   header: {
     height: "10%",
+  },
+  gamePlayMode: {
+    alignSelf: "center",
+    justifyContent: "center",
   },
   scrollView: {
     // height: "80%",
