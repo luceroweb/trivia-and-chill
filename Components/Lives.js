@@ -10,7 +10,7 @@ function Lives({ lives }) {
                 <MaterialCommunityIcons
                     style={styles.livesIcon}
                     name="popcorn"
-                    size={24}
+                    size={35}
                 />
                 <Text style={styles.livesText}>
                     {lives}
@@ -48,21 +48,22 @@ const styles = StyleSheet.create({
         flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
-        padding: 6,
     },
     livesWrap: {
         flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+        position: "relative",
     },
     livesIcon: {
         color: "#F2D379",
     },
     livesText: {
-		position: "relative",
-        top: -20,
-		left: 20,
+		position: "absolute",
 		fontSize: 16,
-		color: "white",
+		color: "black",
+        backgroundColor: "#F2D379",
+        borderRadius: 8,
+        padding: 2,
     },
 });

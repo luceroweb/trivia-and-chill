@@ -44,37 +44,38 @@ function Question({ selectedMovie, movies, setMovies, movieId }) {
           width > widthBreakpoint ? styles.image : styles.imageMobile,
         ]}
       >
-        <View
-          style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
-        >
-          <View style={styles.timerBox}>
-            <Timer
-              timerCount={timerCount}
-              setTimerCount={setTimerCount}
-            />
-            <Text
-              style={[
-                width > 800 ? styles.heading : styles.headingMobile,
-                {
-                  color: "#F2D379",
-                  fontFamily: "Limelight_400Regular",
-                  fontSize: 30,
-                },
-              ]}
-            >
-              Question
-            </Text>
-            <View></View>
-          </View>
-          <GenerateQuestion movies={movies} />
-          <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
-          {/* if gameMode = easy */}
-          <View style={styles.lives}>
-            <Lives />
-          </View>
-          {/* then enable lives */}
-          <View style={styles.badge}>
-            <Badge />
+        <View>
+          <View style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}>
+            <View style={styles.questionHeader}>
+              <Timer
+                timerCount={timerCount}
+                setTimerCount={setTimerCount}
+              />
+              <Text
+                style={[
+                  width > 800 ? styles.heading : styles.headingMobile,
+                  {
+                    color: "#F2D379",
+                    fontFamily: "Limelight_400Regular",
+                    fontSize: 30,
+                  },
+                ]}
+              >
+                Question
+              </Text>
+            </View>
+            <GenerateQuestion movies={movies} />
+            <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+            <View style={styles.questionFooter}>
+              {/* if gameMode = easy */}
+              <View style={styles.lives}>
+                <Lives />
+              </View>
+              {/* then enable lives */}
+              <View style={styles.badge}>
+                <Badge />
+              </View>
+            </View>
           </View>
         </View>
 
@@ -204,13 +205,20 @@ const styles = StyleSheet.create({
   },
   lives: {
     position: "absolute",
-    bottom: -15,
+    bottom: 0,
     left: 0,
   },
-  timerBox: {
+  questionHeader: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  questionFooter: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    width: "100%",
   }
 });
 
