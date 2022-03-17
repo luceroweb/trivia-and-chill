@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 const SettingsModal = ({scene}) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={{position: 'absolute', top: 5, right: 30,}}>
+    <View style={{flexDirection: 'row', justifyContent: 'flex-end', bottom: 35, right: 5}}>
       {scene==="Question"||scene==="CorrectAnswer"
       ?<AntDesign style={styles.gear} name="setting" size={24} color="grey"/>
       :
@@ -73,9 +73,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
   gear:{
-    position: "absolute",
-    justifyContent: "flex-end",
-    flexDirection: "row",
+
   },
 });
 
