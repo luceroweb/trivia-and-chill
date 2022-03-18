@@ -8,7 +8,7 @@ const SettingsModal = ({scene}) => {
   return (
     <View >
       {scene==="Question"||scene==="CorrectAnswer"
-      ?<AntDesign name="setting" size={24} color="grey"/>
+      ?<View></View>
       :
       <>
       <Modal
