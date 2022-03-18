@@ -2,38 +2,53 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { Modal, StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { Picker } from "@react-native-picker/picker";
 
-const SettingsModal = ({scene}) => {
+const SettingsModal = ({ scene }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedMode, setSelectedMode] = useState();
   return (
-    <View >
-      {scene==="Question"||scene==="CorrectAnswer"
-      ?<View></View>
-      :
-      <>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.modalView}>
-          <Pressable
-            style={styles.exit}
-            onPress={() => setModalVisible(!modalVisible)}
+    <View>
+      {scene === "Question" || scene === "CorrectAnswer" ? (
+        <View></View>
+      ) : (
+        <>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(!modalVisible);
+            }}
           >
-            <AntDesign style={styles.exit} name="closecircle" size={24} color="black" />
+            <View style={styles.modalView}>
+              <Pressable
+                style={styles.exit}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <AntDesign
+                  style={styles.exit}
+                  name="closecircle"
+                  size={24}
+                  color="black"
+                />
+              </Pressable>
+              <Picker
+                selectedValue={selectedMode}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedMode(itemValue)
+                }
+              >
+                <Picker.Item label="Single Player" value="java" />
+                <Picker.Item label="Multi Player" value="js" />
+              </Picker>
+            </View>
+          </Modal>
+          <Pressable onPress={() => setModalVisible(true)}>
+            <AntDesign name="setting" size={24} color="#F2D379" />
           </Pressable>
-          <Text style={styles.modalText}>Settings</Text>
-        </View>
-      </Modal>
-      <Pressable onPress={() => setModalVisible(true)}>
-        <AntDesign name="setting" size={24} color="#F2D379"/>
-      </Pressable>
-      </>
-      }
+        </>
+      )}
     </View>
   );
 };
@@ -69,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
-  exit:{
+  exit: {
     alignSelf: "flex-end",
   },
 });

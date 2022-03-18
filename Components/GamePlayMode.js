@@ -6,9 +6,11 @@ function GamePlayMode({ gamePlayMode }) {
   let currentMode = "";
     switch(gamePlayMode) {
       case "singlePlayer":
-        currentMode = "Single Player Mode";
+        currentMode = "Single Player Mode ";
         break;
-        // add more cases for each gamePlayMode state
+        case "multiPlayer":
+        currentMode = "Multi Player Mode ";
+        break;
         default: ""; 
     }
 
