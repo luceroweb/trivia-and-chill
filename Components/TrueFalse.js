@@ -10,15 +10,17 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
-// import {
-// getColorF,
-// getColorT,
-// getIcon } from "./getIcon";
 const TrueFalse = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
+  decreaseWinningStreak,
   resetWinningStreak,
+  lives,
+  gamePlayMode,
+  decreaseLives,
+  resetLives,
+  winningStreak
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
   const answer = selectedMovie?.answer;
@@ -29,7 +31,27 @@ const TrueFalse = ({
         increaseWinningStreak();
         setScene("CorrectAnswer");
       }, 1000);
-    } else {
+    }
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== answer){
+      setTimeout(() => {
+        decreaseWinningStreak();
+        setScene("Main");
+      }, 1000);
+    }
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== answer){
+        setTimeout(() => {
+          decreaseLives();
+          setScene("Main");
+        }, 1000);
+      }
+      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== answer){
+        setTimeout(() => {
+          resetWinningStreak();
+          resetLives();
+          setScene("GameOver");
+        }, 1000);
+      }
+    else {
       setTimeout(() => {
         resetWinningStreak();
         setScene("GameOver");
@@ -183,6 +205,9 @@ const TrueFalse = ({
 const mapStateToProps = (state) => ({
   questions: state.questions,
   selectedMovie: state.selectedMovie,
+  lives:state.lives,
+  gamePlayMode:state.gamePlayMode||"easySinglePlayer",
+  winningStreak:state.winningStreak
 });
 
 function mapDispatchToProps(dispatch) {
@@ -196,9 +221,21 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "INCREASE_WINNING_STREAK",
       }),
+    decreaseWinningStreak: () =>
+      dispatch({
+        type: "DECREASE_WINNING_STREAK",
+      }),
     resetWinningStreak: () =>
       dispatch({
         type: "RESET_WINNING_STREAK",
+      }),
+    decreaseLives: () =>
+      dispatch({
+        type: "DECREASE_LIVES",
+      }),
+    resetLives: () =>
+      dispatch({
+        type: "RESET_LIVES",
       }),
   };
 }
