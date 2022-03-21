@@ -32,27 +32,46 @@ import {
     let answerWidth;
     let answerHeight;
     let aspectRatio;
+    let textSize;
+    let topMargin;
+    let badgeSize;
+    let badgeMargin;
     
-    if (currentWidth > 860) {
+    if (currentWidth > 1000) {
       backgroundImage = drivein;
       contentViewStyle = styles.wrap;
       answerWidth = "50%";
-      answerHeight = "50%";
+      answerHeight = "65%";
+      badgeMargin=11;
+      badgeSize=1.7;
+      textSize=28;
     } else if (currentWidth > 580) {
       backgroundImage = driveinMobile;
       contentViewStyle = styles.wrapMobile;
       answerWidth = "75%";
-      aspectRatio = 16/9;
+      answerHeight="60%";
+      badgeMargin=11;
+      badgeSize=1.7;
+      textSize=28;
+      // aspectRatio = 16/9;
     } else if (currentWidth > 430) {
       backgroundImage = driveinMobileMini;
       contentViewStyle = styles.wrapMini;
       answerWidth = "75%";
-      answerHeight = "100%";
+      answerHeight = "65%";
+      textSize=25;
+      badgeSize=1.4;
+      badgeMargin=10;
     } else {
       backgroundImage = driveinMobileMini;
       contentViewStyle = styles.wrapSuperMini;
-      answerWidth = "75%";
-      answerHeight = "100%";
+      answerWidth = "90%";
+      answerHeight = "33%";
+      textSize=17;
+      topMargin=40;
+      badgeSize=1;
+      // top:40
+      
     }
   
     if (!fontsLoaded) {
@@ -72,15 +91,15 @@ import {
                 <View
                   style={[
                     styles.answerContainer,
-                    { width: answerWidth, height: answerHeight }
+                    { width: answerWidth, height: answerHeight,marginTop:topMargin }
                   ]}
                 >
-                    <Text style={styles.h2}>
-                        Oh no!  You got the wrong answer. You have 
-                        <View style={styles.badge}>
+                    <Text style={[styles.h2,{fontSize:textSize}]}>
+                        Oh no!  You got the wrong answer.{"\n"}{"\n"} You have 
+                        <View style={[styles.badge,{marginLeft:badgeMargin,marginRight:badgeMargin,transform:[{scale:badgeSize}]}]}>
                             <Lives />
                         </View> 
-                        lives left. Try again!
+                        lives left. {"\n"}{"\n"}Try again!
                         <Badge />
                     </Text>              
                 </View>
@@ -122,6 +141,7 @@ import {
   
   const styles = StyleSheet.create({
     wrap: {
+     marginTop:"1%",
     },
     wrapMobile: {
       marginTop: "10%",
@@ -146,7 +166,9 @@ import {
       backgroundColor: "#292840",
       minWidth: 375, // 320px is iPhone 5/SE size
       width: '50%',
-      height: '100%'
+      height: '100%',
+      alignItems:"center",
+      textAlign:'center',
     },
     button: {
       flexShrink: 1,
@@ -158,7 +180,7 @@ import {
       marginTop: 50,
     },
     badge: {
-        display: "block",
+        
     },
     textContainer: {
       alignSelf: 'center',
@@ -172,7 +194,10 @@ import {
       fontSize: 36,
       marginVertical: 10,
       fontFamily: "Limelight_400Regular",
-      color: "#F2D379",    
+      color: "#F2D379", 
+      alignSelf: "center",
+      
+      
     },
     ticketButton: {
       maxWidth: "100%",
