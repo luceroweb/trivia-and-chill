@@ -45,19 +45,12 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
         <View>
           <View style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}>
             <View style={styles.questionHeader}>
-              <Timer
-                timerCount={timerCount}
-                setTimerCount={setTimerCount}
-              />
+            {gamePlayMode!=="easySinglePlayer" &&<Timer
+              timerCount={timerCount}
+              setTimerCount={setTimerCount}
+            />}
               <Text
-                style={[
-                  width > 800 ? styles.heading : styles.headingMobile,
-                  {
-                    color: "#F2D379",
-                    fontFamily: "Limelight_400Regular",
-                    fontSize: 30,
-                  },
-                ]}
+                style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
               >
                 Question
               </Text>
@@ -68,10 +61,12 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
         </View>
 
         <View style={[width > widthBreakpoint ? styles.questionFooter : styles.questionFooterMobile]} >
-          {/* if gameMode = easy */}
-          <View style={styles.lives}>
-            <Lives />
-          </View>
+          {
+          gamePlayMode!=="easySinglePlayer" &&
+            <View style={styles.lives}>
+              <Lives />
+            </View>
+          }
           {/* then enable lives */}
           <View style={styles.badge}>
             <Badge />
