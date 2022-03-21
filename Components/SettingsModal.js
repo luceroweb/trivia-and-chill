@@ -4,7 +4,7 @@ import { Modal, StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 
-const SettingsModal = ({ scene }) => {
+const SettingsModal = ({ scene, gamePlayMode }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedMode, setSelectedMode] = useState();
   return (
@@ -33,14 +33,15 @@ const SettingsModal = ({ scene }) => {
                   color="black"
                 />
               </Pressable>
+              <Text>TEXT GOES HERE</Text>
               <Picker
                 selectedValue={selectedMode}
                 onValueChange={(itemValue, itemIndex) =>
                   setSelectedMode(itemValue)
                 }
               >
-                <Picker.Item label="Single Player" value="java" />
-                <Picker.Item label="Multi Player" value="js" />
+                <Picker.Item label="Single Player" value="SinglePlayer" />
+                <Picker.Item label="Multi Player" value="MultiPlayer" />
               </Picker>
             </View>
           </Modal>
@@ -56,8 +57,10 @@ const SettingsModal = ({ scene }) => {
 function mapStateToProps(state) {
   return {
     scene: state.scene,
+    gamePlayMode: state.gamePlayMode
   };
 }
+
 
 const styles = StyleSheet.create({
   modalView: {
