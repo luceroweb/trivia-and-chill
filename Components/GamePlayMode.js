@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     zIndex: 6,
     borderColor: "#F2D379",
     borderWidth: 1,
-    top: Platform.OS === "ios" ? 76 : 30,
+    top: 30,
   },
   gamePlayText: {
     color: "#F2D379",
