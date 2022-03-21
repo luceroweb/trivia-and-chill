@@ -9,6 +9,7 @@ import CorrectAnswer from "../Scenes/CorrectAnswer";
 import DeveloperCredits from "../Scenes/DeveloperCredits";
 import About from "../Scenes/About";
 import GamePlayMode from "./GamePlayMode";
+import IncorrectAnswer from "../Scenes/IncorrectAnswer";
 
 function Nav({ scene }) {
   return (
@@ -25,6 +26,7 @@ function Nav({ scene }) {
         {scene === "CorrectAnswer" && <CorrectAnswer />}
         {scene === "Credits" && <DeveloperCredits />}
         {scene === "About" && <About />}
+        {scene === "IncorrectAnswer" && <IncorrectAnswer />}
       </ScrollView>
       {scene !== "Question" && scene !== "CorrectAnswer" && (
         <Footer style={styles.footer} />

@@ -35,13 +35,13 @@ const TrueFalse = ({
     else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== answer){
       setTimeout(() => {
         decreaseWinningStreak();
-        setScene("Main");
+        setScene("IncorrectAnswer");
       }, 1000);
     }
     else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== answer){
         setTimeout(() => {
           decreaseLives();
-          setScene("Main");
+          setScene("IncorrectAnswer");
         }, 1000);
       }
       else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== answer){
