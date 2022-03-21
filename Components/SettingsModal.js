@@ -4,9 +4,9 @@ import { Modal, StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 
-const SettingsModal = ({ scene, gamePlayMode }) => {
+const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMode, setSelectedMode] = useState();
+
   return (
     <View>
       {scene === "Question" || scene === "CorrectAnswer" ? (
@@ -35,13 +35,14 @@ const SettingsModal = ({ scene, gamePlayMode }) => {
               </Pressable>
               <Text>TEXT GOES HERE</Text>
               <Picker
-                selectedValue={selectedMode}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedMode(itemValue)
-                }
+                selectedValue={gamePlayMode}
+                onValueChange={(newMode, itemIndex) => {
+                  // this is where the picker calls the redux setter to change the game play mode
+                  setGamePlayMode(newMode)
+                }}
               >
-                <Picker.Item label="Single Player" value="SinglePlayer" />
-                <Picker.Item label="Multi Player" value="MultiPlayer" />
+                <Picker.Item label="Single Player" value="singlePlayer" />
+                <Picker.Item label="Multi Player" value="multiPlayer" />
               </Picker>
             </View>
           </Modal>
@@ -60,7 +61,19 @@ function mapStateToProps(state) {
     gamePlayMode: state.gamePlayMode
   };
 }
-
+// this is how the picker tells redux that the user has selected a new player mode
+// so that other components that use gamePlayMode state, ex GamePlayMode.js, can update with the new player mode
+function mapDispatchToProps(dispatch) {
+  return {
+    setGamePlayMode: (mode) => {
+      dispatch({
+        // type or action or action type, payload
+        type: 'SET_GAME_PLAY_MODE',
+        gamePlayMode: mode
+      })
+    }
+  }
+}
 
 const styles = StyleSheet.create({
   modalView: {
@@ -92,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, null)(SettingsModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsModal);
