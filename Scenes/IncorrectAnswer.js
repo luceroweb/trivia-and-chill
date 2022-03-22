@@ -105,7 +105,7 @@ import {
                 </View>
               </View>
   
-              <Pressable style={[styles.button]} onPress={handleNextQuestion}>
+              <Pressable style={[styles.button]} onPress={handleNextQuestion} accessibilityRole="button" accesibilityLabel="Go to Next Question" accessibilityHint="This button takes you to the next question">
                 <ImageBackground style={styles.ticketButton} source={ticket}>
                   <Text style={styles.ticketText}>Next Question!</Text>
                 </ImageBackground>
