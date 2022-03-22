@@ -5,6 +5,7 @@ import {
     StyleSheet,
     useWindowDimensions,
     ImageBackground,
+    Platform
   } from "react-native";
   import { connect } from "react-redux";
   import Lives from "../Components/Lives";
@@ -56,13 +57,12 @@ import {
     } else {
       backgroundImage = driveinMobileMini;
       contentViewStyle = styles.wrapSuperMini;
-      answerWidth = "90%";
-      answerHeight = "33%";
+      answerWidth = "60%";
+      answerHeight = "43%";
       textSize=17;
-      topMargin=40; 
-    }
-  
-    if (!fontsLoaded) {
+      topMargin=0; 
+    } 
+    if(!fontsLoaded){
       return <AppLoading />;
     } else {
       return (
@@ -87,7 +87,7 @@ import {
                     </Text>              
                 </View>
                 <View style={styles.indicators}>
-                        <View>
+                        <View style={{minWidth:35}}>
                           <Lives />
                         </View>
                         <View>
@@ -141,7 +141,7 @@ import {
       marginTop: "25%",
     },
     wrapSuperMini: {
-      marginTop: 115,
+      marginTop: 90,
     },
     borderStyleDebug: {
       borderWidth: 2,
@@ -155,7 +155,7 @@ import {
     answerContainer: {
       justifyContent: "center",    
       backgroundColor: "#292840",
-      minWidth: 375, // 320px is iPhone 5/SE size
+      minWidth: 325, // 320px is iPhone 5/SE size
       width: '50%',
       height: '100%',
       alignItems:"center",
@@ -204,7 +204,7 @@ import {
       height: "100%",
     },
     indicators: {
-      marginTop: 30,
+      marginTop: Platform.OS === "web" ? 30 : 10,
       minWidth: 375, // 320px is iPhone 5/SE size
       width: '50%',
       display: "flex",
