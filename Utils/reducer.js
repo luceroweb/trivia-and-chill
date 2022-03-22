@@ -1,6 +1,6 @@
 const initialState = {
   winningStreak: 0,
-  scene: "IncorrectAnswer",
+  scene: "WrongAnswer",
   movies: [],
   selectedMovie: {},
   gamePlayMode: "easySinglePlayer",

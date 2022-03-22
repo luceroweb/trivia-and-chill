@@ -59,13 +59,13 @@ const MultipleChoice = ({
     else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
       setTimeout(() => {
         decreaseWinningStreak();
-        setScene("IncorrectAnswer");
+        setScene("WrongAnswer");
       }, 1000);
     }
     else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
         setTimeout(() => {
           decreaseLives();
-          setScene("IncorrectAnswer");
+          setScene("WrongAnswer");
         }, 1000);
       }
       else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){

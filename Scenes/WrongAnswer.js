@@ -16,8 +16,8 @@ import {
   import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
   import Badge from "../Components/Badge";
   
-  const IncorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, lives }) => {
-    const { width: currentWidth, height: currentHeight } = useWindowDimensions();
+  const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
+    const { width: currentWidth } = useWindowDimensions();
     const handleNextQuestion = () => {
       setScene("Question");
       resetSelectedMovie();
@@ -31,47 +31,35 @@ import {
     let contentViewStyle;
     let answerWidth;
     let answerHeight;
-    let aspectRatio;
     let textSize;
     let topMargin;
-    let badgeSize;
-    let badgeMargin;
     
     if (currentWidth > 1000) {
       backgroundImage = drivein;
       contentViewStyle = styles.wrap;
       answerWidth = "50%";
       answerHeight = "65%";
-      badgeMargin=11;
-      badgeSize=1.7;
       textSize=28;
     } else if (currentWidth > 580) {
       backgroundImage = driveinMobile;
       contentViewStyle = styles.wrapMobile;
       answerWidth = "75%";
       answerHeight="60%";
-      badgeMargin=11;
-      badgeSize=1.7;
       textSize=28;
-      // aspectRatio = 16/9;
+      topMargin=14;
     } else if (currentWidth > 430) {
-      backgroundImage = driveinMobileMini;
+      backgroundImage = driveinMobile;
       contentViewStyle = styles.wrapMini;
       answerWidth = "75%";
       answerHeight = "65%";
       textSize=25;
-      badgeSize=1.4;
-      badgeMargin=10;
     } else {
       backgroundImage = driveinMobileMini;
       contentViewStyle = styles.wrapSuperMini;
       answerWidth = "90%";
       answerHeight = "33%";
       textSize=17;
-      topMargin=40;
-      badgeSize=1;
-      // top:40
-      
+      topMargin=40; 
     }
   
     if (!fontsLoaded) {
@@ -95,14 +83,17 @@ import {
                   ]}
                 >
                     <Text style={[styles.h2,{fontSize:textSize}]}>
-                        Oh no!  You got the wrong answer.{"\n"}{"\n"} You have 
-                        <View style={[styles.badge,{marginLeft:badgeMargin,marginRight:badgeMargin,transform:[{scale:badgeSize}]}]}>
-                            <Lives />
-                        </View> 
-                        lives left. {"\n"}{"\n"}Try again!
-                        <Badge />
+                      Incorrect Answer!
                     </Text>              
                 </View>
+                <View style={styles.indicators}>
+                        <View>
+                          <Lives />
+                        </View>
+                        <View>
+                          <Badge />
+                        </View>
+                      </View>
               </View>
   
               <Pressable style={[styles.button]} onPress={handleNextQuestion} accessibilityRole="button" accessibilityHint="This button takes you to the next question">
@@ -179,9 +170,6 @@ import {
       backgroundColor: "transparent",
       marginTop: 50,
     },
-    badge: {
-        
-    },
     textContainer: {
       alignSelf: 'center',
       alignItems: "center",
@@ -215,6 +203,14 @@ import {
       justifyContent: "center",
       height: "100%",
     },
+    indicators: {
+      marginTop: 30,
+      minWidth: 375, // 320px is iPhone 5/SE size
+      width: '50%',
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+    }
   });
   
-  export default connect(mapStateToProps, mapDispatchToProps)(IncorrectAnswer);
+  export default connect(mapStateToProps, mapDispatchToProps)(WrongAnswer);
