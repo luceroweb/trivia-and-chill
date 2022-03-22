@@ -7,6 +7,9 @@ export default function madLibsArray(movies) {
   if (day < 10) {
     day = day[1];
   }
+  if (month < 10) {
+    month = month[1];
+  }
 
   let months = [
     "January",
@@ -24,10 +27,12 @@ export default function madLibsArray(movies) {
   ];
 
   let movieDate = `${months[month - 1]} ${day}, ${year}`;
+  let convertedDate = `${month}/${day}/${year}`;
 
   function generateRandomDate() {
     return new Date(+new Date() - Math.floor(Math.random() * 100000000000));
   }
+
   return (
     movies && [
       {
@@ -85,7 +90,7 @@ export default function madLibsArray(movies) {
       {
         question: `When was ${movies.title} was released on?`, //movie details
         answer: [
-          `${movies.release_date}`,
+          `${convertedDate}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -94,7 +99,7 @@ export default function madLibsArray(movies) {
       {
         question: `${movies.title} was released when?`, //movie details
         answer: [
-          `${movies.release_date}`,
+          `${convertedDate}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -103,7 +108,7 @@ export default function madLibsArray(movies) {
       {
         question: `What was the release date of the ${movies.title}?`, //movie details
         answer: [
-          `${movies.release_date}`,
+          `${convertedDate}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -112,7 +117,7 @@ export default function madLibsArray(movies) {
       {
         question: `${movies.title} was released on what date?`, //movie details
         answer: [
-          `${movies.release_date}`,
+          `${convertedDate}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -121,7 +126,7 @@ export default function madLibsArray(movies) {
       {
         question: `When did ${movies.title} come out?`, //movie details
         answer: [
-          `${movies.release_date}`,
+          `${convertedDate}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -130,7 +135,7 @@ export default function madLibsArray(movies) {
       {
         question: `What was the release date of ${movies.title}?`, //movie details
         answer: [
-          `${movies.release_date}`,
+          `${convertedDate}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
