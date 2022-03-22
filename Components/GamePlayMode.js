@@ -6,10 +6,10 @@ function GamePlayMode({ gamePlayMode }) {
 
   let currentMode = "";
     switch(gamePlayMode) {
-      case "singlePlayer":
-        currentMode = "Single Player Mode";
+      case "easySinglePlayer":
+        currentMode = "Easy Game Play Mode";
         break;
-        // add more cases for each gamePlayMode state
+      // add more cases for each gamePlayMode state
         default: ""; 
     }
 
