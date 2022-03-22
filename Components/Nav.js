@@ -11,7 +11,6 @@ import About from "../Scenes/About";
 import GamePlayMode from "./GamePlayMode";
 
 function Nav({ scene }) {
-
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
@@ -42,24 +41,22 @@ const styles = StyleSheet.create({
         marginTop: 30
       },
       android: {
-        marginTop: StatusBar.currentHeight
+        marginTop: StatusBar.currentHeight        
       },
       default: {
         marginTop: 0
       }
     }),
-    overflow: "hidden",
-    height: "100%",
+    overflow: "hidden",        
   },
   header: {
-    height: "10%",
+    height: "10%",    
   },
   gamePlayMode: {
     alignSelf: "center",
-    justifyContent: "center",
+    justifyContent: "center",    
   },
-  scrollView: {
-    // height: "80%",
+  scrollView: {    
     flex: 1,
     height: "100%",
   },
