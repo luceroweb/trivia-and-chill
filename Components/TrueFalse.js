@@ -32,28 +32,16 @@ const TrueFalse = ({
         setScene("CorrectAnswer");
       }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== answer){
-      setTimeout(() => {
-        decreaseWinningStreak();
-        setScene("Main");
-      }, 1000);
-    }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== answer){
-        setTimeout(() => {
-          decreaseLives();
-          setScene("Main");
-        }, 1000);
-      }
-      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== answer){
-        setTimeout(() => {
-          resetWinningStreak();
-          resetLives();
-          setScene("GameOver");
-        }, 1000);
-      }
-    else {
+    else if (gamePlayMode === "singlePlayer" && lives > 1) {
       setTimeout(() => {
         resetWinningStreak();
+        decreaseLives();
+        setScene("Main");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        resetWinningStreak();
+        resetLives();
         setScene("GameOver");
       }, 1000);
     }
