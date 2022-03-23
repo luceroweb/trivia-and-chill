@@ -20,7 +20,8 @@ const MultipleChoice = ({
   gamePlayMode,
   decreaseLives,
   resetLives,
-  winningStreak
+  winningStreak,
+  resetSelectedMovie,
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -40,13 +41,6 @@ const MultipleChoice = ({
   };
 
   useEffect(() => {
-    console.log('MC mounted')
-    return () => {
-      console.log('MC unmounted')
-    } 
-  }, [])
-
-  useEffect(() => {
     setCorrectAnswer(multipleAnswer[0]);
 
     if (runRandom) {
@@ -54,31 +48,34 @@ const MultipleChoice = ({
     }
   }, [multipleAnswer]);
 
-  useEffect(() => {
-    if (typeof selectedAnswer === 'undefined') return;
+  const isCorrect = (selection) => {
     setRunRandom(false);
-    if (selectedAnswer === correctAnswer) {
+    setSelectedAnswer(selection);
+    if (selection === correctAnswer) {
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
       }, 2000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selectedAnswer !== correctAnswer){
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
       setTimeout(() => {
         decreaseWinningStreak();
-        setScene("WrongAnswer");
+        resetSelectedMovie();
+        setScene("Main");
       }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selectedAnswer !== correctAnswer){
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
         setTimeout(() => {
           decreaseLives();
-          setScene("WrongAnswer");
+          resetSelectedMovie();
+          setScene("Main");
         }, 1000);
       }
-      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selectedAnswer !== correctAnswer){
+      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
         setTimeout(() => {
           resetWinningStreak();
           resetLives();
+          resetSelectedMovie();
           setScene("GameOver");
         }, 1000);
       }
@@ -86,44 +83,10 @@ const MultipleChoice = ({
       setTimeout(() => {
         resetWinningStreak();
         setScene("GameOver");
+        resetSelectedMovie();
       }, 2000);
     }
-  }, [selectedAnswer])
-  // const isCorrect = (selection) => {
-  //   setRunRandom(false);
-  //   setSelectedAnswer(selection);
-  //   if (selection === correctAnswer) {
-  //     setTimeout(() => {
-  //       increaseWinningStreak();
-  //       setScene("CorrectAnswer");
-  //     }, 2000);
-  //   }
-  //   else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
-  //     setTimeout(() => {
-  //       decreaseWinningStreak();
-  //       setScene("Main");
-  //     }, 1000);
-  //   }
-  //   else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
-  //       setTimeout(() => {
-  //         decreaseLives();
-  //         setScene("Main");
-  //       }, 1000);
-  //     }
-  //     else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
-  //       setTimeout(() => {
-  //         resetWinningStreak();
-  //         resetLives();
-  //         setScene("GameOver");
-  //       }, 1000);
-  //     }
-  //   else {
-  //     setTimeout(() => {
-  //       resetWinningStreak();
-  //       setScene("GameOver");
-  //     }, 2000);
-  //   }
-  // };
+  };
 
   const getIcon = (selection) => {
     if (typeof selectedAnswer === "undefined") {
@@ -165,7 +128,7 @@ const MultipleChoice = ({
         >
           <TouchableOpacity
             key={index}
-            onPress={() => setSelectedAnswer(item)}
+            onPress={() => isCorrect(item)}
             style={styles.ticketOption}
           >
             {getIcon(item)}
@@ -212,7 +175,11 @@ function mapDispatchToProps(dispatch) {
     resetLives: () =>
       dispatch({
         type: "RESET_LIVES",
-      }),  
+      }),
+    resetSelectedMovie: () =>
+      dispatch({
+        type: "RESET_SELECTED_MOVIE",
+      }),
   };
 }
 
