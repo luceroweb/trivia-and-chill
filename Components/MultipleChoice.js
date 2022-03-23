@@ -54,33 +54,23 @@ const MultipleChoice = ({
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
-      }, 2000);
-    }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
-      setTimeout(() => {
-        decreaseWinningStreak();
-        setScene("WrongAnswer");
       }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
-        setTimeout(() => {
-          decreaseLives();
-          setScene("WrongAnswer");
-        }, 1000);
-      }
-      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
-        setTimeout(() => {
-          resetWinningStreak();
-          resetLives();
-          setScene("GameOver");
-        }, 1000);
-      }
-    else {
+
+    else if (gamePlayMode === "singlePlayer" && lives > 1) {
       setTimeout(() => {
         resetWinningStreak();
+        decreaseLives();
+        setScene("Main");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        resetWinningStreak();
+        resetLives();
         setScene("GameOver");
-      }, 2000);
+      }, 1000);
     }
+
   };
 
   const getIcon = (selection) => {
