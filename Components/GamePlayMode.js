@@ -1,24 +1,28 @@
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, useWindowDimensions } from "react-native";
 import { connect } from "react-redux";
 
 function GamePlayMode({ gamePlayMode }) {
+  const { height } = useWindowDimensions();
 
   let currentMode = "";
-    switch(gamePlayMode) {
-      case "singlePlayer":
-        currentMode = "Single Player Mode ";
-        break;
-        case "multiPlayer":
-        currentMode = "Multi Player Mode ";
-        break;
-        default: ""; 
-    }
+  switch (gamePlayMode) {
+    case "singlePlayer":
+      currentMode = "Single Player Mode ";
+      break;
+    case "multiPlayer":
+      currentMode = "Multi Player Mode ";
+      break;
+    default:
+      "";
+  }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, 
+      {top: Platform.OS === "ios" && height === "1334px" 
+      ? 40 : Platform.OS === "ios" 
+      ? 48 : 30}]}>
       <Text style={styles.gamePlayText}>{currentMode}</Text>
-    </View>
-  
+    </View>  
   );
 }
 
@@ -39,8 +43,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 6,
     borderColor: "#F2D379",
-    borderWidth: 1,
-    top: Platform.OS === "ios" ? 76 : 30,
+    borderWidth: 1    
   },
   gamePlayText: {
     color: "#F2D379",
