@@ -83,8 +83,18 @@ import {
                   ]}
                 >
                     <Text style={[styles.h2,{fontSize:textSize}]}>
-                      Incorrect Answer!
-                    </Text>              
+                      Incorrect Answer!</Text>
+
+                      <Text style={styles.livesText}>
+                        Oh no!  You lost a life.{"\n"}{"\n"} 
+                        You have 
+                        <View style={[styles.badge
+                          // ,{marginLeft:badgeMargin,marginRight:badgeMargin,transform:[{scale:badgeSize}]}
+                          ]}>
+                            <Lives />
+                        </View> 
+                        lives left. {"\n"}{"\n"}Try again!
+                    </Text>            
                 </View>
                 <View style={styles.indicators}>
                         <View style={{minWidth:35}}>
@@ -210,6 +220,12 @@ import {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
+    },
+    livesText: {
+      marginTop: 10,
+      color: "#ffffff",
+      fontSize: 18,
+      fontWeight: "bold",
     }
   });
   
