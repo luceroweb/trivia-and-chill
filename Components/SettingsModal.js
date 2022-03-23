@@ -42,7 +42,7 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
                 }}
               >
                 <Picker.Item label="Single Player" value="singlePlayer" />
-                <Picker.Item label="Multi Player" value="multiPlayer" />
+                <Picker.Item label="Easy Single Player" value="easySinglePlayer" />
               </Picker>
             </View>
           </Modal>
