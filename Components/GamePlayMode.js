@@ -2,23 +2,22 @@ import { View, Text, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
 
 function GamePlayMode({ gamePlayMode }) {
-
   let currentMode = "";
-    switch(gamePlayMode) {
-      case "singlePlayer":
-        currentMode = "Single Player Mode ";
-        break;
-        case "multiPlayer":
-        currentMode = "Multi Player Mode ";
-        break;
-        default: ""; 
-    }
+  switch (gamePlayMode) {
+    case "singlePlayer":
+      currentMode = "Single Player Mode ";
+      break;
+    case "multiPlayer":
+      currentMode = "Multi Player Mode ";
+      break;
+    default:
+      "";
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.gamePlayText}>{currentMode}</Text>
     </View>
-  
   );
 }
 
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
   },
   gamePlayText: {
     color: "#F2D379",
-    fontWeight: "bold", 
+    fontWeight: "bold",
     fontSize: 12,
   },
 });
