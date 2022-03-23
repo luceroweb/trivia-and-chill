@@ -16,13 +16,44 @@ import {
   import driveinMobile from '../Images/drive-in-movie-mobile.jpg';
   import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
   import Badge from "../Components/Badge";
+  import { Audio } from "expo-av";
+  import wrongSound from "../Sounds/wrongSound.wav";
+  import { useState, useEffect} from "react";
+
+
   
   const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
+    
+    const [sound, setSound] = useState();
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(wrongSound);
+    setSound(sound);
+  }
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(wrongSound);
+    setSound(sound);
+
+    await sound.playAsync();
+  }
+
+  useEffect(() => {
+    playSound();
+    return sound
+      ? () => {
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, []);
+
     const { width: currentWidth } = useWindowDimensions();
     const handleNextQuestion = () => {
       setScene("Question");
       resetSelectedMovie();
     };
+
+
   
     let [fontsLoaded] = useFonts({
       Limelight_400Regular,
