@@ -32,7 +32,7 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
   });
-  console.log(selectedMovie);
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else if (Object.keys(selectedMovie).length === 0) {
@@ -51,10 +51,10 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
         <View>
           <View style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}>
             <View style={styles.questionHeader}>
-            {/* {gamePlayMode!=="easySinglePlayer" &&<Timer
+            {gamePlayMode!=="easySinglePlayer" &&<Timer
               timerCount={timerCount}
               setTimerCount={setTimerCount}
-            />} */}
+            />}
               <Text
                 style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
               >
