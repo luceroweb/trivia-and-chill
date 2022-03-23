@@ -12,9 +12,9 @@ import {
   import AppLoading from "expo-app-loading";
   import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
   import ticket from "../Images/ticket.png";
-  import drivein from "../Images/drive-in-movie.jpg";
-  import driveinMobile from '../Images/drive-in-movie-mobile.jpg';
-  import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
+  import driveIn from "../Images/drive-in-movie.jpg";
+  import driveInMobile from '../Images/drive-in-movie-mobile.jpg';
+  import driveInMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
   import Badge from "../Components/Badge";
   
   const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
@@ -36,75 +36,77 @@ import {
     let topMargin;
     
     if (currentWidth > 1000) {
-      backgroundImage = drivein;
-      contentViewStyle = styles.wrap;
+      backgroundImage = driveIn;
       answerWidth = "50%";
-      answerHeight = "65%";
+      answerHeight = "100%";
       textSize=28;
     } else if (currentWidth > 580) {
-      backgroundImage = driveinMobile;
-      contentViewStyle = styles.wrapMobile;
-      answerWidth = "75%";
-      answerHeight="60%";
+      backgroundImage = driveInMobile;
+      answerWidth = "80%";
+      answerHeight="100%";
       textSize=28;
-      topMargin=14;
     } else if (currentWidth > 430) {
-      backgroundImage = driveinMobile;
-      contentViewStyle = styles.wrapMini;
-      answerWidth = "75%";
-      answerHeight = "65%";
+      backgroundImage = driveInMobile;
+      answerWidth = "80%";
+      answerHeight = "100%";
       textSize=25;
     } else {
-      backgroundImage = driveinMobileMini;
-      contentViewStyle = styles.wrapSuperMini;
-      answerWidth = "60%";
-      answerHeight = "43%";
+      backgroundImage = driveInMobileMini;
+      answerWidth = "48%";
+      answerHeight = "65%";
       textSize=17;
-      topMargin=0; 
+    
     } 
     if(!fontsLoaded){
       return <AppLoading />;
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <ImageBackground
-            style={styles.drivein}
-            source={backgroundImage}
-            resizeMode="cover"
-          >
-            <View
-              style={[styles.scrollViewContent, contentViewStyle]}
-            >
-              <View style={{ alignItems: 'center', flex: 1 }}>
-                <View
-                  style={[
-                    styles.answerContainer,
-                    { width: answerWidth, height: answerHeight,marginTop:topMargin }
-                  ]}
-                >
-                    <Text style={[styles.h2,{fontSize:textSize}]}>
-                      Incorrect Answer!
-                    </Text>              
-                </View>
-                <View style={styles.indicators}>
-                        <View style={{minWidth:35}}>
-                          <Lives />
-                        </View>
-                        <View>
-                          <Badge />
-                        </View>
-                      </View>
-              </View>
-  
-              <Pressable style={[styles.button]} onPress={handleNextQuestion} accessibilityRole="button" accessibilityHint="This button takes you to the next question">
-                <ImageBackground style={styles.ticketButton} source={ticket}>
-                  <Text style={styles.ticketText}>Next Question!</Text>
-                </ImageBackground>
-              </Pressable>
-            </View>
-          </ImageBackground>
-        </View>
-      );
+				<View style={{ flex: 1 }}>
+					<ImageBackground
+						style={styles.driveIn}
+						source={backgroundImage}
+						resizeMode="cover"
+					>
+						<View style={[styles.scrollViewContent, contentViewStyle]}>
+							<View style={{ alignItems: "center", flex: 1 }}>
+								<View
+									style={[
+										styles.answerContainer,
+										{
+											width: answerWidth,
+											height: answerHeight,
+											marginTop: topMargin,
+										},
+									]}
+								>
+									<Text style={[styles.h2, { fontSize: textSize }]}>
+										Incorrect Answer!
+									</Text>
+								</View>
+								<View style={styles.indicators}>
+									<View style={{ minWidth: 45 }}>
+										<Lives />
+									</View>
+									<View >
+										<Badge />
+									</View>
+								</View>
+							</View>
+
+							<Pressable
+								style={[styles.button]}
+								onPress={handleNextQuestion}
+								accessibilityRole="button"
+								accessibilityHint="This button takes you to the next question"
+							>
+								<ImageBackground style={styles.ticketButton} source={ticket}>
+									<Text style={styles.ticketText}>Next Question!</Text>
+								</ImageBackground>
+							</Pressable>
+						</View>
+					</ImageBackground>
+				</View>
+			);
     }
   };
   
@@ -131,19 +133,7 @@ import {
   }
   
   const styles = StyleSheet.create({
-    wrap: {
-     marginTop:"1%",
-    },
-    wrapMobile: {
-      marginTop: "10%",
-    },
-    wrapMini: {
-      marginTop: "25%",
-    },
-    wrapSuperMini: {
-      marginTop: 90,
-    },
-    borderStyleDebug: {
+  borderStyleDebug: {
       borderWidth: 2,
       borderColor: "#000",
     },
@@ -199,7 +189,7 @@ import {
       position: "absolute",
       alignSelf: "center",
     },
-    drivein: {
+    driveIn: {
       justifyContent: "center",
       height: "100%",
     },
