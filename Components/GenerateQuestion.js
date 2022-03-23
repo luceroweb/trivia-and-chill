@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
 import axios from "axios";
 
-const GenerateQuestion = ({ movies, setSelectedMovie }) => {
+const GenerateQuestion = ({ movies, setSelectedMovie}) => {
   useEffect(() => {
     let movie = movies ? movies[RandomGenerator(movies.length)] : [];
     axios.all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])

@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar, Platform } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
 import Header from "./Header";
@@ -8,11 +8,14 @@ import Question from "../Scenes/Question";
 import CorrectAnswer from "../Scenes/CorrectAnswer";
 import DeveloperCredits from "../Scenes/DeveloperCredits";
 import About from "../Scenes/About";
+import GamePlayMode from "./GamePlayMode";
+import WrongAnswer from "../Scenes/WrongAnswer";
 
 function Nav({ scene }) {
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
+      <GamePlayMode style={styles.gamePlayMode}/>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={{ flexGrow: 1 }}
@@ -23,6 +26,7 @@ function Nav({ scene }) {
         {scene === "CorrectAnswer" && <CorrectAnswer />}
         {scene === "Credits" && <DeveloperCredits />}
         {scene === "About" && <About />}
+        {scene === "WrongAnswer" && <WrongAnswer />}
       </ScrollView>
       {scene !== "Question" && scene !== "CorrectAnswer" && (
         <Footer style={styles.footer} />
@@ -34,14 +38,27 @@ function Nav({ scene }) {
 const styles = StyleSheet.create({
   layout: {
     flexGrow: 1,
-    marginTop: StatusBar.currentHeight,
-    overflow: "hidden",
+    ...Platform.select({
+      ios: {
+        marginTop: 30
+      },
+      android: {
+        marginTop: StatusBar.currentHeight        
+      },
+      default: {
+        marginTop: 0
+      }
+    }),
+    overflow: "hidden",        
   },
   header: {
-    height: "10%",
+    height: "10%",    
   },
-  scrollView: {
-    // height: "80%",
+  gamePlayMode: {
+    alignSelf: "center",
+    justifyContent: "center",    
+  },
+  scrollView: {    
     flex: 1,
     height: "100%",
   },
