@@ -40,6 +40,13 @@ const MultipleChoice = ({
   };
 
   useEffect(() => {
+    console.log('MC mounted')
+    return () => {
+      console.log('MC unmounted')
+    } 
+  }, [])
+
+  useEffect(() => {
     setCorrectAnswer(multipleAnswer[0]);
 
     if (runRandom) {
@@ -47,28 +54,28 @@ const MultipleChoice = ({
     }
   }, [multipleAnswer]);
 
-  const isCorrect = (selection) => {
+  useEffect(() => {
+    if (typeof selectedAnswer === 'undefined') return;
     setRunRandom(false);
-    setSelectedAnswer(selection);
-    if (selection === correctAnswer) {
+    if (selectedAnswer === correctAnswer) {
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
       }, 2000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selectedAnswer !== correctAnswer){
       setTimeout(() => {
         decreaseWinningStreak();
         setScene("WrongAnswer");
       }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selectedAnswer !== correctAnswer){
         setTimeout(() => {
           decreaseLives();
           setScene("WrongAnswer");
         }, 1000);
       }
-      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
+      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selectedAnswer !== correctAnswer){
         setTimeout(() => {
           resetWinningStreak();
           resetLives();
@@ -81,7 +88,42 @@ const MultipleChoice = ({
         setScene("GameOver");
       }, 2000);
     }
-  };
+  }, [selectedAnswer])
+  // const isCorrect = (selection) => {
+  //   setRunRandom(false);
+  //   setSelectedAnswer(selection);
+  //   if (selection === correctAnswer) {
+  //     setTimeout(() => {
+  //       increaseWinningStreak();
+  //       setScene("CorrectAnswer");
+  //     }, 2000);
+  //   }
+  //   else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
+  //     setTimeout(() => {
+  //       decreaseWinningStreak();
+  //       setScene("Main");
+  //     }, 1000);
+  //   }
+  //   else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
+  //       setTimeout(() => {
+  //         decreaseLives();
+  //         setScene("Main");
+  //       }, 1000);
+  //     }
+  //     else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
+  //       setTimeout(() => {
+  //         resetWinningStreak();
+  //         resetLives();
+  //         setScene("GameOver");
+  //       }, 1000);
+  //     }
+  //   else {
+  //     setTimeout(() => {
+  //       resetWinningStreak();
+  //       setScene("GameOver");
+  //     }, 2000);
+  //   }
+  // };
 
   const getIcon = (selection) => {
     if (typeof selectedAnswer === "undefined") {
@@ -123,7 +165,7 @@ const MultipleChoice = ({
         >
           <TouchableOpacity
             key={index}
-            onPress={() => isCorrect(item)}
+            onPress={() => setSelectedAnswer(item)}
             style={styles.ticketOption}
           >
             {getIcon(item)}
