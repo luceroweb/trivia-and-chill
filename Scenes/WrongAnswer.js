@@ -38,21 +38,21 @@ import {
     if (currentWidth > 1000) {
       backgroundImage = driveIn;
       answerWidth = "50%";
-      answerHeight = "100%";
+      answerHeight = "82%";
       textSize=28;
     } else if (currentWidth > 580) {
       backgroundImage = driveInMobile;
       answerWidth = "80%";
-      answerHeight="100%";
+      answerHeight="80%";
       textSize=28;
     } else if (currentWidth > 430) {
       backgroundImage = driveInMobile;
       answerWidth = "80%";
-      answerHeight = "100%";
+      answerHeight = "80%";
       textSize=25;
     } else {
       backgroundImage = driveInMobileMini;
-      answerWidth = "48%";
+      answerWidth = "100%";
       answerHeight = "65%";
       textSize=17;
     
