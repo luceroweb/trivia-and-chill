@@ -88,11 +88,11 @@ import {
                       <Text style={styles.livesText}>
                         Oh no!  You lost a life.{"\n"}{"\n"} 
                         You have 
-                        <View style={[styles.badge
+                        {/* <View style={[styles.badge
                           // ,{marginLeft:badgeMargin,marginRight:badgeMargin,transform:[{scale:badgeSize}]}
-                          ]}>
-                            <Lives />
-                        </View> 
+                          ]}> */}
+                            <Text style={{paddingLeft: 5, paddingRight:5}}>{lives}</Text>
+                        {/* </View>  */}
                         lives left. {"\n"}{"\n"}Try again!
                     </Text>            
                 </View>
