@@ -1,94 +1,122 @@
 import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  ImageBackground,
-  Platform,
-} from "react-native";
-import { connect } from "react-redux";
-import Lives from "../Components/Lives";
-import AppLoading from "expo-app-loading";
-import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
-import ticket from "../Images/ticket.png";
-import drivein from "../Images/drive-in-movie.jpg";
-import driveinMobile from "../Images/drive-in-movie-mobile.jpg";
-import driveinMobileMini from "../Images/drive-in-movie-mobile-mini.jpg";
-import Badge from "../Components/Badge";
+    View,
+    Text,
+    Pressable,
+    StyleSheet,
+    useWindowDimensions,
+    ImageBackground,
+    Platform
+  } from "react-native";
+  import { connect } from "react-redux";
+  import Lives from "../Components/Lives";
+  import AppLoading from "expo-app-loading";
+  import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
+  import ticket from "../Images/ticket.png";
+  import drivein from "../Images/drive-in-movie.jpg";
+  import driveinMobile from '../Images/drive-in-movie-mobile.jpg';
+  import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
+  import Badge from "../Components/Badge";
+  import { Audio } from "expo-av";
+  import wrongSound from "../Sounds/wrongSound.wav";
+  import { useState, useEffect} from "react";
 
-const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
-  const { width: currentWidth } = useWindowDimensions();
-  const handleNextQuestion = () => {
-    setScene("Question");
-    resetSelectedMovie();
-  };
 
-  let [fontsLoaded] = useFonts({
-    Limelight_400Regular,
-  });
+  
+  const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
+    
+    const [sound, setSound] = useState();
 
-  let backgroundImage;
-  let contentViewStyle;
-  let answerWidth;
-  let answerHeight;
-  let textSize;
-  let topMargin;
-
-  if (currentWidth > 1000) {
-    backgroundImage = drivein;
-    contentViewStyle = styles.wrap;
-    answerWidth = "50%";
-    answerHeight = "65%";
-    textSize = 28;
-  } else if (currentWidth > 580) {
-    backgroundImage = driveinMobile;
-    contentViewStyle = styles.wrapMobile;
-    answerWidth = "75%";
-    answerHeight = "60%";
-    textSize = 28;
-    topMargin = 14;
-  } else if (currentWidth > 430) {
-    backgroundImage = driveinMobile;
-    contentViewStyle = styles.wrapMini;
-    answerWidth = "75%";
-    answerHeight = "65%";
-    textSize = 25;
-  } else {
-    backgroundImage = driveinMobileMini;
-    contentViewStyle = styles.wrapSuperMini;
-    answerWidth = "60%";
-    answerHeight = "43%";
-    textSize = 17;
-    topMargin = 0;
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(wrongSound);
+    setSound(sound);
   }
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
-    return (
-      <View style={{ flex: 1 }}>
-        <ImageBackground
-          style={styles.drivein}
-          source={backgroundImage}
-          resizeMode="cover"
-        >
-          <View style={[styles.scrollViewContent, contentViewStyle]}>
-            <View style={{ alignItems: "center", flex: 1 }}>
-              <View
-                style={[
-                  styles.answerContainer,
-                  {
-                    width: answerWidth,
-                    height: answerHeight,
-                    marginTop: topMargin,
-                  },
-                ]}
-              >
-                <Text style={[styles.h2, { fontSize: textSize }]}>
-                  Incorrect Answer!
-                </Text>
 
-                <Text style={styles.livesText}>
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(wrongSound);
+    setSound(sound);
+
+    await sound.playAsync();
+  }
+
+  useEffect(() => {
+    playSound();
+    return sound
+      ? () => {
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, []);
+
+    const { width: currentWidth } = useWindowDimensions();
+    const handleNextQuestion = () => {
+      setScene("Question");
+      resetSelectedMovie();
+    };
+
+
+  
+    let [fontsLoaded] = useFonts({
+      Limelight_400Regular,
+    });
+  
+    let backgroundImage;
+    let contentViewStyle;
+    let answerWidth;
+    let answerHeight;
+    let textSize;
+    let topMargin;
+    
+    if (currentWidth > 1000) {
+      backgroundImage = drivein;
+      contentViewStyle = styles.wrap;
+      answerWidth = "50%";
+      answerHeight = "65%";
+      textSize=28;
+    } else if (currentWidth > 580) {
+      backgroundImage = driveinMobile;
+      contentViewStyle = styles.wrapMobile;
+      answerWidth = "75%";
+      answerHeight="60%";
+      textSize=28;
+      topMargin=14;
+    } else if (currentWidth > 430) {
+      backgroundImage = driveinMobile;
+      contentViewStyle = styles.wrapMini;
+      answerWidth = "75%";
+      answerHeight = "65%";
+      textSize=25;
+    } else {
+      backgroundImage = driveinMobileMini;
+      contentViewStyle = styles.wrapSuperMini;
+      answerWidth = "60%";
+      answerHeight = "43%";
+      textSize=17;
+      topMargin=0; 
+    } 
+    if(!fontsLoaded){
+      return <AppLoading />;
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          <ImageBackground
+            style={styles.drivein}
+            source={backgroundImage}
+            resizeMode="cover"
+          >
+            <View
+              style={[styles.scrollViewContent, contentViewStyle]}
+            >
+              <View style={{ alignItems: 'center', flex: 1 }}>
+                <View
+                  style={[
+                    styles.answerContainer,
+                    { width: answerWidth, height: answerHeight,marginTop:topMargin }
+                  ]}
+                >
+                    <Text style={[styles.h2,{fontSize:textSize}]}>
+                      Incorrect Answer!
+                    </Text>   
+                    <Text style={styles.livesText}>
                   Oh no! You lost a life.{"\n"}
                   {"\n"}
                   You have
@@ -104,7 +132,7 @@ const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
                   <Lives />
                 </View>
                 <View>
-                  <Badge />
+                  <Badge />           
                 </View>
               </View>
             </View>
