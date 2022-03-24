@@ -33,8 +33,22 @@ export default function madLibsArray(movies) {
     return new Date(+new Date() - Math.floor(Math.random() * 100000000000));
   }
 
+  function generateRandomCastNumber() {
+    let randomCast = movies.cast;
+    return randomCast[Math.floor(Math.random() * randomCast.length)];    
+  }
+
+  const randomCast1 = generateRandomCastNumber();
+  const randomCast2 = generateRandomCastNumber();    
+
   return (
     movies && [
+      {          
+        question: `${movies.title}'s cast included ${randomCast1.name} and ${randomCast2.name}.`, 
+        answer: randomCast1.known_for_department === "Acting" && randomCast2.known_for_department === "Acting"
+        ?true: false,
+        movieId: `${movies.id}`        
+      },
       {
         question: `${movies.title} was released on ${movieDate}.`, //movie details
         answer: true,

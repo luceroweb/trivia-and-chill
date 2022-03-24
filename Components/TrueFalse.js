@@ -20,7 +20,8 @@ const TrueFalse = ({
   gamePlayMode,
   decreaseLives,
   resetLives,
-  winningStreak
+  winningStreak,
+  resetSelectedMovie,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
   const answer = selectedMovie?.answer;
@@ -34,14 +35,30 @@ const TrueFalse = ({
     }
     else if (gamePlayMode === "singlePlayer" && lives > 1) {
       setTimeout(() => {
-        resetWinningStreak();
-        decreaseLives();
+        decreaseWinningStreak();
+        resetSelectedMovie();
         setScene("Main");
       }, 1000);
-    } else {
+    }
+    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== answer){
+        setTimeout(() => {
+          decreaseLives();
+          resetSelectedMovie();
+          setScene("Main");
+        }, 1000);
+      }
+      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== answer){
+        setTimeout(() => {
+          resetWinningStreak();
+          resetLives();
+          resetSelectedMovie();
+          setScene("GameOver");
+        }, 1000);
+      }
+    else {
       setTimeout(() => {
         resetWinningStreak();
-        resetLives();
+        resetSelectedMovie();
         setScene("GameOver");
       }, 1000);
     }
@@ -224,6 +241,10 @@ function mapDispatchToProps(dispatch) {
     resetLives: () =>
       dispatch({
         type: "RESET_LIVES",
+      }),
+    resetSelectedMovie: () =>
+      dispatch({
+        type: "RESET_SELECTED_MOVIE",
       }),
   };
 }
