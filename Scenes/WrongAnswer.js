@@ -18,7 +18,7 @@ import {
   import Badge from "../Components/Badge";
   
   const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
-    const { width: currentWidth } = useWindowDimensions();
+    const { width: currentWidth ,height:currentHeight } = useWindowDimensions();
     const handleNextQuestion = () => {
       setScene("Question");
       resetSelectedMovie();
@@ -35,28 +35,63 @@ import {
     let textSize;
     let topMargin;
     
-    if (currentWidth > 1000) {
-      backgroundImage = driveIn;
-      answerWidth = "50%";
-      answerHeight = "82%";
-      textSize=28;
-    } else if (currentWidth > 580) {
-      backgroundImage = driveInMobile;
-      answerWidth = "80%";
-      answerHeight="80%";
-      textSize=28;
-    } else if (currentWidth > 430) {
-      backgroundImage = driveInMobile;
-      answerWidth = "80%";
-      answerHeight = "80%";
-      textSize=25;
-    } else {
-      backgroundImage = driveInMobileMini;
-      answerWidth = "100%";
-      answerHeight = "65%";
-      textSize=17;
-    
-    } 
+    if (currentWidth >1300 && currentHeight > 1200) {
+			backgroundImage = driveIn;
+			answerWidth = "50%";
+			answerHeight = "70%";
+			textSize = 28;
+		} else if (currentWidth > 900 && currentHeight > 1200) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "65%";
+			textSize = 28;
+		} else if (currentWidth > 900 && currentHeight < 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "95%";
+			textSize = 28;
+		} else if (currentWidth < 800 && currentHeight > 900) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "65%";
+			textSize = 28;
+		} 
+		 else if (currentWidth >500 && currentHeight < 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "90%";
+			textSize = 28;
+		} else if (currentWidth < 430 && currentHeight > 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "75%";
+			textSize = 28;
+		} else if (currentWidth < 370 && currentHeight > 500) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "86%";
+			textSize = 28;
+		} else if (currentWidth < 600 && currentHeight > 500) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "90%";
+			textSize = 28;
+		} else if (currentWidth > 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "80%";
+			answerHeight = "80%";
+			textSize = 28;
+		} else if (currentWidth > 580) {
+			backgroundImage = driveInMobile;
+			answerWidth = "80%";
+			answerHeight = "80%";
+			textSize = 28;
+		} else {
+			backgroundImage = driveInMobileMini;
+			answerWidth = "100%";
+			answerHeight = "65%";
+			textSize = 17;
+		} 
     if(!fontsLoaded){
       return <AppLoading />;
     } else {
