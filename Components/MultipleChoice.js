@@ -55,9 +55,10 @@ const MultipleChoice = ({
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
-      }, 2000);
+      }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
+
+    else if (gamePlayMode === "singlePlayer" && lives > 1) {
       setTimeout(() => {
         decreaseWinningStreak();
         resetSelectedMovie();
@@ -82,10 +83,12 @@ const MultipleChoice = ({
     else {
       setTimeout(() => {
         resetWinningStreak();
+        resetLives();
         setScene("GameOver");
         resetSelectedMovie();
       }, 2000);
     }
+
   };
 
   const getIcon = (selection) => {

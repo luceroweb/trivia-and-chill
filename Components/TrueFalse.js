@@ -33,7 +33,7 @@ const TrueFalse = ({
         setScene("CorrectAnswer");
       }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== answer){
+    else if (gamePlayMode === "singlePlayer" && lives > 1) {
       setTimeout(() => {
         decreaseWinningStreak();
         resetSelectedMovie();

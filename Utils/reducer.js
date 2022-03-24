@@ -3,7 +3,7 @@ const initialState = {
   scene: "Main",
   movies: [],
   selectedMovie: {},
-  gamePlayMode: "easySinglePlayer",
+  gamePlayMode: "singlePlayer",
   lives: 3,
 };
 
