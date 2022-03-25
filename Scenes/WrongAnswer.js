@@ -16,6 +16,9 @@ import {
   import driveInMobile from '../Images/drive-in-movie-mobile.jpg';
   import driveInMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
   import Badge from "../Components/Badge";
+  import { useState, useEffect} from "react";
+
+
   
   const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
     const { width: currentWidth ,height:currentHeight } = useWindowDimensions();
@@ -23,6 +26,8 @@ import {
       setScene("Question");
       resetSelectedMovie();
     };
+
+
   
     let [fontsLoaded] = useFonts({
       Limelight_400Regular,

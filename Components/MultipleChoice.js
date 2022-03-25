@@ -20,7 +20,8 @@ const MultipleChoice = ({
   gamePlayMode,
   decreaseLives,
   resetLives,
-  winningStreak
+  winningStreak,
+  resetSelectedMovie,
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -54,33 +55,40 @@ const MultipleChoice = ({
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
-      }, 2000);
+      }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== correctAnswer){
+
+    else if (gamePlayMode === "singlePlayer" && lives > 1) {
       setTimeout(() => {
         decreaseWinningStreak();
-        setScene("WrongAnswer");
+        resetSelectedMovie();
+        setScene("Main");
       }, 1000);
     }
     else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
         setTimeout(() => {
           decreaseLives();
-          setScene("WrongAnswer");
+          resetSelectedMovie();
+          setScene("Main");
         }, 1000);
       }
       else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
         setTimeout(() => {
           resetWinningStreak();
           resetLives();
+          resetSelectedMovie();
           setScene("GameOver");
         }, 1000);
       }
     else {
       setTimeout(() => {
         resetWinningStreak();
+        resetLives();
         setScene("GameOver");
+        resetSelectedMovie();
       }, 2000);
     }
+
   };
 
   const getIcon = (selection) => {
@@ -170,7 +178,11 @@ function mapDispatchToProps(dispatch) {
     resetLives: () =>
       dispatch({
         type: "RESET_LIVES",
-      }),  
+      }),
+    resetSelectedMovie: () =>
+      dispatch({
+        type: "RESET_SELECTED_MOVIE",
+      }),
   };
 }
 
