@@ -14,13 +14,11 @@ const MultipleChoice = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  decreaseWinningStreak,
   resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
   resetLives,
-  winningStreak,
   resetSelectedMovie,
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
@@ -57,38 +55,22 @@ const MultipleChoice = ({
         setScene("CorrectAnswer");
       }, 1000);
     }
-
-    else if (gamePlayMode === "singlePlayer" && lives > 1) {
+    else if (gamePlayMode === "easySinglePlayer" && lives > 1) {
       setTimeout(() => {
-        decreaseWinningStreak();
+        resetWinningStreak();
         resetSelectedMovie();
-        setScene("Main");
+        setScene("WrongAnswer");
+        decreaseLives();
       }, 1000);
     }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
-        setTimeout(() => {
-          decreaseLives();
-          resetSelectedMovie();
-          setScene("Main");
-        }, 1000);
-      }
-      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
-        setTimeout(() => {
-          resetWinningStreak();
-          resetLives();
-          resetSelectedMovie();
-          setScene("GameOver");
-        }, 1000);
-      }
     else {
       setTimeout(() => {
         resetWinningStreak();
-        resetLives();
         setScene("GameOver");
         resetSelectedMovie();
-      }, 2000);
+        resetLives();
+      }, 1000);
     }
-
   };
 
   const getIcon = (selection) => {
@@ -149,7 +131,6 @@ const mapStateToProps = (state) => ({
   selectedMovie: state.selectedMovie,
   lives:state.lives,
   gamePlayMode:state.gamePlayMode||"easySinglePlayer",
-  winningStreak:state.winningStreak
 });
 
 function mapDispatchToProps(dispatch) {
@@ -162,10 +143,6 @@ function mapDispatchToProps(dispatch) {
     increaseWinningStreak: () =>
       dispatch({
         type: "INCREASE_WINNING_STREAK",
-      }),
-    decreaseWinningStreak: () =>
-      dispatch({
-        type: "DECREASE_WINNING_STREAK",
       }),
     resetWinningStreak: () =>
       dispatch({
