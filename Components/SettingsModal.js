@@ -33,7 +33,7 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
                   color="black"
                 />
               </Pressable>
-              <Text>TEXT GOES HERE</Text>
+              <Text>Select a Game Play Mode</Text>
               <Picker
                 selectedValue={gamePlayMode}
                 onValueChange={(newMode, itemIndex) => {
