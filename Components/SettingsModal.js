@@ -37,7 +37,7 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
               <Picker
                 selectedValue={gamePlayMode}
                 onValueChange={(newMode, itemIndex) => {
-                  // this is where the picker calls the redux setter to change the game play mode
+                
                   setGamePlayMode(newMode)
                 }}
               >
