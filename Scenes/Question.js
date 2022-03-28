@@ -66,8 +66,7 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
         </View>
 
         <View style={[width > widthBreakpoint ? styles.questionFooter : styles.questionFooterMobile]} >
-          {
-          gamePlayMode!=="easySinglePlayer" &&
+          {gamePlayMode ==="easySinglePlayer" &&
             <View style={styles.lives}>
               <Lives />
             </View>
