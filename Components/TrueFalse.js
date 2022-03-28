@@ -36,7 +36,7 @@ const TrueFalse = ({
       setTimeout(() => {
         resetWinningStreak();
         decreaseLives();
-        setScene("Main");
+        setScene("WrongAnswer");
       }, 1000);
     } else {
       setTimeout(() => {
