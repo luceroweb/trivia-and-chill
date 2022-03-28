@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
 		position: "relative",
 		top: -28,
 		fontSize: 14,
-		color: "#000",
 	},
 	badgeIcon: {
 		// paddingTop: 10,

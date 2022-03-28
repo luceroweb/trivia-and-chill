@@ -1,11 +1,9 @@
-import { StyleSheet, View, Text, Platform, } from "react-native";
+import { StyleSheet, View, Text, Pressable, Platform } from "react-native";
 import { connect } from "react-redux";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
-import SettingsModal from "../Components/SettingsModal"
 
 function Header() {
-
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
   });
@@ -23,9 +21,6 @@ function Header() {
         >
           The Movie Game
         </Text>
-        <View style={{position: "absolute", top: 7, right: 6,}}>
-        <SettingsModal/>
-        </View>
       </View>
     );
   }
@@ -33,14 +28,13 @@ function Header() {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "white",
+    // backgroundColor: "#EEF525",
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderBottomWidth: 3,
     borderColor: "#F2D379",
     backgroundColor: "#401323",
-    flexDirection: "row",
   },
   movieGame: {
     fontSize: 60,
@@ -63,7 +57,6 @@ const styles = StyleSheet.create({
     fontFamily: "Limelight_400Regular",
     color: "#F2D379",
   },
-
 });
 
 export default connect()(Header);

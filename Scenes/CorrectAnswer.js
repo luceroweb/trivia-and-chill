@@ -7,19 +7,17 @@ import {
   useWindowDimensions,
   ImageBackground,
 } from "react-native";
-// import ConfettiCannon from "react-native-confetti-cannon";
+import ConfettiCannon from "react-native-confetti-cannon";
 import { connect } from "react-redux";
 import Trailer from "../Components/Trailer";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import drivein from "../Images/drive-in-movie.jpg";
-import driveinMobile from '../Images/drive-in-movie-mobile.jpg';
-import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
 import Badge from "../Components/Badge";
 
 const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
-  const { width: currentWidth, height: currentHeight } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const handleNextQuestion = () => {
     setScene("Question");
     resetSelectedMovie();
@@ -29,28 +27,6 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
     Limelight_400Regular,
   });
 
-  let backgroundImage;
-  let contentViewStyle;
-  let videoWidth;
-  
-  if (currentWidth > 860) {
-    backgroundImage = drivein;
-    contentViewStyle = styles.wrap;
-    videoWidth = "50%";
-  } else if (currentWidth > 580) {
-    backgroundImage = driveinMobile;
-    contentViewStyle = styles.wrapMobile;
-    videoWidth = "75%";
-  } else if (currentWidth > 430) {
-    backgroundImage = driveinMobileMini;
-    contentViewStyle = styles.wrapMini;
-    videoWidth = "75%";
-  } else {
-    backgroundImage = driveinMobileMini;
-    contentViewStyle = styles.wrapSuperMini;
-    videoWidth = "75%";
-  }
-
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -58,32 +34,32 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
       <View style={{ flex: 1 }}>
         <ImageBackground
           style={styles.drivein}
-          source={backgroundImage}
+          source={drivein}
           resizeMode="cover"
         >
-          {/* <ConfettiCannon
+          <ConfettiCannon
             count={100}
             origin={{ x: -10, y: 0 }}
             fadeOut={true}
-          /> */}
-          <View
-            style={[styles.scrollViewContent, contentViewStyle]}
+          />
+          <ScrollView
+            // todo: replace paddingTop value with useSafeAreaInsets
+            style={[styles.scrollViewOuter, { paddingTop: 20 }]}
+            contentContainerStyle={[
+              styles.scrollViewContent,
+              { marginHorizontal: width > 1000 ? 100 : 0 },
+            ]}
           >
-            <View style={{ alignItems: 'center', flex: 1 }}>
-              <View
-                style={[
-                  styles.videoContainer,
-                  { width: videoWidth },
-                ]}
-              >
-                <Trailer movieId={selectedMovie?.movieId} />
-              </View>
+            <View style={[styles.videoContainer]}>
+              <Trailer movieId={selectedMovie?.movieId} />
             </View>
 
             <View style={styles.textContainer}>
               <Text style={styles.h2}>
                 Correct! <Badge />
-              </Text>              
+              </Text>
+
+              <Text style={styles.h3}>Enjoy this video trailer</Text>
             </View>
 
             <Pressable style={[styles.button]} onPress={handleNextQuestion}>
@@ -91,7 +67,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
                 <Text style={styles.ticketText}>Next Question!</Text>
               </ImageBackground>
             </Pressable>
-          </View>
+          </ScrollView>
         </ImageBackground>
       </View>
     );
@@ -120,33 +96,24 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
-    // marginTop: 10,
-  },
-  wrapMobile: {
-    marginTop: "10%",
-  },
-  wrapMini: {
-    marginTop: "25%",
-  },
-  wrapSuperMini: {
-    marginTop: 115,
-  },
   borderStyleDebug: {
     borderWidth: 2,
-    borderColor: "#000",
+    borderColor: "black",
+  },
+  scrollViewOuter: {
+    alignSelf: "center",
+    width: "100%",
+    height: "100%",
   },
   scrollViewContent: {
     flex: 1,
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginVertical: 20,
   },
   videoContainer: {
-    justifyContent: "center",    
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "transparent",
-    minWidth: 375, // 320px is iPhone 5/SE size
-    width: '50%',
-    height: '100%'
   },
   button: {
     flexShrink: 1,
@@ -155,22 +122,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
     backgroundColor: "transparent",
-    marginTop: 50,
   },
   textContainer: {
-    alignSelf: 'center',
+    flexGrow: 1, // pushes textContainer upwards
+    marginVertical: 50,
     alignItems: "center",
-    borderRadius: 10,
-    width: '80%',
-    maxWidth: 400,
-    marginTop: 50,
   },
   h2: {
     fontSize: 36,
     // fontWeight: "bold",
     marginVertical: 10,
     fontFamily: "Limelight_400Regular",
-    color: "#F2D379",    
+  },
+  h3: {
+    fontSize: 24,
+    // fontWeight: "bold",
+    marginVertical: 10,
+    fontFamily: "Limelight_400Regular",
   },
   ticketButton: {
     maxWidth: "100%",
