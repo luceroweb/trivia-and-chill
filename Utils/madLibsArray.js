@@ -54,7 +54,6 @@ export default function madLibsArray(movies) {
         answer: true,
         movieId: `${movies.id}`,
       },
-
       {
         question: `${movieDate} was the release date of ${movies.title}.`,
         answer: true,
@@ -71,12 +70,12 @@ export default function madLibsArray(movies) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.name} starred in ${movies.title}.`, //get credits endpoint for performer name
+        question: `${movies.cast[0].name} starred in ${movies.title}.`, //get credits endpoint for performer name
         answer: true,
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.title}'s cast included ${movies.name} .`, //get credits endpoint for performer name
+        question: `${movies.title}'s cast included ${movies.cast[0].name} .`, //get credits endpoint for performer name
         answer: true,
         movieId: `${movies.id}`,
       },
@@ -100,7 +99,6 @@ export default function madLibsArray(movies) {
         answer: false,
         movieId: 313369,
       },
-
       {
         question: `When was ${movies.title} was released on?`, //movie details
         answer: [
@@ -155,7 +153,6 @@ export default function madLibsArray(movies) {
         ],
         movieId: `${movies.id}`,
       },
-
       {
         question: `Ghostbusters was released on May 12, 1987.`,
         answer: false,
@@ -225,8 +222,7 @@ export default function madLibsArray(movies) {
         question: `Ashton Kutcher starred in Grown Ups`,
         answer: false,
         movieId: 38365,
-      },
-      
+      },      
     ]
   );
 }
