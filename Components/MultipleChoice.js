@@ -57,7 +57,7 @@ const MultipleChoice = ({
       }, 1000);
     }
 
-    else if (gamePlayMode === "singlePlayer" && lives > 1) {
+    else if (gamePlayMode === "easySinglePlayer" && lives > 1) {
       setTimeout(() => {
         resetWinningStreak();
         decreaseLives();
