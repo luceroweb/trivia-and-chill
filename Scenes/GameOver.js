@@ -4,12 +4,14 @@ import {
   Text,
   Pressable,
   StyleSheet,
+  Image,
   ImageBackground,
   useWindowDimensions,
   Platform,
 } from "react-native";
 import { connect } from "react-redux";
-import BGImage from "../Images/drive-in-movie.jpg";
+import MilkyWay from "../Images/milkyway.jpg";
+import DriveInForeground from "../Images/drive-in-movie-foreground.png";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { Audio } from "expo-av";
@@ -41,37 +43,37 @@ function GameOver({ setScene, resetWinningStreak }) {
     Limelight_400Regular,
   });
 
-  let myBackgroundImage;
+  let MilkyWayBG;
   let gameOverWrapStyle;
   let gameOverStyle;
   let buttonStyle;
 
-  if (width / height >= 1.8) {
-    myBackgroundImage = BGImage;
-    gameOverWrapStyle = styles.gameOverWrapWide;
-    gameOverStyle = styles.gameOver;
-    buttonStyle = styles.button;
-  } else if (width > 860) {
-    myBackgroundImage = BGImage;
-    gameOverWrapStyle = styles.gameOverWrap;
-    gameOverStyle = styles.gameOver;
-    buttonStyle = styles.button;
-  } else if (width > 650) {
-    myBackgroundImage = BGImage;
-    gameOverWrapStyle = styles.gameOverWrapMobile;
-    gameOverStyle = styles.gameOver;
-    buttonStyle = styles.buttonMobile;
-  } else if (width > 450) {
-    myBackgroundImage = BGImage;
-    gameOverWrapStyle = styles.gameOverWrapMini;
-    gameOverStyle = styles.gameOverMobile;
-    buttonStyle = styles.buttonMini;
-  } else {
-    myBackgroundImage = BGImage;
-    gameOverWrapStyle = styles.gameOverWrapSuperMini;
-    gameOverStyle = styles.gameOverMini;
-    buttonStyle = styles.buttonSuperMini;
-  }
+  // if (width / height >= 1.8) {
+  //   MilkyWayBG = MilkyWay;
+  //   gameOverWrapStyle = styles.gameOverWrapWide;
+  //   gameOverStyle = styles.gameOver;
+  //   buttonStyle = styles.button;
+  // } else if (width > 860) {
+  //   MilkyWayBG = MilkyWay;
+  //   gameOverWrapStyle = styles.gameOverWrap;
+  //   gameOverStyle = styles.gameOver;
+  //   buttonStyle = styles.button;
+  // } else if (width > 650) {
+  //   MilkyWayBG = MilkyWay;
+  //   gameOverWrapStyle = styles.gameOverWrapMobile;
+  //   gameOverStyle = styles.gameOver;
+  //   buttonStyle = styles.buttonMobile;
+  // } else if (width > 450) {
+  //   MilkyWayBG = MilkyWay;
+  //   gameOverWrapStyle = styles.gameOverWrapMini;
+  //   gameOverStyle = styles.gameOverMobile;
+  //   buttonStyle = styles.buttonMini;
+  // } else {
+  MilkyWayBG = MilkyWay;
+  gameOverWrapStyle = styles.gameOverWrap;
+  gameOverStyle = styles.gameOverMini;
+  buttonStyle = styles.buttonSuperMini;
+  // }
   useEffect(() => {
     playSound();
     return sound
@@ -85,30 +87,57 @@ function GameOver({ setScene, resetWinningStreak }) {
     return <AppLoading />;
   } else {
     return (
-      <ImageBackground source={myBackgroundImage} style={styles.image}>
-        <View
-          style={[
-            gameOverWrapStyle,
-            { alignItems: "center", paddingVertical: 20 },
-          ]}
+      <>
+        <ImageBackground
+          source={MilkyWayBG}
+          style={[styles.milkywaybg, { marginBottom: (height - 40) * -1 }]}
         >
-          <Text style={gameOverStyle}>Game Over</Text>
-          <Pressable style={buttonStyle} onPress={backToStartHandler}>
-            <ImageBackground
-              source={require("../Images/ticket.png")}
-              style={[
-                styles.ticket,
-                {
-                  alignItems: "center",
-                  justifyContent: "center",
-                },
-              ]}
-            >
-              <Text style={styles.backToStartButtonText}>Back to Start</Text>
-            </ImageBackground>
-          </Pressable>
-        </View>
-      </ImageBackground>
+          <Image
+            source={DriveInForeground}
+            style={[
+              styles.driveinforeground,
+              {
+                top:
+                  Platform.OS === "ios" && height === "1334px"
+                    ? 40
+                    : Platform.OS === "ios"
+                    ? 48
+                    : 30,
+              },
+            ]}
+          ></Image>
+          <View
+            style={[
+              styles.gameOverWrap,
+              {
+                top:
+                  Platform.OS === "ios" && height === "1334px"
+                    ? 40
+                    : Platform.OS === "ios"
+                    ? 48
+                    : 30,
+              },
+              { marginTop: width * 0.023 > 15 ? width * 0.023 : 15 },
+            ]}
+          >
+            <Text style={gameOverStyle}>Game Over</Text>
+            <Pressable style={buttonStyle} onPress={backToStartHandler}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={[
+                  styles.ticket,
+                  {
+                    alignItems: "center",
+                    justifyContent: "center",
+                  },
+                ]}
+              >
+                <Text style={styles.backToStartButtonText}>Back to Start</Text>
+              </ImageBackground>
+            </Pressable>
+          </View>
+        </ImageBackground>
+      </>
     );
   }
 }
@@ -142,22 +171,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "red",
   },
-  image: {
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  milkywaybg: {
+    width: "100%",
+    aspectRatio: 468 / 272,
   },
-  imageMobile: {
-    flex: 1,
-    width: "120%",
-    height: "120%",
-    padding: 30,
-    alignItems: "center",
-    justifyContent: "center",
+  driveinforeground: {
+    position: "absolute",
+    width: "100%",
+    minWidth: 650,
+    alignSelf: "center",
+    aspectRatio: 468 / 485,
   },
   heading: {
     fontSize: 40,
@@ -170,7 +193,6 @@ const styles = StyleSheet.create({
     width: "50%",
     aspectRatio: 16 / 9,
     position: "absolute",
-    top: 0,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -178,17 +200,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#292840",
     padding: 20,
     width: "50%",
+    minWidth: 320,
     aspectRatio: 16 / 9,
-    marginTop: "-25%",
+    marginLeft: -4,
     alignItems: "center",
     justifyContent: "center",
+    alignSelf: "center",
+    zIndex: 1000,
   },
   gameOverWrapMobile: {
     backgroundColor: "#292840",
     padding: 20,
     width: "70%",
     aspectRatio: 16 / 9,
-    marginTop: "-25%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -197,7 +221,6 @@ const styles = StyleSheet.create({
     padding: 20,
     width: "90%",
     aspectRatio: 16 / 9,
-    marginTop: "-50%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -206,7 +229,6 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "90%",
     aspectRatio: 16 / 9,
-    marginTop: "-45%",
     justifyContent: "center",
     alignItems: "center",
   },

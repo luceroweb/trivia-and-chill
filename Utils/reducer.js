@@ -1,6 +1,6 @@
 const initialState = {
   winningStreak: 0,
-  scene: "Main",
+  scene: "GameOver",
   movies: [],
   selectedMovie: {},
   gamePlayMode: "singlePlayer",
@@ -14,7 +14,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         winningStreak: state.winningStreak + 1,
       };
-      case "DECREASE_WINNING_STREAK":
+    case "DECREASE_WINNING_STREAK":
       return {
         ...state,
         winningStreak: state.winningStreak - 1,
@@ -26,7 +26,6 @@ export const reducer = (state = initialState, action) => {
       };
     case "SET_SCENE":
       return {
-
         ...state,
         scene: action.name,
       };
@@ -48,23 +47,23 @@ export const reducer = (state = initialState, action) => {
     case "SET_PERFORMER_NAME":
       return {
         ...state,
-        performerName: action.performerName
+        performerName: action.performerName,
       };
     case "SET_GAME_PLAY_MODE":
       return {
         ...state,
-        gamePlayMode: action.gamePlayMode
+        gamePlayMode: action.gamePlayMode,
       };
     case "DECREASE_LIVES":
       return {
         ...state,
         lives: state.lives - 1,
-      }
+      };
     case "RESET_LIVES":
       return {
         ...state,
         lives: 3,
-      }
+      };
   }
   return state;
 };
