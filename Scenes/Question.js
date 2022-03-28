@@ -3,9 +3,10 @@ import {
   StyleSheet,
   View,
   Text,
+  Pressable,
   ImageBackground,
   useWindowDimensions,
-  Platform,
+  SafeAreaView,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
@@ -17,12 +18,12 @@ import TrueFalse from "../Components/TrueFalse";
 import MultipleChoice from "../Components/MultipleChoice";
 import Drive from "../Images/drive-in-movie.jpg";
 import Badge from "../Components/Badge";
-import Lives from "../Components/Lives";
 
-function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
+function Question({ selectedMovie, movies, setMovies, movieId }) {
   const [timerCount, setTimerCount] = useState(10);
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const widthBreakpoint = 700;
+
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -42,37 +43,34 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
           width > widthBreakpoint ? styles.image : styles.imageMobile,
         ]}
       >
-        <View>
-          <View style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}>
-            <View style={styles.questionHeader}>
-            {gamePlayMode!=="easySinglePlayer" &&<Timer
+        <View
+          style={[width > widthBreakpoint ? styles.title : styles.titleMobile]}
+        >
+          <View style={styles.timerBox}>
+            <Timer
               timerCount={timerCount}
               setTimerCount={setTimerCount}
-            />}
-              <Text
-                style={[styles.heading, Platform.OS === "web" ? {} : { paddingRight: 50}]}
-              >
-                Question
-              </Text>
-            </View>
-            <GenerateQuestion movies={movies} />
-            <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
+            />
+            <Text
+              style={[
+                width > 800 ? styles.heading : styles.headingMobile,
+                {
+                  color: "#F2D379",
+                  fontFamily: "Limelight_400Regular",
+                  fontSize: 30,
+                },
+              ]}
+            >
+              Question
+            </Text>
+            <View></View>
           </View>
+          <GenerateQuestion movies={movies} />
+          <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
         </View>
-
-        <View style={[width > widthBreakpoint ? styles.questionFooter : styles.questionFooterMobile]} >
-          {
-          gamePlayMode!=="easySinglePlayer" &&
-            <View style={styles.lives}>
-              <Lives />
-            </View>
-          }
-          {/* then enable lives */}
-          <View style={styles.badge}>
-            <Badge />
-          </View>
+        <View style={styles.badge}>
+          <Badge />
         </View>
-
         <View
           style={[
             width > widthBreakpoint ? styles.titleWrap : styles.titleWrapMobile,
@@ -94,7 +92,6 @@ function mapStateToProps(state) {
     movies: state.movies,
     selectedMovie: state.selectedMovie,
     scene: state.scene,
-    gamePlayMode:state.gamePlayMode||"easySinglePlayer",
   };
 }
 
@@ -118,7 +115,7 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SCENE",
         name,
       }),
-}
+  };
 }
 
 const styles = StyleSheet.create({
@@ -128,7 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
     width: "100%",
-    flexDirection: "column",    
+    flexDirection: "column",
   },
   image: {
     paddingBottom: 75,
@@ -139,12 +136,12 @@ const styles = StyleSheet.create({
   },
   titleWrap: {
     flexDirection: "row",
-    padding: 20,    
+    padding: 20,
   },
   titleWrapMobile: {
     flexDirection: "row",
     paddingTop: 20,
-    paddingBottom: 3,    
+    paddingBottom: 3,
   },
   title: {
     shadowColor: "#1a1a1a",
@@ -155,7 +152,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     height: 350,
-    width: 615,   
+    width: 615,
   },
   titleMobile: {
     shadowColor: "#1a1a1a",
@@ -167,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 390,
     width: 300,
-    marginHorizontal: 30,    
+    marginHorizontal: 30,
   },
   heading: {
     flexGrow: 1,
@@ -177,9 +174,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 10,
     textAlign: "center",
+  },
+  headingMobile: {
+    flexGrow: 1,
     color: "#F2D379",
-    fontFamily: "Limelight_400Regular",
-    fontSize: 30,
+    paddingTop: 10,
+    paddingBottom: 4,
+    paddingRight: 50,
+    alignSelf: "center",
+    marginTop: 10,
+    textAlign: "center",
   },
   q: {
     color: "#F2D379",
@@ -187,33 +191,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   badge: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  lives: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-  },
-  questionHeader: {
+  timerBox: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  questionFooter: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    width: "48%",
-  },
-  questionFooterMobile: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    width: "75%",
   }
 });
 

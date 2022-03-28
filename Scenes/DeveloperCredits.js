@@ -73,11 +73,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#292840",
+        borderStyle: "dashed",
         alignItems: "center",
     },
     credits: {
         alignItems: "center",
         padding: 10,
+        borderStyle: "dashed",
         borderColor: "#F2D379",
     },
     contentLayout: {

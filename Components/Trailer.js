@@ -1,58 +1,41 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, Alert, Platform } from "react-native";
+import { View, Alert } from "react-native";
 import { getYouTubeId } from "../Utils/FetchApi";
 import YoutubePlayer from "react-native-youtube-iframe";
-import { WebView } from "react-native-web-webview";
+import { connect } from "react-redux";
 
 function Trailer({ movieId }) {
   const [playing, setPlaying] = useState(false);
   const [youTubeId, setYouTubeId] = useState(null);
   useEffect(() => {
-    getYouTubeId(movieId)
-      .then((res) => {
-        setYouTubeId(res);
-      })
-      .catch((err) => console.log(err));
+    getYouTubeId(movieId).then((res) => {
+      setYouTubeId(res);
+    });
   }, []);
 
   const onStateChange = useCallback((state) => {
-    window.postMessage = postMessage.bind(window);
-
     if (state === "ended") {
       setPlaying(false);
       Alert.alert("video has finished playing!");
     }
   }, []);
   
-  if (Platform.OS === "web") {
-    return (
-      <View style={{ flex: 1 }}>
-        {youTubeId && (
-          <WebView
-            mediaPlaybackRequiresUserAction={true}
-            javaScriptEnabled={true}
-            domStorageEnabled={true}
-            source={{ uri: `https:www.youtube.com/embed/${youTubeId}?rel=0` }}
-          />
+
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ width: "100%", aspectRatio: 16 / 9 }}>
+        {youTubeId && ( 
+          <YoutubePlayer
+            height={"100%"}
+            play={playing}
+            videoId={youTubeId}
+            onChangeState={onStateChange}
+          /> 
         )}
+        
       </View>
-    );
-  } else {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <View style={{ width: "100%", aspectRatio: 16 / 9 }}>
-          {youTubeId && (
-            <YoutubePlayer
-              height={"100%"}
-              play={playing}
-              videoId={youTubeId}
-              onChangeState={onStateChange}
-            />
-          )}
-        </View>
-      </View>
-    );
-  }
+    </View>
+  );
 }
 
 export default Trailer;

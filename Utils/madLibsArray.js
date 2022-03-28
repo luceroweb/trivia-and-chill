@@ -7,9 +7,6 @@ export default function madLibsArray(movies) {
   if (day < 10) {
     day = day[1];
   }
-  if (month < 10) {
-    month = month[1];
-  }
 
   let months = [
     "January",
@@ -27,12 +24,10 @@ export default function madLibsArray(movies) {
   ];
 
   let movieDate = `${months[month - 1]} ${day}, ${year}`;
-  let convertedDate = `${month}/${day}/${year}`;
 
   function generateRandomDate() {
     return new Date(+new Date() - Math.floor(Math.random() * 100000000000));
   }
-
   return (
     movies && [
       {
@@ -90,7 +85,7 @@ export default function madLibsArray(movies) {
       {
         question: `When was ${movies.title} was released on?`, //movie details
         answer: [
-          `${convertedDate}`,
+          `${movies.release_date}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -99,7 +94,7 @@ export default function madLibsArray(movies) {
       {
         question: `${movies.title} was released when?`, //movie details
         answer: [
-          `${convertedDate}`,
+          `${movies.release_date}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -108,7 +103,7 @@ export default function madLibsArray(movies) {
       {
         question: `What was the release date of the ${movies.title}?`, //movie details
         answer: [
-          `${convertedDate}`,
+          `${movies.release_date}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -117,7 +112,7 @@ export default function madLibsArray(movies) {
       {
         question: `${movies.title} was released on what date?`, //movie details
         answer: [
-          `${convertedDate}`,
+          `${movies.release_date}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -126,7 +121,7 @@ export default function madLibsArray(movies) {
       {
         question: `When did ${movies.title} come out?`, //movie details
         answer: [
-          `${convertedDate}`,
+          `${movies.release_date}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -135,7 +130,7 @@ export default function madLibsArray(movies) {
       {
         question: `What was the release date of ${movies.title}?`, //movie details
         answer: [
-          `${convertedDate}`,
+          `${movies.release_date}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
@@ -192,29 +187,6 @@ export default function madLibsArray(movies) {
         answer: false,
         movieId: 8467,
       },
-      {
-        question: `Denzel Washington was in the movie Dude, Where's My Car?`,
-        answer: false,
-        movieId: 8859,
-      },
-      {
-        question: `Kristen Stewart was in Fight Club`,
-        answer: false,
-        movieId: 550,
-      },
-      {
-        question: `Olivia Munn starred in Ron's Gone Wrong`,
-        answer: false,
-        movieId: 482321,
-      },
-      {
-        question: `Ashton Kutcher starred in Grown Ups`,
-        answer: false,
-        movieId: 38365,
-      },
-      
     ]
   );
 }
-
-
