@@ -24,15 +24,21 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
   useEffect(() => {
-    FetchApi().then((res) => setMovies(res));
+    FetchApi().then((res) => {
+      setMovies(res);
+    });
   }, []);
 
   let [fontsLoaded] = useFonts({
     Limelight_400Regular,
   });
+
   if (!fontsLoaded) {
     return <AppLoading />;
-  } else {
+  } else if (Object.keys(selectedMovie).length === 0) {
+    return <GenerateQuestion movies={movies} />
+  }
+  else {
     return (
       <ImageBackground
         resizeMode={"cover"}
@@ -55,14 +61,12 @@ function Question({ selectedMovie, movies, setMovies, movieId,gamePlayMode}) {
                 Question
               </Text>
             </View>
-            <GenerateQuestion movies={movies} />
             <Text style={styles.q}>{movies && selectedMovie?.question}</Text>
           </View>
         </View>
 
         <View style={[width > widthBreakpoint ? styles.questionFooter : styles.questionFooterMobile]} >
-          {
-          gamePlayMode!=="easySinglePlayer" &&
+          {gamePlayMode ==="easySinglePlayer" &&
             <View style={styles.lives}>
               <Lives />
             </View>

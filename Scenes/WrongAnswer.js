@@ -12,42 +12,16 @@ import {
   import AppLoading from "expo-app-loading";
   import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
   import ticket from "../Images/ticket.png";
-  import drivein from "../Images/drive-in-movie.jpg";
-  import driveinMobile from '../Images/drive-in-movie-mobile.jpg';
-  import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
+  import driveIn from "../Images/drive-in-movie.jpg";
+  import driveInMobile from '../Images/drive-in-movie-mobile.jpg';
+  import driveInMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
   import Badge from "../Components/Badge";
-  import { Audio } from "expo-av";
-  import wrongSound from "../Sounds/wrongSound.wav";
   import { useState, useEffect} from "react";
 
 
   
   const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
-    
-    const [sound, setSound] = useState();
-
-  async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(wrongSound);
-    setSound(sound);
-  }
-
-  async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(wrongSound);
-    setSound(sound);
-
-    await sound.playAsync();
-  }
-
-  useEffect(() => {
-    playSound();
-    return sound
-      ? () => {
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, []);
-
-    const { width: currentWidth } = useWindowDimensions();
+    const { width: currentWidth ,height:currentHeight } = useWindowDimensions();
     const handleNextQuestion = () => {
       setScene("Question");
       resetSelectedMovie();
@@ -66,33 +40,63 @@ import {
     let textSize;
     let topMargin;
     
-    if (currentWidth > 1000) {
-      backgroundImage = drivein;
-      contentViewStyle = styles.wrap;
-      answerWidth = "50%";
-      answerHeight = "65%";
-      textSize=28;
-    } else if (currentWidth > 580) {
-      backgroundImage = driveinMobile;
-      contentViewStyle = styles.wrapMobile;
-      answerWidth = "75%";
-      answerHeight="60%";
-      textSize=28;
-      topMargin=14;
-    } else if (currentWidth > 430) {
-      backgroundImage = driveinMobile;
-      contentViewStyle = styles.wrapMini;
-      answerWidth = "75%";
-      answerHeight = "65%";
-      textSize=25;
-    } else {
-      backgroundImage = driveinMobileMini;
-      contentViewStyle = styles.wrapSuperMini;
-      answerWidth = "60%";
-      answerHeight = "43%";
-      textSize=17;
-      topMargin=0; 
-    } 
+    if (currentWidth >1300 && currentHeight > 1200) {
+			backgroundImage = driveIn;
+			answerWidth = "50%";
+			answerHeight = "70%";
+			textSize = 28;
+		} else if (currentWidth > 900 && currentHeight > 1200) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "65%";
+			textSize = 28;
+		} else if (currentWidth > 900 && currentHeight < 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "95%";
+			textSize = 28;
+		} else if (currentWidth < 800 && currentHeight > 900) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "65%";
+			textSize = 28;
+		} 
+		 else if (currentWidth >500 && currentHeight < 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "90%";
+			textSize = 28;
+		} else if (currentWidth < 430 && currentHeight > 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "75%";
+			textSize = 28;
+		} else if (currentWidth < 370 && currentHeight > 500) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "86%";
+			textSize = 28;
+		} else if (currentWidth < 600 && currentHeight > 500) {
+			backgroundImage = driveInMobile;
+			answerWidth = "75%";
+			answerHeight = "90%";
+			textSize = 28;
+		} else if (currentWidth > 700) {
+			backgroundImage = driveInMobile;
+			answerWidth = "80%";
+			answerHeight = "80%";
+			textSize = 28;
+		} else if (currentWidth > 580) {
+			backgroundImage = driveInMobile;
+			answerWidth = "80%";
+			answerHeight = "80%";
+			textSize = 28;
+		} else {
+			backgroundImage = driveInMobileMini;
+			answerWidth = "100%";
+			answerHeight = "65%";
+			textSize = 17;
+		} 
     if(!fontsLoaded){
       return <AppLoading />;
     } else {
