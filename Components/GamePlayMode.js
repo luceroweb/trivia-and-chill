@@ -7,9 +7,11 @@ function GamePlayMode({ gamePlayMode }) {
     switch(gamePlayMode) {
       case "singlePlayer":
         currentMode = "Single Player Mode";
-        break;z
-        // add more cases for each gamePlayMode state
-        default: ""; 
+        break;
+        case "easySinglePlayer":
+      currentMode = "Easy Single Player Mode ";
+      break;
+        default: "singlePlayer"; 
     }
 
   return (
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
   },
   gamePlayText: {
     color: "#F2D379",
-    fontWeight: "bold", 
+    fontWeight: "bold",
     fontSize: 12,
   },
 });

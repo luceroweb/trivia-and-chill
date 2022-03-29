@@ -14,14 +14,10 @@ const MultipleChoice = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  decreaseWinningStreak,
   resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
-  resetLives,
-  winningStreak,
-  resetSelectedMovie,
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -56,39 +52,18 @@ const MultipleChoice = ({
         increaseWinningStreak();
         setScene("CorrectAnswer");
       }, 1000);
-    }
-
-    else if (gamePlayMode === "singlePlayer" && lives > 1) {
-      setTimeout(() => {
-        decreaseWinningStreak();
-        resetSelectedMovie();
-        setScene("Main");
-      }, 1000);
-    }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== correctAnswer){
-        setTimeout(() => {
-          decreaseLives();
-          resetSelectedMovie();
-          setScene("Main");
-        }, 1000);
-      }
-      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== correctAnswer){
-        setTimeout(() => {
-          resetWinningStreak();
-          resetLives();
-          resetSelectedMovie();
-          setScene("GameOver");
-        }, 1000);
-      }
-    else {
+    } else if (gamePlayMode === "easySinglePlayer" && lives > 1) {
       setTimeout(() => {
         resetWinningStreak();
-        resetLives();
+        decreaseLives();
+        setScene("WrongAnswer");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        resetWinningStreak();
         setScene("GameOver");
-        resetSelectedMovie();
-      }, 2000);
+      }, 1000);
     }
-
   };
 
   const getIcon = (selection) => {
@@ -147,9 +122,8 @@ const MultipleChoice = ({
 const mapStateToProps = (state) => ({
   questions: state.questions,
   selectedMovie: state.selectedMovie,
-  lives:state.lives,
-  gamePlayMode:state.gamePlayMode||"easySinglePlayer",
-  winningStreak:state.winningStreak
+  lives: state.lives,
+  gamePlayMode: state.gamePlayMode || "easySinglePlayer",
 });
 
 function mapDispatchToProps(dispatch) {
@@ -163,10 +137,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "INCREASE_WINNING_STREAK",
       }),
-    decreaseWinningStreak: () =>
-      dispatch({
-        type: "DECREASE_WINNING_STREAK",
-      }),
     resetWinningStreak: () =>
       dispatch({
         type: "RESET_WINNING_STREAK",
@@ -178,10 +148,6 @@ function mapDispatchToProps(dispatch) {
     resetLives: () =>
       dispatch({
         type: "RESET_LIVES",
-      }),
-    resetSelectedMovie: () =>
-      dispatch({
-        type: "RESET_SELECTED_MOVIE",
       }),
   };
 }
