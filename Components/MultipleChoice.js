@@ -14,13 +14,10 @@ const MultipleChoice = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  decreaseWinningStreak,
   resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
-  resetLives,
-  winningStreak
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -66,11 +63,9 @@ const MultipleChoice = ({
     } else {
       setTimeout(() => {
         resetWinningStreak();
-        resetLives();
         setScene("GameOver");
       }, 1000);
     }
-
   };
 
   const getIcon = (selection) => {
@@ -131,7 +126,6 @@ const mapStateToProps = (state) => ({
   selectedMovie: state.selectedMovie,
   lives:state.lives,
   gamePlayMode:state.gamePlayMode||"easySinglePlayer",
-  winningStreak:state.winningStreak
 });
 
 function mapDispatchToProps(dispatch) {
@@ -144,10 +138,6 @@ function mapDispatchToProps(dispatch) {
     increaseWinningStreak: () =>
       dispatch({
         type: "INCREASE_WINNING_STREAK",
-      }),
-    decreaseWinningStreak: () =>
-      dispatch({
-        type: "DECREASE_WINNING_STREAK",
       }),
     resetWinningStreak: () =>
       dispatch({

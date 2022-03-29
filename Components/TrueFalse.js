@@ -14,13 +14,11 @@ const TrueFalse = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  decreaseWinningStreak,
   resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
   resetLives,
-  winningStreak
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
   const answer = selectedMovie?.answer;
@@ -43,6 +41,7 @@ const TrueFalse = ({
         resetWinningStreak();
         resetLives();
         setScene("GameOver");
+        resetLives();
       }, 1000);
     }
   };
@@ -195,7 +194,6 @@ const mapStateToProps = (state) => ({
   selectedMovie: state.selectedMovie,
   lives:state.lives,
   gamePlayMode:state.gamePlayMode||"easySinglePlayer",
-  winningStreak:state.winningStreak
 });
 
 function mapDispatchToProps(dispatch) {
@@ -208,10 +206,6 @@ function mapDispatchToProps(dispatch) {
     increaseWinningStreak: () =>
       dispatch({
         type: "INCREASE_WINNING_STREAK",
-      }),
-    decreaseWinningStreak: () =>
-      dispatch({
-        type: "DECREASE_WINNING_STREAK",
       }),
     resetWinningStreak: () =>
       dispatch({
