@@ -42,21 +42,6 @@ export default function madLibsArray(movies) {
   const randomCast1 = generateRandomCastNumber();
   const randomCast2 = generateRandomCastNumber();
 
-  function filterPerformerList() {
-    let randomCast = movies.cast;
-    let filteredPerformerName = randomCast.filter(randomCast  => randomCast.known_for_department === 'Acting');        
-    return filteredPerformerName[0].name;           
-  }
-
-  function filterNonPerformerList() {
-    let randomCast = movies.cast;    
-    let filteredNonPerformerName = randomCast.filter(randomCast => randomCast.known_for_department !== 'Acting');        
-    return filteredNonPerformerName[0].name;        
-  }
-
-  const filteredPerformer = filterPerformerList();  
-  const filteredNonPerformer = filterNonPerformerList();  
-
   return (
     movies && [
       {          
@@ -87,13 +72,17 @@ export default function madLibsArray(movies) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${filteredPerformer} starred in ${movies.title}.`, //get credits endpoint for performer name
-        answer: true,
+        question: `${randomCast1.name} starred in ${movies.title}.`, //get credits endpoint for performer name
+        answer: randomCast1.known_for_department === "Acting"
+          ? true
+          : false,
         movieId: `${movies.id}`,
       },     
       {
-        question: `${movies.title}'s cast included ${filteredPerformer} .`, //get credits endpoint for performer name
-        answer: true,
+        question: `${movies.title}'s cast included ${randomCast1.name} .`, //get credits endpoint for performer name
+        answer: randomCast1.known_for_department === "Acting"
+          ? true
+          : false,
         movieId: `${movies.id}`,
       },     
       {
