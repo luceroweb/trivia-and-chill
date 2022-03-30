@@ -7,6 +7,7 @@ export default function madLibsArray(movies) {
   if (day < 10) {
     day = day[1];
   }
+
   if (month < 10) {
     month = month[1];
   }
@@ -39,14 +40,15 @@ export default function madLibsArray(movies) {
   }
 
   const randomCast1 = generateRandomCastNumber();
-  const randomCast2 = generateRandomCastNumber();    
+  const randomCast2 = generateRandomCastNumber();
 
   return (
     movies && [
       {          
         question: `${movies.title}'s cast included ${randomCast1.name} and ${randomCast2.name}.`, 
         answer: randomCast1.known_for_department === "Acting" && randomCast2.known_for_department === "Acting"
-        ?true: false,
+          ? true
+          : false,
         movieId: `${movies.id}`        
       },
       {
@@ -54,7 +56,6 @@ export default function madLibsArray(movies) {
         answer: true,
         movieId: `${movies.id}`,
       },
-
       {
         question: `${movieDate} was the release date of ${movies.title}.`,
         answer: true,
@@ -71,15 +72,19 @@ export default function madLibsArray(movies) {
         movieId: `${movies.id}`,
       },
       {
-        question: `${movies.name} starred in ${movies.title}.`, //get credits endpoint for performer name
-        answer: true,
+        question: `${randomCast1.name} starred in ${movies.title}.`, //get credits endpoint for performer name
+        answer: randomCast1.known_for_department === "Acting"
+          ? true
+          : false,
         movieId: `${movies.id}`,
-      },
+      },     
       {
-        question: `${movies.title}'s cast included ${movies.name} .`, //get credits endpoint for performer name
-        answer: true,
+        question: `${movies.title}'s cast included ${randomCast1.name} .`, //get credits endpoint for performer name
+        answer: randomCast1.known_for_department === "Acting"
+          ? true
+          : false,
         movieId: `${movies.id}`,
-      },
+      },     
       {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
@@ -100,7 +105,6 @@ export default function madLibsArray(movies) {
         answer: false,
         movieId: 313369,
       },
-
       {
         question: `When was ${movies.title} was released on?`, //movie details
         answer: [
@@ -145,7 +149,7 @@ export default function madLibsArray(movies) {
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
         movieId: `${movies.id}`,
-      },
+      },      
       {
         question: `What was the release date of ${movies.title}?`, //movie details
         answer: [
@@ -155,7 +159,6 @@ export default function madLibsArray(movies) {
         ],
         movieId: `${movies.id}`,
       },
-
       {
         question: `Ghostbusters was released on May 12, 1987.`,
         answer: false,
@@ -225,8 +228,7 @@ export default function madLibsArray(movies) {
         question: `Ashton Kutcher starred in Grown Ups`,
         answer: false,
         movieId: 38365,
-      },
-      
+      },      
     ]
   );
 }
