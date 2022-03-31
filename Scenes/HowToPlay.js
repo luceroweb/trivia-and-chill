@@ -50,6 +50,7 @@ const HowToPlay = ({ setScene }) => {
                 <Text style={styles.content}>
                   2. Read and answer the question before the timer runs out!
                 </Text>
+                <QuestionInstructions/>
               </View>
 
               <View>
@@ -58,7 +59,6 @@ const HowToPlay = ({ setScene }) => {
                   the movie trailer. Select the "Next Question" button to
                   continue the game.
                 </Text>
-                  <QuestionInstructions/>
               </View>
 
               <View>
