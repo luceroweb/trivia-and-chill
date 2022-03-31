@@ -11,6 +11,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
+import GameOverHelp from "../Components/GameOverHelp.js";
 
 const HowToPlay = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
@@ -59,11 +60,12 @@ const HowToPlay = ({ setScene }) => {
                 </Text>
               </View>
 
-              <View>
+              <View style={{ height: 453 }}>
                 <Text style={styles.content}>
                   4. Making a wrong answer results in sudden death. Select "Back
                   to Start" to restart the game.
                 </Text>
+                <GameOverHelp />
               </View>
             </View>
 
