@@ -53,7 +53,15 @@ const HowToPlay = ({ setScene }) => {
 
               <View>
                 <Text style={styles.content}>
-                  3. Making a wrong answer results in sudden death. Select "Back
+                  3. Guess correctly to increase your winning streak, and enjoy
+                  the movie trailer. Select the "Next Question" button to
+                  continue the game.
+                </Text>
+              </View>
+
+              <View>
+                <Text style={styles.content}>
+                  4. Making a wrong answer results in sudden death. Select "Back
                   to Start" to restart the game.
                 </Text>
               </View>
