@@ -20,7 +20,7 @@ export default function GameOverHelp() {
           })
         ,
           Animated.timing(translation.y, {
-            toValue: 30,
+            toValue: 35,
             duration: 3000,
             delay: 1000,
             useNativeDriver: false,
@@ -31,11 +31,12 @@ export default function GameOverHelp() {
   }, []);
 
   return (
-      <View style={{height: "100%"}}>
+      <View>
         <ImageBackground resizeMode="cover" style={{
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
+            aspectRatio: 647/423
         }}
         source={gameover}
         >

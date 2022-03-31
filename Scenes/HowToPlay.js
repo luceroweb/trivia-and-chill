@@ -60,7 +60,7 @@ const HowToPlay = ({ setScene }) => {
                 </Text>
               </View>
 
-              <View style={{ height: 453 }}>
+              <View>
                 <Text style={styles.content}>
                   4. Making a wrong answer results in sudden death. Select "Back
                   to Start" to restart the game.
