@@ -11,6 +11,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
+import QuestionInstructions from "../Components/QuestionInstructions"
 
 const HowToPlay = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
@@ -57,6 +58,7 @@ const HowToPlay = ({ setScene }) => {
                   the movie trailer. Select the "Next Question" button to
                   continue the game.
                 </Text>
+                  <QuestionInstructions/>
               </View>
 
               <View>
