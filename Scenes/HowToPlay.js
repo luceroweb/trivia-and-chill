@@ -11,6 +11,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
+import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
 import MainAnimation from "../Components/HowToPlay/MainAnimation";
 
 import GameOverHelp from "../Components/GameOverHelp.js";
@@ -55,13 +56,7 @@ const HowToPlay = ({ setScene }) => {
 								</Text>
 							</View>
 
-							<View>
-								<Text style={styles.content}>
-									3. Guess correctly to increase your winning streak, and enjoy
-									the movie trailer. Select the "Next Question" button to
-									continue the game.
-								</Text>
-							</View>
+              <CorrectAnswerDemo />
 
               <View>
                 <Text style={styles.content}>
