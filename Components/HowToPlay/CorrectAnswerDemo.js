@@ -40,7 +40,7 @@ export default function CorrectAnswerDemo() {
   }, [screenWidth]);
   return (
     <View style={styles.container}>
-      <Text style={styles.instruction}> 3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
+      <Text style={styles.instruction}>3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
       <ImageBackground
         source={require("./../../Images/correctAnswerDemo.png")}
         style={{ 
