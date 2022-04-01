@@ -10,10 +10,7 @@ import {
 	Platform,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import main from "../Images/main.png";
-import driveInMobile from "../Images/drive-in-movie-mobile.jpg";
-import driveInMobileMini from "../Images/drive-in-movie-mobile-mini.jpg";
-import Badge from "../Badge";
+import main from "../../Images/main.png";
 import React, { useRef, useEffect, useState } from "react";
 
 const MainAnimation = ({ setScene, resetSelectedMovie, lives }) => {
