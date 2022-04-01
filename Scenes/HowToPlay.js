@@ -11,7 +11,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
-import CorrectAnswerDemo from "../guess-the-movie/CorrectAnswerDemo";
+import CorrectAnswerDemo from "../Components/CorrectAnswerDemo";
 
 const HowToPlay = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
