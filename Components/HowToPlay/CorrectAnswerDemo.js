@@ -1,11 +1,10 @@
 import {
   ImageBackground,
-  Image,
   StyleSheet,
   Text,
   View,
   Animated,
-  Easing,
+  Platform,
   useWindowDimensions
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
@@ -25,8 +24,7 @@ export default function CorrectAnswerDemo() {
             useNativeDriver: false,
           }),
           Animated.timing(translation.y, {
-            toValue: screenWidth < 581 ? 50: 110,
-            // toValue:100,
+            toValue: screenWidth < 581 ? 55: 105,
             duration:3500,
             delay: 1000,
             useNativeDriver: false,
@@ -39,14 +37,15 @@ export default function CorrectAnswerDemo() {
         }),
       ])
     ).start();
-  }, []);
+  }, [screenWidth]);
   return (
     <View style={styles.container}>
       <Text style={styles.instruction}> 3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
       <ImageBackground
-        source={require("../Images/correctAnswerDemo.png")}
+        source={require("./../../Images/correctAnswerDemo.png")}
         style={{ 
-        width:screenWidth<580 ? 250 : 500, aspectRatio: 1021 / 540, marginBottom:15}}
+        width: screenWidth < 580 ? 250 : 500, aspectRatio: 1021 / 540, marginBottom:15,
+      }}
       >
         <Animated.View
           style={{
@@ -73,7 +72,7 @@ export default function CorrectAnswerDemo() {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: Platform.OS === "web" ? 1 : 0,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#292840",
