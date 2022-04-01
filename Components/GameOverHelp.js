@@ -1,4 +1,4 @@
-import { Animated, View, ImageBackground } from 'react-native';
+import { Animated, View, ImageBackground, Platform } from 'react-native';
 import { useRef, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import gameover from "../Images/gameover.png";
@@ -32,10 +32,15 @@ export default function GameOverHelp() {
 
   return (
       <View>
-        <ImageBackground resizeMode="cover" style={{
+        <ImageBackground resizeMode={Platform.OS === "web" ? "contain" : "cover"} style={{
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
+            alignSelf: 'center',
+            maxWidth:647,
+            maxHeight: 423,
+            width: "100%",
+            height: "100%",
             aspectRatio: 647/423
         }}
         source={gameover}
