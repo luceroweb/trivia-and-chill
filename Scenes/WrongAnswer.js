@@ -101,146 +101,171 @@ import {
       return <AppLoading />;
     } else {
       return (
-				<View style={{ flex: 1 }}>
-					<ImageBackground
-						style={styles.driveIn}
-						source={backgroundImage}
-						resizeMode="cover"
-					>
-						<View style={[styles.scrollViewContent, contentViewStyle]}>
-							<View style={{ alignItems: "center", flex: 1 }}>
-								<View
-									style={[
-										styles.answerContainer,
-										{
-											width: answerWidth,
-											height: answerHeight,
-											marginTop: topMargin,
-										},
-									]}
-								>
-									<Text style={[styles.h2, { fontSize: textSize }]}>
-										Incorrect Answer!
-									</Text>
-								</View>
-								<View style={styles.indicators}>
-									<View style={{ minWidth: 45 }}>
-										<Lives />
-									</View>
-									<View >
-										<Badge />
-									</View>
-								</View>
-							</View>
+        <View style={{ flex: 1 }}>
+          <ImageBackground
+            style={styles.drivein}
+            source={backgroundImage}
+            resizeMode="cover"
+          >
+            <View
+              style={[styles.scrollViewContent, contentViewStyle]}
+            >
+              <View style={{ alignItems: 'center', flex: 1 }}>
+                <View
+                  style={[
+                    styles.answerContainer,
+                    { width: answerWidth, height: answerHeight,marginTop:topMargin }
+                  ]}
+                >
+                    <Text style={[styles.h2,{fontSize:textSize}]}>
+                      Incorrect Answer!
+                    </Text>   
+                    <Text style={styles.livesText}>
+                  Oh no! You lost a life.{"\n"}
+                  {"\n"}
+                  You have
+                  {"  "}
+                  {lives}
+                  {"  "}
+                  lives left. {"\n"}
+                  {"\n"}Try again!
+                </Text>
+              </View>
+              <View style={styles.indicators}>
+                <View style={{ minWidth: 35 }}>
+                  <Lives />
+                </View>
+                <View>
+                  <Badge />           
+                </View>
+              </View>
+            </View>
 
-							<Pressable
-								style={[styles.button]}
-								onPress={handleNextQuestion}
-								accessibilityRole="button"
-								accessibilityHint="This button takes you to the next question"
-							>
-								<ImageBackground style={styles.ticketButton} source={ticket}>
-									<Text style={styles.ticketText}>Next Question!</Text>
-								</ImageBackground>
-							</Pressable>
-						</View>
-					</ImageBackground>
-				</View>
-			);
-    }
+            <Pressable
+              style={[styles.button]}
+              onPress={handleNextQuestion}
+              accessibilityRole="button"
+              accessibilityHint="This button takes you to the next question"
+            >
+              <ImageBackground style={styles.ticketButton} source={ticket}>
+                <Text style={styles.ticketText}>Next Question!</Text>
+              </ImageBackground>
+            </Pressable>
+          </View>
+        </ImageBackground>
+      </View>
+    );
+  }
+};
+
+function mapStateToProps(state) {
+  return {
+    scene: state.scene,
+    selectedMovie: state.selectedMovie,
+    lives: state.lives,
   };
-  
-  function mapStateToProps(state) {
-    return {
-      scene: state.scene,
-      selectedMovie: state.selectedMovie,
-      lives: state.lives
-    };
-  }
-  
-  function mapDispatchToProps(dispatch) {
-    return {
-      setScene: (name) =>
-        dispatch({
-          type: "SET_SCENE",
-          name,
-        }),
-      resetSelectedMovie: () =>
-        dispatch({
-          type: "RESET_SELECTED_MOVIE",
-        }),
-    };
-  }
-  
-  const styles = StyleSheet.create({
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setScene: (name) =>
+      dispatch({
+        type: "SET_SCENE",
+        name,
+      }),
+    resetSelectedMovie: () =>
+      dispatch({
+        type: "RESET_SELECTED_MOVIE",
+      }),
+  };
+}
+
+const styles = StyleSheet.create({
+  wrap: {
+    marginTop: "1%",
+  },
+  wrapMobile: {
+    marginTop: "10%",
+  },
+  wrapMini: {
+    marginTop: "25%",
+  },
+  wrapSuperMini: {
+    marginTop: 90,
+  },
   borderStyleDebug: {
-      borderWidth: 2,
-      borderColor: "#000",
-    },
-    scrollViewContent: {
-      flex: 1,
-      justifyContent: "space-between",
-      marginBottom: 20,
-    },
-    answerContainer: {
-      justifyContent: "center",    
-      backgroundColor: "#292840",
-      minWidth: 325, // 320px is iPhone 5/SE size
-      width: '50%',
-      height: '100%',
-      alignItems:"center",
-      textAlign:'center',
-    },
-    button: {
-      flexShrink: 1,
-      alignSelf: "center",
-      paddingVertical: 10,
-      paddingHorizontal: 15,
-      borderRadius: 10,
-      backgroundColor: "transparent",
-      marginTop: 50,
-    },
-    textContainer: {
-      alignSelf: 'center',
-      alignItems: "center",
-      borderRadius: 10,
-      width: '80%',
-      maxWidth: 400,
-      marginTop: 50,
-    },
-    h2: {
-      fontSize: 36,
-      marginVertical: 10,
-      fontFamily: "Limelight_400Regular",
-      color: "#F2D379", 
-      alignSelf: "center",
-      
-      
-    },
-    ticketButton: {
-      maxWidth: "100%",
-      maxHeight: "100%",
-      width: 224,
-      height: 116,
-      justifyContent: "center",
-    },
-    ticketText: {
-      fontFamily: "Limelight_400Regular",
-      position: "absolute",
-      alignSelf: "center",
-    },
-    driveIn: {
-      justifyContent: "center",
-      height: "100%",
-    },
-    indicators: {
-      marginTop: Platform.OS === "web" ? 30 : 10,
-      minWidth: 375, // 320px is iPhone 5/SE size
-      width: '50%',
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-around",
-    }
-  });
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(WrongAnswer);
+    borderWidth: 2,
+    borderColor: "#000",
+  },
+  scrollViewContent: {
+    flex: 1,
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  answerContainer: {
+    justifyContent: "center",
+    backgroundColor: "#292840",
+    minWidth: 325, // 320px is iPhone 5/SE size
+    width: "50%",
+    height: "100%",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  button: {
+    flexShrink: 1,
+    alignSelf: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    backgroundColor: "transparent",
+    marginTop: 50,
+  },
+  textContainer: {
+    alignSelf: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    width: "80%",
+    maxWidth: 400,
+    marginTop: 50,
+  },
+  h2: {
+    fontSize: 36,
+    marginVertical: 10,
+    fontFamily: "Limelight_400Regular",
+    color: "#F2D379",
+    alignSelf: "center",
+  },
+  ticketButton: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+    width: 224,
+    height: 116,
+    justifyContent: "center",
+  },
+  ticketText: {
+    fontFamily: "Limelight_400Regular",
+    position: "absolute",
+    alignSelf: "center",
+  },
+  drivein: {
+    justifyContent: "center",
+    height: "100%",
+  },
+  indicators: {
+    marginTop: Platform.OS === "web" ? 30 : 10,
+    minWidth: 375, // 320px is iPhone 5/SE size
+    width: "50%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  livesText: {
+    marginTop: 10,
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WrongAnswer);

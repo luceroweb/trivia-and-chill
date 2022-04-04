@@ -7,9 +7,11 @@ function GamePlayMode({ gamePlayMode }) {
     case "singlePlayer":
       currentMode = "Single Player Mode";
       break;
-    // add more cases for each gamePlayMode state
+    case "easySinglePlayer":
+      currentMode = "Easy Single Player Mode ";
+      break;
     default:
-      "";
+      "singlePlayer";
   }
 
   return (
