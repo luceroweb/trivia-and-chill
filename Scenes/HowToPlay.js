@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   mainAnimation: {
     alignSelf: "center",
-    aspectRatio: 230 / 500,
+    aspectRatio: Platform.OS === "web"? 475/700:230 / 500,
   },
 });
 
