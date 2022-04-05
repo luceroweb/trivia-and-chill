@@ -44,7 +44,7 @@ const TrueFalse = ({
       }, 1000);
     }
   };
-
+console.log(answer)
   const getIcon = (button) => {
     if (typeof selectedAnswer === "undefined") {
       return <FontAwesome name="star" size={12} color="#401323" />;
