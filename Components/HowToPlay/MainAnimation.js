@@ -1,7 +1,6 @@
 import {
 	View,
 	Text,
-	Pressable,
 	Animated,
 	StyleSheet,
 	useWindowDimensions,
@@ -10,11 +9,11 @@ import {
 	Platform,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import main from "../../Images/main.png";
-import mainWeb from "../../Images/mainWeb.png";
-import React, { useRef, useEffect, useState } from "react";
+import mainAnimation from "../../Images/mainAnimation.png";
+import mainAnimationWeb from "../../Images/mainAnimationWeb.png";
+import React, { useRef, useEffect} from "react";
 
-const MainAnimation = ({ setScene, resetSelectedMovie, lives }) => {
+const MainAnimation = ( ) => {
     const translation = useRef(new Animated.Value(0)).current;
 	const screenWidth = useWindowDimensions().width;
 	
@@ -28,7 +27,7 @@ const MainAnimation = ({ setScene, resetSelectedMovie, lives }) => {
 				}),
 				Animated.timing(translation, {
 					toValue:
-						Platform.OS === "web" ? (screenWidth < 581 ? 420 : 600) : 310,
+						Platform.OS === "web" ? ((screenWidth < 581 ? 120 : 190)) : 310,
 					easing: Easing.bounce,
 					duration: 5000,
 					useNativeDriver: true,
@@ -43,7 +42,7 @@ const MainAnimation = ({ setScene, resetSelectedMovie, lives }) => {
 				<ImageBackground
 					resizeMode={"cover"}
 					style={styles.container}
-					source={Platform.OS === "web" ? mainWeb : main}
+					source={Platform.OS === "web" ? mainAnimationWeb : mainAnimation}
 				>
 					<View style={{ alignItems: "center", flex: 1 }}>
 						<Animated.View
@@ -53,7 +52,7 @@ const MainAnimation = ({ setScene, resetSelectedMovie, lives }) => {
 								duration: 700,
 								transform: [{ translateY: translation }],
 								opacity: translation.interpolate({
-									inputRange: [0, 350],
+									inputRange: [0, 50],
 									outputRange: [0, 1],
 								}),
 							}}
