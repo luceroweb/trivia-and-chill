@@ -1,6 +1,5 @@
 import {
   ImageBackground,
-  StyleSheet,
   Text,
   View,
   Animated,
@@ -8,6 +7,7 @@ import {
   useWindowDimensions
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import { FontAwesome } from '@expo/vector-icons';
 import { useEffect, useRef } from "react";
 export default function CorrectAnswerDemo() {
   const translation = useRef(new Animated.ValueXY({ x: 100, y: 40 })).current;
@@ -24,7 +24,7 @@ export default function CorrectAnswerDemo() {
             useNativeDriver: false,
           }),
           Animated.timing(translation.y, {
-            toValue: screenWidth < 581 ? 55: 105,
+            toValue: Platform.OS=== "web" ?  (screenWidth<550 ? 65 :105):180,
             duration:3500,
             delay: 1000,
             useNativeDriver: false,
@@ -39,13 +39,17 @@ export default function CorrectAnswerDemo() {
     ).start();
   }, [screenWidth]);
   return (
-    <View style={styles.container}>
-      <Text style={styles.instruction}>3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
-      <ImageBackground
-        source={require("./../../Images/correctAnswerDemo.png")}
-        style={{ 
-        width: screenWidth < 580 ? 250 : 500, aspectRatio: 1021 / 540, marginBottom:15,
+    <View >
+      <ImageBackground resizeMode={Platform.OS === "web" ? "contain" : "contain"}style={{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: 'center',
+      width: "100%",
+      height: "100%",
+      aspectRatio: Platform.OS=== "web"? 1021 / 540 : 321/590,
       }}
+        source={Platform.OS=== "web" ? require("./../../Images/correctAnswerDemo.png"): require("./../../Images/correctAnswerDemoMobile.png") }
       >
         <Animated.View
           style={{
@@ -64,26 +68,10 @@ export default function CorrectAnswerDemo() {
             ],
           }}
         >
-          <Entypo name="mouse-pointer" size={24} color={"black"} />
+         {Platform.OS=== "web" ? <Entypo name="mouse-pointer" size={24} color={"black"} /> :
+         <FontAwesome name="hand-pointer-o" size={38} color="black" />}
         </Animated.View>
       </ImageBackground>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: Platform.OS === "web" ? 1 : 0,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#292840",
-    borderRadius: 8,
-    marginBottom: 15,
-    
-  },
-  instruction:{
-    color: "#F2D379",
-    fontSize: 20,
-    padding:20,
-    
-  }
-});
