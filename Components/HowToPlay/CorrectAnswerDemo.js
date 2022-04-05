@@ -1,6 +1,5 @@
 import {
   ImageBackground,
-  StyleSheet,
   Text,
   View,
   Animated,
@@ -46,15 +45,11 @@ export default function CorrectAnswerDemo() {
       alignItems: 'center',
       justifyContent: 'center',
       alignSelf: 'center',
-      // maxWidth:647,
-      // maxHeight: 423,
       width: "100%",
       height: "100%",
       aspectRatio: Platform.OS=== "web"? 1021 / 540 : 321/590,
-
       }}
         source={Platform.OS=== "web" ? require("./../../Images/correctAnswerDemo.png"): require("./../../Images/correctAnswerDemoMobile.png") }
-
       >
         <Animated.View
           style={{
@@ -80,25 +75,3 @@ export default function CorrectAnswerDemo() {
     </View>
   );
 }
-const styles = StyleSheet.create({
-  // container: {
-  //   height:"100%",
-  //   width:"100%",
-  //   aspectRatio:1021 / 540,
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   alignSelf: 'center',
-  //   resizeMode:Platform.OS === "web" ? "contain" : "cover",
-  //   maxWidth:647,
-  //   maxHeight: 423,
-    
-    
-  // },
-  // instruction:{
-  //   color: "#F2D379",
-  //   fontSize: 20,
-  //   padding:20,
-    
-  // }
-});
