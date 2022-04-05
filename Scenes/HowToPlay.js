@@ -71,10 +71,13 @@ const HowToPlay = ({ setScene }) => {
                   2. Read and answer the question before the timer runs out!
                 </Text>
               </View>
-
-              <CorrectAnswerDemo />
-
-              <View style={[styles.instrcutionWrapper, flexDirection]}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
+                <View style={animationContainer}>
+                <CorrectAnswerDemo />
+                </View>
+              </View>
+              <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
                   4. Making a wrong answer results in sudden death. Select "Back
                   to Start" to restart the game.
