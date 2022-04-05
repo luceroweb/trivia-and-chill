@@ -27,11 +27,11 @@ export default function QuestionInstructions() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../Images/questionpage.png")}
+        source={require("../Images/question-page.png")}
         // resizeMode="cover"
         style={{ width: '100%', height: '100%', aspectRatio: 1021 / 540, borderRadius: 20, zIndex: 100 }}
       >
-        <Animated.Image source={require('../Images/questionchange.png')}
+        <Animated.Image source={require('../Images/question-answered.png')}
         style={{ 
           position: 'absolute',
           width: '100%',
