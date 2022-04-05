@@ -16,7 +16,7 @@ export default function QuestionInstructions() {
           useNativeDriver: true,
         }),
         Animated.timing(translation.y, {
-          toValue: width < 1385 ? width * 0.13 : 180,
+          toValue: 85,
           duration: 2000,
           delay: 1000,
           useNativeDriver: true,

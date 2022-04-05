@@ -1,20 +1,36 @@
 import {
   View,
   Text,
-  Linking,
   StyleSheet,
   ScrollView,
   ImageBackground,
   Pressable,
+  useWindowDimensions,
+  Platform,
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
+import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
+import MainAnimation from "../Components/HowToPlay/MainAnimation";
+import GameOverHelp from "../Components/GameOverHelp.js";
 import QuestionInstructions from "../Components/QuestionInstructions"
 
 const HowToPlay = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
+  const { width } = useWindowDimensions();
+
+  let flexDirection =
+    width > 800
+      ? { flexDirection: "row", justifyContent: "space-between" }
+      : "";
+  let columnGap = width > 800 ? { marginRight: 10 } : null;
+  let animationContainer = {
+    width: Platform.OS === "web" ? (width > 800 ? 500 : "100%") : 230,
+    alignSelf:'center'
+  };
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -24,79 +40,86 @@ const HowToPlay = ({ setScene }) => {
           <View style={styles.subContainer}>
             <View style={styles.contentContainer}>
               <Text style={styles.headings}>How To Play</Text>
-              <Text style={styles.content}>
-                Thanks for playing "Guess The Movie Game". This is a trivia game
-                to test your movie knowledge. Random questions about popular
-                movies could be shown as true/false or multiple choice. Answer
-                correctly to increase your winning streak! If you get a wrong
-                answer, then the game is over.
-              </Text>
-              <Text style={styles.content}>
-                You can choose between the following game modes to change the
-                difficulty of the game.
-              </Text>
+              <View style={styles.instructionWrapper}>
+                <Text style={styles.instructionText}>
+                  Thanks for playing "Guess The Movie Game". This is a trivia
+                  game to test your movie knowledge. Random questions about
+                  popular movies could be shown as true/false or multiple
+                  choice. Answer correctly to increase your winning streak! If
+                  you get a wrong answer, then the game is over.
+                </Text>
+                <Text style={styles.instructionText}>
+                  You can choose between the following game modes to change the
+                  difficulty of the game.
+                </Text>
+              </View>
             </View>
 
             <View style={styles.contentContainer}>
               <Text style={styles.headings}>Single Player Mode (Default)</Text>
 
-              <View>
-                <Text style={styles.content}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   1. Select “Start" to begin the game
                 </Text>
+                <QuestionInstructions/>
+                <View style={[styles.mainAnimation, animationContainer]}>
+                  <MainAnimation />
+                </View>
               </View>
 
-              <View>
-                <Text style={styles.content}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   2. Read and answer the question before the timer runs out!
                 </Text>
-                <QuestionInstructions/>
               </View>
-
-              <View>
-                <Text style={styles.content}>
-                  3. Guess correctly to increase your winning streak, and enjoy
-                  the movie trailer. Select the "Next Question" button to
-                  continue the game.
-                </Text>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
+                <View style={animationContainer}>
+                <CorrectAnswerDemo />
+                </View>
               </View>
-
-              <View>
-                <Text style={styles.content}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   4. Making a wrong answer results in sudden death. Select "Back
                   to Start" to restart the game.
                 </Text>
+                <View style={animationContainer}>
+                  <GameOverHelp />
+                </View>
               </View>
             </View>
 
             <View style={styles.contentContainer}>
               <Text style={styles.headings}>Easy Single Player mode</Text>
-              <Text style={styles.content}>
-                Game play is the same as Single Player Mode with these changes
-              </Text>
+              <View style={styles.instructionWrapper}>
+                <Text style={styles.instructionText}>
+                  Game play is the same as Single Player Mode with these changes
+                </Text>
+              </View>
 
-              <View>
-                <Text style={styles.content}>
+              <View style={styles.instructionWrapper}>
+                <Text style={styles.instructionText}>
                   1. Start the game with 3 lives.
                 </Text>
               </View>
 
-              <View>
-                <Text style={styles.content}>
+              <View style={styles.instructionWrapper}>
+                <Text style={styles.instructionText}>
                   2. There is no timer, so you can take your time to choose the
                   correct answer.
                 </Text>
               </View>
 
-              <View>
-                <Text style={styles.content}>
+              <View style={styles.instructionWrapper}>
+                <Text style={styles.instructionText}>
                   3. If you choose an incorrect answer, then you lose 1 life and
                   your winning streak goes back to zero.
                 </Text>
               </View>
 
-              <View>
-                <Text style={styles.content}>
+              <View style={styles.instructionWrapper}>
+                <Text style={styles.instructionText}>
                   4. If you lose all your lives, the game is over.
                 </Text>
               </View>
@@ -129,13 +152,9 @@ function mapDispatchToProps(dispatch) {
 const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: "#A0947C",
-    // borderWidth: 3,
-    // borderColor: "#A0947C",
-    // marginBottom: 30,
     marginTop: 10,
-    maxWidth: "90%",
+    width: "90%",
     alignSelf: "center",
-    // width: "80%",
     padding: 5,
     borderRadius: 8,
   },
@@ -150,13 +169,18 @@ const styles = StyleSheet.create({
     marginTop: 15,
     backgroundColor: "#292840",
   },
-  content: {
+  instructionWrapper: {
     borderRadius: 8,
     padding: 20,
-    fontSize: 20,
     backgroundColor: "#292840",
     marginBottom: 15,
     color: "#F2D379",
+  },
+  instructionText: {
+    fontSize: 20,
+    marginBottom: 15,
+    color: "#F2D379",
+    width: "100%",
   },
   mainContainer: {
     backgroundColor: "#401323",
@@ -171,6 +195,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
+  },
+  mainAnimation: {
+    alignSelf: "center",
+    aspectRatio: Platform.OS === "web"? 475/700:230 / 500,
   },
 });
 
