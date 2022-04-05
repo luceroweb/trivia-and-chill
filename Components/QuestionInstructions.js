@@ -1,25 +1,25 @@
-import { ImageBackground, StyleSheet, View, Animated, useWindowDimensions, } from "react-native";
+import { ImageBackground, StyleSheet, View, Animated, useWindowDimensions, Platform } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect, useRef } from "react";
 
 export default function QuestionInstructions() {
   const { width } = useWindowDimensions();
-  const translation = useRef(new Animated.ValueXY({ x: 250, y: 40 })).current;
+  const translation = useRef(new Animated.ValueXY({ x:  Platform.OS === 'web' ? width < 630 ? width * 0.2 : 230 : 100, y: 40 })).current;
 
   useEffect(() => {
     Animated.loop(
       Animated.parallel([
         Animated.timing(translation.x, {
-          toValue: 0,
+          toValue: Platform.OS === 'web' ? 0 : 4,
           duration: 2000,
           delay: 1000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(translation.y, {
-          toValue: 85,
+          toValue: Platform.OS === 'web' ? width < 630 ? width * 0.13 : 85 : 45, 
           duration: 2000,
           delay: 1000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ])  
     ).start();
