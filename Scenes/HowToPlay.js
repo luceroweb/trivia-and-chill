@@ -27,6 +27,7 @@ const HowToPlay = ({ setScene }) => {
   let columnGap = width > 800 ? { marginRight: 10 } : null;
   let animationContainer = {
     width: Platform.OS === "web" ? (width > 800 ? 500 : "100%") : 230,
+    alignSelf:'center'
   };
 
   if (!fontsLoaded) {
