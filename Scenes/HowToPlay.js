@@ -15,6 +15,7 @@ import AppLoading from "expo-app-loading";
 import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
 import MainAnimation from "../Components/HowToPlay/MainAnimation";
 import GameOverHelp from "../Components/GameOverHelp.js";
+import WrongAnswerHelp from "../Components/HowToPlay/WrongAnswerHelp";
 
 const HowToPlay = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
@@ -114,6 +115,9 @@ const HowToPlay = ({ setScene }) => {
                   3. If you choose an incorrect answer, then you lose 1 life and
                   your winning streak goes back to zero.
                 </Text>
+                <View style={animationContainer}>
+                  <WrongAnswerHelp />
+                </View>
               </View>
 
               <View style={styles.instructionWrapper}>
