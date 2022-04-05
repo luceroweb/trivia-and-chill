@@ -62,7 +62,7 @@ const HowToPlay = ({ setScene }) => {
                 <Text style={[styles.instructionText, columnGap]}>
                   1. Select “Start" to begin the game
                 </Text>
-                <QuestionInstructions/>
+
                 <View style={[styles.mainAnimation, animationContainer]}>
                   <MainAnimation />
                 </View>
@@ -72,6 +72,9 @@ const HowToPlay = ({ setScene }) => {
                 <Text style={[styles.instructionText, columnGap]}>
                   2. Read and answer the question before the timer runs out!
                 </Text>
+                <View style={animationContainer}>
+                <QuestionInstructions/>
+                </View>
               </View>
               <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
