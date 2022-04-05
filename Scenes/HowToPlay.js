@@ -148,56 +148,56 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    backgroundColor: "#A0947C",
-    marginTop: 10,
-    width: "90%",
-    alignSelf: "center",
-    padding: 5,
-    borderRadius: 8,
-  },
-  headings: {
-    fontFamily: "Limelight_400Regular",
-    borderRadius: 8,
-    padding: 20,
-    textAlign: "center",
-    color: "#F2D379",
-    fontSize: 30,
-    marginBottom: 15,
-    marginTop: 15,
-    backgroundColor: "#292840",
-  },
-  instructionWrapper: {
-    borderRadius: 8,
-    padding: 20,
-    backgroundColor: "#292840",
-    marginBottom: 15,
-    color: "#F2D379",
-  },
-  instructionText: {
-    fontSize: 20,
-    marginBottom: 15,
-    color: "#F2D379",
-    width: "100%",
-  },
-  mainContainer: {
-    backgroundColor: "#401323",
-    height: "100%",
-  },
-  ticketImage: {
-    marginTop: 10,
-    flex: 1,
-    marginBottom: 10,
-    width: 200,
-    aspectRatio: 18 / 9,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  mainAnimation: {
-    alignSelf: "center",
-    aspectRatio: Platform.OS === "web"? 475/700:230 / 500,
-  },
+	contentContainer: {
+		backgroundColor: "#A0947C",
+		marginTop: 10,
+		width: "90%",
+		alignSelf: "center",
+		padding: 5,
+		borderRadius: 8,
+	},
+	headings: {
+		fontFamily: "Limelight_400Regular",
+		borderRadius: 8,
+		padding: 20,
+		textAlign: "center",
+		color: "#F2D379",
+		fontSize: 30,
+		marginBottom: 15,
+		marginTop: 15,
+		backgroundColor: "#292840",
+	},
+	instructionWrapper: {
+		borderRadius: 8,
+		padding: 20,
+		backgroundColor: "#292840",
+		marginBottom: 15,
+		color: "#F2D379",
+	},
+	instructionText: {
+		fontSize: 20,
+		marginBottom: 15,
+		color: "#F2D379",
+		width: "100%",
+	},
+	mainContainer: {
+		backgroundColor: "#401323",
+		height: "100%",
+	},
+	ticketImage: {
+		marginTop: 10,
+		flex: 1,
+		marginBottom: 10,
+		width: 200,
+		aspectRatio: 18 / 9,
+		alignSelf: "center",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	mainAnimation: {
+		alignSelf: "center",
+		aspectRatio: Platform.OS === "web" ? 980 / 500 : 230 / 500,
+	},
 });
 
 export default connect(null, mapDispatchToProps)(HowToPlay);
