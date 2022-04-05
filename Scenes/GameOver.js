@@ -19,14 +19,8 @@ import lose from "../Sounds/lose.wav";
 
 function GameOver({ setScene, resetWinningStreak }) {
   const { width, height } = useWindowDimensions();
-  const gamveOverWrapPosition = {
-    top:
-      Platform.OS === "ios" && height === "1334px"
-        ? 40
-        : Platform.OS === "ios"
-        ? 48
-        : 30,
-    marginTop: width * 0.023 > 15 ? width * 0.023 : 15,
+  const screenWrapTopPosition = {
+    marginTop: width * 0.025 > 16 ? width * 0.025 : 16,
   };
 
   const [sound, setSound] = useState();
@@ -60,26 +54,25 @@ function GameOver({ setScene, resetWinningStreak }) {
   } else {
     return (
       <View style={styles.layout}>
-        <ImageBackground
+        <Image
           source={MilkyWay}
           style={[styles.milkywaybg, { marginBottom: (height - 40) * -1 }]}
-        >
-          <Image
-            source={DriveInForeground}
-            style={styles.driveinforeground}
-          ></Image>
-          <View style={[styles.gameOverWrap, gamveOverWrapPosition]}>
-            <Text style={styles.gameOverStyle}>Game Over</Text>
-            <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
-              <ImageBackground
-                source={require("../Images/ticket.png")}
-                style={styles.ticket}
-              >
-                <Text style={styles.backToStartButtonText}>Start Over</Text>
-              </ImageBackground>
-            </Pressable>
-          </View>
-        </ImageBackground>
+        ></Image>
+        <Image
+          source={DriveInForeground}
+          style={styles.driveinforeground}
+        ></Image>
+        <View style={[styles.screenWrap, screenWrapTopPosition]}>
+          <Text style={styles.gameOverStyle}>Game Over</Text>
+          <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
+            <ImageBackground
+              source={require("../Images/ticket.png")}
+              style={styles.ticket}
+            >
+              <Text style={styles.backToStartButtonText}>Start Over</Text>
+            </ImageBackground>
+          </Pressable>
+        </View>
       </View>
     );
   }
@@ -117,26 +110,22 @@ const styles = StyleSheet.create({
   },
   driveinforeground: {
     position: "absolute",
+    top: 20,
     resizeMode: "contain",
-    width: Platform.OS === "android" ? "170%" : "100%",
-    minWidth: Platform.OS === "android" ? 350 : 650,
+    width: Platform.OS !== "web" ? 650 : "100%",
+    minWidth: 650,
     height: "auto",
     alignSelf: "center",
     aspectRatio: 468 / 485,
-    top:
-      Platform.OS === "ios" && height === "1334px"
-        ? 40
-        : Platform.OS === "ios"
-        ? 48
-        : 30,
   },
-  gameOverWrap: {
+  screenWrap: {
+    position: "absolute",
+    top: 20,
     backgroundColor: "#292840",
     padding: 20,
-    width: "50%",
+    width: "49%",
     minWidth: 320,
     aspectRatio: 16 / 9,
-    marginLeft: -4,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
@@ -144,7 +133,7 @@ const styles = StyleSheet.create({
   },
   gameOverStyle: {
     fontSize: 28,
-    marginBottom: Platform.OS === "android" ? 20 : 70,
+    marginBottom: Platform.OS !== "web" ? 20 : 70,
     textAlign: "center",
     fontFamily: "Limelight_400Regular",
     color: "#F2D379",
@@ -162,6 +151,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     width: "35%",
+    minWidth: 120,
+    minHeight: 62,
     aspectRatio: 7.8 / 4,
   },
 });
