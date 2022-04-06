@@ -127,7 +127,8 @@ import {
                   {"  "}
                   {lives}
                   {"  "}
-                  lives left. {"\n"}
+                  {lives > 1 ? "lives left." : "life left."}
+                  {"\n"}
                   {"\n"}Try again!
                 </Text>
               </View>
