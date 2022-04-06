@@ -14,13 +14,20 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
       ) : (
         <>
           <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
               setModalVisible(!modalVisible);
             }}
           >
+            <View style={{
+              position: 'absolute',
+              height: "100%",
+              width: "100%",
+              opacity: 0.9,
+              backgroundColor: 'gray',
+            }} /> 
             <View style={styles.modalView}>
               <Pressable
                 style={styles.exit}
