@@ -17,7 +17,7 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { Audio } from "expo-av";
 import lose from "../Sounds/lose.wav";
 
-function GameOver({ setScene, resetWinningStreak }) {
+function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
   const { width, height } = useWindowDimensions();
   const screenWrapTopPosition = {
     marginTop: width * 0.025 > 16 ? width * 0.025 : 16,
@@ -34,6 +34,7 @@ function GameOver({ setScene, resetWinningStreak }) {
   const backToStartHandler = () => {
     resetWinningStreak();
     setScene("Main");
+    resetSelectedMovie();
   };
 
   let [fontsLoaded] = useFonts({
@@ -82,6 +83,7 @@ function mapStateToProps(state) {
   return {
     winningStreak: state.winningStreak,
     scene: state.scene,
+    selectedMovie: state.selectedMovie,
   };
 }
 
@@ -95,6 +97,11 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_SCENE",
         name,
+      }),
+    resetSelectedMovie: (selectedMovie) =>
+      dispatch({
+        type: "RESET_SELECTED_MOVIE",
+        selectedMovie,
       }),
   };
 }

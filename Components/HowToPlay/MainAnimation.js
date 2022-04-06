@@ -1,7 +1,6 @@
 import {
 	View,
 	Text,
-	Pressable,
 	Animated,
 	StyleSheet,
 	useWindowDimensions,
@@ -10,22 +9,31 @@ import {
 	Platform,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import main from "../../Images/main.png";
-import React, { useRef, useEffect, useState } from "react";
+import mainAnimation from "../../Images/mainAnimation.png";
+import mainAnimationWeb from "../../Images/mainAnimationWeb.png";
+import React, { useRef, useEffect} from "react";
 
-const MainAnimation = ({ setScene, resetSelectedMovie, lives }) => {
+const MainAnimation = ( ) => {
     const translation = useRef(new Animated.Value(0)).current;
-	
+	const screenWidth = useWindowDimensions().width;
 	
 
-    useEffect(() => {
-        Animated.timing(translation, {
-            toValue: Platform.OS === "web" ? 310 : 310,
-            easing: Easing.bounce,
-            delay: 2000,
-            duration: 5000,
-            useNativeDriver: true,
-        }).start();
+	useEffect(() => {
+		Animated.loop(
+			Animated.sequence([
+				Animated.timing(translation, {
+					toValue:0,
+					useNativeDriver: true,
+				}),
+				Animated.timing(translation, {
+					toValue:
+						Platform.OS === "web" ? ((screenWidth < 581 ? 120 : 190)) : 310,
+					easing: Easing.bounce,
+					duration: 5000,
+					useNativeDriver: true,
+				}),
+			])
+		).start();
     }, []);
 
 	
@@ -34,27 +42,23 @@ const MainAnimation = ({ setScene, resetSelectedMovie, lives }) => {
 				<ImageBackground
 					resizeMode={"cover"}
 					style={styles.container}
-					source={main}
+					source={Platform.OS === "web" ? mainAnimationWeb : mainAnimation}
 				>
 					<View style={{ alignItems: "center", flex: 1 }}>
 						<Animated.View
 							style={{
-								width: 230,
+								width: 30,
 								height: 30,
 								duration: 700,
-								backgroundColor: "#292840",
 								transform: [{ translateY: translation }],
 								opacity: translation.interpolate({
-									inputRange: [0, 350],
+									inputRange: [0, 50],
 									outputRange: [0, 1],
 								}),
 							}}
 						>
-							<Text style={styles.animationText}>
-								Select “Start" to begin the game
-							</Text>
 							<Text style={styles.animationFontAwesome}>
-								<FontAwesome name="arrow-down" size={24} color="#401323" />
+								<FontAwesome name="arrow-down" size={24} color="#292840" />
 							</Text>
 						</Animated.View>
 					</View>
