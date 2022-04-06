@@ -1,10 +1,10 @@
 import { ImageBackground, StyleSheet, View, Animated, useWindowDimensions, Platform } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect, useRef } from "react";
-import questionPage from "../Images/question-page.png";
-import questionPageAnswered from "../Images/question-answered.png";
-import questionPageMobile from "../Images/question-page-mobile.png";
-import questionPageAnsweredMobile from "../Images/question-answered-mobile.png";
+import questionPage from "../Images/HowToPlay/Questions/question-page.png";
+import questionPageAnswered from "../Images/HowToPlay/Questions/question-answered.png";
+import questionPageMobile from "../Images/HowToPlay/Questions/question-page-mobile.png";
+import questionPageAnsweredMobile from "../Images/HowToPlay/Questions/question-answered-mobile.png";
 
 export default function QuestionInstructions() {
   const { width } = useWindowDimensions();
@@ -20,7 +20,7 @@ export default function QuestionInstructions() {
           useNativeDriver: false,
         }),
         Animated.timing(translation.y, {
-          toValue: Platform.OS === 'web' ? width < 630 ? width * 0.13 : 85 : 100, 
+          toValue: Platform.OS === 'web' ? width < 630 ? width * 0.13 : 85 : 140, 
           duration: 2000,
           delay: 1000,
           useNativeDriver: false,
