@@ -1,10 +1,14 @@
 import { ImageBackground, StyleSheet, View, Animated, useWindowDimensions, Platform } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect, useRef } from "react";
+import questionPage from "../Images/HowToPlay/Questions/question-page.png";
+import questionPageAnswered from "../Images/HowToPlay/Questions/question-answered.png";
+import questionPageMobile from "../Images/HowToPlay/Questions/question-page-mobile.png";
+import questionPageAnsweredMobile from "../Images/HowToPlay/Questions/question-answered-mobile.png";
 
 export default function QuestionInstructions() {
   const { width } = useWindowDimensions();
-  const translation = useRef(new Animated.ValueXY({ x:  Platform.OS === 'web' ? width < 630 ? width * 0.2 : 230 : 100, y: 40 })).current;
+  const translation = useRef(new Animated.ValueXY({ x:  Platform.OS === 'web' ? width < 630 ? width * 0.2 : 230 : 100, y: 40 })).current; 
 
   useEffect(() => {
     Animated.loop(
@@ -16,7 +20,7 @@ export default function QuestionInstructions() {
           useNativeDriver: false,
         }),
         Animated.timing(translation.y, {
-          toValue: Platform.OS === 'web' ? width < 630 ? width * 0.13 : 85 : 45, 
+          toValue: Platform.OS === 'web' ? width < 630 ? width * 0.13 : 85 : 140, 
           duration: 2000,
           delay: 1000,
           useNativeDriver: false,
@@ -28,19 +32,19 @@ export default function QuestionInstructions() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../Images/question-page.png")}
-        style={{ width: '100%', height: '100%', aspectRatio: 1021 / 540, borderRadius: 20 }}
+        source={Platform.OS === "web" ? questionPage : questionPageMobile}
+        style={{ height: '100%', width: '100%', aspectRatio: Platform.OS === "web" ? 1021/540 : 5/9 }}
       >
         <Animated.Image
-          source={require('../Images/question-answered.png')}
+          source={Platform.OS === "web" ? questionPageAnswered : questionPageAnsweredMobile}
           style={{ 
             position: 'absolute',
             width: '100%',
             height: '100%',
-            aspectRatio: 1021 / 540,
+            aspectRatio: Platform.OS === "web" ? 1021/540 : 5/9,
             borderRadius: 20, 
             opacity: translation.x.interpolate({
-              inputRange: [0, 2],
+              inputRange: Platform.OS === "web" ? [0, 2] : [4, 6],
               outputRange: [1, 0],
               extrapolate: 'clamp',
             }),
