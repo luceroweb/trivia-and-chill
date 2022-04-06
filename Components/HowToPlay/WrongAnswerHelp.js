@@ -9,7 +9,7 @@ export default function WrongAnswerHelp() {
         new Animated.ValueXY({x: Platform.OS === "web" ? 100 : 50, y: Platform.OS === "web" ? 100 : 50})
     ).current;
 
-    const fade = useRef(
+    const lifePointerCircle = useRef(
         new Animated.Value(1)
     ).current;
 
@@ -17,28 +17,27 @@ export default function WrongAnswerHelp() {
 
     useEffect(() => {
         Animated.loop(
-        Animated.parallel(
-            [
-            Animated.timing(translation.x, {
-                toValue: 6,
-                duration: 3000,
-                delay: 1000,
-                useNativeDriver: false,                
-            })
-            ,
-            Animated.timing(translation.y, {
-                toValue: Platform.OS === "web" ? ( screenWidth<550 ? 130 : 160) : 185,                
-                duration: 3000,
-                delay: 1000,
-                useNativeDriver: false,
-            }),
-            Animated.timing(fade, {
-                toValue: 0,
-                duration: 3000,
-                useNativeDriver: false
-            })
-        ]
-        )
+            Animated.parallel(
+                [
+                    Animated.timing(translation.x, {
+                        toValue: 10,
+                        duration: 3000,
+                        delay: 1000,
+                        useNativeDriver: false,                
+                    }),
+                    Animated.timing(translation.y, {
+                        toValue: Platform.OS === "web" ? (screenWidth < 800 ? 185 : 160) : 185,                
+                        duration: 3000,
+                        delay: 1000,
+                        useNativeDriver: false,
+                    }),
+                    Animated.timing(lifePointerCircle, {
+                        toValue: 0,
+                        duration: 3000,
+                        useNativeDriver: false
+                    })
+                ]
+            )
         ).start() 
     }, []);
 
@@ -58,39 +57,35 @@ export default function WrongAnswerHelp() {
             source= {Platform.OS === 'web' ? WrongAnswerScreen : WrongAnswerScreenMobile}
             >
                 <Animated.View
-                style={{
-                    transform: [
-                    { translateX: translation.x },
-                    { translateY: translation.y },
-                    ],
-                    marginBottom: 10,
-                }} 
+                    style={{
+                        transform: [
+                            { translateX: translation.x },
+                            { translateY: translation.y },
+                        ]                    
+                    }} 
                 >
                     <Entypo
-                    name={Platform.OS === 'web' ? "mouse-pointer" : "circle"}
-                    size={24}
-                    color={Platform.OS === 'web' ? "black" : "#A0947C"}
+                        name={Platform.OS === 'web' ? "mouse-pointer" : "circle"}
+                        size={24}
+                        color={Platform.OS === 'web' ? "black" : "#A0947C"}
                     />
                 </Animated.View>
 
                 <Animated.View
-                style={{
-                    transform: [
-                        { translateX: Platform.OS === "web" ? ( screenWidth < 550 ? -45 : -48) : -63 },
-                        { translateY: Platform.OS === "web" ? ( screenWidth < 550 ? 45 : 40) : 60 },
+                    style={{
+                        transform: [
+                                { translateX: Platform.OS === "web" ? (screenWidth < 800 ? -45 : -50) : -63 },
+                                { translateY: Platform.OS === "web" ? (screenWidth < 800 ? 45 : 33) : 60 },
                         ],
-                    opacity:fade
-                    ,
-                    marginBottom: 10,
-                }} 
+                        opacity:lifePointerCircle                    
+                    }} 
                 >
                     <Entypo
-                    name="circle"
-                    size={40}
-                    color= "white" 
+                        name="circle"
+                        size={40}
+                        color= "white" 
                     />
                 </Animated.View>
-
             </ImageBackground>
         </View>
     );
