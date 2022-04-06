@@ -15,6 +15,7 @@ import AppLoading from "expo-app-loading";
 import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
 import MainAnimation from "../Components/HowToPlay/MainAnimation";
 import GameOverHelp from "../Components/GameOverHelp.js";
+import WrongAnswerHelp from "../Components/HowToPlay/WrongAnswerHelp";
 import QuestionInstructions from "../Components/QuestionInstructions"
 
 const HowToPlay = ({ setScene }) => {
@@ -56,7 +57,9 @@ const HowToPlay = ({ setScene }) => {
             </View>
 
             <View style={styles.contentContainer}>
-              <Text style={styles.headings}>Single Player Mode (Default)</Text>
+              <Text style={styles.headings}>
+                Single Player Mode (Default)
+              </Text>
 
               <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
@@ -76,12 +79,15 @@ const HowToPlay = ({ setScene }) => {
                 <QuestionInstructions/>
                 </View>
               </View>
+
               <View style={[styles.instructionWrapper, flexDirection]}>
-                <Text style={[styles.instructionText, columnGap]}>3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
+                <Text style={[styles.instructionText, columnGap]}>
+                  3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
                 <View style={animationContainer}>
-                <CorrectAnswerDemo />
+                  <CorrectAnswerDemo />
                 </View>
               </View>
+
               <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
                   4. Making a wrong answer results in sudden death. Select "Back
@@ -94,7 +100,10 @@ const HowToPlay = ({ setScene }) => {
             </View>
 
             <View style={styles.contentContainer}>
-              <Text style={styles.headings}>Easy Single Player mode</Text>
+              <Text style={styles.headings}>
+                Easy Single Player mode
+              </Text>
+
               <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
                   Game play is the same as Single Player Mode with these changes
@@ -114,11 +123,14 @@ const HowToPlay = ({ setScene }) => {
                 </Text>
               </View>
 
-              <View style={styles.instructionWrapper}>
-                <Text style={styles.instructionText}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   3. If you choose an incorrect answer, then you lose 1 life and
                   your winning streak goes back to zero.
                 </Text>
+                <View style={animationContainer}>
+                  <WrongAnswerHelp />
+                </View>
               </View>
 
               <View style={styles.instructionWrapper}>
@@ -128,6 +140,7 @@ const HowToPlay = ({ setScene }) => {
               </View>
             </View>
           </View>
+          
           <ImageBackground
             source={require("../Images/ticket.png")}
             style={styles.ticketImage}
