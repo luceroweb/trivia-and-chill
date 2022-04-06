@@ -3,20 +3,30 @@ import { connect } from "react-redux";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function Lives({ lives }) {
+
+    let displayLives = [];
+
+    for (let i = 0; i < lives; i++) {
+        displayLives.push(
+        <MaterialCommunityIcons
+            style={styles.livesIcon}
+            name="popcorn"
+            size={35}
+            key={i}
+        />  
+    );
+}
+
+    
   return (
     <View style={styles.livesDisplay}>
-        {lives > 0 && 
-            (<View style={styles.livesWrap}>
-                <MaterialCommunityIcons
-                    style={styles.livesIcon}
-                    name="popcorn"
-                    size={35}
-                />
-                <Text style={styles.livesText}>
-                    {lives}
-                </Text>
+         <Text style={styles.livesText}>
+         LIVES
+        </Text>
+            <View style={styles.livesWrap}>
+                {displayLives}
             </View>
-        )}
+        
     </View>
   );
 }
@@ -45,25 +55,30 @@ export default connect(mapStateToProps, mapDispatchToProps)(Lives);
 const styles = StyleSheet.create({
     livesDisplay: {
         flex: 1,
-        flexDirection: "row",
+        flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "center",
+        // backgroundColor: "rgba(0, 0, 0, 0.4)",
+        borderRadius: 8,
+        
     },
     livesWrap: {
         flex: 1,
+        flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
         position: "relative",
     },
     livesIcon: {
         color: "#F2D379",
+        
     },
     livesText: {
-		position: "absolute",
+		fontWeight: "bold",
 		fontSize: 16,
-		color: "black",
-        backgroundColor: "#F2D379",
-        borderRadius: 8,
+		color: "#F2D379",
+        // backgroundColor: "#F2D379",
+        // borderRadius: 8,
         padding: 2,
     },
 });
