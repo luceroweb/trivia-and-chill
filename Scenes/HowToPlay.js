@@ -110,8 +110,8 @@ const HowToPlay = ({ setScene }) => {
                 </Text>
               </View>
 
-              <View style={styles.instructionWrapper}>
-                <Text style={styles.instructionText}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   3. If you choose an incorrect answer, then you lose 1 life and
                   your winning streak goes back to zero.
                 </Text>
@@ -119,7 +119,7 @@ const HowToPlay = ({ setScene }) => {
                   <WrongAnswerHelp />
                 </View>
               </View>
-
+              
               <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
                   4. If you lose all your lives, the game is over.
