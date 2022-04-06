@@ -65,17 +65,17 @@ export default function WrongAnswerHelp() {
                     }} 
                 >
                     <Entypo
-                        name={Platform.OS === 'web' ? "mouse-pointer" : "circle"}
-                        size={24}
-                        color={Platform.OS === 'web' ? "black" : "#A0947C"}
+                        name={Platform.OS === 'web' ? "mouse-pointer" : "dot-single"}
+                        size={Platform.OS === "web" ? 24 : 72}
+                        color={Platform.OS === 'web' ? "black" : "red"}
                     />
                 </Animated.View>
 
                 <Animated.View
                     style={{
                         transform: [
-                                { translateX: Platform.OS === "web" ? (screenWidth < 800 ? -45 : -50) : -63 },
-                                { translateY: Platform.OS === "web" ? (screenWidth < 800 ? 45 : 33) : 60 },
+                                { translateX: Platform.OS === "web" ? -50 : -63 },
+                                { translateY: Platform.OS === "web" ? (screenWidth < 800 ? 41 : 33) : 35 },
                         ],
                         opacity:lifePointerCircle                    
                     }} 
