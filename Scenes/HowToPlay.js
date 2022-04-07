@@ -16,7 +16,8 @@ import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
 import MainAnimation from "../Components/HowToPlay/MainAnimation";
 import GameOverHelp from "../Components/GameOverHelp.js";
 import WrongAnswerHelp from "../Components/HowToPlay/WrongAnswerHelp";
-import QuestionInstructions from "../Components/QuestionInstructions"
+import QuestionInstructions from "../Components/QuestionInstructions";
+import EasyModeLivesHelp from "../Components/HowToPlay/EasyModeLivesHelp";
 
 const HowToPlay = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
@@ -110,10 +111,13 @@ const HowToPlay = ({ setScene }) => {
                 </Text>
               </View>
 
-              <View style={styles.instructionWrapper}>
-                <Text style={styles.instructionText}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   1. Start the game with 3 lives.
                 </Text>
+                <View style={animationContainer}>
+                  <EasyModeLivesHelp />
+                </View>
               </View>
 
               <View style={styles.instructionWrapper}>
