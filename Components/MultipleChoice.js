@@ -18,6 +18,7 @@ const MultipleChoice = ({
   lives,
   gamePlayMode,
   decreaseLives,
+  resetLives,
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -61,6 +62,7 @@ const MultipleChoice = ({
     } else {
       setTimeout(() => {
         resetWinningStreak();
+        resetLives();
         setScene("GameOver");
       }, 1000);
     }

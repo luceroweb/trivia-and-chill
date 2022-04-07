@@ -15,6 +15,8 @@ import AppLoading from "expo-app-loading";
 import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
 import MainAnimation from "../Components/HowToPlay/MainAnimation";
 import GameOverHelp from "../Components/GameOverHelp.js";
+import WrongAnswerHelp from "../Components/HowToPlay/WrongAnswerHelp";
+import QuestionInstructions from "../Components/QuestionInstructions"
 
 const HowToPlay = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
@@ -27,6 +29,7 @@ const HowToPlay = ({ setScene }) => {
   let columnGap = width > 800 ? { marginRight: 10 } : null;
   let animationContainer = {
     width: Platform.OS === "web" ? (width > 800 ? 500 : "100%") : 230,
+    alignSelf:'center'
   };
 
   if (!fontsLoaded) {
@@ -38,7 +41,7 @@ const HowToPlay = ({ setScene }) => {
           <View style={styles.subContainer}>
             <View style={styles.contentContainer}>
               <Text style={styles.headings}>How To Play</Text>
-              <View style={styles.instrcutionWrapper}>
+              <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
                   Thanks for playing "Guess The Movie Game". This is a trivia
                   game to test your movie knowledge. Random questions about
@@ -54,26 +57,38 @@ const HowToPlay = ({ setScene }) => {
             </View>
 
             <View style={styles.contentContainer}>
-              <Text style={styles.headings}>Single Player Mode (Default)</Text>
+              <Text style={styles.headings}>
+                Single Player Mode (Default)
+              </Text>
 
-              <View style={[styles.instrcutionWrapper, flexDirection]}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
                   1. Select “Start" to begin the game
                 </Text>
+
                 <View style={[styles.mainAnimation, animationContainer]}>
                   <MainAnimation />
                 </View>
               </View>
 
-              <View style={[styles.instrcutionWrapper, flexDirection]}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
                   2. Read and answer the question before the timer runs out!
                 </Text>
+                <View style={animationContainer}>
+                <QuestionInstructions/>
+                </View>
               </View>
 
-              <CorrectAnswerDemo />
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
+                  3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
+                <View style={animationContainer}>
+                  <CorrectAnswerDemo />
+                </View>
+              </View>
 
-              <View style={[styles.instrcutionWrapper, flexDirection]}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
                   4. Making a wrong answer results in sudden death. Select "Back
                   to Start" to restart the game.
@@ -85,40 +100,47 @@ const HowToPlay = ({ setScene }) => {
             </View>
 
             <View style={styles.contentContainer}>
-              <Text style={styles.headings}>Easy Single Player mode</Text>
-              <View style={styles.instrcutionWrapper}>
+              <Text style={styles.headings}>
+                Easy Single Player mode
+              </Text>
+
+              <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
                   Game play is the same as Single Player Mode with these changes
                 </Text>
               </View>
 
-              <View style={styles.instrcutionWrapper}>
+              <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
                   1. Start the game with 3 lives.
                 </Text>
               </View>
 
-              <View style={styles.instrcutionWrapper}>
+              <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
                   2. There is no timer, so you can take your time to choose the
                   correct answer.
                 </Text>
               </View>
 
-              <View style={styles.instrcutionWrapper}>
-                <Text style={styles.instructionText}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   3. If you choose an incorrect answer, then you lose 1 life and
                   your winning streak goes back to zero.
                 </Text>
+                <View style={animationContainer}>
+                  <WrongAnswerHelp />
+                </View>
               </View>
 
-              <View style={styles.instrcutionWrapper}>
+              <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
                   4. If you lose all your lives, the game is over.
                 </Text>
               </View>
             </View>
           </View>
+          
           <ImageBackground
             source={require("../Images/ticket.png")}
             style={styles.ticketImage}
@@ -144,56 +166,56 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    backgroundColor: "#A0947C",
-    marginTop: 10,
-    width: "90%",
-    alignSelf: "center",
-    padding: 5,
-    borderRadius: 8,
-  },
-  headings: {
-    fontFamily: "Limelight_400Regular",
-    borderRadius: 8,
-    padding: 20,
-    textAlign: "center",
-    color: "#F2D379",
-    fontSize: 30,
-    marginBottom: 15,
-    marginTop: 15,
-    backgroundColor: "#292840",
-  },
-  instrcutionWrapper: {
-    borderRadius: 8,
-    padding: 20,
-    backgroundColor: "#292840",
-    marginBottom: 15,
-    color: "#F2D379",
-  },
-  instructionText: {
-    fontSize: 20,
-    marginBottom: 15,
-    color: "#F2D379",
-    width: "100%",
-  },
-  mainContainer: {
-    backgroundColor: "#401323",
-    height: "100%",
-  },
-  ticketImage: {
-    marginTop: 10,
-    flex: 1,
-    marginBottom: 10,
-    width: 200,
-    aspectRatio: 18 / 9,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  mainAnimation: {
-    alignSelf: "center",
-    aspectRatio: 230 / 500,
-  },
+	contentContainer: {
+		backgroundColor: "#A0947C",
+		marginTop: 10,
+		width: "90%",
+		alignSelf: "center",
+		padding: 5,
+		borderRadius: 8,
+	},
+	headings: {
+		fontFamily: "Limelight_400Regular",
+		borderRadius: 8,
+		padding: 20,
+		textAlign: "center",
+		color: "#F2D379",
+		fontSize: 30,
+		marginBottom: 15,
+		marginTop: 15,
+		backgroundColor: "#292840",
+	},
+	instructionWrapper: {
+		borderRadius: 8,
+		padding: 20,
+		backgroundColor: "#292840",
+		marginBottom: 15,
+		color: "#F2D379",
+	},
+	instructionText: {
+		fontSize: 20,
+		marginBottom: 15,
+		color: "#F2D379",
+		width: "100%",
+	},
+	mainContainer: {
+		backgroundColor: "#401323",
+		height: "100%",
+	},
+	ticketImage: {
+		marginTop: 10,
+		flex: 1,
+		marginBottom: 10,
+		width: 200,
+		aspectRatio: 18 / 9,
+		alignSelf: "center",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	mainAnimation: {
+		alignSelf: "center",
+		aspectRatio: Platform.OS === "web" ? 980 / 500 : 230 / 500,
+	},
 });
 
 export default connect(null, mapDispatchToProps)(HowToPlay);

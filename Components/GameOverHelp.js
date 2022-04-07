@@ -2,10 +2,11 @@ import { Animated, View, ImageBackground, Platform } from 'react-native';
 import { useRef, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import gameover from "../Images/gameover.png";
+import gameOverMobile from "../Images/gameOverMobile.png";
 
 export default function GameOverHelp() {
   const translation = useRef(
-    new Animated.ValueXY({x: 100, y: 100})
+    new Animated.ValueXY({x: Platform.OS === "web" ? 100 : 50, y: Platform.OS === "web" ? 100 : 50})
   ).current;
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function GameOverHelp() {
           })
         ,
           Animated.timing(translation.y, {
-            toValue: 35,
+            toValue: Platform.OS === "web" ? 35 : -12,
             duration: 3000,
             delay: 1000,
             useNativeDriver: false,
@@ -38,12 +39,12 @@ export default function GameOverHelp() {
             justifyContent: 'center',
             alignSelf: 'center',
             maxWidth:647,
-            maxHeight: 423,
+            maxHeight: Platform.OS === 'web' ? 423 : "100%",
             width: "100%",
             height: "100%",
-            aspectRatio: 647/423
+            aspectRatio: Platform.OS === 'web' ? 647/423 : 1170/2532,
         }}
-        source={gameover}
+        source= {Platform.OS === 'web' ? gameover : gameOverMobile}
         >
             <Animated.View
             style={{
@@ -54,7 +55,11 @@ export default function GameOverHelp() {
                 marginBottom: 10,
             }} 
             >
-                <Entypo name="mouse-pointer" size={24} color="black"/>
+                <Entypo
+                  name={Platform.OS === 'web' ? "mouse-pointer" : "circle"}
+                  size={24}
+                  color={Platform.OS === 'web' ? "black" : "#A0947C"}
+                />
             </Animated.View>
         </ImageBackground>
     </View>
