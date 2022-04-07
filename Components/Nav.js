@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
+  View,
 } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
@@ -18,7 +19,7 @@ import GamePlayMode from "./GamePlayMode";
 import WrongAnswer from "../Scenes/WrongAnswer";
 import HowToPlay from "../Scenes/HowToPlay";
 
-function Nav({ scene }) {
+function Nav({ scene, modalVisible }) {
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
@@ -39,6 +40,18 @@ function Nav({ scene }) {
       {scene !== "Question" && scene !== "CorrectAnswer" && (
         <Footer style={styles.footer} />
       )}
+      {
+        modalVisible && (
+          <View style={{
+            position: 'absolute',
+            height: "100%",
+            width: "100%",
+            opacity: 0.9,
+            backgroundColor: 'gray',
+            zIndex: 100,
+          }} /> 
+        )
+      }
     </SafeAreaView>
   );
 }
@@ -78,6 +91,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     scene: state.scene,
+    modalVisible: state.modalVisible,
   };
 }
 
