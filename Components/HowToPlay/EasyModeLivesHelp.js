@@ -3,6 +3,7 @@ import { useRef, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import GameStartEasy from "../../Images/gameStartEasy.png";
 import GameStartEasyMobile from "../../Images/gameStartEasyMobile.png";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 export default function EasyModeLivesHelp() {
     const lifePointerCircle = useRef(
@@ -43,17 +44,29 @@ export default function EasyModeLivesHelp() {
                 <Animated.View
                     style={{
                         transform: [
-                                { translateX: Platform.OS === "web" ? -50 : -63 },
-                                { translateY: Platform.OS === "web" ? (screenWidth < 800 ? 41 : 33) : 35 },
+                                { translateX: Platform.OS === "web" ? (screenWidth < 800 ? -120 : -100) : -65 },
+                                { translateY: Platform.OS === "web" ? 10 : 70 },
                         ],
                         opacity:lifePointerCircle                    
                     }} 
                 >
-                    <Entypo
-                        name="circle"
-                        size={40}
-                        color= "white" 
-                    />
+                    <View style={{flexDirection: 'row'}}>
+                        <MaterialCommunityIcons
+                            name="popcorn"
+                            size={screenWidth > 800 ? 12 : 16}
+                            color="#F2D379"
+                        />
+                        <MaterialCommunityIcons
+                            name="popcorn"
+                            size={screenWidth > 800 ? 12 : 16}
+                            color="#F2D379"
+                        />
+                        <MaterialCommunityIcons
+                            name="popcorn"
+                            size={screenWidth > 800 ? 12 : 16}
+                            color="#F2D379"
+                        />
+                    </View>
                 </Animated.View>
             </ImageBackground>
         </View>
