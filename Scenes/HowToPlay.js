@@ -18,7 +18,6 @@ import GameOverHelp from "../Components/GameOverHelp.js";
 import WrongAnswerHelp from "../Components/HowToPlay/WrongAnswerHelp";
 import QuestionInstructions from "../Components/QuestionInstructions"
 import LoseGameInstruction from "../Components/HowToPlay/LoseGameInstruction";
-import QuestionInstructions from "../Components/QuestionInstructions";
 import EasyModeLivesHelp from "../Components/HowToPlay/EasyModeLivesHelp";
 
 const HowToPlay = ({ setScene }) => {
