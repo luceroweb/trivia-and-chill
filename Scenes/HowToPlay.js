@@ -16,7 +16,8 @@ import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
 import MainAnimation from "../Components/HowToPlay/MainAnimation";
 import GameOverHelp from "../Components/GameOverHelp.js";
 import WrongAnswerHelp from "../Components/HowToPlay/WrongAnswerHelp";
-import QuestionInstructions from "../Components/QuestionInstructions";
+import QuestionInstructions from "../Components/QuestionInstructions"
+import LoseGameInstruction from "../Components/HowToPlay/LoseGameInstruction";
 import EasyModeLivesHelp from "../Components/HowToPlay/EasyModeLivesHelp";
 
 const HowToPlay = ({ setScene }) => {
@@ -134,6 +135,7 @@ const HowToPlay = ({ setScene }) => {
                 </Text>
                 <View style={animationContainer}>
                   <WrongAnswerHelp />
+
                 </View>
               </View>
 
@@ -141,6 +143,9 @@ const HowToPlay = ({ setScene }) => {
                 <Text style={styles.instructionText}>
                   4. If you lose all your lives, the game is over.
                 </Text>
+                <View style={animationContainer}>
+                <LoseGameInstruction/>
+                </View>
               </View>
             </View>
           </View>
