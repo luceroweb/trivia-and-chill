@@ -2,23 +2,22 @@ import { View, Text, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
 
 function GamePlayMode({ gamePlayMode }) {
-
   let currentMode = "";
-    switch(gamePlayMode) {
-      case "singlePlayer":
-        currentMode = "Single Player Mode";
-        break;
-        case "easySinglePlayer":
+  switch (gamePlayMode) {
+    case "singlePlayer":
+      currentMode = "Single Player Mode";
+      break;
+    case "easySinglePlayer":
       currentMode = "Easy Single Player Mode ";
       break;
-        default: "singlePlayer"; 
-    }
+    default:
+      "singlePlayer";
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.gamePlayText}>{currentMode}</Text>
     </View>
-  
   );
 }
 
