@@ -5,7 +5,8 @@ import tick from "../Sounds/tick.wav";
 import Clock from "../Components/Clock";
 import { StyleSheet, View, Platform } from "react-native";
 
-function Timer({ setScene, timerCount, setTimerCount }) {
+function Timer({ setScene }) {
+  const [timerCount, setTimerCount] = useState(10);
   const [sound, setSound] = useState();
 
   async function playSound() {

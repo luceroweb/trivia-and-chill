@@ -20,7 +20,6 @@ import Badge from "../Components/Badge";
 import Lives from "../Components/Lives";
 
 function Question({ selectedMovie, movies, setMovies, movieId, gamePlayMode }) {
-  const [timerCount, setTimerCount] = useState(10);
   const { width } = useWindowDimensions();
   const widthBreakpoint = 700;
   useEffect(() => {
@@ -55,7 +54,7 @@ function Question({ selectedMovie, movies, setMovies, movieId, gamePlayMode }) {
           >
             <View style={styles.questionHeader}>
               {gamePlayMode !== "easySinglePlayer" && (
-                <Timer timerCount={timerCount} setTimerCount={setTimerCount} />
+                <Timer />
               )}
               <Text
                 style={[
