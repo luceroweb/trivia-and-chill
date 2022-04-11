@@ -14,13 +14,11 @@ const TrueFalse = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  decreaseWinningStreak,
   resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
   resetLives,
-  winningStreak
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
   const answer = selectedMovie?.answer;
@@ -31,34 +29,21 @@ const TrueFalse = ({
         increaseWinningStreak();
         setScene("CorrectAnswer");
       }, 1000);
-    }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak>=0&&selection !== answer){
-      setTimeout(() => {
-        decreaseWinningStreak();
-        setScene("Main");
-      }, 1000);
-    }
-    else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives>1&&selection !== answer){
-        setTimeout(() => {
-          decreaseLives();
-          setScene("Main");
-        }, 1000);
-      }
-      else if(gamePlayMode="easySinglePlayer"&&winningStreak==-1&&lives==1&&selection !== answer){
-        setTimeout(() => {
-          resetWinningStreak();
-          resetLives();
-          setScene("GameOver");
-        }, 1000);
-      }
-    else {
+    } else if (gamePlayMode === "easySinglePlayer" && lives > 1) {
       setTimeout(() => {
         resetWinningStreak();
+        decreaseLives();
+        setScene("WrongAnswer");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        resetWinningStreak();
+        resetLives();
         setScene("GameOver");
+        resetLives();
       }, 1000);
     }
   };
-
   const getIcon = (button) => {
     if (typeof selectedAnswer === "undefined") {
       return <FontAwesome name="star" size={12} color="#401323" />;
@@ -205,9 +190,8 @@ const TrueFalse = ({
 const mapStateToProps = (state) => ({
   questions: state.questions,
   selectedMovie: state.selectedMovie,
-  lives:state.lives,
-  gamePlayMode:state.gamePlayMode||"easySinglePlayer",
-  winningStreak:state.winningStreak
+  lives: state.lives,
+  gamePlayMode: state.gamePlayMode || "easySinglePlayer",
 });
 
 function mapDispatchToProps(dispatch) {
@@ -220,10 +204,6 @@ function mapDispatchToProps(dispatch) {
     increaseWinningStreak: () =>
       dispatch({
         type: "INCREASE_WINNING_STREAK",
-      }),
-    decreaseWinningStreak: () =>
-      dispatch({
-        type: "DECREASE_WINNING_STREAK",
       }),
     resetWinningStreak: () =>
       dispatch({

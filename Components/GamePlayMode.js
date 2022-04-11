@@ -6,13 +6,16 @@ function GamePlayMode({ gamePlayMode }) {
   const { height } = useWindowDimensions();
 
   let currentMode = "";
-    switch(gamePlayMode) {
-      case "singlePlayer":
-        currentMode = "Single Player Mode";
-        break;
-        // add more cases for each gamePlayMode state
-        default: ""; 
-    }
+  switch (gamePlayMode) {
+    case "singlePlayer":
+      currentMode = "Single Player Mode";
+      break;
+    case "easySinglePlayer":
+      currentMode = "Easy Single Player Mode ";
+      break;
+    default:
+      "singlePlayer";
+  }
 
   return (
     <View style={[styles.container,
@@ -25,7 +28,6 @@ function GamePlayMode({ gamePlayMode }) {
     }>
       <Text style={styles.gamePlayText}>{currentMode}</Text>
     </View>
-  
   );
 }
 
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   },
   gamePlayText: {
     color: "#F2D379",
-    fontWeight: "bold", 
+    fontWeight: "bold",
     fontSize: 12,
   },
 });
