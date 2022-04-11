@@ -13,7 +13,11 @@ function GamePlayMode({ gamePlayMode }) {
     }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,
+      {top: Platform.OS === "ios" && height === "1334px" 
+      ? 40 : Platform.OS === "ios" 
+      ? 48 : 30}]
+    }>
       <Text style={styles.gamePlayText}>{currentMode}</Text>
     </View>
   
