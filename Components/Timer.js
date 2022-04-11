@@ -10,10 +10,20 @@ function Timer({ setScene }) {
   const [sound, setSound] = useState();
 
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(tick);
-    setSound(sound);
-    await sound.playAsync();
+    await sound.replayAsync();
   }
+
+  useEffect(() => {
+    const loadSound = async () => {
+      try {
+        const { sound } = await Audio.Sound.createAsync(tick);
+        setSound(sound);
+      } catch(e) {
+        console.error(e);
+      }
+    }
+    loadSound();
+  }, [])
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
