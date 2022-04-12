@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View, StyleSheet, Platform } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
-export default function App() {
+export default function Clock() {
   const [isPlaying, setIsPlaying] = React.useState(true);
 
   return (
