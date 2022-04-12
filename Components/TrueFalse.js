@@ -21,10 +21,13 @@ const TrueFalse = ({
   resetLives,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
+  const [hasAnswered, setHasAnswered]=useState(false)
   const answer = selectedMovie?.answer;
   const isCorrect = (selection) => {
     setSelectedAnswer(selection);
+    setHasAnswered(true);
     if (selection === answer) {
+    
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
@@ -160,7 +163,7 @@ const TrueFalse = ({
           style={styles.ticket}
         >
           <TouchableOpacity
-            onPress={() => isCorrect(true)}
+            onPress={!hasAnswered&&(() => isCorrect(true))}
             style={styles.ticketOption}
           >
             {getIcon(true)}
@@ -175,7 +178,7 @@ const TrueFalse = ({
           style={styles.ticket}
         >
           <TouchableOpacity
-            onPress={() => isCorrect(false)}
+            onPress={!hasAnswered&&(() => isCorrect(false))}
             style={styles.ticketOption}
           >
             {getIcon(false)}
