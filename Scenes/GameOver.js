@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   },
   milkywaybg: {
     width: "100%",
+    maxHeight: "50%",
     aspectRatio: 468 / 272,
   },
   driveinforeground: {
