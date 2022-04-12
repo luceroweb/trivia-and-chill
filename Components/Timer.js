@@ -6,7 +6,6 @@ import Clock from "../Components/Clock";
 import { StyleSheet, View, Platform } from "react-native";
 
 function Timer({ setScene }) {
-  const [timerCount, setTimerCount] = useState(10);
   const [sound, setSound] = useState();
 
   async function playSound() {
@@ -26,25 +25,30 @@ function Timer({ setScene }) {
   }, [])
 
   useEffect(() => {
-    const timerInterval = setInterval(() => {
-      if (timerCount > 0) {
-        setTimerCount(timerCount - 1);
-        playSound();
-      } else {
-        clearTimer();
-      }
-    }, 1000);
+    if (sound) {
+      let timerCount = 10;
 
-    const clearTimer = () => {
-      clearInterval(timerInterval);
-      setScene("GameOver");
-    };
+      const timerInterval = setInterval(() => {
+        if (timerCount > 0) {
+          playSound().then(() => {
+            timerCount -= 1;
+          });
+        } else {
+          clearTimer();
+        }
+      }, 1000);
 
-    return () => {
-      clearInterval(timerInterval);
-      sound ? sound.unloadAsync() : undefined;
-    };
-  }, [timerCount]);
+      const clearTimer = () => {
+        clearInterval(timerInterval);
+        setScene("GameOver");
+      };
+
+      return () => {
+        clearInterval(timerInterval);
+        sound ? sound.unloadAsync() : undefined;
+      };
+    }
+  }, [sound]);
 
   // Conditional render depending on OS
   if (Platform.OS === "web") {
