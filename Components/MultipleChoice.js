@@ -24,6 +24,7 @@ const MultipleChoice = ({
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [runRandom, setRunRandom] = useState(true);
+  const [hasAnswered, setHasAnswered]=useState(false)
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
@@ -46,6 +47,10 @@ const MultipleChoice = ({
   }, [multipleAnswer]);
 
   const isCorrect = (selection) => {
+    if(hasAnswered){
+      return;
+    }
+    setHasAnswered(true);
     setRunRandom(false);
     setSelectedAnswer(selection);
     if (selection === correctAnswer) {
