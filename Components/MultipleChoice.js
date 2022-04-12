@@ -47,6 +47,9 @@ const MultipleChoice = ({
   }, [multipleAnswer]);
 
   const isCorrect = (selection) => {
+    if(hasAnswered){
+      return;
+    }
     setHasAnswered(true);
     setRunRandom(false);
     setSelectedAnswer(selection);
@@ -110,7 +113,7 @@ const MultipleChoice = ({
         >
           <TouchableOpacity
             key={index}
-            onPress={!hasAnswered &&(() => isCorrect(item))}
+            onPress={() => isCorrect(item)}
             style={styles.ticketOption}
           >
             {getIcon(item)}

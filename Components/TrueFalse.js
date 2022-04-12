@@ -24,8 +24,12 @@ const TrueFalse = ({
   const [hasAnswered, setHasAnswered]=useState(false)
   const answer = selectedMovie?.answer;
   const isCorrect = (selection) => {
-    setSelectedAnswer(selection);
+    if(hasAnswered){
+      return;
+    }
     setHasAnswered(true);
+    setSelectedAnswer(selection);
+    
     if (selection === answer) {
     
       setTimeout(() => {
@@ -163,7 +167,7 @@ const TrueFalse = ({
           style={styles.ticket}
         >
           <TouchableOpacity
-            onPress={!hasAnswered&&(() => isCorrect(true))}
+            onPress={() => isCorrect(true)}
             style={styles.ticketOption}
           >
             {getIcon(true)}
@@ -178,7 +182,7 @@ const TrueFalse = ({
           style={styles.ticket}
         >
           <TouchableOpacity
-            onPress={!hasAnswered&&(() => isCorrect(false))}
+            onPress={() => isCorrect(false)}
             style={styles.ticketOption}
           >
             {getIcon(false)}
