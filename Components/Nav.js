@@ -37,7 +37,7 @@ function Nav({ scene, modalVisible }) {
         {scene === "WrongAnswer" && <WrongAnswer />}
         {scene === "HowToPlay" && <HowToPlay />}
       </ScrollView>
-      {scene !== "Question" && scene !== "CorrectAnswer" && (
+      {scene !== "Question" && scene !== "CorrectAnswer" && scene !=="WrongAnswer" && (
         <Footer style={styles.footer} />
       )}
       {
