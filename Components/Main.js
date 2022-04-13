@@ -12,6 +12,8 @@ import {
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
+import AppLoading from "expo-app-loading";
 
 function Main({ setScene, setMovies}) {
 
@@ -19,9 +21,18 @@ function Main({ setScene, setMovies}) {
     FetchApi().then((res) => setMovies(res));
   }, []);
 
+  let [fontsLoaded] = useFonts({ Limelight_400Regular });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+
   return (
     <View style={styles.container}>
-      <Image
+
+      {/* <Text style={styles.fontText}>
+        Bitwise Industries Presents:
+      </Text> */}
+      {/* <Image
         style={{ width: "80%", aspectRatio: 7 / 1 }}
         source={require("../Images/bw-header-logo.png")}
         alt="BitWise Industries"
@@ -40,9 +51,23 @@ function Main({ setScene, setMovies}) {
         style={{ width: "75%", aspectRatio: 1 }}
         source={require("../Images/gtm-header-logo.png")}
         alt="Guess The Movie"
+      /> */}
+       <ImageBackground
+        style={{
+          flex:1,
+          flexDirection: "column", 
+          width: "100%", 
+          aspectRatio: 4 / 3,
+          }}
+        source={require("../Images/marquee.jpeg")}
+        resizeMode="contain"
+        alt="movie theatre with marquee sign with cars parked in front"
       />
+      {/* <Text style={styles.fontText}>
+        The Movie Game
+      </Text> */}
 
-      <ImageBackground
+      {/* <ImageBackground
         source={require("../Images/ticket.png")}
         style={{ width: 160, height: 80 }}
       >
@@ -61,15 +86,17 @@ function Main({ setScene, setMovies}) {
             <Text>Start</Text>
           </Pressable>
         </View>
-      </ImageBackground>
+      </ImageBackground> */}
     </View>
   );
+}
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    backgroundColor: "#401323",
   },
   start: {
     borderRadius: 5,
@@ -91,6 +118,12 @@ const styles = StyleSheet.create({
     height: 54,
     top: -123,
   },
+  fontText:{
+    fontFamily: "Limelight_400Regular",
+    textAlign: "center",
+    color: "#F2D379",
+    fontSize: 30,
+  }
 });
 
 function mapDispatchToProps(dispatch) {
