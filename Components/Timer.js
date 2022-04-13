@@ -7,60 +7,57 @@ import { StyleSheet, View, Platform } from "react-native";
 
 function Timer({ setScene }) {
   const [sound, setSound] = useState();
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  async function playSound() {
-    await sound.replayAsync();
+  async function handleClockUpdate(remainingTime) {
+    if (sound && remainingTime > 0) {
+      await sound.replayAsync();
+    }
+  }
+
+  function handleClockComplete() {
+    setScene("GameOver");
   }
 
   useEffect(() => {
     const loadSound = async () => {
       try {
         const { sound } = await Audio.Sound.createAsync(tick);
+        await sound.playAsync();
+        setIsPlaying(true);
         setSound(sound);
       } catch(e) {
         console.error(e);
       }
+    
     }
     loadSound();
-  }, [])
-
-  useEffect(() => {
-    if (sound) {
-      let timerCount = 10;
-
-      const timerInterval = setInterval(() => {
-        if (timerCount > 0) {
-          playSound().then(() => {
-            timerCount -= 1;
-          });
-        } else {
-          clearTimer();
-        }
-      }, 1000);
-
-      const clearTimer = () => {
-        clearInterval(timerInterval);
-        setScene("GameOver");
-      };
-
-      return () => {
-        clearInterval(timerInterval);
-        sound ? sound.unloadAsync() : undefined;
-      };
-    }
-  }, [sound]);
+    return () => {
+      sound ? sound.unloadAsync() : undefined;
+    };
+  }, []);
 
   // Conditional render depending on OS
   if (Platform.OS === "web") {
     // Render for web
     return (
       <View style={styles.timer}>
-        <Clock />
+        <Clock
+          isPlaying={isPlaying}
+          onUpdate={handleClockUpdate}
+          onComplete={handleClockComplete}
+        />
       </View>
     );
   } else {
   // Render for ios and android
-    return <Clock />;
+    return (
+      <Clock
+        isPlaying={isPlaying}
+        onUpdate={handleClockUpdate}
+        onComplete={handleClockComplete} 
+      />
+    );
   }
 }
 
