@@ -4,8 +4,7 @@ import { Modal, StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 
-const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode, modalVisible, setModalVisible }) => {
 
   return (
     <View>
@@ -14,7 +13,7 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
       ) : (
         <>
           <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
@@ -59,7 +58,8 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode }) => {
 function mapStateToProps(state) {
   return {
     scene: state.scene,
-    gamePlayMode: state.gamePlayMode
+    gamePlayMode: state.gamePlayMode,
+    modalVisible: state.modalVisible,
   };
 }
 // this is how the picker tells redux that the user has selected a new player mode
@@ -71,6 +71,12 @@ function mapDispatchToProps(dispatch) {
         // type or action or action type, payload
         type: 'SET_GAME_PLAY_MODE',
         gamePlayMode: mode
+      })
+    },
+    setModalVisible: (visible) => {
+      dispatch({
+        type: 'SET_MODAL_VISIBLE',
+        modalVisible: visible
       })
     }
   }
