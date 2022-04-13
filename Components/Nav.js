@@ -58,19 +58,9 @@ function Nav({ scene, modalVisible }) {
 
 const styles = StyleSheet.create({
   layout: {
-    flexGrow: 1,
-    ...Platform.select({
-      ios: {
-        marginTop: 30,
-      },
-      android: {
-        marginTop: StatusBar.currentHeight,
-      },
-      default: {
-        marginTop: 0,
-      },
-    }),
+    flexGrow: 1, 
     overflow: "hidden",
+    marginTop: StatusBar.currentHeight
   },
   header: {
     height: "10%",
