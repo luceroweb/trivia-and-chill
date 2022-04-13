@@ -11,7 +11,7 @@ function Lives({ lives }) {
         <MaterialCommunityIcons
             style={styles.livesIcon}
             name="popcorn"
-            size={35}
+            size={28}
             key={i}
         />  
     );

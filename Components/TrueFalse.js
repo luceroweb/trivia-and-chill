@@ -21,10 +21,17 @@ const TrueFalse = ({
   resetLives,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
+  const [hasAnswered, setHasAnswered]=useState(false)
   const answer = selectedMovie?.answer;
   const isCorrect = (selection) => {
+    if(hasAnswered){
+      return;
+    }
+    setHasAnswered(true);
     setSelectedAnswer(selection);
+    
     if (selection === answer) {
+    
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");

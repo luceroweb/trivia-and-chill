@@ -1,7 +1,10 @@
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, useWindowDimensions } from "react-native";
 import { connect } from "react-redux";
 
 function GamePlayMode({ gamePlayMode }) {
+
+  const { height } = useWindowDimensions();
+
   let currentMode = "";
   switch (gamePlayMode) {
     case "singlePlayer":
@@ -15,7 +18,14 @@ function GamePlayMode({ gamePlayMode }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,
+      {top: Platform.OS === "ios" && height === "1334px" 
+        ? 40 
+        : Platform.OS === "ios" 
+        ? 48 : 30
+      }
+    ]
+    }>
       <Text style={styles.gamePlayText}>{currentMode}</Text>
     </View>
   );
