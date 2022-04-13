@@ -1,9 +1,7 @@
 import {
   StyleSheet,
   ScrollView,
-  SafeAreaView,
-  StatusBar,
-  Platform,
+  SafeAreaView, 
 } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
@@ -17,6 +15,7 @@ import About from "../Scenes/About";
 import GamePlayMode from "./GamePlayMode";
 import WrongAnswer from "../Scenes/WrongAnswer";
 import HowToPlay from "../Scenes/HowToPlay";
+//import { SafeAreaView} from 'react-native-safe-area-context';
 
 function Nav({ scene }) {
   return (
@@ -45,18 +44,7 @@ function Nav({ scene }) {
 
 const styles = StyleSheet.create({
   layout: {
-    flexGrow: 1,
-    ...Platform.select({
-      ios: {
-        marginTop: 30,
-      },
-      android: {
-        marginTop: StatusBar.currentHeight,
-      },
-      default: {
-        marginTop: 0,
-      },
-    }),
+    flexGrow: 1, 
     overflow: "hidden",
   },
   header: {

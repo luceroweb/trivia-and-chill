@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, Platform, useWindowDimensions } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
+import { useSafeAreaInsets} from "react-native-safe-area-context";
 
 function GamePlayMode({ gamePlayMode }) {
 
-  const { height } = useWindowDimensions();
+  const insets = useSafeAreaInsets();  
 
   let currentMode = "";
   switch (gamePlayMode) {
@@ -19,14 +20,22 @@ function GamePlayMode({ gamePlayMode }) {
 
   return (
     <View style={[styles.container,
-      {top: Platform.OS === "ios" && height === "1334px" 
-        ? 40 
-        : Platform.OS === "ios" 
-        ? 48 : 30
-      }
+      Platform.select({
+        ios: {
+          top: insets.top + 31
+        },
+        android: {
+          top: 55
+        },
+        default: {
+          top: 30,
+        },
+      }),     
     ]
     }>
-      <Text style={styles.gamePlayText}>{currentMode}</Text>
+      <Text style={styles.gamePlayText}>
+        {currentMode}
+      </Text>
     </View>
   );
 }
@@ -49,7 +58,6 @@ const styles = StyleSheet.create({
     zIndex: 6,
     borderColor: "#F2D379",
     borderWidth: 1,
-    top: Platform.OS === "ios" ? 76 : 30,
   },
   gamePlayText: {
     color: "#F2D379",

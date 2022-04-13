@@ -139,8 +139,8 @@ const HowToPlay = ({ setScene }) => {
                 </View>
               </View>
 
-              <View style={styles.instructionWrapper}>
-                <Text style={styles.instructionText}>
+              <View style={[styles.instructionWrapper, flexDirection]}>
+              <Text style={[styles.instructionText, columnGap]}>
                   4. If you lose all your lives, the game is over.
                 </Text>
                 <View style={animationContainer}>
