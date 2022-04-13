@@ -21,7 +21,7 @@ export default function LoseGameInstruction() {
       y: Platform.OS === "web" ? (width < 800 ? 300 : 250) : 370,
     })
   ).current;
-  const lifePointerCircle = useRef(new Animated.Value(1)).current;
+  const lifePopcornIcon = useRef(new Animated.Value(1)).current;
   const backgroundFade = useRef(new Animated.Value(0)).current;
   const screenWidth = useWindowDimensions().width;
 
@@ -128,7 +128,7 @@ export default function LoseGameInstruction() {
                   Platform.OS === "web" ? (screenWidth < 800 ? 100 : 110) : 200,
               },
             ],
-            opacity: lifePointerCircle,
+            opacity: lifePopcornIcon,
           }}
         >
           <MaterialCommunityIcons
