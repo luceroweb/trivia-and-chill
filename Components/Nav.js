@@ -1,7 +1,10 @@
 import {
   StyleSheet,
   ScrollView,
-  SafeAreaView, 
+  SafeAreaView,
+  StatusBar,
+  Platform,
+  View,
 } from "react-native";
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
@@ -15,9 +18,8 @@ import About from "../Scenes/About";
 import GamePlayMode from "./GamePlayMode";
 import WrongAnswer from "../Scenes/WrongAnswer";
 import HowToPlay from "../Scenes/HowToPlay";
-//import { SafeAreaView} from 'react-native-safe-area-context';
 
-function Nav({ scene }) {
+function Nav({ scene, modalVisible }) {
   return (
     <SafeAreaView style={styles.layout}>
       <Header style={styles.header} />
@@ -35,9 +37,21 @@ function Nav({ scene }) {
         {scene === "WrongAnswer" && <WrongAnswer />}
         {scene === "HowToPlay" && <HowToPlay />}
       </ScrollView>
-      {scene !== "Question" && scene !== "CorrectAnswer" && (
+      {scene !== "Question" && scene !== "CorrectAnswer" && scene !=="WrongAnswer" && (
         <Footer style={styles.footer} />
       )}
+      {
+        modalVisible && (
+          <View style={{
+            position: 'absolute',
+            height: "100%",
+            width: "100%",
+            opacity: 0.9,
+            backgroundColor: 'gray',
+            zIndex: 100,
+          }} /> 
+        )
+      }
     </SafeAreaView>
   );
 }
@@ -46,6 +60,7 @@ const styles = StyleSheet.create({
   layout: {
     flexGrow: 1, 
     overflow: "hidden",
+    marginTop: StatusBar.currentHeight
   },
   header: {
     height: "10%",
@@ -66,6 +81,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     scene: state.scene,
+    modalVisible: state.modalVisible,
   };
 }
 
