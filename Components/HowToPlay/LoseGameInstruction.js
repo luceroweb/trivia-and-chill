@@ -29,10 +29,10 @@ export default function LoseGameInstruction() {
     Animated.loop(
       Animated.sequence([
         Animated.timing(lifePopcornIcon, {
-          toValue: 0,
-          duration: 1500,
+          toValue: 1,
+          duration: 1,
           useNativeDriver: false,
-        }),
+        }),        
         Animated.parallel([
           Animated.timing(translation.x, {
             toValue: Platform.OS === "web" ? 260 : 120,
@@ -46,6 +46,11 @@ export default function LoseGameInstruction() {
             useNativeDriver: false,
           }),
         ]),
+        Animated.timing(lifePopcornIcon, {
+          toValue: 0,
+          duration: 1500,
+          useNativeDriver: false,
+        }),
         Animated.timing(backgroundFade, {
           toValue: 1,
           duration: 1500,
