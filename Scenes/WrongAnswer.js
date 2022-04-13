@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   indicators: {
     marginTop: Platform.OS === "web" ? 30 : 10,
     minWidth: 375, // 320px is iPhone 5/SE size
-    width: "50%",
+    width: "100%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",

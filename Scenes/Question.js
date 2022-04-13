@@ -77,17 +77,20 @@ function Question({ selectedMovie, movies, setMovies, movieId, gamePlayMode }) {
               : styles.questionFooterMobile,
           ]}
         >
+
+          {/* then enable lives */}
+          
+        </View>
+        <View style={styles.indicators}>
           {gamePlayMode === "easySinglePlayer" && (
             <View style={styles.lives}>
               <Lives />
             </View>
           )}
-          {/* then enable lives */}
           <View style={styles.badge}>
             <Badge />
           </View>
         </View>
-
         <View
           style={[
             width > widthBreakpoint ? styles.titleWrap : styles.titleWrapMobile,
@@ -192,7 +195,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 10,
     textAlign: "center",
-    color: "#F2D379",
     fontFamily: "Limelight_400Regular",
     fontSize: 30,
   },
@@ -203,13 +205,14 @@ const styles = StyleSheet.create({
   },
   badge: {
     position: "absolute",
-    bottom: 0,
-    right: 0,
+    top: 15,
+    right: 50,
   },
   lives: {
     position: "absolute",
-    bottom: 0,
-    left: 0,
+    top: -5,
+    left: 50,
+    
   },
   questionHeader: {
     flexDirection: "row",
@@ -229,6 +232,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     width: "75%",
+  },
+  indicators: {
+    marginTop: Platform.OS === "web" ? 10 : 5,
+    minWidth: 375, // 320px is iPhone 5/SE size
+    width: "50%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    
   },
 });
 
