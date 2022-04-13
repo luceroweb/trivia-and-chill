@@ -22,10 +22,10 @@ function GamePlayMode({ gamePlayMode }) {
     <View style={[styles.container,
       Platform.select({
         ios: {
-          top: insets.top + 31
+          top: insets.top + 30
         },
         android: {
-          top: 55
+          top: 30
         },
         default: {
           top: 30,
