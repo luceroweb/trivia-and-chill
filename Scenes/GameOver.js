@@ -58,22 +58,46 @@ function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
         <Image
           source={MilkyWay}
           style={[styles.milkywaybg, { marginBottom: (height - 40) * -1 }]}
-          resizeMode='cover'
+          resizeMode="cover"
         ></Image>
         <Image
           source={DriveInForeground}
           style={styles.driveinforeground}
         ></Image>
-        <View style={[styles.screenWrap, screenWrapTopPosition]}>
-          <Text style={styles.gameOverStyle}>Game Over</Text>
-          <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
-            <ImageBackground
-              source={require("../Images/ticket.png")}
-              style={styles.ticket}
-            >
-              <Text style={styles.backToStartButtonText}>Start Over</Text>
-            </ImageBackground>
-          </Pressable>
+        <View style={[styles.contentArea, screenWrapTopPosition]}>
+          <View style={styles.screenWrap}>
+            <Text style={styles.gameOverStyle}>Game Over</Text>
+            <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={styles.ticket}
+              >
+                <Text style={styles.backToStartButtonText}>Start Over</Text>
+              </ImageBackground>
+            </Pressable>
+          </View>
+          <View style={styles.indicators}>
+            <Text>Indicators</Text>
+            <Text>Indicators</Text>
+          </View>
+          <View style={styles.answersContainer}>
+            <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={styles.ticket}
+              >
+                <Text style={styles.backToStartButtonText}>True</Text>
+              </ImageBackground>
+            </Pressable>
+            <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={styles.ticket}
+              >
+                <Text style={styles.backToStartButtonText}>False</Text>
+              </ImageBackground>
+            </Pressable>
+          </View>
         </View>
       </View>
     );
@@ -127,19 +151,42 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     aspectRatio: 468 / 485,
   },
-  screenWrap: {
+  contentArea: {
     position: "absolute",
     top: 20,
-    backgroundColor: "#292840",
-    padding: 20,
     width: "49.1%",
     minWidth: 320,
-    aspectRatio: 714 / 391,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
     zIndex: 1000,
     marginLeft: -2,
+  },
+  screenWrap: {
+    width: "100%",
+    backgroundColor: "#292840",
+    padding: 20,
+    aspectRatio: 714 / 391,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+  },
+  indicators: {
+    aspectRatio: 120 / 19,
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+  answersContainer: {
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "red",
+    width: "100%",
+    alignItems: "center",
+    marginTop: "10%",
   },
   gameOverStyle: {
     fontSize: 28,
