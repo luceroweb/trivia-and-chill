@@ -28,7 +28,7 @@ export default function LoseGameInstruction() {
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
-        Animated.timing(lifePointerCircle, {
+        Animated.timing(lifePopcornIcon, {
           toValue: 0,
           duration: 1500,
           useNativeDriver: false,
