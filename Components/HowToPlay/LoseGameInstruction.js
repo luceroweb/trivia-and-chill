@@ -6,7 +6,7 @@ import {
   useWindowDimensions,
   Platform,
 } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect, useRef } from "react";
 import loseGameAnimationWeb from "../../Images/gameOverAnimationWEb.png";
 import loseGameAnimationMobile from "../../Images/gameOverAnimationMobile.png";
@@ -17,8 +17,8 @@ export default function LoseGameInstruction() {
   const { width } = useWindowDimensions();
   const translation = useRef(
     new Animated.ValueXY({
-      x: Platform.OS === "web" ? (width < 630 ? 300: 350) :200,
-      y: Platform.OS === "web" ? 250:370,
+      x: Platform.OS === "web" ? (width < 800 ? 500 : 350) : 200,
+      y: Platform.OS === "web" ? (width < 800 ? 300 : 250) : 370,
     })
   ).current;
   const lifePointerCircle = useRef(new Animated.Value(1)).current;
@@ -33,31 +33,40 @@ export default function LoseGameInstruction() {
           duration: 1500,
           useNativeDriver: false,
         }),
-        Animated.parallel([        
+        Animated.parallel([
           Animated.timing(translation.x, {
-            toValue: Platform.OS === "web" ? 240 : 120,
+            toValue: Platform.OS === "web" ? 260 : 120,
             duration: 1000,
-            // delay: 500,
             useNativeDriver: false,
           }),
           Animated.timing(translation.y, {
-            toValue:
-              Platform.OS === "web" ? (width < 630 ? 200 : 220) : 280,
+            toValue: Platform.OS === "web" ? (width < 815 ? 200 : 180) : 280,
             duration: 1000,
-            // delay: 500,
-            useNativeDriver:false,
+
+            useNativeDriver: false,
           }),
         ]),
-        
         Animated.timing(backgroundFade, {
           toValue: 1,
-          duration: 500,
+          duration: 1500,
           useNativeDriver: false,
         }),
+
+        Animated.timing(translation.x, {
+          toValue: Platform.OS === "web" ? (width < 800 ? 500 : 350) : 200,
+          duration: 1,
+          useNativeDriver: false,
+        }),
+        Animated.timing(translation.y, {
+          toValue: Platform.OS === "web" ? (width < 800 ? 300 : 250) : 370,
+          duration: 1,
+          useNativeDriver: false,
+        }),
+
         Animated.timing(backgroundFade, {
           toValue: 0,
           duration: 250,
-          delay:2000,
+          delay: 1500,
           useNativeDriver: false,
         }),
       ])
@@ -88,21 +97,20 @@ export default function LoseGameInstruction() {
             width: "100%",
             height: "100%",
             aspectRatio: Platform.OS === "web" ? 1021 / 540 : 5 / 9,
-            opacity:backgroundFade,
+            opacity: backgroundFade,
           }}
         />
 
         <Animated.View
           style={{
-            
-              transform: [
-                  { translateX: translation.x },
-                  { translateY: translation.y },
-              ]   ,                 
-          
+            transform: [
+              { translateX: translation.x },
+              { translateY: translation.y },
+            ],
+
             opacity: backgroundFade.interpolate({
-              inputRange: [0,1],
-              outputRange:[1,0],
+              inputRange: [0, 1],
+              outputRange: [1, 0],
             }),
           }}
         >
@@ -113,17 +121,22 @@ export default function LoseGameInstruction() {
             transform: [
               {
                 translateX:
-                  Platform.OS === "web" ? (screenWidth < 800 ? 130 : 120) : 20,
+                  Platform.OS === "web" ? (screenWidth < 800 ? 140 : 130) : 30,
               },
               {
                 translateY:
-                  Platform.OS === "web" ? (screenWidth < 800 ? 115 : 100) : 200,
+                  Platform.OS === "web" ? (screenWidth < 800 ? 100 : 110) : 200,
               },
             ],
             opacity: lifePointerCircle,
           }}
         >
-          <Entypo name="circle" size={40} color="white" />
+          <MaterialCommunityIcons
+            style={styles.livesIcon}
+            name="popcorn"
+            size={20}
+            color="#F2D379"
+          />
         </Animated.View>
       </ImageBackground>
     </View>
