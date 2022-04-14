@@ -58,7 +58,7 @@ function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
         <Image
           source={MilkyWay}
           style={[styles.milkywaybg, { marginBottom: (height - 40) * -1 }]}
-          resizeMode='cover'
+          resizeMode="cover"
         ></Image>
         <Image
           source={DriveInForeground}
@@ -114,8 +114,7 @@ const styles = StyleSheet.create({
   },
   milkywaybg: {
     width: "100%",
-    height: "80%",
-    // aspectRatio: 468 / 272,
+    height: "60%",
   },
   driveinforeground: {
     position: "absolute",

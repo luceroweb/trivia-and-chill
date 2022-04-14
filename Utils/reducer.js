@@ -1,10 +1,11 @@
 const initialState = {
   winningStreak: 0,
-  scene: "GameOver",
+  scene: "Main",
   movies: [],
   selectedMovie: {},
   gamePlayMode: "singlePlayer",
   lives: 3,
+  modalVisible: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -64,6 +65,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         lives: 3,
       };
+    case "SET_MODAL_VISIBLE":
+      return {
+        ...state,
+        modalVisible: action.modalVisible,
+      }
   }
   return state;
 };
