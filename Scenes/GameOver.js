@@ -20,7 +20,8 @@ import lose from "../Sounds/lose.wav";
 
 function GameOver({ setScene, winningStreak, resetWinningStreak, resetSelectedMovie }) {
   const { width, height } = useWindowDimensions();
-  const shareMessage = `I got a streak of 🎞️${winningStreak} in Trivia & Chill! Test your movie knowledge here: URL HERE`;
+  const shareMessage = `I got a streak of 🎞️${winningStreak} in Trivia & Chill!
+Test your movie knowledge here: https://luceroweb.github.io/guess-the-movie/`;
   const screenWrapTopPosition = {
     marginTop: width * 0.025 > 16 ? width * 0.025 : 16,
   };
