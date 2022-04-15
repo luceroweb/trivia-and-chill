@@ -20,50 +20,50 @@ function Main({ setScene, setMovies}) {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={{ width: "80%", aspectRatio: 7 / 1 }}
-        source={require("../Images/bw-header-logo.png")}
-        alt="BitWise Industries"
-      />
-      <Image
-        style={{ width: "45%", aspectRatio: 5 / 1 }}
-        source={require("../Images/teammvp-header-logo.png")}
-        alt="Team MVP"
-      />
-      <Image
-        style={{ width: "45%", aspectRatio: 5 / 1 }}
-        source={require("../Images/presents-header-logo.png")}
-        alt="Presents"
-      />
-      <Image
-        style={{ width: "75%", aspectRatio: 1 }}
-        source={require("../Images/gtm-header-logo.png")}
-        alt="Guess The Movie"
-      />
+		<View style={styles.container}>
+			<Image
+				style={{ width: "80%", aspectRatio: 7 / 1 }}
+				source={require("../Images/bw-header-logo.png")}
+				alt="BitWise Industries"
+			/>
+			<Image
+				style={{ width: "45%", aspectRatio: 5 / 1 }}
+				source={require("../Images/teammvp-header-logo.png")}
+				alt="Team MVP"
+			/>
+			<Image
+				style={{ width: "45%", aspectRatio: 5 / 1 }}
+				source={require("../Images/presents-header-logo.png")}
+				alt="Presents"
+			/>
+			<Image
+				style={{ width: "75%", aspectRatio: 1 }}
+				source={require("../Images/gtm-header-logo.png")}
+				alt="Trivia & Chill"
+			/>
 
-      <ImageBackground
-        source={require("../Images/ticket.png")}
-        style={{ width: 160, height: 80 }}
-      >
-        <View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Pressable onPress={() => setScene("Question")}>
-            <Text>Start</Text>
-          </Pressable>
-        </View>
-      </ImageBackground>
-    </View>
-  );
+			<ImageBackground
+				source={require("../Images/ticket.png")}
+				style={{ width: 160, height: 80 }}
+			>
+				<View
+					style={{
+						position: "absolute",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+				>
+					<Pressable onPress={() => setScene("Question")}>
+						<Text>Start</Text>
+					</Pressable>
+				</View>
+			</ImageBackground>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
