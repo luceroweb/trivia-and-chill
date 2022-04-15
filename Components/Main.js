@@ -7,15 +7,14 @@ import {
   Image,
   Pressable,
   ImageBackground,
-  scrollView,
   Animated,
-  Platform
+  Platform, 
+  useWindowDimensions,
 } from "react-native";
 import { Audio } from 'expo-av';
 import clapper from '../Sounds/clapper.wav'
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
 
@@ -23,7 +22,6 @@ function Main({ setScene, setMovies }) {
 
   const clapperFade = useRef(new Animated.Value(1)).current;
   const clapperFadeIn = useRef(new Animated.Value(0)).current;
-  // const sound = useRef(new Animated.Value(0)).current;
   const textFade = useRef(new Animated.Value(0)).current;
   const [sound, setSound] = useState();
 
@@ -34,13 +32,14 @@ function Main({ setScene, setMovies }) {
     await sound.playAsync();
   }
 
+  const { width } = useWindowDimensions();
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
   
   
   useEffect(() => {
-    playSound();
+    setTimeout(()=>{playSound()}, 900);
     Animated.sequence(
       [
         Animated.timing(clapperFade, {
@@ -53,11 +52,9 @@ function Main({ setScene, setMovies }) {
           [
             Animated.timing(clapperFadeIn, {
               toValue: 1,
-              duration: 100,
+              duration: 1000,
               useNativeDriver: false,
-            
-            }),
-            
+            }),  
           ]
         ),
         Animated.timing(textFade, {
@@ -76,91 +73,83 @@ function Main({ setScene, setMovies }) {
 
 
     return (
-      <View style={styles.container}>
+      <View 
+      style={[styles.container,]}
+      >
         <ImageBackground
           style={{
             flex: 1,
             flexDirection: "column",
-            // width: "100%",
             aspectRatio: 4 / 3,
+            maxWidth: width,
           }}
           source={require("../Images/marquee.jpeg")}
-          resizeMode="contain"
+          resizeMode={Platform.OS === "web" ? "contain" : "cover"}
           alt="movie theatre with marquee sign with cars parked in front"
         >
-          <Animated.View style={{ opacity: clapperFade, position: 'absolute', width: "85%", alignSelf: 'center' }}>
+          <Animated.View style={{ opacity: clapperFade, 
+            position: 'absolute', 
+            width: "85%", 
+            alignSelf: 'center' }}>
             <Image
-              style={{ aspectRatio: 1280 / 1117, zIndex: 100 }}
+              style={{ 
+                aspectRatio: 1280 / 1117, 
+                zIndex: 100, 
+                maxWidth: Platform.OS !== "web" ? "90%" : width,
+             }}
               source={require("../Images/clapper2-open.png")}
-              alt="BitWise Industries"
-              resizeMode="cover"
+              alt="open movie clapper"
+              resizeMode="contain"
             />
           </Animated.View>
-          <Animated.View style={{ opacity: clapperFadeIn, position: 'absolute', width: "85%", alignSelf: 'center' }}>
+          <Animated.View style={{ 
+            opacity: clapperFadeIn.interpolate({inputRange: [0, .1, .8, 1], outputRange: [0, 1, 1, 0]}),
+            position: 'absolute', 
+            width: "85%", maxWidth: width, 
+            alignSelf: 'center' 
+          }}
+          >
             <Image
-              style={{ aspectRatio: 1280 / 1117, zIndex: 100 }}
+              style={{ 
+                aspectRatio: 1280 / 1117, 
+                zIndex: 100,
+                maxWidth: Platform.OS !== "web" ? "90%" : width, 
+              }}
               source={require("../Images/clapper2-closed.png")}
-              alt="BitWise Industries"
-              resizeMode="cover"
+              alt="closed movie clapper"
+              resizeMode="contain"
             />
 
 
           </Animated.View>
           <Animated.View style={{ opacity: textFade }}>
-
-
-
+            <View style={styles.titleContainer}>
+              <Text style={styles.fontText}>Trivia &#38; Chill</Text>
+              <View style={styles.buttonContainer}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={{ width: 160, height: 80, alignSelf: 'center', marginBottom: 30 }}
+              >
+                <View
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Pressable onPress={() => setScene("Question")}>
+                    <Text>Start</Text>
+                  </Pressable>
+                </View>
+              </ImageBackground>
+              </View>
+            </View>
           </Animated.View>
         </ImageBackground>
-
-        {/* <Text style={styles.fontText}>
-        Bitwise Industries Presents:
-      </Text> */}
-        {/* <Image
-        style={{ width: "80%", aspectRatio: 7 / 1 }}
-        source={require("../Images/bw-header-logo.png")}
-        alt="BitWise Industries"
-      />
-      <Image
-        style={{ width: "45%", aspectRatio: 5 / 1 }}
-        source={require("../Images/teammvp-header-logo.png")}
-        alt="Team MVP"
-      />
-      <Image
-        style={{ width: "45%", aspectRatio: 5 / 1 }}
-        source={require("../Images/presents-header-logo.png")}
-        alt="Presents"
-      />
-      <Image
-        style={{ width: "75%", aspectRatio: 1 }}
-        source={require("../Images/gtm-header-logo.png")}
-        alt="Guess The Movie"
-      /> */}
-
-        {/* <Text style={styles.fontText}>
-        The Movie Game
-      </Text> */}
-
-        {/* <ImageBackground
-        source={require("../Images/ticket.png")}
-        style={{ width: 160, height: 80 }}
-      >
-        <View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Pressable onPress={() => setScene("Question")}>
-            <Text>Start</Text>
-          </Pressable>
-        </View>
-      </ImageBackground> */}
       </View>
     );
   }
@@ -171,6 +160,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#401323",
+    
   },
   start: {
     borderRadius: 5,
@@ -196,8 +186,22 @@ const styles = StyleSheet.create({
     fontFamily: "Limelight_400Regular",
     textAlign: "center",
     color: "#F2D379",
-    fontSize: 30,
-  }
+    fontSize: Platform.OS === "web" ? 100 : 50,
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: "center",
+    textAlign: "center",
+    backgroundColor: "transparent",
+    width: "100%",
+    marginTop: Platform.OS === "web" ? 50 : 80,
+  },
+  buttonContainer:{
+  flex: 1,
+  justifyContent: "center",
+  textAlign: "center",
+  marginTop: Platform.OS === "web" ? 280 : 390,
+},
 });
 
 function mapDispatchToProps(dispatch) {
