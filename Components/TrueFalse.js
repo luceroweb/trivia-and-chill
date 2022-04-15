@@ -14,7 +14,6 @@ const TrueFalse = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
@@ -38,13 +37,11 @@ const TrueFalse = ({
       }, 1000);
     } else if (gamePlayMode === "easySinglePlayer" && lives > 1) {
       setTimeout(() => {
-        resetWinningStreak();
         decreaseLives();
         setScene("WrongAnswer");
       }, 1000);
     } else {
       setTimeout(() => {
-        resetWinningStreak();
         resetLives();
         setScene("GameOver");
         resetLives();
@@ -211,10 +208,6 @@ function mapDispatchToProps(dispatch) {
     increaseWinningStreak: () =>
       dispatch({
         type: "INCREASE_WINNING_STREAK",
-      }),
-    resetWinningStreak: () =>
-      dispatch({
-        type: "RESET_WINNING_STREAK",
       }),
     decreaseLives: () =>
       dispatch({

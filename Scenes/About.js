@@ -23,7 +23,7 @@ const About = ({setScene}) => {
         <View style={styles.subContainer}>
           <View style={styles.contentContainer}>
             <Text style={styles.headings}>
-              About the "Guess The Movie" Game:
+              About the "Trivia & Chill" Game:
             </Text>
             <Text style={styles.content}>
               This game was created in order for our developer team to learn

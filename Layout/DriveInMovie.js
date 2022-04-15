@@ -27,9 +27,9 @@ function DriveInMovie({ screen, indicators, answers }) {
         style={styles.driveinforeground}
       ></Image>
       <View style={[styles.contentArea, screenWrapTopPosition]}>
-        <View style={styles.screenWrap}>{screen}</View>
-        <View style={styles.indicators}>{indicators}</View>
-        <View style={styles.answersContainer}>{answers}</View>
+        <View style={styles.screenWrap}>{screen ? screen : null}</View>
+        <View style={styles.indicators}>{indicators ? indicators : null}</View>
+        <View style={styles.answersContainer}>{answers ? answers : null}</View>
       </View>
     </View>
   );
@@ -84,9 +84,6 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
   answersContainer: {
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "red",
     width: "100%",
     alignItems: "center",
     marginTop: "10%",
