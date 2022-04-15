@@ -8,6 +8,7 @@ import {
   ImageBackground,
   useWindowDimensions,
   Platform,
+  Share
 } from "react-native";
 import { connect } from "react-redux";
 import MilkyWay from "../Images/milkyway.jpg";
@@ -17,8 +18,10 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { Audio } from "expo-av";
 import lose from "../Sounds/lose.wav";
 
-function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
+function GameOver({ setScene, winningStreak, resetWinningStreak, resetSelectedMovie }) {
   const { width, height } = useWindowDimensions();
+  const shareMessage = `I got a streak of 🎞️${winningStreak} in Trivia & Chill!
+Test your movie knowledge here: https://luceroweb.github.io/guess-the-movie/`;
   const screenWrapTopPosition = {
     marginTop: width * 0.025 > 16 ? width * 0.025 : 16,
   };
@@ -35,6 +38,35 @@ function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
     resetWinningStreak();
     setScene("Main");
     resetSelectedMovie();
+  };
+
+  const shareScoreMobile = async () => {
+    try {
+      const result = await Share.share({
+        message: shareMessage,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const shareScoreWeb = async () => {
+    try {
+      await navigator.clipboard.writeText(shareMessage);
+      alert("Message copied to clipboard!");
+    }
+    catch (error) {
+      alert(error.message);
+    }
   };
 
   let [fontsLoaded] = useFonts({
@@ -66,14 +98,36 @@ function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
         ></Image>
         <View style={[styles.screenWrap, screenWrapTopPosition]}>
           <Text style={styles.gameOverStyle}>Game Over</Text>
-          <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
-            <ImageBackground
-              source={require("../Images/ticket.png")}
-              style={styles.ticket}
-            >
-              <Text style={styles.backToStartButtonText}>Start Over</Text>
-            </ImageBackground>
-          </Pressable>
+          <View style={styles.buttonRow}>
+            { winningStreak > 0 && Platform.OS !=="web" &&
+            <Pressable style={styles.buttonStyle} onPress={shareScoreMobile}>
+              <ImageBackground
+                  source={require("../Images/ticket.png")}
+                  style={styles.ticket}
+                >
+                <Text style={styles.backToStartButtonText}>Share Score</Text>
+              </ImageBackground>
+            </Pressable>
+            }
+            { winningStreak > 0 && Platform.OS ==="web" &&
+            <Pressable style={styles.buttonStyle} onPress={shareScoreWeb}>
+              <ImageBackground
+                  source={require("../Images/ticket.png")}
+                  style={styles.ticket}
+                >
+                <Text style={styles.backToStartButtonText}>Share Score</Text>
+              </ImageBackground>
+            </Pressable>
+            }
+            <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={styles.ticket}
+              >
+                <Text style={styles.backToStartButtonText}>Start Over</Text>
+              </ImageBackground>
+            </Pressable>
+          </View>
         </View>
       </View>
     );
@@ -163,7 +217,11 @@ const styles = StyleSheet.create({
     minWidth: 120,
     minHeight: 62,
     aspectRatio: 7.8 / 4,
+    marginRight: 5,
   },
+  buttonRow: {
+    flexDirection: "row",
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOver);

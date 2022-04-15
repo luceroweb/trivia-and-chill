@@ -14,7 +14,6 @@ const MultipleChoice = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
@@ -60,13 +59,11 @@ const MultipleChoice = ({
       }, 1000);
     } else if (gamePlayMode === "easySinglePlayer" && lives > 1) {
       setTimeout(() => {
-        resetWinningStreak();
         decreaseLives();
         setScene("WrongAnswer");
       }, 1000);
     } else {
       setTimeout(() => {
-        resetWinningStreak();
         resetLives();
         setScene("GameOver");
       }, 1000);
@@ -143,10 +140,6 @@ function mapDispatchToProps(dispatch) {
     increaseWinningStreak: () =>
       dispatch({
         type: "INCREASE_WINNING_STREAK",
-      }),
-    resetWinningStreak: () =>
-      dispatch({
-        type: "RESET_WINNING_STREAK",
       }),
     decreaseLives: () =>
       dispatch({
