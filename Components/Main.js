@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -8,31 +8,115 @@ import {
   Pressable,
   ImageBackground,
   scrollView,
+  Animated,
+  Platform
 } from "react-native";
+import { Audio } from 'expo-av';
+import clapper from '../Sounds/clapper.wav'
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
 
-function Main({ setScene, setMovies}) {
+function Main({ setScene, setMovies }) {
+
+  const clapperFade = useRef(new Animated.Value(1)).current;
+  const clapperFadeIn = useRef(new Animated.Value(0)).current;
+  // const sound = useRef(new Animated.Value(0)).current;
+  const textFade = useRef(new Animated.Value(0)).current;
+  const [sound, setSound] = useState();
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(clapper);
+    setSound(sound);
+
+    await sound.playAsync();
+  }
 
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
+  
+  
+  useEffect(() => {
+    playSound();
+    Animated.sequence(
+      [
+        Animated.timing(clapperFade, {
+          toValue: 0,
+          duration: 100,
+          delay: 1000,
+          useNativeDriver: false,
+        }),
+        Animated.parallel(
+          [
+            Animated.timing(clapperFadeIn, {
+              toValue: 1,
+              duration: 100,
+              useNativeDriver: false,
+            
+            }),
+            
+          ]
+        ),
+        Animated.timing(textFade, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+      ]).start()
+  }, [])
 
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
 
-  return (
-    <View style={styles.container}>
 
-      {/* <Text style={styles.fontText}>
+
+    return (
+      <View style={styles.container}>
+        <ImageBackground
+          style={{
+            flex: 1,
+            flexDirection: "column",
+            // width: "100%",
+            aspectRatio: 4 / 3,
+          }}
+          source={require("../Images/marquee.jpeg")}
+          resizeMode="contain"
+          alt="movie theatre with marquee sign with cars parked in front"
+        >
+          <Animated.View style={{ opacity: clapperFade, position: 'absolute', width: "85%", alignSelf: 'center' }}>
+            <Image
+              style={{ aspectRatio: 1280 / 1117, zIndex: 100 }}
+              source={require("../Images/clapper2-open.png")}
+              alt="BitWise Industries"
+              resizeMode="cover"
+            />
+          </Animated.View>
+          <Animated.View style={{ opacity: clapperFadeIn, position: 'absolute', width: "85%", alignSelf: 'center' }}>
+            <Image
+              style={{ aspectRatio: 1280 / 1117, zIndex: 100 }}
+              source={require("../Images/clapper2-closed.png")}
+              alt="BitWise Industries"
+              resizeMode="cover"
+            />
+
+
+          </Animated.View>
+          <Animated.View style={{ opacity: textFade }}>
+
+
+
+          </Animated.View>
+        </ImageBackground>
+
+        {/* <Text style={styles.fontText}>
         Bitwise Industries Presents:
       </Text> */}
-      {/* <Image
+        {/* <Image
         style={{ width: "80%", aspectRatio: 7 / 1 }}
         source={require("../Images/bw-header-logo.png")}
         alt="BitWise Industries"
@@ -52,22 +136,12 @@ function Main({ setScene, setMovies}) {
         source={require("../Images/gtm-header-logo.png")}
         alt="Guess The Movie"
       /> */}
-       <ImageBackground
-        style={{
-          flex:1,
-          flexDirection: "column", 
-          width: "100%", 
-          aspectRatio: 4 / 3,
-          }}
-        source={require("../Images/marquee.jpeg")}
-        resizeMode="contain"
-        alt="movie theatre with marquee sign with cars parked in front"
-      />
-      {/* <Text style={styles.fontText}>
+
+        {/* <Text style={styles.fontText}>
         The Movie Game
       </Text> */}
 
-      {/* <ImageBackground
+        {/* <ImageBackground
         source={require("../Images/ticket.png")}
         style={{ width: 160, height: 80 }}
       >
@@ -87,9 +161,9 @@ function Main({ setScene, setMovies}) {
           </Pressable>
         </View>
       </ImageBackground> */}
-    </View>
-  );
-}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -118,7 +192,7 @@ const styles = StyleSheet.create({
     height: 54,
     top: -123,
   },
-  fontText:{
+  fontText: {
     fontFamily: "Limelight_400Regular",
     textAlign: "center",
     color: "#F2D379",
@@ -138,7 +212,7 @@ function mapDispatchToProps(dispatch) {
         type: "SET_MOVIES",
         movies,
       }),
-      setPerformerName: (performerName) =>
+    setPerformerName: (performerName) =>
       dispatch({
         type: "SET_PERFORMER_NAME",
         performerName,
