@@ -45,7 +45,7 @@ const HowToPlay = ({ setScene }) => {
               <Text style={styles.headings}>How To Play</Text>
               <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
-                  Thanks for playing "Guess The Movie Game". This is a trivia
+                  Thanks for playing "Trivia & Chill Game". This is a trivia
                   game to test your movie knowledge. Random questions about
                   popular movies could be shown as true/false or multiple
                   choice. Answer correctly to increase your winning streak! If

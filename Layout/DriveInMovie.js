@@ -6,10 +6,11 @@ import {
   useWindowDimensions,
   Platform,
 } from "react-native";
+import { connect } from "react-redux";
 import MilkyWay from "../Images/milkyway.jpg";
 import DriveInForeground from "../Images/drive-in-movie-foreground.png";
 
-function DriveInMovie({ screen, indicators, answers }) {
+function DriveInMovie({ screen, indicators, answers, scene }) {
   const { width, height } = useWindowDimensions();
   const screenWrapTopPosition = {
     marginTop: width * 0.025 > 16 ? width * 0.025 : 16,
@@ -27,12 +28,25 @@ function DriveInMovie({ screen, indicators, answers }) {
         style={styles.driveinforeground}
       ></Image>
       <View style={[styles.contentArea, screenWrapTopPosition]}>
-        <View style={styles.screenWrap}>{screen}</View>
-        <View style={styles.indicators}>{indicators}</View>
-        <View style={styles.answersContainer}>{answers}</View>
+        <View
+          style={[
+            styles.screenWrap,
+            scene !== "CorrectAnswer" ? { padding: 20 } : null,
+          ]}
+        >
+          {screen ? screen : null}
+        </View>
+        <View style={styles.indicators}>{indicators ? indicators : null}</View>
+        <View style={styles.answersContainer}>{answers ? answers : null}</View>
       </View>
     </View>
   );
+}
+
+function mapStateToProps(state) {
+  return {
+    scene: state.scene,
+  };
 }
 
 const styles = StyleSheet.create({
@@ -68,7 +82,6 @@ const styles = StyleSheet.create({
   screenWrap: {
     width: "100%",
     backgroundColor: "#292840",
-    padding: 20,
     aspectRatio: 714 / 391,
     alignItems: "center",
     justifyContent: "center",
@@ -84,13 +97,10 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
   answersContainer: {
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "red",
     width: "100%",
     alignItems: "center",
     marginTop: "10%",
   },
 });
 
-export default DriveInMovie;
+export default connect(mapStateToProps, null)(DriveInMovie);

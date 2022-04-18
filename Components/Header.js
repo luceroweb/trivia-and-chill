@@ -13,21 +13,21 @@ function Header() {
     return <AppLoading />;
   } else {
     return (
-      <View style={styles.container}>
-        <Text
-          style={{
-            color: "#F2D379",
-            fontFamily: "Limelight_400Regular",
-            fontSize: 30,
-          }}
-        >
-          The Movie Game
-        </Text>
-        <View style={{position: "absolute", top: 7, right: 6,}}>
-        <SettingsModal/>
-        </View>
-      </View>
-    );
+			<View style={styles.container}>
+				<Text
+					style={{
+						color: "#F2D379",
+						fontFamily: "Limelight_400Regular",
+						fontSize: 30,
+					}}
+				>
+					Trivia & Chill
+				</Text>
+				<View style={{ position: "absolute", top: 7, right: 6 }}>
+					<SettingsModal />
+				</View>
+			</View>
+		);
   }
 }
 
