@@ -23,10 +23,10 @@ function Trailer({ movieId }) {
       Alert.alert("video has finished playing!");
     }
   }, []);
-  
+
   if (Platform.OS === "web") {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, width: "100%" }}>
         {youTubeId && (
           <WebView
             mediaPlaybackRequiresUserAction={true}
@@ -44,6 +44,7 @@ function Trailer({ movieId }) {
           {youTubeId && (
             <YoutubePlayer
               height={"100%"}
+              width={"100%"}
               play={playing}
               videoId={youTubeId}
               onChangeState={onStateChange}

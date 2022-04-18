@@ -7,19 +7,23 @@ import { connect } from "react-redux";
 import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
 import axios from "axios";
 
-const GenerateQuestion = ({ movies, setSelectedMovie}) => {
+const GenerateQuestion = ({ movies, setSelectedMovie }) => {
   useEffect(() => {
     let movie = movies ? movies[RandomGenerator(movies.length)] : [];
-    axios.all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
-      .then(axios.spread ((castRes, genreRes) => {
-        movie={...movie, cast: castRes.data.cast, genre: genreRes}        
-        let questionObject = movie ? madLibsArray(movie) : {};
-        let randomIndex = RandomGenerator(questionObject.length);
-        setSelectedMovie(questionObject[randomIndex]);        
-      }))
-    }, []);    
+    axios
+      .all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
+      .then(
+        axios.spread((castRes, genreRes) => {
+          movie = { ...movie, cast: castRes.data.cast, genre: genreRes };
+          let questionObject = movie ? madLibsArray(movie) : {};
+          let randomIndex = RandomGenerator(questionObject.length);
+          console.log(questionObject[randomIndex]);
+          setSelectedMovie(questionObject[randomIndex]);
+        })
+      );
+  }, []);
 
-return <View></View>
+  return <View></View>;
 };
 
 function mapStateToProps(state) {
@@ -36,11 +40,11 @@ function mapDispatchToProps(dispatch) {
         type: "SET_SELECTED_MOVIE",
         selectedMovie,
       }),
-      setGenreName: (genreName) =>
-        dispatch({
-          type: "SET_GENRE_NAME",
-          genreName,
-        }),
+    setGenreName: (genreName) =>
+      dispatch({
+        type: "SET_GENRE_NAME",
+        genreName,
+      }),
   };
 }
 
