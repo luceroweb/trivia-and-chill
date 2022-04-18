@@ -8,25 +8,24 @@ import {
   Pressable,
   ImageBackground,
   Animated,
-  Platform, 
+  Platform,
   useWindowDimensions,
 } from "react-native";
-import { Audio } from 'expo-av';
-import clapper from '../Sounds/clapper.wav'
+import { Audio } from "expo-av";
+import clapper from "../Sounds/clapper.wav";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
 
 function Main({ setScene, setMovies }) {
-
   const clapperFade = useRef(new Animated.Value(1)).current;
   const clapperFadeIn = useRef(new Animated.Value(0)).current;
   const textFade = useRef(new Animated.Value(0)).current;
   const [sound, setSound] = useState();
 
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(clapper);
+    const { sound } = await Audio.Sound.createAsync(clapper, { volume: 0.1 });
     setSound(sound);
 
     await sound.playAsync();
@@ -36,116 +35,123 @@ function Main({ setScene, setMovies }) {
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
-  
-  
+
   useEffect(() => {
-    setTimeout(()=>{playSound()}, 900);
-    Animated.sequence(
-      [
-        Animated.timing(clapperFade, {
-          toValue: 0,
-          duration: 100,
-          delay: 1000,
-          useNativeDriver: false,
-        }),
-        Animated.parallel(
-          [
-            Animated.timing(clapperFadeIn, {
-              toValue: 1,
-              duration: 1000,
-              useNativeDriver: false,
-            }),  
-          ]
-        ),
-        Animated.timing(textFade, {
+    setTimeout(() => {
+      playSound();
+    }, 1400);
+    Animated.stagger(1497, [
+      Animated.timing(clapperFade, {
+        toValue: 0,
+        duration: 0,
+        delay: 1500,
+        useNativeDriver: false,
+      }),
+      Animated.parallel([
+        Animated.timing(clapperFadeIn, {
           toValue: 1,
-          duration: 1000,
+          duration: 2000,
           useNativeDriver: false,
         }),
-      ]).start()
-  }, [])
+      ]),
+      Animated.timing(textFade, {
+        toValue: 1,
+        delay: 800,
+        duration: 4000,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  }, []);
 
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
-
-
-
     return (
-      <View 
-      style={[styles.container,]}
-      >
+      <View style={[styles.container]}>
         <ImageBackground
           style={{
             flex: 1,
             flexDirection: "column",
             aspectRatio: 4 / 3,
             maxWidth: width,
+            justifyContent: "center",
           }}
           source={require("../Images/marquee.jpeg")}
           resizeMode={Platform.OS === "web" ? "contain" : "cover"}
           alt="movie theatre with marquee sign with cars parked in front"
         >
-          <Animated.View style={{ opacity: clapperFade, 
-            position: 'absolute', 
-            width: "85%", 
-            alignSelf: 'center' }}>
+          <Animated.View
+            style={{
+              opacity: clapperFade,
+              position: "absolute",
+              width: "85%",
+              alignSelf: "center",
+            }}
+          >
             <Image
-              style={{ 
-                aspectRatio: 1280 / 1117, 
-                zIndex: 100, 
+              style={{
+                aspectRatio: 1280 / 1117,
+                zIndex: 100,
                 maxWidth: Platform.OS !== "web" ? "90%" : width,
-             }}
+              }}
               source={require("../Images/clapper2-open.png")}
               alt="open movie clapper"
               resizeMode="contain"
             />
           </Animated.View>
-          <Animated.View style={{ 
-            opacity: clapperFadeIn.interpolate({inputRange: [0, .1, .8, 1], outputRange: [0, 1, 1, 0]}),
-            position: 'absolute', 
-            width: "85%", maxWidth: width, 
-            alignSelf: 'center' 
-          }}
+          <Animated.View
+            style={{
+              opacity: clapperFadeIn.interpolate({
+                inputRange: [0, 0.0000000000000000001, 0.5, 1],
+                outputRange: [0, 1, 1, 0],
+              }),
+              position: "absolute",
+              width: "85%",
+              maxWidth: width,
+              alignSelf: "center",
+            }}
           >
             <Image
-              style={{ 
-                aspectRatio: 1280 / 1117, 
+              style={{
+                aspectRatio: 1280 / 1117,
                 zIndex: 100,
-                maxWidth: Platform.OS !== "web" ? "90%" : width, 
+                maxWidth: Platform.OS !== "web" ? "90%" : width,
               }}
               source={require("../Images/clapper2-closed.png")}
               alt="closed movie clapper"
               resizeMode="contain"
             />
-
-
           </Animated.View>
           <Animated.View style={{ opacity: textFade }}>
             <View style={styles.titleContainer}>
               <Text style={styles.fontText}>Trivia &#38; Chill</Text>
               <View style={styles.buttonContainer}>
-              <ImageBackground
-                source={require("../Images/ticket.png")}
-                style={{ width: 160, height: 80, alignSelf: 'center', marginBottom: 30 }}
-              >
-                <View
+                <ImageBackground
+                  source={require("../Images/ticket.png")}
                   style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    justifyContent: "center",
-                    alignItems: "center",
+                    width: 160,
+                    height: 80,
+                    alignSelf: "center",
+                    marginBottom: 30,
                   }}
                 >
-                  <Pressable onPress={() => setScene("Question")}>
-                    <Text>Start</Text>
-                  </Pressable>
-                </View>
-              </ImageBackground>
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Pressable onPress={() => setScene("Question")}>
+                      <Text>Start</Text>
+                    </Pressable>
+                  </View>
+                </ImageBackground>
               </View>
             </View>
           </Animated.View>
@@ -160,7 +166,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#401323",
-    
   },
   start: {
     borderRadius: 5,
@@ -196,12 +201,12 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: Platform.OS === "web" ? 50 : 80,
   },
-  buttonContainer:{
-  flex: 1,
-  justifyContent: "center",
-  textAlign: "center",
-  marginTop: Platform.OS === "web" ? 280 : 390,
-},
+  buttonContainer: {
+    flex: 1,
+    justifyContent: "center",
+    textAlign: "center",
+    marginTop: Platform.OS === "web" ? 280 : 390,
+  },
 });
 
 function mapDispatchToProps(dispatch) {
