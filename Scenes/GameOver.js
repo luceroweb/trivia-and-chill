@@ -4,24 +4,25 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  Image,
   ImageBackground,
-  useWindowDimensions,
   Platform,
+  Share,
 } from "react-native";
 import { connect } from "react-redux";
-import MilkyWay from "../Images/milkyway.jpg";
-import DriveInForeground from "../Images/drive-in-movie-foreground.png";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { Audio } from "expo-av";
 import lose from "../Sounds/lose.wav";
+import DriveInMovie from "../Layout/DriveInMovie";
 
-function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
-  const { width, height } = useWindowDimensions();
-  const screenWrapTopPosition = {
-    marginTop: width * 0.025 > 16 ? width * 0.025 : 16,
-  };
+function GameOver({
+  setScene,
+  winningStreak,
+  resetWinningStreak,
+  resetSelectedMovie,
+}) {
+  const shareMessage = `I got a streak of 🎞️${winningStreak} in Trivia & Chill!
+Test your movie knowledge here: https://luceroweb.github.io/guess-the-movie/`;
 
   const [sound, setSound] = useState();
   async function playSound() {
@@ -35,6 +36,34 @@ function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
     resetWinningStreak();
     setScene("Main");
     resetSelectedMovie();
+  };
+
+  const shareScoreMobile = async () => {
+    try {
+      const result = await Share.share({
+        message: shareMessage,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const shareScoreWeb = async () => {
+    try {
+      await navigator.clipboard.writeText(shareMessage);
+      alert("Message copied to clipboard!");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   let [fontsLoaded] = useFonts({
@@ -54,28 +83,53 @@ function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
     return <AppLoading />;
   } else {
     return (
-      <View style={styles.layout}>
-        <Image
-          source={MilkyWay}
-          style={[styles.milkywaybg, { marginBottom: (height - 40) * -1 }]}
-          resizeMode="cover"
-        ></Image>
-        <Image
-          source={DriveInForeground}
-          style={styles.driveinforeground}
-        ></Image>
-        <View style={[styles.screenWrap, screenWrapTopPosition]}>
-          <Text style={styles.gameOverStyle}>Game Over</Text>
-          <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
-            <ImageBackground
-              source={require("../Images/ticket.png")}
-              style={styles.ticket}
-            >
-              <Text style={styles.backToStartButtonText}>Start Over</Text>
-            </ImageBackground>
-          </Pressable>
-        </View>
-      </View>
+      <DriveInMovie
+        screen={
+          <>
+            <Text style={styles.gameOverStyle}>Game Over</Text>
+            <View style={styles.buttonRow}>
+              {winningStreak > 0 && Platform.OS !== "web" && (
+                <Pressable
+                  style={styles.buttonStyle}
+                  onPress={shareScoreMobile}
+                >
+                  <ImageBackground
+                    source={require("../Images/ticket.png")}
+                    style={styles.ticket}
+                  >
+                    <Text style={styles.backToStartButtonText}>
+                      Share Score
+                    </Text>
+                  </ImageBackground>
+                </Pressable>
+              )}
+              {winningStreak > 0 && Platform.OS === "web" && (
+                <Pressable style={styles.buttonStyle} onPress={shareScoreWeb}>
+                  <ImageBackground
+                    source={require("../Images/ticket.png")}
+                    style={styles.ticket}
+                  >
+                    <Text style={styles.backToStartButtonText}>
+                      Share Score
+                    </Text>
+                  </ImageBackground>
+                </Pressable>
+              )}
+              <Pressable
+                style={styles.buttonStyle}
+                onPress={backToStartHandler}
+              >
+                <ImageBackground
+                  source={require("../Images/ticket.png")}
+                  style={styles.ticket}
+                >
+                  <Text style={styles.backToStartButtonText}>Start Over</Text>
+                </ImageBackground>
+              </Pressable>
+            </View>
+          </>
+        }
+      />
     );
   }
 }
@@ -83,7 +137,6 @@ function GameOver({ setScene, resetWinningStreak, resetSelectedMovie }) {
 function mapStateToProps(state) {
   return {
     winningStreak: state.winningStreak,
-    scene: state.scene,
     selectedMovie: state.selectedMovie,
   };
 }
@@ -108,38 +161,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-  layout: {
-    backgroundColor: "black",
-    height: "100%",
-  },
-  milkywaybg: {
-    width: "100%",
-    height: "60%",
-  },
-  driveinforeground: {
-    position: "absolute",
-    top: 20,
-    resizeMode: "contain",
-    width: Platform.OS !== "web" ? 650 : "100%",
-    minWidth: 650,
-    height: "auto",
-    alignSelf: "center",
-    aspectRatio: 468 / 485,
-  },
-  screenWrap: {
-    position: "absolute",
-    top: 20,
-    backgroundColor: "#292840",
-    padding: 20,
-    width: "49.1%",
-    minWidth: 320,
-    aspectRatio: 714 / 391,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    zIndex: 1000,
-    marginLeft: -2,
-  },
   gameOverStyle: {
     fontSize: 28,
     marginBottom: Platform.OS !== "web" ? 20 : 70,
@@ -163,6 +184,10 @@ const styles = StyleSheet.create({
     minWidth: 120,
     minHeight: 62,
     aspectRatio: 7.8 / 4,
+    marginRight: 5,
+  },
+  buttonRow: {
+    flexDirection: "row",
   },
 });
 
