@@ -22,10 +22,12 @@ function DriveInMovie({ screen, indicators, answers, scene }) {
         source={MilkyWay}
         style={[styles.milkywaybg, { marginBottom: (height - 40) * -1 }]}
         resizeMode="cover"
+        fadeDuration={0}
       ></Image>
       <Image
         source={DriveInForeground}
         style={styles.driveinforeground}
+        fadeDuration={0}
       ></Image>
       <View style={[styles.contentArea, screenWrapTopPosition]}>
         <View
