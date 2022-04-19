@@ -26,47 +26,30 @@ function Timer({ setScene }) {
         await sound.playAsync();
         setIsPlaying(true);
         setSound(sound);
-      } catch(e) {
+      } catch (e) {
         console.error(e);
       }
-    
-    }
+    };
     loadSound();
     return () => {
       sound ? sound.unloadAsync() : undefined;
     };
   }, []);
 
-  // Conditional render depending on OS
-  if (Platform.OS === "web") {
-    // Render for web
-    return (
-      <View style={styles.timer}>
-        <Clock
-          isPlaying={isPlaying}
-          onUpdate={handleClockUpdate}
-          onComplete={handleClockComplete}
-        />
-      </View>
-    );
-  } else {
-  // Render for ios and android
-    return (
+  return (
+    <View style={styles.timer}>
       <Clock
         isPlaying={isPlaying}
         onUpdate={handleClockUpdate}
-        onComplete={handleClockComplete} 
+        onComplete={handleClockComplete}
       />
-    );
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   timer: {
-    position: "absolute",
-    left: 0,
-    top: 4,
-    flex: 1,
+    position: "relative",
   },
 });
 
