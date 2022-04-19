@@ -34,7 +34,8 @@
     "react-native-youtube-iframe": "^2.2.2",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
-    "react-native-safe-area-context": "3.3.2"
+    "react-native-safe-area-context": "3.3.2",
+    "expo-linear-gradient": "~11.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
