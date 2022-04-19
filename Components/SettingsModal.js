@@ -68,9 +68,10 @@ const SettingsModal = ({
               <Text>Select a Genre</Text>
               <Picker
                 style={{ width: 200 }}
-                selectedValue={genre === null ? "" : genre.id }
+                selectedValue={genre == null ? "" : genre.id }
                 onValueChange={(newGenreId) => {
-                  setGenre(genreTypes.find((genre) => genre.id == newGenreId));
+                  const foundGenre = genreTypes.find((genre) => genre.id == newGenreId);
+                  setGenre(foundGenre ? foundGenre : null);
                 }}
               >
                  <Picker.Item
@@ -78,8 +79,7 @@ const SettingsModal = ({
                     value= ""
                   />
                 {genreTypes.map((genre, key) => {
-                  console.log(key)
-                  return(
+                  return (
                     <Picker.Item
                     label={genre.name}
                     value={genre.id}
