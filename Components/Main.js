@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
@@ -96,13 +95,13 @@ function Main({ setScene, setMovies }) {
               position: "absolute",
               width: width > 500 ? "85%" : "100%",
               alignSelf: "center",
-              alignItems: "center",
+              alignItems:
+                Platform.OS !== "web" && width < 500 ? "center" : "stretch",
             }}
           >
             <Image
               style={{
                 aspectRatio: 1280 / 1117,
-                zIndex: 100,
                 maxWidth: Platform.OS !== "web" ? "90%" : width,
               }}
               source={require("../Images/IntroAnimation/clapper2-open.png")}
@@ -121,13 +120,13 @@ function Main({ setScene, setMovies }) {
               width: width > 500 ? "85%" : "100%",
               maxWidth: width,
               alignSelf: "center",
-              alignItems: "center",
+              alignItems:
+                Platform.OS !== "web" && width < 500 ? "center" : "stretch",
             }}
           >
             <Image
               style={{
                 aspectRatio: 1280 / 1117,
-                zIndex: 100,
                 maxWidth: Platform.OS !== "web" ? "90%" : width,
               }}
               source={require("../Images/IntroAnimation/clapper2-closed.png")}
@@ -146,14 +145,13 @@ function Main({ setScene, setMovies }) {
               width: width > 500 ? "85%" : "100%",
               maxWidth: width,
               alignSelf: "center",
-              alignItems: "center",
-              zIndex: 101,
+              alignItems:
+                Platform.OS !== "web" && width < 500 ? "center" : "stretch",
             }}
           >
             <Image
               style={{
                 aspectRatio: 1280 / 1117,
-                zIndex: 100,
                 maxWidth: Platform.OS !== "web" ? "90%" : width,
               }}
               //Can change font in following line to limelight, annie, or arial
