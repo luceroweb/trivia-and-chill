@@ -95,11 +95,12 @@ function Main({ setScene, setMovies }) {
             shadowOffset: { width: 0, height: 0 },
             shadowOpacity: 0.9,
             shadowRadius: 300,
-            marginTop: width > 1000 ? 30 : 0,
-            marginBottom: width > 1000 ? 30 : 0,
+            marginTop: 30,
+            marginBottom: 30,
+            maxHeight: Platform.OS !== "web" ? 580 : null,
           }}
-          source={require("../Images/theater-sign-generator.jpg")}
-          resizeMode={width > 1000 ? "contain" : "cover"}
+          source={require("../Images/theater-sign-generator-trimmed.png")}
+          // resizeMode={width > 1000 ? "contain" : "cover"}
           alt="movie theatre with marquee sign with cars parked in front"
         >
           {/* Animated View for picture of open clapper with no text */}
@@ -242,7 +243,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "black",
+    backgroundColor:  Platform.OS !== "web"? "#100307" : 'black',
+    justifyContent: "center",
   },
   start: {
     borderRadius: 5,
@@ -256,14 +258,6 @@ const styles = StyleSheet.create({
     marginLeft: 42,
     fontSize: 24,
   },
-  border: {
-    borderWidth: 4,
-    borderColor: "#401323",
-    width: 85,
-    marginLeft: 27,
-    height: 54,
-    top: -123,
-  },
   fontText: {
     fontFamily: "Limelight_400Regular",
     textAlign: "center",
@@ -271,7 +265,6 @@ const styles = StyleSheet.create({
     fontSize: Platform.OS === "web" ? 100 : 50,
   },
   titleContainer: {
-    flex: 1,
     justifyContent: "center",
     textAlign: "center",
     backgroundColor: "transparent",
