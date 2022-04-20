@@ -36,21 +36,29 @@ function Main({ setScene, setMovies }) {
     await sound.playAsync();
   }
 
+  let delay;
+
+  if (Platform.OS === "web") {
+    delay = 1900;
+  } else {
+    delay = 1600;
+  }
+
   useEffect(() => {
     setTimeout(() => {
       playSound();
-    }, 1540);
+    }, delay);
     Animated.parallel([
       Animated.timing(boardWithTextFade, {
         toValue: 1,
-        duration: 3250,
+        duration: 3740,
         useNativeDriver: false,
       }),
-      Animated.stagger(1497, [
+      Animated.stagger(1897, [
         Animated.timing(clapperOpenFade, {
           toValue: 0,
           duration: 0,
-          delay: 1500,
+          delay: 1900,
           useNativeDriver: false,
         }),
         Animated.parallel([
@@ -83,12 +91,12 @@ function Main({ setScene, setMovies }) {
             aspectRatio: 700 / 500,
             maxWidth: width,
             justifyContent: "center",
-            shadowColor: '#c9195468',
+            shadowColor: "#c9195468",
             shadowOffset: { width: 0, height: 0 },
-            shadowOpacity: .9,
+            shadowOpacity: 0.9,
             shadowRadius: 300,
-            marginTop: width > 1000 ? 30: 0,
-            marginBottom: width > 1000 ? 30: 0,
+            marginTop: width > 1000 ? 30 : 0,
+            marginBottom: width > 1000 ? 30 : 0,
           }}
           source={require("../Images/theater-sign-generator.jpg")}
           resizeMode={width > 1000 ? "contain" : "cover"}
@@ -160,8 +168,7 @@ function Main({ setScene, setMovies }) {
                 aspectRatio: 1280 / 1117,
                 maxWidth: Platform.OS !== "web" ? "90%" : width,
               }}
-              //Can change font in following line to limelight, annie, or arial
-              source={require("../Images/IntroAnimation/clapper2-no-arm-annie.png")}
+              source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
               alt="closed movie clapper"
               resizeMode="contain"
             />
@@ -278,12 +285,11 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === "web" ? 280 : 390,
   },
   background: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     top: 0,
-    height: "100%"
-
+    height: "100%",
   },
 });
 
