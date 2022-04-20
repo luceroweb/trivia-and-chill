@@ -52,14 +52,14 @@ const About = ({ setScene }) => {
               </Text>
             </View>
           </View>
-          <ImageBackground
-            source={require("../Images/ticket.png")}
-            style={styles.ticketImage}
-          >
-            <Pressable onPress={() => setScene("Main")}>
+          <Pressable onPress={() => setScene("Main")}>
+            <ImageBackground
+              source={require("../Images/ticket.png")}
+              style={styles.ticketImage}
+            >
               <Text>Home</Text>
-            </Pressable>
-          </ImageBackground>
+            </ImageBackground>
+          </Pressable>
         </ScrollView>
       </View>
     );
