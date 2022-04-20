@@ -16,7 +16,7 @@ import CorrectAnswerDemo from "../Components/HowToPlay/CorrectAnswerDemo";
 import MainAnimation from "../Components/HowToPlay/MainAnimation";
 import GameOverHelp from "../Components/GameOverHelp.js";
 import WrongAnswerHelp from "../Components/HowToPlay/WrongAnswerHelp";
-import QuestionInstructions from "../Components/QuestionInstructions"
+import QuestionInstructions from "../Components/QuestionInstructions";
 import LoseGameInstruction from "../Components/HowToPlay/LoseGameInstruction";
 import EasyModeLivesHelp from "../Components/HowToPlay/EasyModeLivesHelp";
 
@@ -31,7 +31,7 @@ const HowToPlay = ({ setScene }) => {
   let columnGap = width > 800 ? { marginRight: 10 } : null;
   let animationContainer = {
     width: Platform.OS === "web" ? (width > 800 ? 500 : "100%") : 230,
-    alignSelf:'center'
+    alignSelf: "center",
   };
 
   if (!fontsLoaded) {
@@ -59,9 +59,7 @@ const HowToPlay = ({ setScene }) => {
             </View>
 
             <View style={styles.contentContainer}>
-              <Text style={styles.headings}>
-                Single Player Mode (Default)
-              </Text>
+              <Text style={styles.headings}>Single Player Mode (Default)</Text>
 
               <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
@@ -78,13 +76,16 @@ const HowToPlay = ({ setScene }) => {
                   2. Read and answer the question before the timer runs out!
                 </Text>
                 <View style={animationContainer}>
-                <QuestionInstructions/>
+                  <QuestionInstructions />
                 </View>
               </View>
 
               <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
-                  3. Guess correctly to increase your winning streak, and enjoy the movie trailer. Select the “Next Question” button to continue the game.</Text>
+                  3. Guess correctly to increase your winning streak, and enjoy
+                  the movie trailer. Select the “Next Question” button to
+                  continue the game.
+                </Text>
                 <View style={animationContainer}>
                   <CorrectAnswerDemo />
                 </View>
@@ -102,30 +103,29 @@ const HowToPlay = ({ setScene }) => {
             </View>
 
             <View style={styles.contentContainer}>
-              <Text style={styles.headings}>
-                Easy Single Player mode
-              </Text>
+              <Text style={styles.headings}>Easy Single Player mode</Text>
 
               <View style={styles.instructionWrapper}>
                 <Text style={styles.instructionText}>
-                  Game play is the same as Single Player Mode with these changes
+                  Game play is the same as Single Player Mode with these
+                  changes.
+                </Text>
+              </View>
+
+              <View style={styles.instructionWrapper}>
+                <Text style={styles.instructionText}>
+                  1. See "Settings" instructions
                 </Text>
               </View>
 
               <View style={[styles.instructionWrapper, flexDirection]}>
                 <Text style={[styles.instructionText, columnGap]}>
-                  1. Start the game with 3 lives.
+                  2. Start the game with 3 lives. There is no timer, so you can
+                  take your time to choose the correct answer.
                 </Text>
                 <View style={animationContainer}>
                   <EasyModeLivesHelp />
                 </View>
-              </View>
-
-              <View style={styles.instructionWrapper}>
-                <Text style={styles.instructionText}>
-                  2. There is no timer, so you can take your time to choose the
-                  correct answer.
-                </Text>
               </View>
 
               <View style={[styles.instructionWrapper, flexDirection]}>
@@ -135,29 +135,28 @@ const HowToPlay = ({ setScene }) => {
                 </Text>
                 <View style={animationContainer}>
                   <WrongAnswerHelp />
-
                 </View>
               </View>
 
               <View style={[styles.instructionWrapper, flexDirection]}>
-              <Text style={[styles.instructionText, columnGap]}>
+                <Text style={[styles.instructionText, columnGap]}>
                   4. If you lose all your lives, the game is over.
                 </Text>
                 <View style={animationContainer}>
-                <LoseGameInstruction/>
+                  <LoseGameInstruction />
                 </View>
               </View>
             </View>
           </View>
-          
-          <ImageBackground
-            source={require("../Images/ticket.png")}
-            style={styles.ticketImage}
-          >
-            <Pressable onPress={() => setScene("Main")}>
+
+          <Pressable onPress={() => setScene("Main")}>
+            <ImageBackground
+              source={require("../Images/ticket.png")}
+              style={styles.ticketImage}
+            >
               <Text>Home</Text>
-            </Pressable>
-          </ImageBackground>
+            </ImageBackground>
+          </Pressable>
         </ScrollView>
       </View>
     );
@@ -175,56 +174,56 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-	contentContainer: {
-		backgroundColor: "#A0947C",
-		marginTop: 10,
-		width: "90%",
-		alignSelf: "center",
-		padding: 5,
-		borderRadius: 8,
-	},
-	headings: {
-		fontFamily: "Limelight_400Regular",
-		borderRadius: 8,
-		padding: 20,
-		textAlign: "center",
-		color: "#F2D379",
-		fontSize: 30,
-		marginBottom: 15,
-		marginTop: 15,
-		backgroundColor: "#292840",
-	},
-	instructionWrapper: {
-		borderRadius: 8,
-		padding: 20,
-		backgroundColor: "#292840",
-		marginBottom: 15,
-		color: "#F2D379",
-	},
-	instructionText: {
-		fontSize: 20,
-		marginBottom: 15,
-		color: "#F2D379",
-		width: "100%",
-	},
-	mainContainer: {
-		backgroundColor: "#401323",
-		height: "100%",
-	},
-	ticketImage: {
-		marginTop: 10,
-		flex: 1,
-		marginBottom: 10,
-		width: 200,
-		aspectRatio: 18 / 9,
-		alignSelf: "center",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	mainAnimation: {
-		alignSelf: "center",
-		aspectRatio: Platform.OS === "web" ? 980 / 500 : 230 / 500,
-	},
+  contentContainer: {
+    backgroundColor: "#A0947C",
+    marginTop: 10,
+    width: "90%",
+    alignSelf: "center",
+    padding: 5,
+    borderRadius: 8,
+  },
+  headings: {
+    fontFamily: "Limelight_400Regular",
+    borderRadius: 8,
+    padding: 20,
+    textAlign: "center",
+    color: "#F2D379",
+    fontSize: 30,
+    marginBottom: 15,
+    marginTop: 15,
+    backgroundColor: "#292840",
+  },
+  instructionWrapper: {
+    borderRadius: 8,
+    padding: 20,
+    backgroundColor: "#292840",
+    marginBottom: 15,
+    color: "#F2D379",
+  },
+  instructionText: {
+    fontSize: 20,
+    marginBottom: 15,
+    color: "#F2D379",
+    width: "100%",
+  },
+  mainContainer: {
+    backgroundColor: "#401323",
+    height: "100%",
+  },
+  ticketImage: {
+    marginTop: 10,
+    flex: 1,
+    marginBottom: 10,
+    width: 200,
+    aspectRatio: 18 / 9,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  mainAnimation: {
+    alignSelf: "center",
+    aspectRatio: Platform.OS === "web" ? 980 / 500 : 230 / 500,
+  },
 });
 
 export default connect(null, mapDispatchToProps)(HowToPlay);

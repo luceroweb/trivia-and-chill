@@ -17,9 +17,9 @@ const SettingsModal = ({
 }) => {
   useEffect(() => {
     getGenre().then((genreTypes) => {
-      setGenreTypes(genreTypes.data.genres)
-    } )
-  },[])
+      setGenreTypes(genreTypes.data.genres);
+    });
+  }, []);
   return (
     <View>
       {scene === "Question" || scene === "CorrectAnswer" ? (
@@ -47,17 +47,15 @@ const SettingsModal = ({
                 />
               </Pressable>
               {/* GameMode Picker */}
-              <Text>Select a Game Play Mode</Text>
+              <Text style={styles.label}>Select a Game Play Mode</Text>
               <Picker
-                style={{ width: 200 }}
+                style={styles.input}
                 selectedValue={gamePlayMode}
                 onValueChange={(newMode, itemIndex) => {
                   setGamePlayMode(newMode);
                 }}
               >
-                <Picker.Item 
-                  label="Single Player" 
-                  value="singlePlayer" />
+                <Picker.Item label="Single Player" value="singlePlayer" />
                 <Picker.Item
                   label="Easy Single Player"
                   value="easySinglePlayer"
@@ -65,27 +63,26 @@ const SettingsModal = ({
               </Picker>
 
               {/* Genre Picker */}
-              <Text>Select a Genre</Text>
+              <Text style={styles.label}>Select a Genre</Text>
               <Picker
-                style={{ width: 200 }}
-                selectedValue={genre == null ? "" : genre.id }
+                style={styles.input}
+                selectedValue={genre == null ? "" : genre.id}
                 onValueChange={(newGenreId) => {
-                  const foundGenre = genreTypes.find((genre) => genre.id == newGenreId);
+                  const foundGenre = genreTypes.find(
+                    (genre) => genre.id == newGenreId
+                  );
                   setGenre(foundGenre ? foundGenre : null);
                 }}
               >
-                 <Picker.Item
-                    label= "All Genres"
-                    value= ""
-                  />
+                <Picker.Item label="All Genres" value="" />
                 {genreTypes.map((genre, key) => {
                   return (
                     <Picker.Item
-                    label={genre.name}
-                    value={genre.id}
-                    key={key}
-                  />
-                  )
+                      label={genre.name}
+                      value={genre.id}
+                      key={key}
+                    />
+                  );
                 })}
               </Picker>
             </View>
@@ -105,7 +102,7 @@ function mapStateToProps(state) {
     gamePlayMode: state.gamePlayMode,
     modalVisible: state.modalVisible,
     genreTypes: state.genreTypes,
-    genre: state.genre
+    genre: state.genre,
   };
 }
 // this is how the picker tells redux that the user has selected a new player mode
@@ -125,17 +122,17 @@ function mapDispatchToProps(dispatch) {
         modalVisible: visible,
       });
     },
-    setGenre: (genre) =>{
+    setGenre: (genre) => {
       dispatch({
         type: "SET_GENRE",
         genre: genre,
-    });
+      });
     },
-    setGenreTypes: (genreTypes) =>{
+    setGenreTypes: (genreTypes) => {
       dispatch({
         type: "SET_GENRE_TYPES",
         genreTypes: genreTypes,
-    });
+      });
     },
   };
 }
@@ -145,7 +142,10 @@ const styles = StyleSheet.create({
     margin: 50,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 12,
+    paddingTop: 5,
+    paddingRight: 25,
+    paddingBottom: 25,
+    paddingLeft: 25,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -155,18 +155,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    alignSelf: "center",
   },
-  textStyle: {
-    color: "white",
+  label: {
     fontWeight: "bold",
-    textAlign: "center",
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+  input: {
+    width: 200,
+    marginBottom: 10,
   },
   exit: {
     alignSelf: "flex-end",
+    marginRight: -10,
   },
 });
 
