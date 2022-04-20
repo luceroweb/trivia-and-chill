@@ -15,7 +15,6 @@ import DriveInMovie from "../Layout/DriveInMovie";
 function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
   useEffect(() => {
     FetchApi().then((res) => {
-      // console.log(res);
       setMovies(res);
     });
   }, []);

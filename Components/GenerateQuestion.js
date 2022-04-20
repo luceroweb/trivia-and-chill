@@ -17,7 +17,6 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
           movie = { ...movie, cast: castRes.data.cast, genre: genreRes };
           let questionObject = movie ? madLibsArray(movie) : {};
           let randomIndex = RandomGenerator(questionObject.length);
-          console.log(questionObject[randomIndex]);
           setSelectedMovie(questionObject[randomIndex]);
         })
       );
