@@ -1,5 +1,4 @@
 export default function madLibsArray(movies) {
-
   let year = movies.release_date.substr(0, 4);
   let month = movies.release_date.substr(5, 2);
   let day = movies.release_date.substr(8, 2);
@@ -36,7 +35,7 @@ export default function madLibsArray(movies) {
 
   function generateRandomCastNumber() {
     let randomCast = movies.cast;
-    return randomCast[Math.floor(Math.random() * randomCast.length)];    
+    return randomCast[Math.floor(Math.random() * randomCast.length)];
   }
 
   const randomCast1 = generateRandomCastNumber();
@@ -44,12 +43,14 @@ export default function madLibsArray(movies) {
 
   return (
     movies && [
-      {          
-        question: `${movies.title}'s cast included ${randomCast1.name} and ${randomCast2.name}.`, 
-        answer: randomCast1.known_for_department === "Acting" && randomCast2.known_for_department === "Acting"
-          ? true
-          : false,
-        movieId: `${movies.id}`        
+      {
+        question: `${movies.title}'s cast included ${randomCast1.name} and ${randomCast2.name}.`,
+        answer:
+          randomCast1.known_for_department === "Acting" &&
+          randomCast2.known_for_department === "Acting"
+            ? true
+            : false,
+        movieId: `${movies.id}`,
       },
       {
         question: `${movies.title} was released on ${movieDate}.`, //movie details
@@ -61,11 +62,11 @@ export default function madLibsArray(movies) {
         answer: true,
         movieId: `${movies.id}`,
       },
-      {
-        question: `${movies.overview} describes what ${movies.title} is about.`,
-        answer: true,
-        movieId: `${movies.id}`,
-      },
+      // {
+      //   question: `${movies.overview} describes what ${movies.title} is about.`,
+      //   answer: true,
+      //   movieId: `${movies.id}`,
+      // },
       // {
       //   question: `${movies.title} is a movie about "${movies.overview}"`,
       //   answer: true,
@@ -232,5 +233,3 @@ export default function madLibsArray(movies) {
     ]
   );
 }
-
-

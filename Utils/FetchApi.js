@@ -59,3 +59,15 @@ export async function getGenreName(genreId) {
 
   return matchGenre;
 }
+
+export async function getGenre(genreId) {
+  let matchGenre = null;
+
+  const genreTypes = await axios
+    .get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
+    )
+    .catch((err) => console.log("Fetch API Error", err));
+
+  return genreTypes;
+}

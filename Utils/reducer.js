@@ -6,6 +6,8 @@ const initialState = {
   gamePlayMode: "singlePlayer",
   lives: 3,
   modalVisible: false,
+  genre: null,
+  genreTypes:[]
 };
 
 export const reducer = (state = initialState, action) => {
@@ -69,7 +71,18 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         modalVisible: action.modalVisible,
+      };
+    case "SET_GENRE":
+      return {
+        ...state,
+        genre: action.genre,
+      };
+    case "SET_GENRE_TYPES":
+      return {
+        ...state,
+        genreTypes: action.genreTypes,
       }
+
   }
   return state;
 };

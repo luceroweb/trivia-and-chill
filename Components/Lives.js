@@ -54,7 +54,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Lives);
 
 const styles = StyleSheet.create({
     livesDisplay: {
-        flex: 1,
         flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "center",

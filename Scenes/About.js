@@ -5,76 +5,76 @@ import {
   StyleSheet,
   ScrollView,
   ImageBackground,
-  Pressable
+  Pressable,
 } from "react-native";
 import React from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
 
-const About = ({setScene}) => {
+const About = ({ setScene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
-  return (
-    <View style={styles.mainContainer}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.subContainer}>
-          <View style={styles.contentContainer}>
-            <Text style={styles.headings}>
-              About the "Trivia & Chill" Game:
-            </Text>
-            <Text style={styles.content}>
-              This game was created in order for our developer team to learn
-              more about React-Native, Redux, Axios, and dynamic question
-              generation using a live data base.
-            </Text>
-          </View>
-
-          <View style={styles.contentContainer}>
-            <Text style={styles.headings}>About Workforce Training:</Text>
-
-            <Text style={styles.content}>
-              Our curriculum doesn't come from textbooks, it comes directly from
-              practicing industry experts. Our system of teaching is hands-on
-              and up-to-date with current practices.
-              <Text
-              style={{ textDecorationLine: "underline", color: "white"}}
-                onPress={() =>
-                  Linking.openURL(
-                    "https://bitwiseindustries.com/services/workforce-training/classes/"
-                  )
-                }
-              >
-                Learn more about Workforce Training
+    return (
+      <View style={styles.mainContainer}>
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.subContainer}>
+            <View style={styles.contentContainer}>
+              <Text style={styles.headings}>
+                About the "Trivia & Chill" Game:
               </Text>
-            </Text>
+              <Text style={styles.content}>
+                This game was created in order for our developer team to learn
+                more about React-Native, Redux, Axios, and dynamic question
+                generation using a live data base.
+              </Text>
+            </View>
+
+            <View style={styles.contentContainer}>
+              <Text style={styles.headings}>About Workforce Training:</Text>
+
+              <Text style={styles.content}>
+                Our curriculum doesn't come from textbooks, it comes directly
+                from practicing industry experts. Our system of teaching is
+                hands-on and up-to-date with current practices.{" "}
+                <Text
+                  style={{ textDecorationLine: "underline", color: "white" }}
+                  onPress={() =>
+                    Linking.openURL(
+                      "https://bitwiseindustries.com/services/workforce-training/classes/"
+                    )
+                  }
+                >
+                  Learn more about Workforce Training
+                </Text>
+              </Text>
+            </View>
           </View>
-        </View>
-        <ImageBackground
-          source={require("../Images/ticket.png")}
-          style={styles.ticketImage}
-        >
           <Pressable onPress={() => setScene("Main")}>
-            <Text>Home</Text>
+            <ImageBackground
+              source={require("../Images/ticket.png")}
+              style={styles.ticketImage}
+            >
+              <Text>Home</Text>
+            </ImageBackground>
           </Pressable>
-        </ImageBackground>
-      </ScrollView>
-    </View>
-   );
+        </ScrollView>
+      </View>
+    );
   }
 };
 
-function mapDispatchToProps(dispatch){
-  return{
-    setScene: (name) => dispatch({
-      type: "SET_SCENE",
-      name: name
-    })
-  }
+function mapDispatchToProps(dispatch) {
+  return {
+    setScene: (name) =>
+      dispatch({
+        type: "SET_SCENE",
+        name: name,
+      }),
+  };
 }
-
 
 const styles = StyleSheet.create({
   contentContainer: {
