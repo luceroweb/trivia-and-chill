@@ -6,8 +6,9 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import Badge from "../Components/Badge";
 import DriveInMovie from "../Layout/DriveInMovie";
+import Lives from "../Components/Lives";
 
-const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
+const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMode }) => {
   const handleNextQuestion = () => {
     setScene("Question");
     resetSelectedMovie();
@@ -25,6 +26,9 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
         screen={<Trailer movieId={selectedMovie?.movieId} />}
         indicators={
           <>
+          { gamePlayMode === 'easySinglePlayer' &&
+            <Lives/>
+          }
             <Text style={styles.h2}>Correct!</Text>
             <Badge />
           </>
@@ -44,6 +48,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
 function mapStateToProps(state) {
   return {
     selectedMovie: state.selectedMovie,
+    gamePlayMode: state.gamePlayMode
   };
 }
 
