@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View, ScrollView, Text } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
@@ -12,7 +12,9 @@ import Badge from "../Components/Badge";
 import Lives from "../Components/Lives";
 import DriveInMovie from "../Layout/DriveInMovie";
 
-function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
+function Question({ selectedMovie, movies, setMovies, gamePlayMode, genre }) {
+const [filteredMovies, setFilteredMovies] = useState(null)
+
   useEffect(() => {
     FetchApi().then((res) => {
       setMovies(res);
@@ -23,10 +25,18 @@ function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
     Limelight_400Regular,
   });
 
+  useEffect(()=>{
+    if(genre !== null){
+      setFilteredMovies( movies.filter((movie)=>{
+        return movie.genre_ids.includes(genre.id) 
+      }))
+    }
+  }, [genre])
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else if (Object.keys(selectedMovie).length === 0) {
-    return <GenerateQuestion movies={movies} />;
+    return <GenerateQuestion movies={filteredMovies !== null ? filteredMovies : movies} />;
   } else {
     return (
       <DriveInMovie
@@ -71,6 +81,7 @@ function mapStateToProps(state) {
     selectedMovie: state.selectedMovie,
     scene: state.scene,
     gamePlayMode: state.gamePlayMode || "easySinglePlayer",
+    genre: state.genre,
   };
 }
 
