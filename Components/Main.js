@@ -80,12 +80,18 @@ function Main({ setScene, setMovies }) {
           style={{
             flex: 1,
             flexDirection: "column",
-            aspectRatio: 4 / 3,
+            aspectRatio: 700 / 500,
             maxWidth: width,
             justifyContent: "center",
+            shadowColor: '#c9195468',
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: .9,
+            shadowRadius: 300,
+            marginTop: width > 1000 ? 30: 0,
+            marginBottom: width > 1000 ? 30: 0,
           }}
           source={require("../Images/theater-sign-generator.jpg")}
-          resizeMode={width > 750 ? "contain" : "cover"}
+          resizeMode={width > 1000 ? "contain" : "cover"}
           alt="movie theatre with marquee sign with cars parked in front"
         >
           {/* Animated View for picture of open clapper with no text */}
@@ -155,7 +161,7 @@ function Main({ setScene, setMovies }) {
                 maxWidth: Platform.OS !== "web" ? "90%" : width,
               }}
               //Can change font in following line to limelight, annie, or arial
-              source={require("../Images/IntroAnimation/clapper2-no-arm-limelight.png")}
+              source={require("../Images/IntroAnimation/clapper2-no-arm-annie.png")}
               alt="closed movie clapper"
               resizeMode="contain"
             />
@@ -229,7 +235,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#401323",
+    backgroundColor: "black",
   },
   start: {
     borderRadius: 5,
@@ -270,6 +276,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     marginTop: Platform.OS === "web" ? 280 : 390,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%"
+
   },
 });
 
