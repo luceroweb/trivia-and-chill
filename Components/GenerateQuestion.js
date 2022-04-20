@@ -8,8 +8,12 @@ import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
 import axios from "axios";
 
 const GenerateQuestion = ({ movies, setSelectedMovie }) => {
-  useEffect(() => {
+  let count = 0;
+  const checkUndefined = () => {
+    console.log("RUNNING checkUndefined ", count);
     let movie = movies ? movies[RandomGenerator(movies.length)] : [];
+    
+    movie.release_date = "";
     axios
       .all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
       .then(
@@ -17,10 +21,53 @@ const GenerateQuestion = ({ movies, setSelectedMovie }) => {
           movie = { ...movie, cast: castRes.data.cast, genre: genreRes };
           let questionObject = movie ? madLibsArray(movie) : {};
           let randomIndex = RandomGenerator(questionObject.length);
-          console.log(questionObject[randomIndex]);
+          const movieQuestion = questionObject[randomIndex].question;
+          console.log("QUESTION 1: ", movieQuestion);
+          const movieAnswer = questionObject[randomIndex].answer;
+          console.log("ANSWER 1: ", movieAnswer);
+          if (count > 2) {
+            console.error("Count equals 3");
+            // add alert in here
+            return;
+          }
+          
+          if (movieQuestion.includes("undefined")) {
+            count++;
+            console.log("QUESTION MISSING DATA");
+            checkUndefined();
+            return;
+          }
+          
+          if(typeof movieAnswer === "object") {
+            let foundUndefined = false;
+            for (let i = 0; i < movieAnswer.length; i++ ){
+              if (movieAnswer[i] === "undefined"); {
+                foundUndefined = true;
+              }
+            }
+
+            if (foundUndefined) {              
+              count++;
+              console.log("ANSWER MISSING DATA");
+              checkUndefined();
+              return;
+            } else {
+              count = 0;
+              setSelectedMovie(questionObject[randomIndex]);
+              return;
+            }
+          }
+
+          count = 0;
           setSelectedMovie(questionObject[randomIndex]);
+          return;
+          
         })
       );
+  }
+
+  useEffect(() => {
+    checkUndefined();
   }, []);
 
   return <View></View>;
