@@ -84,7 +84,7 @@ function Main({ setScene, setMovies }) {
       <View
         style={[
           styles.container,
-          { backgroundColor: width < 500 ? "#100307" : "black" },
+          { backgroundColor: width < 600 ? "#100307" : "black" },
         ]}
       >
         <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -92,7 +92,7 @@ function Main({ setScene, setMovies }) {
             style={[
               styles.backgroundPicture,
               {
-                height: width > 500 ? 600 : width * 1.5,
+                height: width > 600 ? 600 : width * 1.5,
               },
             ]}
             source={require("../Images/theater-sign-generator-trimmed.png")}
@@ -104,16 +104,19 @@ function Main({ setScene, setMovies }) {
                 styles.clapperViews,
                 {
                   opacity: clapperOpenFade,
-                  width: width > 500 ? "85%" : "100%",
+                  width: width > 600 ? "85%" : "100%",
                   maxWidth: width,
-                  alignItems: width < 500 ? "center" : "stretch",
+                  alignItems: Platform.OS !== "web" && width < 600 ? "center" : "stretch",
                 },
               ]}
             >
               <Image
-                style={[styles.introImages,{
-                  maxWidth: width < 500 ? "90%" : width,
-                }]}
+                style={[
+                  styles.introImages,
+                  {
+                    maxWidth: width < 600 ? "90%" : width,
+                  },
+                ]}
                 source={require("../Images/IntroAnimation/clapper2-open.png")}
                 alt="open movie clapper"
                 resizeMode="contain"
@@ -125,19 +128,22 @@ function Main({ setScene, setMovies }) {
                 styles.clapperViews,
                 {
                   opacity: clapperClosedFade.interpolate({
-                    inputRange: [0, 0.001, 500, 1000],
+                    inputRange: [0, 0.0001, 500, 1000],
                     outputRange: [0, 1, 1, 0],
                   }),
-                  width: width > 500 ? "85%" : "100%",
+                  width: width > 600 ? "85%" : "100%",
                   maxWidth: width,
-                  alignItems: width < 500 ? "center" : "stretch",
+                  alignItems: Platform.OS !== "web" && width < 600 ? "center" : "stretch",
                 },
               ]}
             >
               <Image
-                style={[styles.introImages,{
-                  maxWidth: width < 500 ? "90%" : width,
-                }]}
+                style={[
+                  styles.introImages,
+                  {
+                    maxWidth: width < 600 ? "90%" : width,
+                  },
+                ]}
                 source={require("../Images/IntroAnimation/clapper2-closed.png")}
                 alt="closed movie clapper"
                 resizeMode="contain"
@@ -152,17 +158,20 @@ function Main({ setScene, setMovies }) {
                     inputRange: [0, 0.8, 1],
                     outputRange: [1, 1, 0],
                   }),
-                  width: width > 500 ? "85%" : "100%",
+                  width: width > 600 ? "85%" : "100%",
                   maxWidth: width,
-                  alignItems: width < 500 ? "center" : "stretch",
+                  alignItems: Platform.OS !== "web" && width < 600 ? "center" : "stretch",
                   zIndex: 2,
                 },
               ]}
             >
               <Image
-                style={[styles.introImages,{
-                  maxWidth: width < 500 ? "90%" : width,
-                }]}
+                style={[
+                  styles.introImages,
+                  {
+                    maxWidth: width < 600 ? "90%" : width,
+                  },
+                ]}
                 source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
                 alt="closed movie clapper"
                 resizeMode="contain"
@@ -174,8 +183,8 @@ function Main({ setScene, setMovies }) {
           <Animated.View
             style={[
               {
-                marginTop: width < 500 ? 64 : 0,
-                opacity: textFade,
+                marginTop: width < 600 ? 64 : 0,
+                opacity: textFade, 
               },
               styles.titleAndButtonContainer,
             ]}
@@ -191,7 +200,7 @@ function Main({ setScene, setMovies }) {
               Trivia &#38; Chill
             </Text>
             {/*following View is a spacer necessary because of complications on android within an Animated.View */}
-            <View style={{ height: width > 500 ? 300 : width / 1.6 }}></View>
+            <View style={{ height: width > 600 ? 300 : width / 1.6 }}></View>
             <Pressable onPress={() => setScene("Question")}>
               <ImageBackground
                 source={require("../Images/ticket.png")}
@@ -227,8 +236,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
   },
-  introImages:
-  {
+  introImages: {
     aspectRatio: 1280 / 1117,
   },
   fontText: {
