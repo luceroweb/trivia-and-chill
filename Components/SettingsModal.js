@@ -25,6 +25,7 @@ const SettingsModal = ({
             }}
           >
             <View style={styles.modalView}>
+            <Text style={[styles.settingHeader, styles.label]}>Settings</Text>
               <Pressable
                 style={styles.exit}
                 onPress={() => setModalVisible(!modalVisible)}
@@ -119,7 +120,12 @@ const styles = StyleSheet.create({
   exit: {
     alignSelf: "flex-end",
     marginRight: -10,
+    marginTop: -12,
+    marginBottom: 10,
   },
+  settingHeader: {
+    fontSize: 20,
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsModal);
