@@ -24,7 +24,7 @@ function Main({ setScene, setMovies }) {
   const boardWithTextFade = useRef(new Animated.Value(0)).current;
   const [sound, setSound] = useState();
 
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -61,13 +61,11 @@ function Main({ setScene, setMovies }) {
           delay: 1900,
           useNativeDriver: false,
         }),
-        Animated.parallel([
-          Animated.timing(clapperClosedFade, {
-            toValue: 1,
-            duration: 2000,
-            useNativeDriver: false,
-          }),
-        ]),
+        Animated.timing(clapperClosedFade, {
+          toValue: 1000,
+          duration: 2000,
+          useNativeDriver: false,
+        }),
         Animated.timing(textFade, {
           toValue: 1,
           delay: 800,
@@ -83,157 +81,127 @@ function Main({ setScene, setMovies }) {
     return <AppLoading />;
   } else {
     return (
-      <View style={[styles.container]}>
-        <ImageBackground
-          style={{
-            flex: 1,
-            flexDirection: "column",
-            aspectRatio: 700 / 500,
-            maxWidth: width,
-            justifyContent: "center",
-            shadowColor: "#c9195468",
-            shadowOffset: { width: 0, height: 0 },
-            shadowOpacity: 0.9,
-            shadowRadius: 300,
-            marginTop: 30,
-            marginBottom: 30,
-            maxHeight: Platform.OS !== "web" ? 580 : null,
-          }}
-          source={require("../Images/theater-sign-generator-trimmed.png")}
-          // resizeMode={width > 1000 ? "contain" : "cover"}
-          alt="movie theatre with marquee sign with cars parked in front"
-        >
-          {/* Animated View for picture of open clapper with no text */}
-          <Animated.View
-            style={{
-              opacity: clapperOpenFade,
-              position: "absolute",
-              width: width > 500 ? "85%" : "100%",
-              alignSelf: "center",
-              alignItems:
-                Platform.OS !== "web" && width < 500 ? "center" : "stretch",
-            }}
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: width < 500 ? "#100307" : "black" },
+        ]}
+      >
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <ImageBackground
+            style={[
+              styles.backgroundPicture,
+              {
+                height: width > 500 ? 600 : width * 1.5,
+              },
+            ]}
+            source={require("../Images/theater-sign-generator-trimmed.png")}
+            alt="movie theatre with marquee sign with cars parked in front"
           >
-            <Image
-              style={{
-                aspectRatio: 1280 / 1117,
-                maxWidth: Platform.OS !== "web" ? "90%" : width,
-              }}
-              source={require("../Images/IntroAnimation/clapper2-open.png")}
-              alt="open movie clapper"
-              resizeMode="contain"
-            />
-          </Animated.View>
-          {/* Animated View for clapper image with arm closed with no text */}
-          <Animated.View
-            style={{
-              opacity: clapperClosedFade.interpolate({
-                inputRange: [0, 0.0000000000000000001, 0.5, 1],
-                outputRange: [0, 1, 1, 0],
-              }),
-              position: "absolute",
-              width: width > 500 ? "85%" : "100%",
-              maxWidth: width,
-              alignSelf: "center",
-              alignItems:
-                Platform.OS !== "web" && width < 500 ? "center" : "stretch",
-            }}
-          >
-            <Image
-              style={{
-                aspectRatio: 1280 / 1117,
-                maxWidth: Platform.OS !== "web" ? "90%" : width,
-              }}
-              source={require("../Images/IntroAnimation/clapper2-closed.png")}
-              alt="closed movie clapper"
-              resizeMode="contain"
-            />
-          </Animated.View>
-          {/* Animated View for clapper board with actual text in foreground */}
-          <Animated.View
-            style={{
-              opacity: boardWithTextFade.interpolate({
-                inputRange: [0, 0.8, 1],
-                outputRange: [1, 1, 0],
-              }),
-              position: "absolute",
-              width: width > 500 ? "85%" : "100%",
-              maxWidth: width,
-              alignSelf: "center",
-              alignItems:
-                Platform.OS !== "web" && width < 500 ? "center" : "stretch",
-            }}
-          >
-            <Image
-              style={{
-                aspectRatio: 1280 / 1117,
-                maxWidth: Platform.OS !== "web" ? "90%" : width,
-              }}
-              source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
-              alt="closed movie clapper"
-              resizeMode="contain"
-            />
-          </Animated.View>
-          {/* Animated View for the fading in title and start button */}
-          <Animated.View style={{ opacity: textFade }}>
-            <View
+            {/* Animated View for picture of open clapper with no text */}
+            <Animated.View
               style={[
-                styles.titleContainer,
-                { marginTop: Platform.OS !== "web" && width < 750 ? 64 : 0 },
+                styles.clapperViews,
+                {
+                  opacity: clapperOpenFade,
+                  width: width > 500 ? "85%" : "100%",
+                  maxWidth: width,
+                  alignItems: width < 500 ? "center" : "stretch",
+                },
               ]}
             >
-              <Text
-                style={[
-                  styles.fontText,
-                  {
-                    fontSize:
-                      height > 700
-                        ? width > 900
-                          ? 120
-                          : (100 * width) / 800
-                        : (100 * height) / 900,
-                  },
-                ]}
+              <Image
+                style={[styles.introImages,{
+                  maxWidth: width < 500 ? "90%" : width,
+                }]}
+                source={require("../Images/IntroAnimation/clapper2-open.png")}
+                alt="open movie clapper"
+                resizeMode="contain"
+              />
+            </Animated.View>
+            {/* Animated View for clapper image with arm closed with no text */}
+            <Animated.View
+              style={[
+                styles.clapperViews,
+                {
+                  opacity: clapperClosedFade.interpolate({
+                    inputRange: [0, 0.001, 500, 1000],
+                    outputRange: [0, 1, 1, 0],
+                  }),
+                  width: width > 500 ? "85%" : "100%",
+                  maxWidth: width,
+                  alignItems: width < 500 ? "center" : "stretch",
+                },
+              ]}
+            >
+              <Image
+                style={[styles.introImages,{
+                  maxWidth: width < 500 ? "90%" : width,
+                }]}
+                source={require("../Images/IntroAnimation/clapper2-closed.png")}
+                alt="closed movie clapper"
+                resizeMode="contain"
+              />
+            </Animated.View>
+            {/* Animated View for clapper board with actual text in foreground */}
+            <Animated.View
+              style={[
+                styles.clapperViews,
+                {
+                  opacity: boardWithTextFade.interpolate({
+                    inputRange: [0, 0.8, 1],
+                    outputRange: [1, 1, 0],
+                  }),
+                  width: width > 500 ? "85%" : "100%",
+                  maxWidth: width,
+                  alignItems: width < 500 ? "center" : "stretch",
+                  zIndex: 2,
+                },
+              ]}
+            >
+              <Image
+                style={[styles.introImages,{
+                  maxWidth: width < 500 ? "90%" : width,
+                }]}
+                source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
+                alt="closed movie clapper"
+                resizeMode="contain"
+              />
+            </Animated.View>
+          </ImageBackground>
+
+          {/* Animated View for the fading in title and start button */}
+          <Animated.View
+            style={[
+              {
+                marginTop: width < 500 ? 64 : 0,
+                opacity: textFade,
+              },
+              styles.titleAndButtonContainer,
+            ]}
+          >
+            <Text
+              style={[
+                styles.fontText,
+                {
+                  fontSize: width > 900 ? 110 : (100 * width) / 800,
+                },
+              ]}
+            >
+              Trivia &#38; Chill
+            </Text>
+            {/*following View is a spacer necessary because of complications on android within an Animated.View */}
+            <View style={{ height: width > 500 ? 300 : width / 1.6 }}></View>
+            <Pressable onPress={() => setScene("Question")}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={styles.ticket}
               >
-                Trivia &#38; Chill
-              </Text>
-              <View
-                style={[
-                  styles.buttonContainer,
-                  {
-                    // I think it's okay without this line, but not positive.  It is causing some issues: paddingTop: width < 750 && Platform.OS === "web" ? 150 : 0,
-                  },
-                ]}
-              >
-                <ImageBackground
-                  source={require("../Images/ticket.png")}
-                  style={{
-                    width: 160,
-                    height: 80,
-                    alignSelf: "center",
-                    marginBottom: 30,
-                  }}
-                >
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Pressable onPress={() => setScene("Question")}>
-                      <Text>Start</Text>
-                    </Pressable>
-                  </View>
-                </ImageBackground>
-              </View>
-            </View>
+                <Text style={styles.buttonText}>Start</Text>
+              </ImageBackground>
+            </Pressable>
           </Animated.View>
-        </ImageBackground>
+        </View>
       </View>
     );
   }
@@ -243,39 +211,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor:  Platform.OS !== "web"? "#100307" : 'black',
     justifyContent: "center",
   },
-  start: {
-    borderRadius: 5,
-    backgroundColor: "white",
-    padding: 10,
-    marginBottom: 10,
+  backgroundPicture: {
+    flexDirection: "column",
+    aspectRatio: 672 / 500,
+    justifyContent: "center",
+    shadowColor: "#c9195468",
+    shadowOpacity: 0.9,
+    shadowRadius: 300,
+    marginTop: 30,
+    marginBottom: 30,
   },
-  text: {
-    position: "relative",
-    top: -78,
-    marginLeft: 42,
-    fontSize: 24,
+  clapperViews: {
+    position: "absolute",
+    alignSelf: "center",
+  },
+  introImages:
+  {
+    aspectRatio: 1280 / 1117,
   },
   fontText: {
     fontFamily: "Limelight_400Regular",
     textAlign: "center",
     color: "#F2D379",
-    fontSize: Platform.OS === "web" ? 100 : 50,
-  },
-  titleContainer: {
-    justifyContent: "center",
-    textAlign: "center",
-    backgroundColor: "transparent",
-    width: "100%",
-    marginTop: Platform.OS === "web" ? 50 : 80,
-  },
-  buttonContainer: {
-    flex: 1,
-    justifyContent: "center",
-    textAlign: "center",
-    marginTop: Platform.OS === "web" ? 280 : 390,
   },
   background: {
     position: "absolute",
@@ -283,6 +242,19 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: "100%",
+  },
+  titleAndButtonContainer: {
+    position: "absolute",
+  },
+  ticket: {
+    marginTop: 10,
+    flex: 1,
+    marginBottom: 10,
+    width: 200,
+    aspectRatio: 18 / 9,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
