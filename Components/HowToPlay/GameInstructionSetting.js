@@ -5,6 +5,7 @@ import {
 	Platform,
 } from "react-native";
 import gameSettingsAnimation from "../../Images/gameSettingsAnimation.gif";
+import gameSettingsAnimationMobile from "../../Images/gameSettingAnimationMobile.gif";
 
 
 export default function GameInstructionSetting() {
@@ -14,12 +15,14 @@ return (
 		<ImageBackground
 			resizeMode={"cover"}
 			source={
-				gameSettingsAnimation 
+				Platform.OS === "web"
+					? gameSettingsAnimation
+					: gameSettingsAnimationMobile
 			}
 			style={{
 				width: "100%",
 				height: "100%",
-				aspectRatio: Platform.OS === "web" ? 960 / 540 : 960 / 540,
+				aspectRatio: Platform.OS === "web" ? 960 / 540 : 360 / 750,
 			}}
 		></ImageBackground>
 	</View>

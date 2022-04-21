@@ -1,25 +1,15 @@
-import { useEffect } from "react";
+
 import { connect } from "react-redux";
 import { Modal, StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
-import { getGenre } from "../Utils/FetchApi";
 const SettingsModal = ({
   scene,
   gamePlayMode,
   setGamePlayMode,
   modalVisible,
   setModalVisible,
-  setGenre,
-  genreTypes,
-  genre,
-  setGenreTypes,
 }) => {
-  useEffect(() => {
-    getGenre().then((genreTypes) => {
-      setGenreTypes(genreTypes.data.genres);
-    });
-  }, []);
   return (
     <View>
       {scene === "Question" || scene === "CorrectAnswer" ? (
@@ -35,6 +25,7 @@ const SettingsModal = ({
             }}
           >
             <View style={styles.modalView}>
+            <Text style={[styles.settingHeader, styles.label]}>Settings</Text>
               <Pressable
                 style={styles.exit}
                 onPress={() => setModalVisible(!modalVisible)}
@@ -61,30 +52,6 @@ const SettingsModal = ({
                   value="easySinglePlayer"
                 />
               </Picker>
-
-              {/* Genre Picker */}
-              <Text style={styles.label}>Select a Genre</Text>
-              <Picker
-                style={styles.input}
-                selectedValue={genre == null ? "" : genre.id}
-                onValueChange={(newGenreId) => {
-                  const foundGenre = genreTypes.find(
-                    (genre) => genre.id == newGenreId
-                  );
-                  setGenre(foundGenre ? foundGenre : null);
-                }}
-              >
-                <Picker.Item label="All Genres" value="" />
-                {genreTypes.map((genre, key) => {
-                  return (
-                    <Picker.Item
-                      label={genre.name}
-                      value={genre.id}
-                      key={key}
-                    />
-                  );
-                })}
-              </Picker>
             </View>
           </Modal>
           <Pressable onPress={() => setModalVisible(true)}>
@@ -101,8 +68,6 @@ function mapStateToProps(state) {
     scene: state.scene,
     gamePlayMode: state.gamePlayMode,
     modalVisible: state.modalVisible,
-    genreTypes: state.genreTypes,
-    genre: state.genre,
   };
 }
 // this is how the picker tells redux that the user has selected a new player mode
@@ -120,18 +85,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_MODAL_VISIBLE",
         modalVisible: visible,
-      });
-    },
-    setGenre: (genre) => {
-      dispatch({
-        type: "SET_GENRE",
-        genre: genre,
-      });
-    },
-    setGenreTypes: (genreTypes) => {
-      dispatch({
-        type: "SET_GENRE_TYPES",
-        genreTypes: genreTypes,
       });
     },
   };
@@ -167,7 +120,12 @@ const styles = StyleSheet.create({
   exit: {
     alignSelf: "flex-end",
     marginRight: -10,
+    marginTop: -12,
+    marginBottom: 10,
   },
+  settingHeader: {
+    fontSize: 20,
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsModal);
