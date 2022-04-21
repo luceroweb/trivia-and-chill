@@ -1,16 +1,21 @@
 import axios from "axios";
 
 export default async function FetchApi() {
-  let movies = [];
-
-  await axios
+  let moviesResponse = await axios.all([...Array(10)].map((item, index) =>{
+    return axios
     .get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US"
+      `https://api.themoviedb.org/3/movie/popular?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US&page=${index + 1}`
     )
-    .then((res) => (movies = res.data.results))
+    .then((res) => (moviesResponse = res.data.results))
     .catch((err) => console.log(err.response.data));
 
-  return movies;
+  }));
+  let moviesList = []
+  moviesResponse.forEach((movieList) => {
+    moviesList = moviesList.concat(movieList)
+  });
+
+  return moviesList;
 }
 
 export async function getPerformerName(movieId) {
