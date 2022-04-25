@@ -10,7 +10,7 @@ import TrueFalse from "../Components/TrueFalse";
 import MultipleChoice from "../Components/MultipleChoice";
 import Badge from "../Components/Badge";
 import Lives from "../Components/Lives";
-import DriveInMovie from "../Layout/DriveInMovie";
+import Theater from "../Layout/Theater";
 
 function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
   useEffect(() => {
@@ -29,11 +29,24 @@ function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
     return <GenerateQuestion movies={movies} />;
   } else {
     return (
-      <DriveInMovie
-        screen={
+      <Theater
+        indicators={
+          <>
+            {gamePlayMode === "easySinglePlayer" && (
+              <View>
+                <Lives />
+              </View>
+            )}
+            {gamePlayMode !== "easySinglePlayer" && <Timer />}
+            <View>
+              <Badge />
+            </View>
+          </>
+        }
+        content={
           <View style={{ width: "100%" }}>
             <View style={styles.questionHeader}>
-              {gamePlayMode !== "easySinglePlayer" && <Timer />}
+              
               <Text style={styles.heading}>Question</Text>
             </View>
             <Text style={styles.questionText}>
@@ -41,19 +54,7 @@ function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
             </Text>
           </View>
         }
-        indicators={
-          <>
-            {gamePlayMode === "easySinglePlayer" && (
-              <View style={styles.lives}>
-                <Lives />
-              </View>
-            )}
-            <View style={styles.badge}>
-              <Badge />
-            </View>
-          </>
-        }
-        answers={
+        buttons={
           Array.isArray(selectedMovie?.answer) ? (
             <MultipleChoice />
           ) : (

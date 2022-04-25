@@ -106,7 +106,7 @@ function Main({ setScene, setMovies }) {
                   opacity: clapperOpenFade,
                   width: width > 600 ? "85%" : "100%",
                   maxWidth: width,
-                  alignItems: Platform.OS !== "web" && width < 600 ? "center" : "stretch",
+                  alignItems: width < 600 ? "center" : "stretch",
                 },
               ]}
             >
@@ -114,7 +114,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: width < 600 ? "90%" : width,
+                    maxWidth: width < 600 && "90%",
+                    width: width < 600 ? "90%" : 672,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-open.png")}
@@ -133,7 +134,7 @@ function Main({ setScene, setMovies }) {
                   }),
                   width: width > 600 ? "85%" : "100%",
                   maxWidth: width,
-                  alignItems: Platform.OS !== "web" && width < 600 ? "center" : "stretch",
+                  alignItems: width < 600 ? "center" : "stretch",
                 },
               ]}
             >
@@ -141,7 +142,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: width < 600 ? "90%" : width,
+                    maxWidth: width < 600 && "90%",
+                    width: width < 600 ? "90%" : 672,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-closed.png")}
@@ -160,7 +162,7 @@ function Main({ setScene, setMovies }) {
                   }),
                   width: width > 600 ? "85%" : "100%",
                   maxWidth: width,
-                  alignItems: Platform.OS !== "web" && width < 600 ? "center" : "stretch",
+                  alignItems: width < 600 ? "center" : "stretch",
                   zIndex: 2,
                 },
               ]}
@@ -169,7 +171,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: width < 600 ? "90%" : width,
+                    maxWidth: width < 600 && "90%",
+                    width: width < 600 ? "90%" : 672,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
@@ -184,7 +187,7 @@ function Main({ setScene, setMovies }) {
             style={[
               {
                 marginTop: width < 600 ? 64 : 0,
-                opacity: textFade, 
+                opacity: textFade,
               },
               styles.titleAndButtonContainer,
             ]}

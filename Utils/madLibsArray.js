@@ -74,14 +74,18 @@ export default function madLibsArray(movies) {
       // },
       {
         question: `${randomCast1.name} starred in ${movies.title}.`, //get credits endpoint for performer name
-        answer: randomCast1.known_for_department === "Acting" ? true : false,
+        answer: randomCast1.known_for_department === "Acting"
+          ? true
+          : false,
         movieId: `${movies.id}`,
-      },
+      },     
       {
         question: `${movies.title}'s cast included ${randomCast1.name} .`, //get credits endpoint for performer name
-        answer: randomCast1.known_for_department === "Acting" ? true : false,
+        answer: randomCast1.known_for_department === "Acting"
+          ? true
+          : false,
         movieId: `${movies.id}`,
-      },
+      },     
       {
         question: `September 2, 1996 was the release date of Scream.`,
         answer: false,
@@ -146,7 +150,7 @@ export default function madLibsArray(movies) {
           `${new generateRandomDate().toLocaleDateString("en-US")}`,
         ],
         movieId: `${movies.id}`,
-      },
+      },      
       {
         question: `What was the release date of ${movies.title}?`, //movie details
         answer: [
@@ -225,7 +229,7 @@ export default function madLibsArray(movies) {
         question: `Ashton Kutcher starred in Grown Ups`,
         answer: false,
         movieId: 38365,
-      },
+      },      
     ]
   );
 }

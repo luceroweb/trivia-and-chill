@@ -79,13 +79,9 @@ function mapDispatchToProps(dispatch) {
 const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: "#A0947C",
-    // borderWidth: 3,
-    // borderColor: "#A0947C",
-    // marginBottom: 30,
     marginTop: 10,
-    maxWidth: "90%",
+    width: "90%",
     alignSelf: "center",
-    // width: "80%",
     padding: 5,
     borderRadius: 8,
   },

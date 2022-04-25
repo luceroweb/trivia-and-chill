@@ -5,7 +5,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import Badge from "../Components/Badge";
-import DriveInMovie from "../Layout/DriveInMovie";
+import Theater from "../Layout/Theater";
 import Lives from "../Components/Lives";
 
 const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMode }) => {
@@ -22,8 +22,8 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMo
     return <AppLoading />;
   } else {
     return (
-      <DriveInMovie
-        screen={<Trailer movieId={selectedMovie?.movieId} />}
+      <Theater
+        content={<Trailer movieId={selectedMovie?.movieId} />}
         indicators={
           <>
           { gamePlayMode === 'easySinglePlayer' &&
@@ -33,7 +33,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMo
             <Badge />
           </>
         }
-        answers={
+        buttons={
           <Pressable style={[styles.button]} onPress={handleNextQuestion}>
             <ImageBackground style={styles.ticketButton} source={ticket}>
               <Text style={styles.ticketText}>Next Question!</Text>
