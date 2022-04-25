@@ -5,6 +5,8 @@ import {
   Text,
   View,
   ImageBackground,
+  useWindowDimensions,
+  Platform,
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
@@ -24,6 +26,7 @@ const MultipleChoice = ({
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [runRandom, setRunRandom] = useState(true);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const { width } = useWindowDimensions();
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
@@ -91,7 +94,7 @@ const MultipleChoice = ({
   };
 
   return (
-    <View>
+    <View style={[styles.container, { flexDirection: width > 500 ? "row" : "column" }]}>
       {multipleAnswer.map((item, index) => (
         <ImageBackground
           source={require("../Images/ticket2.png")}
@@ -145,6 +148,14 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(MultipleChoice);
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    margin: Platform.OS === "android" ? 1 : 4,
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
+  },
   ticket: {
     justifyContent: "center",
     alignItems: "center",
