@@ -14,8 +14,9 @@ import Badge from "../Components/Badge";
 import DriveInMovie from "../Layout/DriveInMovie";
 import Theater from "../Layout/Theater";
 
-const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
+const WrongAnswer = ({ setScene, resetSelectedMovie, lives, resetWinningStreak }) => {
   const handleNextQuestion = () => {
+    resetWinningStreak();
     setScene("Question");
     resetSelectedMovie();
   };
@@ -81,6 +82,10 @@ function mapDispatchToProps(dispatch) {
     resetSelectedMovie: () =>
       dispatch({
         type: "RESET_SELECTED_MOVIE",
+      }),
+    resetWinningStreak: () =>
+      dispatch({
+        type: "RESET_WINNING_STREAK",
       }),
   };
 }

@@ -20,7 +20,6 @@ const TrueFalse = ({
   gamePlayMode,
   decreaseLives,
   resetLives,
-  resetWinningStreak
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [hasAnswered, setHasAnswered] = useState(false);
@@ -43,7 +42,6 @@ const TrueFalse = ({
       setTimeout(() => {
         decreaseLives();
         setScene("WrongAnswer");
-        resetWinningStreak();
       }, 1000);
     } else {
       setTimeout(() => {
@@ -226,10 +224,6 @@ function mapDispatchToProps(dispatch) {
     resetLives: () =>
       dispatch({
         type: "RESET_LIVES",
-      }),
-    resetWinningStreak: () =>
-      dispatch({
-        type: "RESET_WINNING_STREAK",
       }),
   };
 }
