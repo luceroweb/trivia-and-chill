@@ -12,6 +12,7 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import Badge from "../Components/Badge";
 import DriveInMovie from "../Layout/DriveInMovie";
+import Theater from "../Layout/Theater";
 
 const WrongAnswer = ({ setScene, resetSelectedMovie, lives }) => {
   const handleNextQuestion = () => {
@@ -30,8 +31,8 @@ Try again!`;
     return <AppLoading />;
   } else {
     return (
-      <DriveInMovie
-        screen={
+      <Theater
+        content={
           <>
             <Text style={styles.h2}>Incorrect Answer!</Text>
             <Text style={styles.livesText}>{ohno}</Text>
@@ -39,7 +40,7 @@ Try again!`;
         }
         indicators={
           <>
-            <View style={{ minWidth: 35 }}>
+            <View>
               <Lives />
             </View>
             <View>
@@ -47,7 +48,7 @@ Try again!`;
             </View>
           </>
         }
-        answers={
+        buttons={
           <Pressable
             style={[styles.button]}
             onPress={handleNextQuestion}
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
   h2: {
     fontSize: 28,
     fontFamily: "Limelight_400Regular",
-    color: "#F2D379",
+    color: "#292840",
     alignSelf: "center",
   },
   ticketButton: {
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   livesText: {
     marginTop: 10,
-    color: "#ffffff",
+    color: "#292840",
     fontSize: 18,
     lineHeight: 28,
     fontWeight: "bold",
