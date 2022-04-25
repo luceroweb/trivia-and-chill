@@ -87,12 +87,12 @@ function mapDispatchToProps(dispatch) {
 
 const styles = StyleSheet.create({
   heading: {
-    color: "#F2D379",
+    color: "#292840",
     fontFamily: "Limelight_400Regular",
     fontSize: 30,
   },
   questionText: {
-    color: "#F2D379",
+    color: "#292840",
     alignSelf: "center",
   },
   badge: {
