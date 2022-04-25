@@ -6,10 +6,12 @@ import {
   View,
   ImageBackground,
   Platform,
+  useWindowDimensions
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
+
 const TrueFalse = ({
   selectedMovie,
   setScene,
@@ -22,6 +24,8 @@ const TrueFalse = ({
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [hasAnswered, setHasAnswered]=useState(false)
   const answer = selectedMovie?.answer;
+  const { width } = useWindowDimensions();
+
   const isCorrect = (selection) => {
     if(hasAnswered){
       return;
@@ -157,7 +161,7 @@ const TrueFalse = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { flexDirection: width > 500 ? "row" : "column" }]}>
       <View style={styles.true}>
         <ImageBackground
           source={require("../Images/ticket2.png")}
@@ -227,14 +231,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     margin: Platform.OS === "android" ? 1 : 4,
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
+    width: "100%",
   },
   true: {
-    marginTop: Platform.OS === "ios" ? 20 : 0,
+    marginBottom: 5
   },
   false: {
-    marginTop: Platform.OS === "ios" ? 80 : 20,
+    marginBottom: 5
   },
   ticket: {
     justifyContent: "center",
