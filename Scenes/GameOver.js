@@ -168,7 +168,6 @@ function mapDispatchToProps(dispatch) {
 const styles = StyleSheet.create({
   gameOverStyle: {
     fontSize: 28,
-    marginBottom: Platform.OS !== "web" ? 20 : 70,
     textAlign: "center",
     fontFamily: "Limelight_400Regular",
     color: "#292840",
