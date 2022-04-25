@@ -6,7 +6,7 @@ import {
   View,
   ImageBackground,
   Platform,
-  useWindowDimensions
+  useWindowDimensions,
 } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
@@ -22,19 +22,18 @@ const TrueFalse = ({
   resetLives,
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
-  const [hasAnswered, setHasAnswered]=useState(false)
+  const [hasAnswered, setHasAnswered] = useState(false);
   const answer = selectedMovie?.answer;
   const { width } = useWindowDimensions();
 
   const isCorrect = (selection) => {
-    if(hasAnswered){
+    if (hasAnswered) {
       return;
     }
     setHasAnswered(true);
     setSelectedAnswer(selection);
-    
+
     if (selection === answer) {
-    
       setTimeout(() => {
         increaseWinningStreak();
         setScene("CorrectAnswer");
@@ -161,7 +160,12 @@ const TrueFalse = ({
   };
 
   return (
-    <View style={[styles.container, { flexDirection: width > 500 ? "row" : "column" }]}>
+    <View
+      style={[
+        styles.container,
+        { flexDirection: width > 500 ? "row" : "column" },
+      ]}
+    >
       <View style={styles.true}>
         <ImageBackground
           source={require("../Images/ticket2.png")}
@@ -236,10 +240,10 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   true: {
-    marginBottom: 5
+    marginBottom: 5,
   },
   false: {
-    marginBottom: 5
+    marginBottom: 5,
   },
   ticket: {
     justifyContent: "center",

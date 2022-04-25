@@ -94,7 +94,12 @@ const MultipleChoice = ({
   };
 
   return (
-    <View style={[styles.container, { flexDirection: width > 500 ? "row" : "column" }]}>
+    <View
+      style={[
+        styles.container,
+        { flexDirection: width > 500 ? "row" : "column" },
+      ]}
+    >
       {multipleAnswer.map((item, index) => (
         <ImageBackground
           source={require("../Images/ticket2.png")}
