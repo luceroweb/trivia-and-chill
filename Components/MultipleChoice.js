@@ -20,6 +20,7 @@ const MultipleChoice = ({
   gamePlayMode,
   decreaseLives,
   resetLives,
+  resetWinningStreak,
 }) => {
   const [multipleAnswer, setMultipleAnswer] = useState(selectedMovie?.answer);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -64,6 +65,7 @@ const MultipleChoice = ({
       setTimeout(() => {
         decreaseLives();
         setScene("WrongAnswer");
+        resetWinningStreak();
       }, 1000);
     } else {
       setTimeout(() => {
@@ -94,7 +96,12 @@ const MultipleChoice = ({
   };
 
   return (
-    <View style={[styles.container, { flexDirection: width > 500 ? "row" : "column" }]}>
+    <View
+      style={[
+        styles.container,
+        { flexDirection: width > 500 ? "row" : "column" },
+      ]}
+    >
       {multipleAnswer.map((item, index) => (
         <ImageBackground
           source={require("../Images/ticket2.png")}
@@ -141,6 +148,10 @@ function mapDispatchToProps(dispatch) {
     resetLives: () =>
       dispatch({
         type: "RESET_LIVES",
+      }),
+    resetWinningStreak: () =>
+      dispatch({
+        type: "RESET_WINNING_STREAK",
       }),
   };
 }
