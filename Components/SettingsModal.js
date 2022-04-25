@@ -1,11 +1,15 @@
-import { useState } from "react";
+
 import { connect } from "react-redux";
 import { Modal, StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
-
-const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode, modalVisible, setModalVisible }) => {
-
+const SettingsModal = ({
+  scene,
+  gamePlayMode,
+  setGamePlayMode,
+  modalVisible,
+  setModalVisible,
+}) => {
   return (
     <View>
       {scene === "Question" || scene === "CorrectAnswer" ? (
@@ -21,6 +25,7 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode, modalVisible, set
             }}
           >
             <View style={styles.modalView}>
+            <Text style={[styles.settingHeader, styles.label]}>Settings</Text>
               <Pressable
                 style={styles.exit}
                 onPress={() => setModalVisible(!modalVisible)}
@@ -32,17 +37,20 @@ const SettingsModal = ({ scene, gamePlayMode, setGamePlayMode, modalVisible, set
                   color="black"
                 />
               </Pressable>
-              <Text>Select a Game Play Mode</Text>
+              {/* GameMode Picker */}
+              <Text style={styles.label}>Select a Game Play Mode</Text>
               <Picker
-                style={{width: 200}}
+                style={styles.input}
                 selectedValue={gamePlayMode}
                 onValueChange={(newMode, itemIndex) => {
-                
-                  setGamePlayMode(newMode)
+                  setGamePlayMode(newMode);
                 }}
               >
                 <Picker.Item label="Single Player" value="singlePlayer" />
-                <Picker.Item label="Easy Single Player" value="easySinglePlayer" />
+                <Picker.Item
+                  label="Easy Single Player"
+                  value="easySinglePlayer"
+                />
               </Picker>
             </View>
           </Modal>
@@ -69,17 +77,17 @@ function mapDispatchToProps(dispatch) {
     setGamePlayMode: (mode) => {
       dispatch({
         // type or action or action type, payload
-        type: 'SET_GAME_PLAY_MODE',
-        gamePlayMode: mode
-      })
+        type: "SET_GAME_PLAY_MODE",
+        gamePlayMode: mode,
+      });
     },
     setModalVisible: (visible) => {
       dispatch({
-        type: 'SET_MODAL_VISIBLE',
-        modalVisible: visible
-      })
-    }
-  }
+        type: "SET_MODAL_VISIBLE",
+        modalVisible: visible,
+      });
+    },
+  };
 }
 
 const styles = StyleSheet.create({
@@ -87,7 +95,10 @@ const styles = StyleSheet.create({
     margin: 50,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 12,
+    paddingTop: 5,
+    paddingRight: 25,
+    paddingBottom: 25,
+    paddingLeft: 25,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -97,19 +108,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    alignSelf: "center",
   },
-  textStyle: {
-    color: "white",
+  label: {
     fontWeight: "bold",
-    textAlign: "center",
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+  input: {
+    width: 200,
+    marginBottom: 10,
   },
   exit: {
     alignSelf: "flex-end",
+    marginRight: -10,
+    marginTop: -12,
+    marginBottom: 10,
   },
+  settingHeader: {
+    fontSize: 20,
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsModal);

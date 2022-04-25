@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "guess-the-movie",
-    "slug": "guess-the-movie",
+    "name": "trivia-and-chill",
+    "slug": "trivia-and-chill",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

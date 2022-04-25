@@ -1,25 +1,14 @@
-import {
-  ScrollView,
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  ImageBackground,
-} from "react-native";
-// import ConfettiCannon from "react-native-confetti-cannon";
+import { Text, Pressable, StyleSheet, ImageBackground } from "react-native";
 import { connect } from "react-redux";
 import Trailer from "../Components/Trailer";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
-import drivein from "../Images/drive-in-movie.jpg";
-import driveinMobile from '../Images/drive-in-movie-mobile.jpg';
-import driveinMobileMini from '../Images/drive-in-movie-mobile-mini.jpg';
 import Badge from "../Components/Badge";
+import DriveInMovie from "../Layout/DriveInMovie";
+import Lives from "../Components/Lives";
 
-const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
-  const { width: currentWidth, height: currentHeight } = useWindowDimensions();
+const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMode }) => {
   const handleNextQuestion = () => {
     setScene("Question");
     resetSelectedMovie();
@@ -29,79 +18,37 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
     Limelight_400Regular,
   });
 
-  let backgroundImage;
-  let contentViewStyle;
-  let videoWidth;
-  
-  if (currentWidth > 860) {
-    backgroundImage = drivein;
-    contentViewStyle = styles.wrap;
-    videoWidth = "50%";
-  } else if (currentWidth > 580) {
-    backgroundImage = driveinMobile;
-    contentViewStyle = styles.wrapMobile;
-    videoWidth = "75%";
-  } else if (currentWidth > 430) {
-    backgroundImage = driveinMobileMini;
-    contentViewStyle = styles.wrapMini;
-    videoWidth = "75%";
-  } else {
-    backgroundImage = driveinMobileMini;
-    contentViewStyle = styles.wrapSuperMini;
-    videoWidth = "75%";
-  }
-
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
-      <View style={{ flex: 1 }}>
-        <ImageBackground
-          style={styles.drivein}
-          source={backgroundImage}
-          resizeMode="cover"
-        >
-          {/* <ConfettiCannon
-            count={100}
-            origin={{ x: -10, y: 0 }}
-            fadeOut={true}
-          /> */}
-          <View
-            style={[styles.scrollViewContent, contentViewStyle]}
-          >
-            <View style={{ alignItems: 'center', flex: 1 }}>
-              <View
-                style={[
-                  styles.videoContainer,
-                  { width: videoWidth },
-                ]}
-              >
-                <Trailer movieId={selectedMovie?.movieId} />
-              </View>
-            </View>
-
-            <View style={styles.textContainer}>
-              <Text style={styles.h2}>
-                Correct! <Badge />
-              </Text>              
-            </View>
-
-            <Pressable style={[styles.button]} onPress={handleNextQuestion}>
-              <ImageBackground style={styles.ticketButton} source={ticket}>
-                <Text style={styles.ticketText}>Next Question!</Text>
-              </ImageBackground>
-            </Pressable>
-          </View>
-        </ImageBackground>
-      </View>
+      <DriveInMovie
+        screen={<Trailer movieId={selectedMovie?.movieId} />}
+        indicators={
+          <>
+          { gamePlayMode === 'easySinglePlayer' &&
+            <Lives/>
+          }
+            <Text style={styles.h2}>Correct!</Text>
+            <Badge />
+          </>
+        }
+        answers={
+          <Pressable style={[styles.button]} onPress={handleNextQuestion}>
+            <ImageBackground style={styles.ticketButton} source={ticket}>
+              <Text style={styles.ticketText}>Next Question!</Text>
+            </ImageBackground>
+          </Pressable>
+        }
+      />
     );
   }
 };
 
 function mapStateToProps(state) {
   return {
-    scene: state.scene,
     selectedMovie: state.selectedMovie,
+    gamePlayMode: state.gamePlayMode
   };
 }
 
@@ -120,34 +67,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
-    // marginTop: 10,
-  },
-  wrapMobile: {
-    marginTop: "10%",
-  },
-  wrapMini: {
-    marginTop: "25%",
-  },
-  wrapSuperMini: {
-    marginTop: 115,
-  },
-  borderStyleDebug: {
-    borderWidth: 2,
-    borderColor: "#000",
-  },
-  scrollViewContent: {
-    flex: 1,
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
-  videoContainer: {
-    justifyContent: "center",    
-    backgroundColor: "transparent",
-    minWidth: 375, // 320px is iPhone 5/SE size
-    width: '50%',
-    height: '100%'
-  },
   button: {
     flexShrink: 1,
     alignSelf: "center",
@@ -157,20 +76,11 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     marginTop: 50,
   },
-  textContainer: {
-    alignSelf: 'center',
-    alignItems: "center",
-    borderRadius: 10,
-    width: '80%',
-    maxWidth: 400,
-    marginTop: 50,
-  },
   h2: {
-    fontSize: 36,
-    // fontWeight: "bold",
+    fontSize: 28,
     marginVertical: 10,
     fontFamily: "Limelight_400Regular",
-    color: "#F2D379",    
+    color: "#F2D379",
   },
   ticketButton: {
     maxWidth: "100%",
@@ -183,10 +93,6 @@ const styles = StyleSheet.create({
     fontFamily: "Limelight_400Regular",
     position: "absolute",
     alignSelf: "center",
-  },
-  drivein: {
-    justifyContent: "center",
-    height: "100%",
   },
 });
 

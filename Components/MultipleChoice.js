@@ -14,7 +14,6 @@ const MultipleChoice = ({
   selectedMovie,
   setScene,
   increaseWinningStreak,
-  resetWinningStreak,
   lives,
   gamePlayMode,
   decreaseLives,
@@ -24,7 +23,7 @@ const MultipleChoice = ({
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [selectedAnswer, setSelectedAnswer] = useState();
   const [runRandom, setRunRandom] = useState(true);
-  const [hasAnswered, setHasAnswered]=useState(false)
+  const [hasAnswered, setHasAnswered] = useState(false);
 
   const randomizeAnswer = (array) => {
     let currentIndex = array.length;
@@ -47,7 +46,7 @@ const MultipleChoice = ({
   }, [multipleAnswer]);
 
   const isCorrect = (selection) => {
-    if(hasAnswered){
+    if (hasAnswered) {
       return;
     }
     setHasAnswered(true);
@@ -60,13 +59,11 @@ const MultipleChoice = ({
       }, 1000);
     } else if (gamePlayMode === "easySinglePlayer" && lives > 1) {
       setTimeout(() => {
-        resetWinningStreak();
         decreaseLives();
         setScene("WrongAnswer");
       }, 1000);
     } else {
       setTimeout(() => {
-        resetWinningStreak();
         resetLives();
         setScene("GameOver");
       }, 1000);
@@ -90,16 +87,6 @@ const MultipleChoice = ({
       return styles.colorT;
     } else {
       return styles.colorF;
-    }
-  };
-
-  const getTextDecoration = (selection) => {
-    if (typeof selectedAnswer === "undefined") {
-      return "none";
-    } else if (selection === correctAnswer) {
-      return "none";
-    } else {
-      return "line-through";
     }
   };
 
@@ -144,10 +131,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "INCREASE_WINNING_STREAK",
       }),
-    resetWinningStreak: () =>
-      dispatch({
-        type: "RESET_WINNING_STREAK",
-      }),
     decreaseLives: () =>
       dispatch({
         type: "DECREASE_LIVES",
@@ -162,13 +145,7 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(MultipleChoice);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    paddingHorizontal: 20,
-  },
   ticket: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: 160,
