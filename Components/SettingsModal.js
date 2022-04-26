@@ -12,7 +12,7 @@ const SettingsModal = ({
 }) => {
   return (
     <View>
-      {scene === "Question" || scene === "CorrectAnswer" ? (
+      {scene === "Question" || scene === "CorrectAnswer" || scene === "WrongAnswer" ? (
         <View></View>
       ) : (
         <>
@@ -28,7 +28,7 @@ const SettingsModal = ({
             <Text style={[styles.settingHeader, styles.label]}>Settings</Text>
               <Pressable
                 style={styles.exit}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => setModalVisible(!modalVisible)}                
               >
                 <AntDesign
                   style={styles.exit}
