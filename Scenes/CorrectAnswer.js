@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
     backgroundColor: "transparent",
-    marginTop: 50,
   },
   h2: {
     fontSize: 28,
