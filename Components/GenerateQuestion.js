@@ -53,7 +53,7 @@ Press OK to return to the main screen.`);
           if(typeof movieAnswer === "object") {
             let foundUndefined = false;
             for (let i = 0; i < movieAnswer.length; i++ ){
-              if (movieAnswer[i] === "undefined"); {
+              if (movieAnswer[i] === "undefined") {
                 foundUndefined = true;
               }
             }

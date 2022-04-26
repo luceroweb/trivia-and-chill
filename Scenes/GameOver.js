@@ -13,7 +13,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { Audio } from "expo-av";
 import lose from "../Sounds/lose.wav";
-import DriveInMovie from "../Layout/DriveInMovie";
+import Theater from "../Layout/Theater";
 
 function GameOver({
   setScene,
@@ -83,11 +83,17 @@ Test your movie knowledge here: https://luceroweb.github.io/guess-the-movie/`;
     return <AppLoading />;
   } else {
     return (
-      <DriveInMovie
-        screen={
-          <>
-            <Text style={styles.gameOverStyle}>Game Over</Text>
-            <View style={styles.buttonRow}>
+      <Theater
+        content={
+          <View style={{ width: "100%" }}>
+            <View style={styles.questionHeader}>
+              
+              <Text style={styles.gameOverStyle}>Game Over</Text>
+            </View>
+          </View>
+        }
+        buttons={
+          <View style={styles.buttonRow}>
               {winningStreak > 0 && Platform.OS !== "web" && (
                 <Pressable
                   style={styles.buttonStyle}
@@ -127,7 +133,6 @@ Test your movie knowledge here: https://luceroweb.github.io/guess-the-movie/`;
                 </ImageBackground>
               </Pressable>
             </View>
-          </>
         }
       />
     );
@@ -163,10 +168,9 @@ function mapDispatchToProps(dispatch) {
 const styles = StyleSheet.create({
   gameOverStyle: {
     fontSize: 28,
-    marginBottom: Platform.OS !== "web" ? 20 : 70,
     textAlign: "center",
     fontFamily: "Limelight_400Regular",
-    color: "#F2D379",
+    color: "#292840",
   },
   backToStartButtonText: {
     textAlign: "center",
