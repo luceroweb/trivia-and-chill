@@ -3,7 +3,8 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  ImageBackground,
+  ImageBackground,  
+  useWindowDimensions
 } from "react-native";
 import { connect } from "react-redux";
 import Lives from "../Components/Lives";
@@ -11,10 +12,11 @@ import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
 import Badge from "../Components/Badge";
-import DriveInMovie from "../Layout/DriveInMovie";
 import Theater from "../Layout/Theater";
 
 const WrongAnswer = ({ setScene, resetSelectedMovie, lives, resetWinningStreak }) => {
+  const { width} = useWindowDimensions();
+
   const handleNextQuestion = () => {
     resetWinningStreak();
     setScene("Question");
@@ -35,8 +37,12 @@ Try again!`;
       <Theater
         content={
           <>
-            <Text style={styles.h2}>Incorrect Answer!</Text>
-            <Text style={styles.livesText}>{ohno}</Text>
+            <Text style={ width < 336 ? styles.h2Fold : styles.h2}>
+              Incorrect Answer!
+            </Text>
+            <Text style={ width < 336 ? styles.livesTextFold : styles.livesText}>
+              {ohno}
+            </Text>
           </>
         }
         indicators={
@@ -106,6 +112,12 @@ const styles = StyleSheet.create({
     color: "#292840",
     alignSelf: "center",
   },
+  h2Fold: {
+    fontSize: 20,
+    fontFamily: "Limelight_400Regular",
+    color: "#292840",
+    alignSelf: "center",
+  },
   ticketButton: {
     maxWidth: "100%",
     maxHeight: "100%",
@@ -122,6 +134,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "#292840",
     fontSize: 18,
+    lineHeight: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  livesTextFold: {
+    marginTop: 10,
+    color: "#292840",
+    fontSize: 16,
     lineHeight: 28,
     fontWeight: "bold",
     textAlign: "center",
