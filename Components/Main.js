@@ -24,7 +24,7 @@ function Main({ setScene, setMovies }) {
   const boardWithTextFade = useRef(new Animated.Value(0)).current;
   const [sound, setSound] = useState();
 
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -76,6 +76,22 @@ function Main({ setScene, setMovies }) {
     ]).start();
   }, []);
 
+  let titleFontSize;
+  let backgroundHeight;
+  let spacerHeight;
+
+  if(height < 800) {
+    backgroundHeight = height * .65;
+    spacerHeight = height * .2;
+    titleFontSize = 
+  } else if (width > 600) {
+    backgroundHeight = 600;
+    spacerHeight = 300;
+  } else {
+    backgroundHeight = width * 1.5;
+    spacerHeight = width / 1.6;
+  }
+
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -92,7 +108,7 @@ function Main({ setScene, setMovies }) {
             style={[
               styles.backgroundPicture,
               {
-                height: width > 600 ? 600 : width * 1.5,
+                height: backgroundHeight,
               },
             ]}
             source={require("../Images/theater-sign-generator-trimmed.png")}
@@ -203,7 +219,7 @@ function Main({ setScene, setMovies }) {
               Trivia &#38; Chill
             </Text>
             {/*following View is a spacer necessary because of complications on android within an Animated.View */}
-            <View style={{ height: width > 600 ? 300 : width / 1.6 }}></View>
+            <View style={{ height: spacerHeight}}></View>
             <Pressable onPress={() => setScene("Question")}>
               <ImageBackground
                 source={require("../Images/ticket.png")}
