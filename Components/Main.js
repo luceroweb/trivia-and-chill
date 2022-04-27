@@ -91,7 +91,7 @@ function Main({ setScene, setMovies }) {
       : width * 0.3;
   let backgroundHeight =
   height < 300 ? height * .55:
-    height < 800 && width > 550
+    height < 700 && width > 550
       ? height * 0.65
       : height * 0.7 > 600
       ? 600
