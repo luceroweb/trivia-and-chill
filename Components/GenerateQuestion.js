@@ -19,7 +19,7 @@ const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
         }
       } else if (typeof value === 'object' && value !== null) {
         return hasValidValues(Object.values(value));
-      } else if (typeof value === 'undefined' || value === '') {
+      } else if (typeof value === 'undefined' || value === null || value === '') {
         return false;
       }
       return true
@@ -80,9 +80,8 @@ Press OK to return to the main screen.`);
         .all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
         .then(
           axios.spread((castRes, genreRes) => {
-            movie = { ...movie, cast: castRes.data.cast.slice(0, 2), genre: genreRes };
-            return movie;
-      }))
+            return { ...movie, cast: castRes.data.cast.slice(0, 10), genre: genreRes };
+      }));
     };
     
     generateQuestionAndCheckUndefined();  
