@@ -76,13 +76,29 @@ function Main({ setScene, setMovies }) {
     ]).start();
   }, []);
 
-  let titleFontSize = height < 800 && width > 500 ? height/8:(width / 8 > 110 ? 110: width / 8);
-  let buttonFontSize = height < 800 && width > 500 ? height/4:width * .3 > 200? 200: width * .3;
-  let backgroundHeight = height < 800 && width > 500 ? height * .65:height * .75 > 600 ? 600 : height * .75;
-  let spacerHeight = height / 3 > 300? 300: height/3;
-  let clapperWidth = height<800 && width > 500 ?height*.65: width * 0.85;
-  let IntroImageWidth = height<800 && width > 500?height*.65:width * .85;
-
+  let titleFontSize =
+  height < 300 ? height / 10:
+    height < 800 && width > 550
+      ? height / 8
+      : width / 8.5 > 110
+      ? 110
+      : width / 8.5;
+  let buttonFontSize =
+    height < 800 && width > 550
+      ? height / 4
+      : width * 0.3 > 200
+      ? 200
+      : width * 0.3;
+  let backgroundHeight =
+  height < 300 ? height * .55:
+    height < 800 && width > 550
+      ? height * 0.65
+      : height * 0.7 > 600
+      ? 600
+      : height * 0.7;
+  let spacerHeight = height < 300 ? height/4: height / 3 > 300 ? 300 : height / 3.3;
+  let clapperWidth = height < 800 && width > 550 ? height * 0.8 : width * 0.85;
+ 
 
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
@@ -101,7 +117,6 @@ function Main({ setScene, setMovies }) {
               styles.backgroundPicture,
               {
                 height: backgroundHeight,
-                maxHeight: 600,
               },
             ]}
             source={require("../Images/marqueeBackground.png")}
@@ -113,8 +128,6 @@ function Main({ setScene, setMovies }) {
                 styles.clapperViews,
                 {
                   opacity: clapperOpenFade,
-                  width: clapperWidth,
-                  maxWidth: 672,
                   alignItems: width < 600 ? "center" : "stretch",
                 },
               ]}
@@ -123,8 +136,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: 672,
-                    width: IntroImageWidth,
+                    width: clapperWidth,
+                    maxWidth:width*.9 < 672 ? width * .9 : 672,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-open.png")}
@@ -141,8 +154,6 @@ function Main({ setScene, setMovies }) {
                     inputRange: [0, 0.0001, 500, 1000],
                     outputRange: [0, 1, 1, 0],
                   }),
-                  width: clapperWidth,
-                  maxWidth: 672,
                   alignItems: width < 600 ? "center" : "stretch",
                 },
               ]}
@@ -151,8 +162,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: 672,
-                    width: IntroImageWidth,
+                    width: clapperWidth,
+                    maxWidth: width*.9 < 672 ? width * .9 : 672,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-closed.png")}
@@ -169,8 +180,6 @@ function Main({ setScene, setMovies }) {
                     inputRange: [0, 0.8, 1],
                     outputRange: [1, 1, 0],
                   }),
-                  width: clapperWidth,
-                  maxWidth: 672,
                   alignItems: width < 600 ? "center" : "stretch",
                   zIndex: 2,
                 },
@@ -180,8 +189,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: 672,
-                    width: IntroImageWidth,
+                    width: clapperWidth,
+                    maxWidth: width*.9 < 672 ? width * .9 : 672,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
@@ -216,7 +225,10 @@ function Main({ setScene, setMovies }) {
             <Pressable onPress={() => setScene("Question")}>
               <ImageBackground
                 source={require("../Images/ticket.png")}
-                style={[styles.ticket, { width: buttonFontSize, maxWidth: 200 }]}
+                style={[
+                  styles.ticket,
+                  { width: buttonFontSize },
+                ]}
               >
                 <Text style={styles.buttonText}>Start</Text>
               </ImageBackground>
