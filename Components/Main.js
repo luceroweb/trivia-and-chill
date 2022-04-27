@@ -24,7 +24,7 @@ function Main({ setScene, setMovies }) {
   const boardWithTextFade = useRef(new Animated.Value(0)).current;
   const [sound, setSound] = useState();
 
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   useEffect(() => {
     FetchApi().then((res) => setMovies(res));
   }, []);
@@ -76,6 +76,66 @@ function Main({ setScene, setMovies }) {
     ]).start();
   }, []);
 
+  let titleFontSize = 110;
+  let buttonFontSize = 20;
+  let backgroundHeight = 600;
+  let spacerHeight = 300;
+  let clapperWidth = width * 0.85;
+  let IntroImageWidth = 672;
+
+  if (height < 1000 && width < 600 && width > 430) {
+    backgroundHeight = width;
+    spacerHeight = width / 2.5;
+    titleFontSize = width / 8;
+    buttonFontSize = width * 0.3;
+    clapperWidth = "85%";
+    IntroImageWidth = width * 0.9;
+  } else if (height < 300 && width < 700) {
+    backgroundHeight = height * 0.54;
+    spacerHeight = height * 0.2;
+    titleFontSize = height * 0.1;
+    buttonFontSize = height * 0.2;
+    clapperWidth = height * 0.65;
+    IntroImageWidth = height * 0.65;
+  } else if (height < 730) {
+    if (width > 600) {
+      backgroundHeight = height * 0.65;
+      spacerHeight = height * 0.2;
+      titleFontSize = height * 0.1;
+      buttonFontSize = height * 0.2;
+      clapperWidth = height * 0.65;
+      IntroImageWidth = height * 0.65;
+    } else {
+      backgroundHeight = width * 1.4;
+      spacerHeight = width / 1.6;
+      titleFontSize = width / 8;
+      buttonFontSize = width * 0.3;
+      clapperWidth = "85%";
+      IntroImageWidth = width * 0.9;
+    }
+  } else if (width > 900) {
+    backgroundHeight = 600;
+    spacerHeight = 300;
+    titleFontSize = 110;
+    buttonFontSize = 200;
+    clapperWidth = "85%";
+    IntroImageWidth = 672;
+  } else if (width > 600) {
+    backgroundHeight = 600;
+    spacerHeight = 300;
+    titleFontSize = width / 8;
+    buttonFontSize = 200;
+    clapperWidth = "85%";
+    IntroImageWidth = 672;
+  } else {
+    backgroundHeight = width * 1.5;
+    spacerHeight = width / 1.6;
+    titleFontSize = width / 8;
+    buttonFontSize = width * 0.3;
+    clapperWidth = "100%";
+    IntroImageWidth = width * 0.9;
+  }
+
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -92,7 +152,7 @@ function Main({ setScene, setMovies }) {
             style={[
               styles.backgroundPicture,
               {
-                height: width > 600 ? 600 : width * 1.5,
+                height: backgroundHeight,
               },
             ]}
             source={require("../Images/marqueeBackground.png")}
@@ -104,7 +164,7 @@ function Main({ setScene, setMovies }) {
                 styles.clapperViews,
                 {
                   opacity: clapperOpenFade,
-                  width: width > 600 ? "85%" : "100%",
+                  width: clapperWidth,
                   maxWidth: width,
                   alignItems: width < 600 ? "center" : "stretch",
                 },
@@ -115,7 +175,7 @@ function Main({ setScene, setMovies }) {
                   styles.introImages,
                   {
                     maxWidth: width < 600 && "90%",
-                    width: width < 600 ? "90%" : 672,
+                    width: IntroImageWidth,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-open.png")}
@@ -132,7 +192,7 @@ function Main({ setScene, setMovies }) {
                     inputRange: [0, 0.0001, 500, 1000],
                     outputRange: [0, 1, 1, 0],
                   }),
-                  width: width > 600 ? "85%" : "100%",
+                  width: clapperWidth,
                   maxWidth: width,
                   alignItems: width < 600 ? "center" : "stretch",
                 },
@@ -143,7 +203,7 @@ function Main({ setScene, setMovies }) {
                   styles.introImages,
                   {
                     maxWidth: width < 600 && "90%",
-                    width: width < 600 ? "90%" : 672,
+                    width: IntroImageWidth,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-closed.png")}
@@ -160,7 +220,7 @@ function Main({ setScene, setMovies }) {
                     inputRange: [0, 0.8, 1],
                     outputRange: [1, 1, 0],
                   }),
-                  width: width > 600 ? "85%" : "100%",
+                  width: clapperWidth,
                   maxWidth: width,
                   alignItems: width < 600 ? "center" : "stretch",
                   zIndex: 2,
@@ -172,7 +232,7 @@ function Main({ setScene, setMovies }) {
                   styles.introImages,
                   {
                     maxWidth: width < 600 && "90%",
-                    width: width < 600 ? "90%" : 672,
+                    width: IntroImageWidth,
                   },
                 ]}
                 source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
@@ -186,7 +246,7 @@ function Main({ setScene, setMovies }) {
           <Animated.View
             style={[
               {
-                marginTop: width < 600 ? 64 : 0,
+                // marginTop: width < 600 ? 64 : 0,
                 opacity: textFade,
               },
               styles.titleAndButtonContainer,
@@ -196,18 +256,18 @@ function Main({ setScene, setMovies }) {
               style={[
                 styles.fontText,
                 {
-                  fontSize: width > 900 ? 110 : (100 * width) / 800,
+                  fontSize: titleFontSize,
                 },
               ]}
             >
               Trivia &#38; Chill
             </Text>
             {/*following View is a spacer necessary because of complications on android within an Animated.View */}
-            <View style={{ height: width > 600 ? 300 : width / 1.6 }}></View>
+            <View style={{ height: spacerHeight }}></View>
             <Pressable onPress={() => setScene("Question")}>
               <ImageBackground
                 source={require("../Images/ticket.png")}
-                style={styles.ticket}
+                style={[styles.ticket, { width: buttonFontSize }]}
               >
                 <Text style={styles.buttonText}>Start</Text>
               </ImageBackground>
