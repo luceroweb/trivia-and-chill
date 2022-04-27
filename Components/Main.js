@@ -95,7 +95,7 @@ function Main({ setScene, setMovies }) {
                 height: width > 600 ? 600 : width * 1.5,
               },
             ]}
-            source={require("../Images/theater-sign-generator-trimmed.png")}
+            source={require("../Images/marqueeBackground.png")}
             alt="movie theatre with marquee sign with cars parked in front"
           >
             {/* Animated View for picture of open clapper with no text */}
