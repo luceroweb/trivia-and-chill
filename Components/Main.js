@@ -204,7 +204,6 @@ function Main({ setScene, setMovies }) {
           <Animated.View
             style={[
               {
-                // marginTop: width < 600 ? 64 : 0,
                 opacity: textFade,
               },
               styles.titleAndButtonContainer,
