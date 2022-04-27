@@ -3,19 +3,24 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  ImageBackground,  
-  useWindowDimensions
+  ImageBackground,
+  useWindowDimensions,
 } from "react-native";
 import { connect } from "react-redux";
-import Lives from "../Components/Lives";
+import Lives from "../Components/Indicators/Lives";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
-import Badge from "../Components/Badge";
+import Badge from "../Components/Indicators/Badge";
 import Theater from "../Layout/Theater";
 
-const WrongAnswer = ({ setScene, resetSelectedMovie, lives, resetWinningStreak }) => {
-  const { width} = useWindowDimensions();
+const WrongAnswer = ({
+  setScene,
+  resetSelectedMovie,
+  lives,
+  resetWinningStreak,
+}) => {
+  const { width } = useWindowDimensions();
 
   const handleNextQuestion = () => {
     resetWinningStreak();
@@ -37,10 +42,10 @@ Try again!`;
       <Theater
         content={
           <>
-            <Text style={ width < 336 ? styles.h2Fold : styles.h2}>
+            <Text style={width < 336 ? styles.h2Fold : styles.h2}>
               Incorrect Answer!
             </Text>
-            <Text style={ width < 336 ? styles.livesTextFold : styles.livesText}>
+            <Text style={width < 336 ? styles.livesTextFold : styles.livesText}>
               {ohno}
             </Text>
           </>

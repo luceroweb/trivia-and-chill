@@ -4,11 +4,16 @@ import Trailer from "../Components/Trailer";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
-import Badge from "../Components/Badge";
+import Badge from "../Components/Indicators/Badge";
 import Theater from "../Layout/Theater";
-import Lives from "../Components/Lives";
+import Lives from "../Components/Indicators/Lives";
 
-const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMode }) => {
+const CorrectAnswer = ({
+  selectedMovie,
+  setScene,
+  resetSelectedMovie,
+  gamePlayMode,
+}) => {
   const handleNextQuestion = () => {
     setScene("Question");
     resetSelectedMovie();
@@ -26,9 +31,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMo
         content={<Trailer movieId={selectedMovie?.movieId} />}
         indicators={
           <>
-          { gamePlayMode === 'easySinglePlayer' &&
-            <Lives/>
-          }
+            {gamePlayMode === "easySinglePlayer" && <Lives />}
             <Text style={styles.h2}>Correct!</Text>
             <Badge />
           </>
@@ -48,7 +51,7 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie, gamePlayMo
 function mapStateToProps(state) {
   return {
     selectedMovie: state.selectedMovie,
-    gamePlayMode: state.gamePlayMode
+    gamePlayMode: state.gamePlayMode,
   };
 }
 

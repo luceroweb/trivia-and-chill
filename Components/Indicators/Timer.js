@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Audio } from "expo-av";
-import tick from "../Sounds/tick.wav";
-import Clock from "../Components/Clock";
+import tick from "../../Sounds/tick.wav";
+import Clock from "./Clock";
 import { StyleSheet, View, Platform } from "react-native";
 
 function Timer({ setScene }) {

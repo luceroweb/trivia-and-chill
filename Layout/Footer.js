@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, Platform } from "react-native";
 import { connect } from "react-redux";
 
 function Footer({ setScene }) {
@@ -9,11 +9,11 @@ function Footer({ setScene }) {
       </Pressable>
       <Text style={styles.textColor}> | </Text>
       <Pressable onPress={() => setScene("About")}>
-        <Text style={styles.textColor}>About</Text>
+        <Text style={styles.textColor}>{Platform.OS === 'ios' ? " " : ""}About</Text>
       </Pressable>
       <Text style={styles.textColor}> | </Text>
       <Pressable onPress={() => setScene("HowToPlay")}>
-        <Text style={styles.textColor}>How To Play</Text>
+        <Text style={styles.textColor}>{Platform.OS === 'ios' ? " " : ""}How To Play</Text>
       </Pressable>
     </View>
   );

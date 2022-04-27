@@ -9,13 +9,13 @@ import {
 import { connect } from "react-redux";
 import GameOver from "../Scenes/GameOver";
 import Header from "./Header";
-import Main from "./Main";
+import Main from "../Scenes/Main";
 import Footer from "./Footer";
 import Question from "../Scenes/Question";
 import CorrectAnswer from "../Scenes/CorrectAnswer";
-import DeveloperCredits from "../Scenes/DeveloperCredits";
+import Credits from "../Scenes/Credits";
 import About from "../Scenes/About";
-import GamePlayMode from "./GamePlayMode";
+import GamePlayMode from "../Components/GamePlayMode";
 import WrongAnswer from "../Scenes/WrongAnswer";
 import HowToPlay from "../Scenes/HowToPlay";
 
@@ -32,35 +32,35 @@ function Nav({ scene, modalVisible }) {
         {scene === "GameOver" && <GameOver />}
         {scene === "Question" && <Question />}
         {scene === "CorrectAnswer" && <CorrectAnswer />}
-        {scene === "Credits" && <DeveloperCredits />}
+        {scene === "Credits" && <Credits />}
         {scene === "About" && <About />}
         {scene === "WrongAnswer" && <WrongAnswer />}
         {scene === "HowToPlay" && <HowToPlay />}
       </ScrollView>
-      {scene !== "Question" && scene !== "CorrectAnswer" && scene !=="WrongAnswer" && (
-        <Footer style={styles.footer} />
-      )}
-      {
-        modalVisible && (
-          <View style={{
-            position: 'absolute',
+      {scene !== "Question" &&
+        scene !== "CorrectAnswer" &&
+        scene !== "WrongAnswer" && <Footer style={styles.footer} />}
+      {modalVisible && (
+        <View
+          style={{
+            position: "absolute",
             height: "100%",
             width: "100%",
             opacity: 0.9,
-            backgroundColor: 'gray',
+            backgroundColor: "gray",
             zIndex: 100,
-          }} /> 
-        )
-      }
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   layout: {
-    flexGrow: 1, 
+    flexGrow: 1,
     overflow: "hidden",
-    marginTop: StatusBar.currentHeight
+    marginTop: StatusBar.currentHeight,
   },
   header: {
     height: "10%",

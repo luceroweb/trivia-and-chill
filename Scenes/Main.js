@@ -45,7 +45,7 @@ function Main({ setScene, setMovies }) {
   }
 
   useEffect(() => {
-    setTimeout(() => {
+    let timeout = setTimeout(() => {
       playSound();
     }, delay);
     Animated.parallel([
@@ -74,6 +74,7 @@ function Main({ setScene, setMovies }) {
         }),
       ]),
     ]).start();
+    return () => clearTimeout(timeout);
   }, []);
 
   let titleFontSize = width / 8.5 > 110 ? 110 : width / 8.5;
@@ -118,7 +119,7 @@ function Main({ setScene, setMovies }) {
                 height: backgroundHeight,
               },
             ]}
-            source={require("../Images/marqueeBackground.png")}
+            source={require("../Images/Main/IntroAnimation/marqueeBackground.png")}
             alt="movie theatre with marquee sign with cars parked in front"
           >
             {/* Animated View for picture of open clapper with no text */}
@@ -139,7 +140,7 @@ function Main({ setScene, setMovies }) {
                     maxWidth: width * 0.9 < 672 ? width * 0.9 : 672,
                   },
                 ]}
-                source={require("../Images/IntroAnimation/clapper2-open.png")}
+                source={require("../Images/Main/IntroAnimation/clapper2-open.png")}
                 alt="open movie clapper"
                 resizeMode="contain"
               />
@@ -165,7 +166,7 @@ function Main({ setScene, setMovies }) {
                     maxWidth: width * 0.9 < 672 ? width * 0.9 : 672,
                   },
                 ]}
-                source={require("../Images/IntroAnimation/clapper2-closed.png")}
+                source={require("../Images/Main/IntroAnimation/clapper2-closed.png")}
                 alt="closed movie clapper"
                 resizeMode="contain"
               />
@@ -192,7 +193,7 @@ function Main({ setScene, setMovies }) {
                     maxWidth: width * 0.9 < 672 ? width * 0.9 : 672,
                   },
                 ]}
-                source={require("../Images/IntroAnimation/clapper2-no-arm-arial.png")}
+                source={require("../Images/Main/IntroAnimation/clapper2-no-arm-arial.png")}
                 alt="closed movie clapper"
                 resizeMode="contain"
               />
