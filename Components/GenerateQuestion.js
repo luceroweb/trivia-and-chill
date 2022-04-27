@@ -12,10 +12,14 @@ const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
   const hasValidValues = (valuesList) => {
     return valuesList.every((value) => {
       if (Array.isArray(value)) {
-        return hasValidValues(value);
+        if (value.length === 0) {
+          return false;
+        } else {
+          return hasValidValues(value);
+        }
       } else if (typeof value === 'object' && value !== null) {
         return hasValidValues(Object.values(value));
-      } else if (typeof value === 'undefined' || value === null || value === '') {
+      } else if (typeof value === 'undefined' || value === '') {
         return false;
       }
       return true
