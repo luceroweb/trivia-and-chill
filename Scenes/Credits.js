@@ -9,7 +9,7 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import AppLoading from "expo-app-loading";
 import { connect } from "react-redux";
 
-const DeveloperCredits = ({ setscene }) => {
+const Credits = ({ setscene }) => {
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, mapDispatchToProps)(DeveloperCredits);
+export default connect(null, mapDispatchToProps)(Credits);

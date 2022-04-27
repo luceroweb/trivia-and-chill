@@ -1,7 +1,12 @@
-import { View, StyleSheet, ImageBackground, useWindowDimensions } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  useWindowDimensions,
+} from "react-native";
 import { connect } from "react-redux";
-import GameBG from '../Images/GameBG.jpg';
-import ScreenBG from '../Images/ScreenBG.jpg';
+import GameBG from "../Images/GamePlay/GameBG.jpg";
+import ScreenBG from "../Images/GamePlay/ScreenBG.jpg";
 
 function Theater({ indicators, content, buttons, scene }) {
   const { height } = useWindowDimensions();
@@ -9,25 +14,28 @@ function Theater({ indicators, content, buttons, scene }) {
   return (
     <View style={styles.layout}>
       <ImageBackground source={GameBG} style={styles.gamebg}>
-
         <View style={styles.contentArea}>
-          <View style={styles.indicators}>{indicators ? indicators : null}</View>
+          <View style={styles.indicators}>
+            {indicators ? indicators : null}
+          </View>
           <ImageBackground
             source={ScreenBG}
             style={[
               styles.contentWrap,
-              height > 650 ? { aspectRatio: 16 / 9, } : null,
+              height > 650 ? { aspectRatio: 16 / 9 } : null,
               scene !== "CorrectAnswer" ? { padding: 20 } : null,
             ]}
           >
             {content ? content : null}
           </ImageBackground>
-        
-        <View style={styles.buttonsContainer}>{buttons ? buttons : null}</View>
-      </View>
-    </ImageBackground>
-  </View>
-  )
+
+          <View style={styles.buttonsContainer}>
+            {buttons ? buttons : null}
+          </View>
+        </View>
+      </ImageBackground>
+    </View>
+  );
 }
 
 function mapStateToProps(state) {

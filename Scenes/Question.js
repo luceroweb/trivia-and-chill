@@ -5,11 +5,11 @@ import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import { connect } from "react-redux";
 import FetchApi from "../Utils/FetchApi";
 import GenerateQuestion from "../Components/GenerateQuestion";
-import Timer from "../Components/Timer";
+import Timer from "../Components/Indicators/Timer";
 import TrueFalse from "../Components/TrueFalse";
 import MultipleChoice from "../Components/MultipleChoice";
-import Badge from "../Components/Badge";
-import Lives from "../Components/Lives";
+import Badge from "../Components/Indicators/Badge";
+import Lives from "../Components/Indicators/Lives";
 import Theater from "../Layout/Theater";
 
 function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
@@ -46,7 +46,6 @@ function Question({ selectedMovie, movies, setMovies, gamePlayMode }) {
         content={
           <View style={{ width: "100%" }}>
             <View style={styles.questionHeader}>
-              
               <Text style={styles.heading}>Question</Text>
             </View>
             <Text style={styles.questionText}>

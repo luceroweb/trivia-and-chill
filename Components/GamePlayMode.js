@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     zIndex: 6,
     borderColor: "#F2D379",
     borderWidth: 1,
+    paddingLeft:4
   },
   gamePlayText: {
     color: "#F2D379",
