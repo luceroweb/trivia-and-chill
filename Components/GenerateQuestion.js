@@ -2,15 +2,14 @@ import React, { useEffect } from "react";
 import { View, Alert } from "react-native";
 import madLibsArray from "../Utils/madLibsArray";
 import RandomGenerator from "../Utils/RandomGenerator";
-import { getGenreName } from "../Utils/FetchApi";
+import { getGenreName, getPerformerName } from "../Utils/FetchApi";
 import { connect } from "react-redux";
-import { getMovieChanges, getPerformerName } from "../Utils/FetchApi";
 import axios from "axios";
 import { Platform } from "expo-modules-core";
 
 const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
-  const hasValidValues = (valuesList) => {
-    return valuesList.every((value) => {
+  const hasValidValues = (valuesList) => 
+    valuesList.every((value) => {
       if (Array.isArray(value)) {
         if (value.length === 0) {
           return false;
@@ -24,26 +23,19 @@ const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
       }
       return true
     });
-  }
   
   useEffect(() => {
-    let count = 0;
-    
     const generateQuestionAndCheckUndefined = async () => {
+      let count = 0;
       let isValid = false;
       let newMovie = await fetchNewMovie();
 
       while (!isValid && count < 2) {
-        if (isValid) {
-          isValid = true;
-        } else {
-          const movieQueryValues = Object.values(newMovie);
-
-          isValid = hasValidValues(movieQueryValues);
-          if (!isValid) {
-            newMovie = await fetchNewMovie();
-            count++;
-          }
+        const movieQueryValues = Object.values(newMovie);
+        isValid = hasValidValues(movieQueryValues);
+        if (!isValid) {
+          newMovie = await fetchNewMovie();
+          count++;
         }
       }
 
@@ -53,8 +45,7 @@ const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
 Press OK to return to the main screen.`);
           setScene("Main");
         }
-
-        if (Platform.OS !== "web") {
+        else {
           Alert.alert(
             "ERROR: Found too much missing data.",
             "Press OK to return to the main screen.",
@@ -64,7 +55,7 @@ Press OK to return to the main screen.`);
                 onPress: () => setScene("Main"),
               }
             ]
-          )
+          );
         }
       } else {
         let questionObject = madLibsArray(newMovie);
@@ -93,7 +84,6 @@ Press OK to return to the main screen.`);
 function mapStateToProps(state) {
   return {
     selectedMovie: state.selectedMovie,
-    genreName: state.genreName,
   };
 }
 
@@ -103,11 +93,6 @@ function mapDispatchToProps(dispatch) {
       dispatch({
         type: "SET_SELECTED_MOVIE",
         selectedMovie,
-      }),
-    setGenreName: (genreName) =>
-      dispatch({
-        type: "SET_GENRE_NAME",
-        genreName,
       }),
     setScene: (name) =>
       dispatch({
