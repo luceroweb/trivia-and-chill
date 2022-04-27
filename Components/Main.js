@@ -83,7 +83,21 @@ function Main({ setScene, setMovies }) {
   let clapperWidth = width * 0.85;
   let IntroImageWidth = 672;
 
-  if (height < 800) {
+  if (height < 1000 && width < 600 && width > 430) {
+    backgroundHeight = width;
+    spacerHeight = width / 2.5;
+    titleFontSize = width / 8;
+    buttonFontSize = width * 0.3;
+    clapperWidth = "85%";
+    IntroImageWidth = width * 0.9;
+  } else if (height < 300 && width < 700) {
+    backgroundHeight = height * 0.54;
+    spacerHeight = height * 0.2;
+    titleFontSize = height * 0.1;
+    buttonFontSize = height * 0.2;
+    clapperWidth = height * 0.65;
+    IntroImageWidth = height * 0.65;
+  } else if (height < 730) {
     if (width > 600) {
       backgroundHeight = height * 0.65;
       spacerHeight = height * 0.2;
@@ -232,7 +246,7 @@ function Main({ setScene, setMovies }) {
           <Animated.View
             style={[
               {
-                marginTop: width < 600 ? 64 : 0,
+                // marginTop: width < 600 ? 64 : 0,
                 opacity: textFade,
               },
               styles.titleAndButtonContainer,
