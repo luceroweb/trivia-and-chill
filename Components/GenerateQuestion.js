@@ -9,76 +9,79 @@ import axios from "axios";
 import { Platform } from "expo-modules-core";
 
 const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
-  let count = 0;
-  const checkUndefined = () => {
-    let movie = movies ? movies[RandomGenerator(movies.length)] : [];
-    
-    axios
-      .all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
-      .then(
-        axios.spread((castRes, genreRes) => {
-          movie = { ...movie, cast: castRes.data.cast, genre: genreRes };
-          let questionObject = movie ? madLibsArray(movie) : {};
-          let randomIndex = RandomGenerator(questionObject.length);
-          const movieQuestion = questionObject[randomIndex].question;
-          const movieAnswer = questionObject[randomIndex].answer;
-          if (count > 2) {
-            if (Platform.OS === "web") {
-              alert(`ERROR: Found too much missing data.
-Press OK to return to the main screen.`);
-              setScene("Main");
-            }
-
-            if (Platform.OS !== "web") {
-              Alert.alert(
-                "ERROR: Found too much missing data.",
-                "Press OK to return to the main screen.",
-                [
-                  {
-                    text: "OK",
-                    onPress: () => setScene("Main"),
-                  }
-                ]
-              )
-            }
-            return;
-          }
-          
-          if (movieQuestion.includes("undefined")) {
-            count++;
-            checkUndefined();
-            return;
-          }
-          
-          if(typeof movieAnswer === "object") {
-            let foundUndefined = false;
-            for (let i = 0; i < movieAnswer.length; i++ ){
-              if (movieAnswer[i] === "undefined") {
-                foundUndefined = true;
-              }
-            }
-
-            if (foundUndefined) {              
-              count++;
-              checkUndefined();
-              return;
-            }
-
-            count = 0;
-            setSelectedMovie(questionObject[randomIndex]);
-            return;            
-          }
-
-          count = 0;
-          setSelectedMovie(questionObject[randomIndex]);
-          return;
-          
-        })
-      );
+  const hasValidValues = (valuesList) => {
+    return valuesList.every((value) => {
+      if (Array.isArray(value)) {
+        return hasValidValues(value);
+      } else if (typeof value === 'object' && value !== null) {
+        return hasValidValues(Object.values(value));
+      } else if (value === 'undefined' || value === '') {
+        return false;
+      }
+      return true
+    });
   }
-
+  
   useEffect(() => {
-    checkUndefined();
+    let count = 0;
+    
+    const generateQuestionAndCheckUndefined = async () => {
+      let isValid = false;
+      let newMovie = await fetchNewMovie();
+      const movieQueryValues = Object.values(newMovie);
+
+      while (!isValid && count < 2) {
+        if (isValid) {
+          isValid = true;
+        } else {
+          isValid = hasValidValues(movieQueryValues);
+          if (!isValid) {
+            newMovie = await fetchNewMovie();
+            count++;
+          }
+        }
+      }
+
+      if (count >= 2) {
+        if (Platform.OS === "web") {
+          alert(`ERROR: Found too much missing data.
+Press OK to return to the main screen.`);
+          setScene("Main");
+        }
+
+        if (Platform.OS !== "web") {
+          Alert.alert(
+            "ERROR: Found too much missing data.",
+            "Press OK to return to the main screen.",
+            [
+              {
+                text: "OK",
+                onPress: () => setScene("Main"),
+              }
+            ]
+          )
+        }
+      } else {
+        setSelectedMovie(newMovie);
+      }
+    }
+
+    const fetchNewMovie = async () => {
+      let movie = movies ? movies[RandomGenerator(movies.length)] : [];
+
+      return await axios
+        .all([getPerformerName(movie.id), getGenreName(movie.genre_ids[0])])
+        .then(
+          axios.spread((castRes, genreRes) => {
+            movie = { ...movie, cast: castRes.data.cast.slice(0, 2), genre: genreRes };
+            let questionObject = movie ? madLibsArray(movie) : {};
+            let randomIndex = RandomGenerator(questionObject.length);
+            
+            return questionObject[randomIndex];
+      }))
+    };
+    
+    generateQuestionAndCheckUndefined();  
   }, []);
 
   return <View></View>;
