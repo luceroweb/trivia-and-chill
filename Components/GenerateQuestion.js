@@ -66,7 +66,9 @@ Press OK to return to the main screen.`);
           )
         }
       } else {
-        setSelectedMovie(newMovie);
+        let questionObject = madLibsArray(newMovie);
+        let randomIndex = RandomGenerator(questionObject.length);
+        setSelectedMovie(questionObject[randomIndex]);
       }
     }
 
@@ -78,10 +80,7 @@ Press OK to return to the main screen.`);
         .then(
           axios.spread((castRes, genreRes) => {
             movie = { ...movie, cast: castRes.data.cast.slice(0, 2), genre: genreRes };
-            let questionObject = movie ? madLibsArray(movie) : {};
-            let randomIndex = RandomGenerator(questionObject.length);
-            
-            return questionObject[randomIndex];
+            return movie;
       }))
     };
     
