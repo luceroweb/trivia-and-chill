@@ -32,12 +32,13 @@ const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
     const generateQuestionAndCheckUndefined = async () => {
       let isValid = false;
       let newMovie = await fetchNewMovie();
-      const movieQueryValues = Object.values(newMovie);
 
       while (!isValid && count < 2) {
         if (isValid) {
           isValid = true;
         } else {
+          const movieQueryValues = Object.values(newMovie);
+
           isValid = hasValidValues(movieQueryValues);
           if (!isValid) {
             newMovie = await fetchNewMovie();
