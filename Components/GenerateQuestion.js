@@ -15,7 +15,7 @@ const GenerateQuestion = ({ movies, setSelectedMovie, setScene}) => {
         return hasValidValues(value);
       } else if (typeof value === 'object' && value !== null) {
         return hasValidValues(Object.values(value));
-      } else if (value === 'undefined' || value === '') {
+      } else if (typeof value === 'undefined' || value === null || value === '') {
         return false;
       }
       return true
