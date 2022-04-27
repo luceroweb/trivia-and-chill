@@ -77,7 +77,7 @@ function Main({ setScene, setMovies }) {
   }, []);
 
   let titleFontSize = width / 8.5 > 110 ? 110 : width / 8.5;
-  let buttonFontSize = width * 0.3 > 200 ? 200 : width * 0.3;
+  let buttonSize = width * 0.3 > 200 ? 200 : width * 0.3;
   let backgroundHeight = height * 0.7 > 600 ? 600 : height * 0.7;
   let spacerHeight = height / 3 > 300 ? 300 : height / 3.3;
   let clapperWidth = height < 800 && width > 550 ? height * 0.8 : width * 0.85;
@@ -88,17 +88,17 @@ function Main({ setScene, setMovies }) {
     titleFontSize = height / 10;
     backgroundHeight = height * 0.55;
     spacerHeight = height / 4;
-    buttonFontSize = width * 0.1;
+    buttonSize = width * 0.1;
 // Primarily for iPhone SE in Landscape
   } else if (height < 800 && width > 550) {
     titleFontSize = height / 8;
-    buttonFontSize = height / 4;
+    buttonSize = height / 4;
     clapperWidth = height * 0.8;
     if (height < 700) {
       backgroundHeight = height * 0.65;
     }
   }
-  
+
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -223,7 +223,7 @@ function Main({ setScene, setMovies }) {
             <Pressable onPress={() => setScene("Question")}>
               <ImageBackground
                 source={require("../Images/ticket.png")}
-                style={[styles.ticket, { width: buttonFontSize }]}
+                style={[styles.ticket, { width: buttonSize }]}
               >
                 <Text style={styles.buttonText}>Start</Text>
               </ImageBackground>
