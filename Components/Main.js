@@ -76,33 +76,29 @@ function Main({ setScene, setMovies }) {
     ]).start();
   }, []);
 
-
-  let titleFontSize =
-    height < 300
-      ? height / 10
-      : height < 800 && width > 550
-      ? height / 8
-      : width / 8.5 > 110
-      ? 110
-      : width / 8.5;
-  let buttonFontSize =
-    height < 800 && width > 550
-      ? height / 4
-      : width * 0.3 > 200
-      ? 200
-      : width * 0.3;
-  let backgroundHeight =
-    height < 300
-      ? height * 0.55
-      : height < 700 && width > 550
-      ? height * 0.65
-      : height * 0.7 > 600
-      ? 600
-      : height * 0.7;
-  let spacerHeight =
-    height < 300 ? height / 4 : height / 3 > 300 ? 300 : height / 3.3;
+  let titleFontSize = width / 8.5 > 110 ? 110 : width / 8.5;
+  let buttonFontSize = width * 0.3 > 200 ? 200 : width * 0.3;
+  let backgroundHeight = height * 0.7 > 600 ? 600 : height * 0.7;
+  let spacerHeight = height / 3 > 300 ? 300 : height / 3.3;
   let clapperWidth = height < 800 && width > 550 ? height * 0.8 : width * 0.85;
 
+  // For edge cases
+  // For Galaxy Fold in landscape
+  if (height < 300) {
+    titleFontSize = height / 10;
+    backgroundHeight = height * 0.55;
+    spacerHeight = height / 4;
+    buttonFontSize = width * 0.1;
+// Primarily for iPhone SE in Landscape
+  } else if (height < 800 && width > 550) {
+    titleFontSize = height / 8;
+    buttonFontSize = height / 4;
+    clapperWidth = height * 0.8;
+    if (height < 700) {
+      backgroundHeight = height * 0.65;
+    }
+  }
+  
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
   if (!fontsLoaded) {
     return <AppLoading />;
