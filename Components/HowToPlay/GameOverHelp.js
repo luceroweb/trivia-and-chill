@@ -1,8 +1,8 @@
 import { Animated, View, ImageBackground, Platform } from "react-native";
 import { useRef, useEffect } from "react";
 import { Entypo } from "@expo/vector-icons";
-import gameover from "../Images/HowToPlay/GameOver/SinglePlayer/gameover.png";
-import gameOverMobile from "../Images/HowToPlay/GameOver/SinglePlayer/gameOverMobile.png";
+import gameover from "../../Images/HowToPlay/GameOver/SinglePlayer/gameover.png";
+import gameOverMobile from "../../Images/HowToPlay/GameOver/SinglePlayer/gameOverMobile.png";
 
 export default function GameOverHelp() {
   const translation = useRef(

@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect, useRef } from "react";
-import questionPage from "../Images/HowToPlay/Questions/SinglePlayer/question-page.png";
-import questionPageAnswered from "../Images/HowToPlay/Questions/SinglePlayer/question-answered.png";
-import questionPageMobile from "../Images/HowToPlay/Questions/SinglePlayer/question-page-mobile.png";
-import questionPageAnsweredMobile from "../Images/HowToPlay/Questions/SinglePlayer/question-answered-mobile.png";
+import questionPage from "../../Images/HowToPlay/Questions/SinglePlayer/question-page.png";
+import questionPageAnswered from "../../Images/HowToPlay/Questions/SinglePlayer/question-answered.png";
+import questionPageMobile from "../../Images/HowToPlay/Questions/SinglePlayer/question-page-mobile.png";
+import questionPageAnsweredMobile from "../../Images/HowToPlay/Questions/SinglePlayer/question-answered-mobile.png";
 
 export default function QuestionInstructions() {
   const { width } = useWindowDimensions();
