@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { View, Alert, Platform } from "react-native";
-import { getYouTubeId } from "../Utils/FetchApi";
+import { getYouTubeId } from "../../Utils/FetchApi";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { WebView } from "react-native-web-webview";
 

@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Platform } from "react-native";
 import { connect } from "react-redux";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
-import SettingsModal from "../Components/SettingsModal";
+import SettingsModal from "../Components/Header/SettingsModal";
 
 function Header() {
   let [fontsLoaded] = useFonts({

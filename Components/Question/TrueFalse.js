@@ -168,7 +168,7 @@ const TrueFalse = ({
     >
       <View style={styles.true}>
         <ImageBackground
-          source={require("../Images/ticket2.png")}
+          source={require("../../Images/ticket2.png")}
           style={styles.ticket}
         >
           <TouchableOpacity
@@ -183,7 +183,7 @@ const TrueFalse = ({
       </View>
       <View style={styles.false}>
         <ImageBackground
-          source={require("../Images/ticket2.png")}
+          source={require("../../Images/ticket2.png")}
           style={styles.ticket}
         >
           <TouchableOpacity

@@ -102,7 +102,7 @@ const MultipleChoice = ({
     >
       {multipleAnswer.map((item, index) => (
         <ImageBackground
-          source={require("../Images/ticket2.png")}
+          source={require("../../Images/ticket2.png")}
           style={styles.ticket}
           key={index}
         >
