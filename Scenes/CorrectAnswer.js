@@ -1,6 +1,6 @@
 import { Text, Pressable, StyleSheet, ImageBackground } from "react-native";
 import { connect } from "react-redux";
-import Trailer from "../Components/Trailer";
+import Trailer from "../Components/CorrectAnswer/Trailer";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";

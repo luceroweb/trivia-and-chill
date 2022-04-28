@@ -15,7 +15,7 @@ import Question from "../Scenes/Question";
 import CorrectAnswer from "../Scenes/CorrectAnswer";
 import Credits from "../Scenes/Credits";
 import About from "../Scenes/About";
-import GamePlayMode from "../Components/GamePlayMode";
+import GamePlayMode from "../Components/Header/GamePlayMode";
 import WrongAnswer from "../Scenes/WrongAnswer";
 import HowToPlay from "../Scenes/HowToPlay";
 
