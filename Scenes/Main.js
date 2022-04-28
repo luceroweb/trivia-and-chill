@@ -81,7 +81,7 @@ function Main({ setScene, setMovies }) {
   let buttonSize = width * 0.3 > 200 ? 200 : width * 0.3;
   let backgroundHeight = height * 0.7 > 600 ? 600 : height * 0.7;
   let spacerHeight = height / 3 > 300 ? 300 : height / 3.3;
-  let clapperWidth = height < 800 && width > 550 ? height * 0.8 : width * 0.85;
+  let clapperWidth = width * 0.85;
 
   // For edge cases
   // For Galaxy Fold in landscape
@@ -90,6 +90,7 @@ function Main({ setScene, setMovies }) {
     backgroundHeight = height * 0.55;
     spacerHeight = height / 4;
     buttonSize = width * 0.1;
+    clapperWidth = height * 0.8;
 // Primarily for iPhone SE in Landscape
   } else if (height < 800 && width > 550) {
     titleFontSize = height / 8;
