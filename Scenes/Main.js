@@ -77,64 +77,28 @@ function Main({ setScene, setMovies }) {
     return () => clearTimeout(timeout);
   }, []);
 
-  let titleFontSize = 110;
-  let buttonFontSize = 20;
-  let backgroundHeight = 600;
-  let spacerHeight = 300;
+  let titleFontSize = width / 8.5 > 110 ? 110 : width / 8.5;
+  let buttonSize = width * 0.3 > 200 ? 200 : width * 0.3;
+  let backgroundHeight = height * 0.7 > 600 ? 600 : height * 0.7;
+  let spacerHeight = height / 3 > 300 ? 300 : height / 3.3;
   let clapperWidth = width * 0.85;
-  let IntroImageWidth = 672;
 
-  if (height < 1000 && width < 600 && width > 430) {
-    backgroundHeight = width;
-    spacerHeight = width / 2.5;
-    titleFontSize = width / 8;
-    buttonFontSize = width * 0.3;
-    clapperWidth = "85%";
-    IntroImageWidth = width * 0.9;
-  } else if (height < 300 && width < 700) {
-    backgroundHeight = height * 0.54;
-    spacerHeight = height * 0.2;
-    titleFontSize = height * 0.1;
-    buttonFontSize = height * 0.2;
-    clapperWidth = height * 0.65;
-    IntroImageWidth = height * 0.65;
-  } else if (height < 730) {
-    if (width > 600) {
+  // For edge cases
+  // For Galaxy Fold in landscape
+  if (height < 300) {
+    titleFontSize = height / 10;
+    backgroundHeight = height * 0.55;
+    spacerHeight = height / 4;
+    buttonSize = width * 0.1;
+    clapperWidth = height * 0.8;
+// Primarily for iPhone SE in Landscape
+  } else if (height < 800 && width > 550) {
+    titleFontSize = height / 8;
+    buttonSize = height / 4;
+    clapperWidth = height * 0.8;
+    if (height < 700) {
       backgroundHeight = height * 0.65;
-      spacerHeight = height * 0.2;
-      titleFontSize = height * 0.1;
-      buttonFontSize = height * 0.2;
-      clapperWidth = height * 0.65;
-      IntroImageWidth = height * 0.65;
-    } else {
-      backgroundHeight = width * 1.4;
-      spacerHeight = width / 1.6;
-      titleFontSize = width / 8;
-      buttonFontSize = width * 0.3;
-      clapperWidth = "85%";
-      IntroImageWidth = width * 0.9;
     }
-  } else if (width > 900) {
-    backgroundHeight = 600;
-    spacerHeight = 300;
-    titleFontSize = 110;
-    buttonFontSize = 200;
-    clapperWidth = "85%";
-    IntroImageWidth = 672;
-  } else if (width > 600) {
-    backgroundHeight = 600;
-    spacerHeight = 300;
-    titleFontSize = width / 8;
-    buttonFontSize = 200;
-    clapperWidth = "85%";
-    IntroImageWidth = 672;
-  } else {
-    backgroundHeight = width * 1.5;
-    spacerHeight = width / 1.6;
-    titleFontSize = width / 8;
-    buttonFontSize = width * 0.3;
-    clapperWidth = "100%";
-    IntroImageWidth = width * 0.9;
   }
 
   let [fontsLoaded] = useFonts({ Limelight_400Regular });
@@ -165,8 +129,6 @@ function Main({ setScene, setMovies }) {
                 styles.clapperViews,
                 {
                   opacity: clapperOpenFade,
-                  width: clapperWidth,
-                  maxWidth: width,
                   alignItems: width < 600 ? "center" : "stretch",
                 },
               ]}
@@ -175,8 +137,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: width < 600 && "90%",
-                    width: IntroImageWidth,
+                    width: clapperWidth,
+                    maxWidth: width * 0.9 < 672 ? width * 0.9 : 672,
                   },
                 ]}
                 source={require("../Images/Main/IntroAnimation/clapper2-open.png")}
@@ -193,8 +155,6 @@ function Main({ setScene, setMovies }) {
                     inputRange: [0, 0.0001, 500, 1000],
                     outputRange: [0, 1, 1, 0],
                   }),
-                  width: clapperWidth,
-                  maxWidth: width,
                   alignItems: width < 600 ? "center" : "stretch",
                 },
               ]}
@@ -203,8 +163,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: width < 600 && "90%",
-                    width: IntroImageWidth,
+                    width: clapperWidth,
+                    maxWidth: width * 0.9 < 672 ? width * 0.9 : 672,
                   },
                 ]}
                 source={require("../Images/Main/IntroAnimation/clapper2-closed.png")}
@@ -221,8 +181,6 @@ function Main({ setScene, setMovies }) {
                     inputRange: [0, 0.8, 1],
                     outputRange: [1, 1, 0],
                   }),
-                  width: clapperWidth,
-                  maxWidth: width,
                   alignItems: width < 600 ? "center" : "stretch",
                   zIndex: 2,
                 },
@@ -232,8 +190,8 @@ function Main({ setScene, setMovies }) {
                 style={[
                   styles.introImages,
                   {
-                    maxWidth: width < 600 && "90%",
-                    width: IntroImageWidth,
+                    width: clapperWidth,
+                    maxWidth: width * 0.9 < 672 ? width * 0.9 : 672,
                   },
                 ]}
                 source={require("../Images/Main/IntroAnimation/clapper2-no-arm-arial-revised.png")}
@@ -247,7 +205,6 @@ function Main({ setScene, setMovies }) {
           <Animated.View
             style={[
               {
-                // marginTop: width < 600 ? 64 : 0,
                 opacity: textFade,
               },
               styles.titleAndButtonContainer,
@@ -268,7 +225,7 @@ function Main({ setScene, setMovies }) {
             <Pressable onPress={() => setScene("Question")}>
               <ImageBackground
                 source={require("../Images/ticket.png")}
-                style={[styles.ticket, { width: buttonFontSize }]}
+                style={[styles.ticket, { width: buttonSize }]}
               >
                 <Text style={styles.buttonText}>Start</Text>
               </ImageBackground>
