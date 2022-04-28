@@ -1,16 +1,21 @@
 import axios from "axios";
 
 export default async function FetchApi() {
-  let movies = [];
-
-  await axios
+  let moviesResponse = await axios.all([...Array(10)].map((item, index) =>{
+    return axios
     .get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US"
+      `https://api.themoviedb.org/3/movie/popular?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US&page=${index + 1}`
     )
-    .then((res) => (movies = res.data.results))
+    .then((res) => (moviesResponse = res.data.results))
     .catch((err) => console.log(err.response.data));
 
-  return movies;
+  }));
+  let moviesList = []
+  moviesResponse.forEach((movieList) => {
+    moviesList = moviesList.concat(movieList)
+  });
+
+  return moviesList;
 }
 
 export async function getPerformerName(movieId) {
@@ -18,7 +23,7 @@ export async function getPerformerName(movieId) {
     .get(
       `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(err));
   return credits;
 }
 
@@ -27,9 +32,9 @@ export async function getMovieChanges(movieId) {
     .get(
       `https://api.themoviedb.org/3/movie/${movieId}/changes?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .catch((err) => console.log(err))
-    return details;
-    }
+    .catch((err) => console.log(err));
+  return details;
+}
 
 export async function getYouTubeId(movieId) {
   let youTubeId = null;
@@ -38,11 +43,10 @@ export async function getYouTubeId(movieId) {
     .get(
       `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .then((response) => (youTubeId = response.data?.results[0]?.key||null))
-    .catch((err) => console.log("Fetch API Error",err))
+    .then((response) => (youTubeId = response.data?.results[0]?.key || null))
+    .catch((err) => console.log("Fetch API Error", err));
 
   return youTubeId;
-  
 }
 
 export async function getGenreName(genreId) {
@@ -52,12 +56,23 @@ export async function getGenreName(genreId) {
     .get(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
     )
-    .then((response) =>
-      {
-        matchGenre = response.data.genres.filter((genre) => genre.id === genreId);
-        matchGenre = matchGenre[0].name;
-      })
-    .catch((err) => console.log("Fetch API Error",err))
-  
-    return matchGenre;
+    .then((response) => {
+      matchGenre = response.data.genres.filter((genre) => genre.id === genreId);
+      matchGenre = matchGenre[0].name;
+    })
+    .catch((err) => console.log("Fetch API Error", err));
+
+  return matchGenre;
+}
+
+export async function getGenre(genreId) {
+  let matchGenre = null;
+
+  const genreTypes = await axios
+    .get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=59a35a38a15babb3dad4e83c83a72748&language=en-US`
+    )
+    .catch((err) => console.log("Fetch API Error", err));
+
+  return genreTypes;
 }

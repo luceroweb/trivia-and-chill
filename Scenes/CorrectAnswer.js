@@ -1,23 +1,19 @@
-import {
-  ScrollView,
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  ImageBackground,
-} from "react-native";
-import ConfettiCannon from "react-native-confetti-cannon";
+import { Text, Pressable, StyleSheet, ImageBackground } from "react-native";
 import { connect } from "react-redux";
-import Trailer from "../Components/Trailer";
+import Trailer from "../Components/CorrectAnswer/Trailer";
 import AppLoading from "expo-app-loading";
 import { useFonts, Limelight_400Regular } from "@expo-google-fonts/limelight";
 import ticket from "../Images/ticket.png";
-import drivein from "../Images/drive-in-movie.jpg";
-import Badge from "../Components/Badge";
+import Badge from "../Components/Indicators/Badge";
+import Theater from "../Layout/Theater";
+import Lives from "../Components/Indicators/Lives";
 
-const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
-  const { width } = useWindowDimensions();
+const CorrectAnswer = ({
+  selectedMovie,
+  setScene,
+  resetSelectedMovie,
+  gamePlayMode,
+}) => {
   const handleNextQuestion = () => {
     setScene("Question");
     resetSelectedMovie();
@@ -31,53 +27,31 @@ const CorrectAnswer = ({ selectedMovie, setScene, resetSelectedMovie }) => {
     return <AppLoading />;
   } else {
     return (
-      <View style={{ flex: 1 }}>
-        <ImageBackground
-          style={styles.drivein}
-          source={drivein}
-          resizeMode="cover"
-        >
-          <ConfettiCannon
-            count={100}
-            origin={{ x: -10, y: 0 }}
-            fadeOut={true}
-          />
-          <ScrollView
-            // todo: replace paddingTop value with useSafeAreaInsets
-            style={[styles.scrollViewOuter, { paddingTop: 20 }]}
-            contentContainerStyle={[
-              styles.scrollViewContent,
-              { marginHorizontal: width > 1000 ? 100 : 0 },
-            ]}
-          >
-            <View style={[styles.videoContainer]}>
-              <Trailer movieId={selectedMovie?.movieId} />
-            </View>
-
-            <View style={styles.textContainer}>
-              <Text style={styles.h2}>
-                Correct! <Badge />
-              </Text>
-
-              <Text style={styles.h3}>Enjoy this video trailer</Text>
-            </View>
-
-            <Pressable style={[styles.button]} onPress={handleNextQuestion}>
-              <ImageBackground style={styles.ticketButton} source={ticket}>
-                <Text style={styles.ticketText}>Next Question!</Text>
-              </ImageBackground>
-            </Pressable>
-          </ScrollView>
-        </ImageBackground>
-      </View>
+      <Theater
+        content={<Trailer movieId={selectedMovie?.movieId} />}
+        indicators={
+          <>
+            {gamePlayMode === "easySinglePlayer" && <Lives />}
+            <Text style={styles.h2}>Correct!</Text>
+            <Badge />
+          </>
+        }
+        buttons={
+          <Pressable style={[styles.button]} onPress={handleNextQuestion}>
+            <ImageBackground style={styles.ticketButton} source={ticket}>
+              <Text style={styles.ticketText}>Next Question!</Text>
+            </ImageBackground>
+          </Pressable>
+        }
+      />
     );
   }
 };
 
 function mapStateToProps(state) {
   return {
-    scene: state.scene,
     selectedMovie: state.selectedMovie,
+    gamePlayMode: state.gamePlayMode,
   };
 }
 
@@ -96,25 +70,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = StyleSheet.create({
-  borderStyleDebug: {
-    borderWidth: 2,
-    borderColor: "black",
-  },
-  scrollViewOuter: {
-    alignSelf: "center",
-    width: "100%",
-    height: "100%",
-  },
-  scrollViewContent: {
-    flex: 1,
-    justifyContent: "space-between",
-    marginVertical: 20,
-  },
-  videoContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent",
-  },
   button: {
     flexShrink: 1,
     alignSelf: "center",
@@ -123,22 +78,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "transparent",
   },
-  textContainer: {
-    flexGrow: 1, // pushes textContainer upwards
-    marginVertical: 50,
-    alignItems: "center",
-  },
   h2: {
-    fontSize: 36,
-    // fontWeight: "bold",
+    fontSize: 28,
     marginVertical: 10,
     fontFamily: "Limelight_400Regular",
-  },
-  h3: {
-    fontSize: 24,
-    // fontWeight: "bold",
-    marginVertical: 10,
-    fontFamily: "Limelight_400Regular",
+    color: "#F2D379",
   },
   ticketButton: {
     maxWidth: "100%",
@@ -151,10 +95,6 @@ const styles = StyleSheet.create({
     fontFamily: "Limelight_400Regular",
     position: "absolute",
     alignSelf: "center",
-  },
-  drivein: {
-    justifyContent: "center",
-    height: "100%",
   },
 });
 

@@ -3,6 +3,11 @@ const initialState = {
   scene: "Main",
   movies: [],
   selectedMovie: {},
+  gamePlayMode: "singlePlayer",
+  lives: 3,
+  modalVisible: false,
+  genre: null,
+  genreTypes: [],
 };
 
 export const reducer = (state = initialState, action) => {
@@ -12,6 +17,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         winningStreak: state.winningStreak + 1,
       };
+    case "DECREASE_WINNING_STREAK":
+      return {
+        ...state,
+        winningStreak: state.winningStreak - 1,
+      };
     case "RESET_WINNING_STREAK":
       return {
         ...state,
@@ -19,7 +29,6 @@ export const reducer = (state = initialState, action) => {
       };
     case "SET_SCENE":
       return {
-
         ...state,
         scene: action.name,
       };
@@ -41,7 +50,37 @@ export const reducer = (state = initialState, action) => {
     case "SET_PERFORMER_NAME":
       return {
         ...state,
-        performerName: action.performerName
+        performerName: action.performerName,
+      };
+    case "SET_GAME_PLAY_MODE":
+      return {
+        ...state,
+        gamePlayMode: action.gamePlayMode,
+      };
+    case "DECREASE_LIVES":
+      return {
+        ...state,
+        lives: state.lives - 1,
+      };
+    case "RESET_LIVES":
+      return {
+        ...state,
+        lives: 3,
+      };
+    case "SET_MODAL_VISIBLE":
+      return {
+        ...state,
+        modalVisible: action.modalVisible,
+      };
+    case "SET_GENRE":
+      return {
+        ...state,
+        genre: action.genre,
+      };
+    case "SET_GENRE_TYPES":
+      return {
+        ...state,
+        genreTypes: action.genreTypes,
       };
   }
   return state;
