@@ -194,7 +194,7 @@ function Main({ setScene, setMovies }) {
                     maxWidth: width * 0.9 < 672 ? width * 0.9 : 672,
                   },
                 ]}
-                source={require("../Images/Main/IntroAnimation/clapper2-no-arm-arial.png")}
+                source={require("../Images/Main/IntroAnimation/clapper2-no-arm-arial-revised.png")}
                 alt="closed movie clapper"
                 resizeMode="contain"
               />
