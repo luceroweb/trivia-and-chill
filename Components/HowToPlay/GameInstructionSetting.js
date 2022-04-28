@@ -1,6 +1,6 @@
 import { ImageBackground, StyleSheet, View, Platform } from "react-native";
 import gameSettingsAnimation from "../../Images/HowToPlay/Settings/gameSettingsAnimation.gif";
-import gameSettingsAnimationMobile from "../../Images/HowToPlay/Settings/gameSettingAnimationMobile.gif";
+import gameSettingsAnimationMobile from "../../Images/HowToPlay/Settings/gameSettingMobile.gif";
 
 export default function GameInstructionSetting() {
   return (
