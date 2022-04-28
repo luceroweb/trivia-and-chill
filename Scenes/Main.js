@@ -236,7 +236,7 @@ function Main({ setScene, setMovies }) {
                     width: IntroImageWidth,
                   },
                 ]}
-                source={require("../Images/Main/IntroAnimation/clapper2-no-arm-arial.png")}
+                source={require("../Images/Main/IntroAnimation/clapper2-no-arm-arial-revised.png")}
                 alt="closed movie clapper"
                 resizeMode="contain"
               />
