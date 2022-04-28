@@ -45,7 +45,7 @@ function Main({ setScene, setMovies }) {
   }
 
   useEffect(() => {
-    setTimeout(() => {
+    let timeout = setTimeout(() => {
       playSound();
     }, delay);
     Animated.parallel([
@@ -74,6 +74,7 @@ function Main({ setScene, setMovies }) {
         }),
       ]),
     ]).start();
+    return () => clearTimeout(timeout);
   }, []);
 
   let titleFontSize = 110;
