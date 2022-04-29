@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/trivia-and-chill/static/js/app.75c3e01b.chunk.js",
-    "app.js.map": "/trivia-and-chill/static/js/app.75c3e01b.chunk.js.map",
+    "app.js": "/trivia-and-chill/static/js/app.e821f646.chunk.js",
+    "app.js.map": "/trivia-and-chill/static/js/app.e821f646.chunk.js.map",
     "runtime~app.js": "/trivia-and-chill/static/js/runtime~app.17a60961.js",
     "runtime~app.js.map": "/trivia-and-chill/static/js/runtime~app.17a60961.js.map",
-    "static/js/2.fc1196ff.chunk.js": "/trivia-and-chill/static/js/2.fc1196ff.chunk.js",
-    "static/js/2.fc1196ff.chunk.js.map": "/trivia-and-chill/static/js/2.fc1196ff.chunk.js.map",
+    "static/js/2.425dd7bf.chunk.js": "/trivia-and-chill/static/js/2.425dd7bf.chunk.js",
+    "static/js/2.425dd7bf.chunk.js.map": "/trivia-and-chill/static/js/2.425dd7bf.chunk.js.map",
     "fonts/AntDesign.ttf": "/trivia-and-chill/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/trivia-and-chill/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/trivia-and-chill/./fonts/Feather.ttf",
@@ -25,7 +25,7 @@
     "index.html": "/trivia-and-chill/index.html",
     "manifest.json": "/trivia-and-chill/manifest.json",
     "serve.json": "/trivia-and-chill/serve.json",
-    "static/js/2.fc1196ff.chunk.js.LICENSE.txt": "/trivia-and-chill/static/js/2.fc1196ff.chunk.js.LICENSE.txt",
+    "static/js/2.425dd7bf.chunk.js.LICENSE.txt": "/trivia-and-chill/static/js/2.425dd7bf.chunk.js.LICENSE.txt",
     "static/media/GameBG.jpg": "/trivia-and-chill/static/media/GameBG.ba68b791.jpg",
     "static/media/ScreenBG.jpg": "/trivia-and-chill/static/media/ScreenBG.6bc620a7.jpg",
     "static/media/WrongAnswerScreen.png": "/trivia-and-chill/static/media/WrongAnswerScreen.ac0b66d4.png",
@@ -60,7 +60,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.17a60961.js",
-    "static/js/2.fc1196ff.chunk.js",
-    "static/js/app.75c3e01b.chunk.js"
+    "static/js/2.425dd7bf.chunk.js",
+    "static/js/app.e821f646.chunk.js"
   ]
 }
