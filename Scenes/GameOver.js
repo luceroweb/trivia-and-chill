@@ -22,7 +22,7 @@ function GameOver({
   resetSelectedMovie,
 }) {
   const shareMessage = `I got a streak of 🎞️${winningStreak} in Trivia & Chill!
-Test your movie knowledge here: https://luceroweb.github.io/guess-the-movie/`;
+Test your movie knowledge here: https://luceroweb.github.io/trivia-and-chill/`;
 
   const [sound, setSound] = useState();
   async function playSound() {
@@ -87,52 +87,41 @@ Test your movie knowledge here: https://luceroweb.github.io/guess-the-movie/`;
         content={
           <View style={{ width: "100%" }}>
             <View style={styles.questionHeader}>
-              
               <Text style={styles.gameOverStyle}>Game Over</Text>
             </View>
           </View>
         }
         buttons={
           <View style={styles.buttonRow}>
-              {winningStreak > 0 && Platform.OS !== "web" && (
-                <Pressable
-                  style={styles.buttonStyle}
-                  onPress={shareScoreMobile}
-                >
-                  <ImageBackground
-                    source={require("../Images/ticket.png")}
-                    style={styles.ticket}
-                  >
-                    <Text style={styles.backToStartButtonText}>
-                      Share Score
-                    </Text>
-                  </ImageBackground>
-                </Pressable>
-              )}
-              {winningStreak > 0 && Platform.OS === "web" && (
-                <Pressable style={styles.buttonStyle} onPress={shareScoreWeb}>
-                  <ImageBackground
-                    source={require("../Images/ticket.png")}
-                    style={styles.ticket}
-                  >
-                    <Text style={styles.backToStartButtonText}>
-                      Share Score
-                    </Text>
-                  </ImageBackground>
-                </Pressable>
-              )}
-              <Pressable
-                style={styles.buttonStyle}
-                onPress={backToStartHandler}
-              >
+            {winningStreak > 0 && Platform.OS !== "web" && (
+              <Pressable style={styles.buttonStyle} onPress={shareScoreMobile}>
                 <ImageBackground
                   source={require("../Images/ticket.png")}
                   style={styles.ticket}
                 >
-                  <Text style={styles.backToStartButtonText}>Start Over</Text>
+                  <Text style={styles.backToStartButtonText}>Share Score</Text>
                 </ImageBackground>
               </Pressable>
-            </View>
+            )}
+            {winningStreak > 0 && Platform.OS === "web" && (
+              <Pressable style={styles.buttonStyle} onPress={shareScoreWeb}>
+                <ImageBackground
+                  source={require("../Images/ticket.png")}
+                  style={styles.ticket}
+                >
+                  <Text style={styles.backToStartButtonText}>Share Score</Text>
+                </ImageBackground>
+              </Pressable>
+            )}
+            <Pressable style={styles.buttonStyle} onPress={backToStartHandler}>
+              <ImageBackground
+                source={require("../Images/ticket.png")}
+                style={styles.ticket}
+              >
+                <Text style={styles.backToStartButtonText}>Start Over</Text>
+              </ImageBackground>
+            </Pressable>
+          </View>
         }
       />
     );

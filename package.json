@@ -1,6 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "homepage": "https://luceroweb.github.io/guess-the-movie",
+  "homepage": "https://luceroweb.github.io/trivia-and-chill",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
