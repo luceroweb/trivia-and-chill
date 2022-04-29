@@ -39,7 +39,7 @@ const CorrectAnswer = ({
         buttons={
           <Pressable style={[styles.button]} onPress={handleNextQuestion}>
             <ImageBackground style={styles.ticketButton} source={ticket}>
-              <Text style={styles.ticketText}>Next Question!</Text>
+              <Text style={styles.ticketText}>Next</Text>
             </ImageBackground>
           </Pressable>
         }
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
   ticketButton: {
     maxWidth: "100%",
     maxHeight: "100%",
-    width: 224,
-    height: 116,
+    width: 160,
+    height: 80,
     justifyContent: "center",
   },
   ticketText: {
