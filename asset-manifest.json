@@ -1,7 +1,7 @@
 {
   "files": {
-    "app.js": "/trivia-and-chill/static/js/app.80ef579c.chunk.js",
-    "app.js.map": "/trivia-and-chill/static/js/app.80ef579c.chunk.js.map",
+    "app.js": "/trivia-and-chill/static/js/app.b71caf46.chunk.js",
+    "app.js.map": "/trivia-and-chill/static/js/app.b71caf46.chunk.js.map",
     "runtime~app.js": "/trivia-and-chill/static/js/runtime~app.17a60961.js",
     "runtime~app.js.map": "/trivia-and-chill/static/js/runtime~app.17a60961.js.map",
     "static/js/2.fc1196ff.chunk.js": "/trivia-and-chill/static/js/2.fc1196ff.chunk.js",
@@ -61,6 +61,6 @@
   "entrypoints": [
     "static/js/runtime~app.17a60961.js",
     "static/js/2.fc1196ff.chunk.js",
-    "static/js/app.80ef579c.chunk.js"
+    "static/js/app.b71caf46.chunk.js"
   ]
 }
