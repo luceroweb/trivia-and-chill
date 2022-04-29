@@ -32,7 +32,7 @@ function Trailer({ movieId }) {
             mediaPlaybackRequiresUserAction={true}
             javaScriptEnabled={true}
             domStorageEnabled={true}
-            source={{ uri: `https:www.youtube.com/embed/${youTubeId}?rel=0` }}
+            source={{ uri: `https://www.youtube.com/embed/${youTubeId}?rel=0` }}
           />
         )}
       </View>
