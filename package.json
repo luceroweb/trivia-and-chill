@@ -1,6 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "homepage": "https://luceroweb.github.io/trivia-and-chill",
+  "description": "This is a trivia game to test your movie knowledge. Random questions about popular movies could be shown as true/false or multiple choice. Answer correctly to increase your winning streak! If you get a wrong answer, then the game is over.",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
