@@ -1,11 +1,20 @@
 {
   "background_color": "#401323",
+  "description": "This is a trivia game to test your movie knowledge. Random questions about popular movies could be shown as true/false or multiple choice. Answer correctly to increase your winning streak! If you get a wrong answer, then the game is over.",
   "display": "standalone",
   "lang": "en",
   "name": "trivia-and-chill",
   "short_name": "trivia-and-chill",
   "start_url": "/?utm_source=web_app_manifest",
   "orientation": "portrait",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "http://play.google.com/store/apps/details?id=com.jlucero.triviaandchill",
+      "id": "com.jlucero.triviaandchill"
+    }
+  ],
+  "prefer_related_applications": true,
   "icons": [
     {
       "src": "/trivia-and-chill/pwa/chrome-icon/chrome-icon-144.png",
